@@ -1,4 +1,10 @@
 /*Centrado para detalles de productos*/
+/* You can add global styles to this file, and also import other style files */
+ *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .centrar {
     width: 83%;
