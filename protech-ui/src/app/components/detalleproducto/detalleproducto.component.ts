@@ -11,7 +11,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class DetalleproductoComponent implements OnInit {
   numero = 1;
   ruta = 0;
-  especificaciones: string[] = ['Especificación 1', 'Especificación 2'];
+  especificaciones: string[] = ['Especificación 1', 'Especificación 2', 'Especificacion 3', 'Especificacion 4',
+  'Especificacion 5', 'Especificacion 6', 'Especificacion 7'];
   rutas: string[] = ['assets/img/Samsung.jpg', 'assets/img/Samsung3.jpg'];
   constructor() {
   }

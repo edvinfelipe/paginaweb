@@ -1,0 +1,111 @@
+<div class="centrar">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+            <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div style="margin-top: 35px;" class="row">
+                <div class="form-group col-4">
+                    <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto">
+                    <br>
+                    <div class="row form-group">
+                        <div class="btn-group col-6">
+                            <button id="selected" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Marca</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Marca 1</a>
+                                <a class="dropdown-item" href="#">Marca 2</a>
+                                <a class="dropdown-item" href="#">Marca 3</a>
+                            </div>
+                        </div>
+                        <div class="btn-group col-6">
+                            <button id="selected2" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Categoría</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Categoría 1</a>
+                                <a class="dropdown-item" href="#">Categoría 2</a>
+                                <a class="dropdown-item" href="#">Categoría 3</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="PrecioVenta" placeholder="Precio de venta">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="Existencia" placeholder="Existencia">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Disponible</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">Descontinuado</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">En oferta</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-6">
+                            <input type="text" class="form-control" placeholder="% descuento">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-3">
+
+                </div>
+                <div class="col-4">
+                    <div class="card-group">
+                        <div class="card">
+                            <img src="" class="card-img-top" alt="">
+                            <div class="card-body">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="" class="card-img-top" alt="">
+                            <div class="card-body">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="" class="card-img-top" alt="">
+                            <div class="card-body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Example file input</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+            </div>
+
+            <div class="row">
+                <div class="form-group col-5">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Nav-Profile</div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Nav-Contact</div>
+    </div>
+</div>

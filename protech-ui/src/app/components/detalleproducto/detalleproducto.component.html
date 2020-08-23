@@ -19,19 +19,19 @@
             </div>
         </div>
         <div class="col-7">
-            <h5 style="font-size:2vw;">Nombre del producto:</h5>
+            <h5 style="font-size:3vw;">Nombre del producto:</h5>
             <br>
-            <h5 style="font-size:2vw;">Precio: Q#,###.## </h5>
+            <h5 style="font-size:3vw;">Precio: Q#,###.## </h5>
             <br>
-            <h6 style="font-size:2vw;">Cantidad: &nbsp;</h6>
+            <h6 style="font-size:3vw;">Cantidad: &nbsp;</h6>
             <div class="input-group col-sm-4">
 
-                <button style="font-size:1vw;" type="button" (click)="manipularContador(0)" class="btn btn-dark btn-sm">-</button>
-                <input style="font-size:1vw;" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
-                <button style="font-size:1vw;" type="button " (click)="manipularContador(1)" class="btn btn-dark btn-sm">+</button>
+                <button style="font-size:2vw;" type="button" (click)="manipularContador(0)" class="btn btn-dark btn-sm">-</button>
+                <input style="font-size:2vw;" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
+                <button style="font-size:2vw;" type="button " (click)="manipularContador(1)" class="btn btn-dark btn-sm">+</button>
             </div>
             <br>
-            <button style="font-size:2vw;" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal">
+            <button style="font-size:3vw;" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal">
                 &nbsp;&nbsp;Comprar&nbsp;&nbsp;</button>
         </div>
     </div>
@@ -39,13 +39,15 @@
     <br>
     <br>
 
+    <div class="especificaciones">
+        <ul class="list-group ">
+            <b style="font-size:2vw;">Especificaciones:</b>
+            <li style="font-size:1.8vw;" class="list-group-item " *ngFor="let especificacion of especificaciones">{{ especificacion }}</li>
+        </ul>
+    </div>
+
 </div>
-<div class="especificaciones ">
-    <ul class="list-group ">
-        <b style="font-size:1vw;">Especificaciones:</b>
-        <li style="font-size:1vw;" class="list-group-item " *ngFor="let especificacion of especificaciones">{{ especificacion }}</li>
-    </ul>
-</div>
+
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
