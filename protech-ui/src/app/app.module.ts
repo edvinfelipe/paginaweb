@@ -17,7 +17,6 @@ import { HowbuyComponent } from './components/howbuy/howbuy.component';
 import { DetalleproductoComponent } from './components/detalleproducto/detalleproducto.component';
 import { IngresoproductosComponent } from './components/ingresoproductos/ingresoproductos.component';
 import { CatalogoComponent } from './components/catalogo/catalogo.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { TarjetasProductosComponent } from './components/tarjetas-productos/tarjetas-productos.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { CarritocompraComponent } from './components/carritocompra/carritocompra.component';
@@ -34,16 +33,16 @@ import { CarritocompraComponent } from './components/carritocompra/carritocompra
     AboutusComponent,
     NavbarComponent,
     ContactpageComponent,
-    HowbuyComponent
+    HowbuyComponent,
     AppComponent,
     DetalleproductoComponent,
-    IngresoproductosComponent
+    IngresoproductosComponent,
     CarritocompraComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    APP_ROUTING
+    APP_ROUTING,
     AppRoutingModule,
   ],
   providers: [
