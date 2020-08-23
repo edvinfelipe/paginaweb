@@ -1,27 +1,50 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-//Rutas
-import { APP_ROUTING } from './app.routes'
+import { AppRoutingModule } from './app-routing.module';
 
+//Rutas
+import { APP_ROUTING } from './routes';
 //Servicios
-import { ProductosService } from './services/productos.service';
 
 //Componentes
+import { ProductosService } from './services/productos.service';
 import { AppComponent } from './app.component';
+import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
-import { from } from 'rxjs';
+import { ContactpageComponent } from './components/contactpage/contactpage.component';
+import { HowbuyComponent } from './components/howbuy/howbuy.component';
+import { DetalleproductoComponent } from './components/detalleproducto/detalleproducto.component';
+import { IngresoproductosComponent } from './components/ingresoproductos/ingresoproductos.component';
+import { CatalogoComponent } from './components/catalogo/catalogo.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { TarjetasProductosComponent } from './components/tarjetas-productos/tarjetas-productos.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 import { CarritocompraComponent } from './components/carritocompra/carritocompra.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    CatalogoComponent,
+    TarjetasProductosComponent,
+    FooterComponent,
+
+    AppComponent,
+    AboutusComponent,
     NavbarComponent,
+    ContactpageComponent,
+    HowbuyComponent
+    AppComponent,
+    DetalleproductoComponent,
+    IngresoproductosComponent
     CarritocompraComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     APP_ROUTING
+    AppRoutingModule,
   ],
   providers: [
     ProductosService

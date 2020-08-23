@@ -1,1 +1,47 @@
+/*Centrado para detalles de productos*/
 /* You can add global styles to this file, and also import other style files */
+ *{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.centrar {
+    width: 83%;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+}
+
+.especificaciones {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fijarTarjetaGrande {
+    width: 100%;
+    height: 20vw;
+    object-fit: cover;
+}
+
+.fijarTarjetaPequena {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}
+
+
+/*Animaciones*/
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
