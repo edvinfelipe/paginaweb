@@ -7,6 +7,8 @@ import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { ContactpageComponent } from './components/contactpage/contactpage.component';
 import { HowbuyComponent } from './components/howbuy/howbuy.component';
+import { DetalleproductoComponent } from './components/detalleproducto/detalleproducto.component';
+import { IngresoproductosComponent } from './components/ingresoproductos/ingresoproductos.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +17,13 @@ import { HowbuyComponent } from './components/howbuy/howbuy.component';
     NavbarComponent,
     ContactpageComponent,
     HowbuyComponent
+    AppComponent,
+    DetalleproductoComponent,
+    IngresoproductosComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
