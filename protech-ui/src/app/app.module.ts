@@ -1,18 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+//Rutas
+import { APP_ROUTING } from './app.routes'
+
+//Servicios
+import { ProductosService } from './services/productos.service';
+
+//Componentes
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { from } from 'rxjs';
+import { CarritocompraComponent } from './components/carritocompra/carritocompra.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    CarritocompraComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    APP_ROUTING
   ],
-  providers: [],
+  providers: [
+    ProductosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
