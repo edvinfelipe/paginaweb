@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<h2 align="center" class="colorGray" style="margin-top: 20px;">
+    CARRITO DE COMPRAS
+    <img src="assets/img/carrito.jpg" alt="" width="50px" height="50px" style="margin-top: -5px;">
+</h2>
+
+<hr>
+<div class="row">
+    <ul class="list-group" style="width: auto; min-width: 300px; max-width: 400px; margin-left: 140px;">
+        <li class="list-group-item" style="border-right: transparent; border-radius: 0%; height: 45px; left: 100px;">
+            <h6 style="text-align: center;" class="colorGray">
+                <Strong>PRODUCTO</Strong> </h6>
+        </li>
+        <li class="list-group-item" *ngFor="let producto of productos" style=" border-radius: 0%; height: 100px; left: 100px;">
+            <div class="media">
+                <img [src]="producto.img" style="width: auto; height: auto; max-width: 80px; max-height: 80;" [alt]="producto.nombre">
+                <div class="media-body ml-2 mb-n2 colorGray">
+                    <h5 class="mt-0 colorGray"> {{producto.marca}} </h5>
+                    {{producto.nombre}}
+                </div>
+            </div>
+        </li>
+
+    </ul>
+    <ul class="list-group" style="border-radius: 0%; width: auto; min-width: 100px; max-width: 150px;">
+        <li class="list-group-item" style="height: 45px; left: 100px; border-right: transparent;">
+            <h6 style="text-align: center;" class="colorGray">
+                <Strong>PRECIO</Strong> </h6>
+        </li>
+        <li class="list-group-item colorGray" *ngFor="let producto of productos" style="border-radius: 0%; border-left: none; height: 100px; justify-items: center; left: 100px;">
+            <p style="margin-top: 22px;"> {{ producto.precio | currency: 'Q' }} </p>
+        </li>
+
+    </ul>
+    <ul class="list-group" style="border-radius: 0%; width: auto; min-width: 200px; max-width: 250px;">
+
+        <li class="list-group-item" style="height: 45px; left: 100px;">
+            <h6 style="text-align: center;" class="colorGray"> <strong>CANTIDAD</strong> </h6>
+        </li>
+        <li class="list-group-item colorGray" *ngFor="let producto of productos; let i = index" style="border-radius: 0%; border-left: none; height: 100px; text-align: center; left: 100px;">
+            <div class="btn-group" role="group">
+                <button id="btns {{i}}" type="button" class="btn btn-secondary" style="margin-top: 18px" onclick="this.blur();">+</button>
+                <input id="cantidad {{i}}" type="text" style="text-align: center; width: 40px; margin-top: 18px;" value="1" disabled>
+                <button id="btnr {{i}}" type="button" class="btn btn-secondary" style="margin-top: 18px" onclick="this.blur();">-</button>
+                <button id="btne {{i}}" type="button" class="btn btn-secondary" style="margin-top: 18px; margin-left: 2px;" onclick="this.blur(); ">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </li>
+
+    </ul>
+    <ul class="list-group" style="border-radius: 0%; width: auto; min-width: 100px; max-width: 150px;">
+        <li class="list-group-item" style="height: 45px; left: 100px; border-left: transparent;">
+            <h6 style="text-align: center;" class="colorGray"> <strong>SUB-TOTAL</strong> </h6>
+        </li>
+        <li class="list-group-item colorGray" *ngFor="let producto of productos" style="border-radius: 0%; border-left: none; height: 100px; text-align: center; left: 100px;">
+            <p style="margin-top: 22px;"> {{ subtotal | currency: 'Q' }} </p>
+        </li>
+
+    </ul>
+</div>
+<div class="row">
+    <ul class="list-group" style="margin-top: 30px; min-width: 150px; max-width: 200px; width: auto; margin-left: 650px;">
+        <div>
+            <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent;"> <strong>| Detalle de pago</strong></li>
+            <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent;">
+                Sub-total de compra
+                <hr style="margin-bottom: -10px; margin-top: 0px;">
+            </li>
+            <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent;">
+                Envío y entrega
+                <hr style="margin-bottom: -10px; margin-top: 0px;">
+            </li>
+            <li class="list-group-item colorBlue" style="border-right: transparent;">
+                <strong>Total de Pedido</strong>
+                <hr style="margin-bottom: -10px; margin-top: 0px;">
+            </li>
+        </div>
+    </ul>
+    <ul class="list-group" style="margin-top: 30px; min-width: 150px; max-width: 200px; width: auto;">
+        <div>
+            <li class="list-group-item" style="color: transparent; border-bottom: transparent; border-left: transparent;">
+                <Strong>|</Strong>
+            </li>
+            <li class="list-group-item colorGray" style="border-bottom: transparent; border-left: transparent; text-align: right;">
+                {{ subtotal | currency: 'Q' }}
+                <hr style="margin-bottom: -10px; margin-top: 0px;">
+            </li>
+            <li class="list-group-item colorGray" style="border-bottom: transparent; border-left: transparent; text-align: right;">
+                {{ subtotal | currency: 'Q' }}
+                <hr style="margin-bottom: -10px; margin-top: 0px;">
+            </li>
+            <li class="list-group-item colorBlue" style="border-left: transparent; text-align: right;">
+                <Strong>{{ subtotal | currency: 'Q' }}</Strong>
+                <hr style="margin-bottom: -10px; margin-top: 0px;">
+            </li>
+
+        </div>
+    </ul>
+</div>

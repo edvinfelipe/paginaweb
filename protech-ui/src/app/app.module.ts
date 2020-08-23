@@ -8,6 +8,7 @@ import { APP_ROUTING } from './routes';
 //Servicios
 
 //Componentes
+import { ProductosService } from './services/productos.service';
 import { AppComponent } from './app.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -19,6 +20,7 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { TarjetasProductosComponent } from './components/tarjetas-productos/tarjetas-productos.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { CarritocompraComponent } from './components/carritocompra/carritocompra.component';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     AppComponent,
     DetalleproductoComponent,
     IngresoproductosComponent
+    CarritocompraComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +46,9 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     APP_ROUTING
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    ProductosService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
