@@ -1,0 +1,42 @@
+body{
+    background-size: cover;
+
+}
+.main-section{
+    margin:0 auto ;
+    margin-top: 40% ;
+    padding: 0;
+    border-top-right-radius: 0%;
+ 
+} 
+.user-img{
+    background-color:#070c2d;
+    margin-bottom: 35px;
+    margin-top: -40px;
+    border-radius: 50;
+    width: 400px;
+    height: 100px;
+    
+
+}
+.forgot{
+    margin-top: 0;
+    margin-bottom: 60px;
+    margin-left: 60px;
+
+}
+.margenboton{
+ margin-bottom: 40px;
+}
+.btn-dark{
+    background-color: #070c2d;
+}
+.modal-content{
+    box-shadow: 0px 0px 3px #aaaaaa;
+
+}
+.form-group input{
+    height: 42px;
+    font-size: 20px ;
+
+}
