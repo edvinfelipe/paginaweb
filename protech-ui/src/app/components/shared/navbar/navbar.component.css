@@ -105,11 +105,19 @@
   margin-left: 40px;
 }
 .main_menu-items {
-  display: inline;
+  /* display: inline; */
+  width: auto;
+  height: auto;
 }
 
-.hamburguesa{
+.checkbtn{
+  font-size: 25px;
+  float: right;
   display: none;
+}
+
+#check{
+ display: none;
 }
 
 .main_menu-items ul{
@@ -177,28 +185,35 @@
     display: none;
   }
 
-  /* ul .menu{
-    display: none;
-  } */
-
   .main_menu {
     height: auto;
   }
 
-  .main_menu-items ul {
-    display: block;
-  }
-
-  /* .input{
-    width: 230px;
+  /* .main_menu-items{
+    background-color: white;
   } */
 
-  .hamburguesa{
-    display: block;
-    float: right;
-    cursor: pointer;
-    font-size: 25px;
+  .main_menu-items{
+    display: none;
   }
 
+  /* .main_menu-items ul {
+    display: block;
+    text-align: center;
+  }
 
+  .main_menu-items ul li{
+    margin-top: 20px;
+  } */
+
+  .checkbtn{
+    display: block;
+    margin-bottom: 0;
+  }
+
+  .menu-hamburguesa{
+    width: auto;
+    height: 35px;
+
+  }
 }
