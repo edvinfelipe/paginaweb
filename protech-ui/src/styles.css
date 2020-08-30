@@ -1,9 +1,12 @@
 /*Centrado para detalles de productos*/
+
+
 /* You can add global styles to this file, and also import other style files */
- *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .centrar {
@@ -30,6 +33,19 @@
     width: 100%;
     height: 10vw;
     object-fit: cover;
+}
+
+
+/*Ingreso de productos*/
+
+.fijarTarjetas {
+    width: 100%;
+    height: 8vw;
+    object-fit: cover;
+}
+
+.fijarMarco {
+    width: 100%;
 }
 
 
