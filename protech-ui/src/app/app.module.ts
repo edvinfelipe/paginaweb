@@ -21,6 +21,7 @@ import { TarjetasProductosComponent } from './components/tarjetas-productos/tarj
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { CarritocompraComponent } from './components/carritocompra/carritocompra.component';
 import { PanelprincipalComponent } from './components/panelprincipal/panelprincipal.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { PanelprincipalComponent } from './components/panelprincipal/panelprinci
     DetalleproductoComponent,
     IngresoproductosComponent,
     CarritocompraComponent,
-    PanelprincipalComponent
+    PanelprincipalComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
