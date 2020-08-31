@@ -44,6 +44,11 @@
     object-fit: cover;
 }
 
+.fijarInventario {
+    width: 60%;
+    height: 10vw;
+}
+
 .fijarMarco {
     width: 100%;
 }

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-4">
             <div class="card">
-                <img src="" class="fijarTarjetaGrande">
+                <img src="{{rutas[retornarRuta()]}}" class="fijarTarjetaGrande">
             </div>
             <br>
             <div class="row">
@@ -65,3 +65,10 @@
         </div>
     </div>
 </div>
+
+<script language="javascript">
+    submitForms = function() {
+        document.getElementById("firstform").submit();
+        document.getElementById("secondform").submit();
+    }
+</script>
