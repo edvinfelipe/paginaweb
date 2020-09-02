@@ -21,6 +21,7 @@ import { TarjetasProductosComponent } from './components/tarjetas-productos/tarj
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { CarritocompraComponent } from './components/carritocompra/carritocompra.component';
 import { PaginainicioComponent } from './components/paginainicio/paginainicio.component';
+import { PanelprincipalComponent } from './components/panelprincipal/panelprincipal.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { PaginainicioComponent } from './components/paginainicio/paginainicio.co
     DetalleproductoComponent,
     IngresoproductosComponent,
     CarritocompraComponent,
-    PaginainicioComponent
+    PaginainicioComponent,
+    PanelprincipalComponent
   ],
   imports: [
     BrowserModule,
