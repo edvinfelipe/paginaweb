@@ -1,11 +1,34 @@
+require('./config/config')
+
 const express = require('express')
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
+
 const app = express()
 
-app.get('/', function(req, res) {
-    res.send('Servidor back-end de la página web Pro-Tech')
-})
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+
+// configuración global de rutas
+app.use(require('./routes/index'))
+
+// Conexión a la base de datos
+mongoose.connect(process.env.URLDB, {
+  useFindAndModify: false,
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, (err, res) =>{
+
+    if( err ) throw err
+
+    console.log('Base de datos ONLINE')
+});
 
 // Puerto dónde escucha el servidor
-app.listen(3000, () => {
-    console.log('Escuchando al puert 3000');
+app.listen( process.env.PORT, () => {
+    console.log('Escuchando al puerto:',process.env.PORT);
 })
