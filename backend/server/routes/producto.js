@@ -5,7 +5,7 @@ const express = require('express')
 const app = express()
 const _ = require('underscore')
 
-const Producto = require('../models/producto')
+const Producto  = require('../models/producto')
 
 const verificarToken = require('../middleware/autenticacion')
 
@@ -23,6 +23,7 @@ app.get('/api/producto',( req, res )=>{
         .limit(10)
         .populate('categoria','nombre')
         .populate('marca','nombre')
+        .populate('imagenes')
         .exec((err, productos) => {
 
             if(err){
@@ -33,6 +34,7 @@ app.get('/api/producto',( req, res )=>{
             }
 
             Producto.countDocuments( { descontinuado: false }, (err, conteo)=>{
+                
 
                 res.json({
                     status: true,

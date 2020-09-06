@@ -4,6 +4,12 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
+
+const opts = {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+}
+
 const productoSchema = Schema({
     nombre: {
         type: String,
@@ -60,6 +66,14 @@ const productoSchema = Schema({
         type: Schema.Types.ObjectId,
         ref: 'Usuario'
     }
+}, opts)
+
+
+productoSchema.virtual('imagenes',{
+    ref: 'Imagen',
+    localField:'_id',
+    foreignField:'producto',
+    justOne: false
 })
 
 productoSchema.methods.toJSON = function(){
