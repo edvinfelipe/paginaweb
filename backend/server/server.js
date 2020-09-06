@@ -3,6 +3,7 @@ require('./config/config')
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express()
 
@@ -14,6 +15,9 @@ app.use(bodyParser.json())
 
 // configuración global de rutas
 app.use(require('./routes/index'))
+
+// Use cors
+app.use(cors())
 
 // Conexión a la base de datos
 mongoose.connect(process.env.URLDB, {
