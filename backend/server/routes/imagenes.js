@@ -2,9 +2,6 @@
 
 const express = require('express')
 
-// Models
-const Imagen = require('../models/imagenes')
-
 const fs = require('fs')
 const path = require('path')
 
