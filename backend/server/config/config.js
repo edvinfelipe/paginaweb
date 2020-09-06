@@ -28,7 +28,7 @@ if( process.env.NODE_ENV === 'dev' ){
     urlDB = 'mongodb://localhost:27017/protech'
 }
 else{
-    urlDB = 'mongodb+srv://admin:jyBIfOZHGAhfwupu@cluster0.bs5pb.mongodb.net/protech'
+    urlDB = process.env.URI_DB 
 }
 
 process.env.URLDB = urlDB
