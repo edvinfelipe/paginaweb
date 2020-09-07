@@ -62,6 +62,9 @@ app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
     Producto.find({ descontinuado: false, categoria, marca }  )
         .skip(desde)
         .limit(10)
+        .populate('categoria','nombre')
+        .populate('marca','nombre')
+        .populate('imagenes')
         .exec((err, productos) => {
 
             if(err){
@@ -71,7 +74,7 @@ app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
                 })
             }
 
-            Producto.countDocuments( { descontinuado: false }, (err, conteo)=>{
+            Producto.countDocuments( { descontinuado: false, categoria, marca }, (err, conteo)=>{
 
                 res.json({
                     status: true,
