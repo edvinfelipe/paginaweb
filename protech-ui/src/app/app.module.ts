@@ -6,9 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 //Rutas
 import { APP_ROUTING } from './routes';
 //Servicios
-
-//Componentes
+import { MarcasService } from './services/marcas.service';
 import { ProductosService } from './services/productos.service';
+//Componentes
 import { AppComponent } from './app.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -23,6 +23,10 @@ import { CarritocompraComponent } from './components/carritocompra/carritocompra
 import { PanelprincipalComponent } from './components/panelprincipal/panelprincipal.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { NoimagePipe } from './pipes/noimage.pipe';
+
+
 
 @NgModule({
   declarations: [
@@ -30,27 +34,27 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CatalogoComponent,
     TarjetasProductosComponent,
     FooterComponent,
-
-    AppComponent,
     AboutusComponent,
     NavbarComponent,
     ContactpageComponent,
     HowbuyComponent,
-    AppComponent,
     DetalleproductoComponent,
     IngresoproductosComponent,
     CarritocompraComponent,
     PanelprincipalComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    NoimagePipe
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     APP_ROUTING,
     AppRoutingModule,
   ],
   providers: [
-    ProductosService
+    ProductosService,
+    MarcasService
   ],
   bootstrap: [AppComponent]
 })

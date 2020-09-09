@@ -1,16 +1,11 @@
 <body class="contenedor_general">
     <div class="contenedor_filtros">
         <aside class="filtros">
-
-            <p *ngFor="let m of marcas">
+            <p *ngFor="let m of arregloMarcas">
                 <input name="marca" value="{{m.nombre}}" type="radio">
-                <span>{{m.nombre}} </span>
+                <span> {{m.nombre}} </span>
 
             </p>
-            <!--             <h6>Filtrar por:</h6>
-            <p *ngFor="let marca of marcas">
-                <input type="radio" name="marca"> {{marca.nombre}}<br>
-            </p> -->
         </aside>
     </div>
 
@@ -18,14 +13,8 @@
 
         <div class="productos">
 
-            <app-tarjetas-productos [producto]="producto" [index]="i" *ngFor="let producto of productos; let i = index"></app-tarjetas-productos>
+            <app-tarjetas-productos [producto]="producto" [index]="i" *ngFor="let producto of arregloProductos; let i = index"></app-tarjetas-productos>
 
         </div>
-
     </div>
-
-    <div class="contenedor_footer">
-
-    </div>
-
 </body>

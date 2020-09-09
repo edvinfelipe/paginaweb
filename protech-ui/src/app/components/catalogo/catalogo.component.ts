@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalagoService, Producto, Marca } from '../../services/catalago.service';
 import { fromEventPattern } from 'rxjs';
+import { MarcasService } from '../../services/marcas.service';
+
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
@@ -8,14 +10,24 @@ import { fromEventPattern } from 'rxjs';
 })
 export class CatalogoComponent implements OnInit {
   
-  productos:Producto[] = [];
-  marcas:Marca[] = [];
+  arregloProductos: any[] = [];
+  arregloMarcas: any[] = [];
 
-  constructor(private _catalogoService:CatalagoService) { }
+  constructor(private _catalogoService:CatalagoService, private _marcasService:MarcasService) {
+    this._marcasService.getMarcas()
+      .subscribe( (dataMarcas: any) => {
+        console.log(dataMarcas);
+        this.arregloMarcas = dataMarcas
+      });
+    this._catalogoService.getProductos()
+      .subscribe( (dataProductos: any) => {
+        console.log(dataProductos);
+        this.arregloProductos = dataProductos
+      }); 
+    }
 
   ngOnInit(): void {
-    this.productos = this._catalogoService.getProductos(),
-    this.marcas = this._catalogoService.getMarcas()
+
   }
 
 }
