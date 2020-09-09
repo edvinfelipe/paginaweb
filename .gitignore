@@ -2,5 +2,4 @@
 # dependencies de nodejs
 node_modules/
 backend/node_modules
-backend/uploads/productos/*
 npm-debug.log*
