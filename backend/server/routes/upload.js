@@ -72,7 +72,7 @@ function insertarImagen(res, archivo, idPorducto, extension ){
     // Cambiar el nombre del archivo
     let nombreArchivo = `${idPorducto}-${ new Date().getMilliseconds() }.${ extension }`
 
-    archivo.mv(`uploads/productos/${ nombreArchivo }`, (err)=>{
+    archivo.mv(`backend/uploads/productos/${ nombreArchivo }`, (err)=>{
 
         if( err ){
             return res.status(500).json({
