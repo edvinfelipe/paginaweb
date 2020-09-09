@@ -11,6 +11,18 @@ export class ProductosService {
             img: "assets/img/products/predator.jpg"
         },
         {
+            nombre: "Predator Helios 300",
+            marca: "Acer",
+            precio: 15000,
+            img: "assets/img/products/predator.jpg"
+        },
+        {
+            nombre: "Predator Helios 300",
+            marca: "Acer",
+            precio: 12099,
+            img: "assets/img/products/predator.jpg"
+        },
+        {
             nombre: "A30",
             marca: "Samsung",
             precio: 1800,

@@ -1,101 +1,122 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!doctype html>
+<html>
 
-<h2 align="center" class="colorGray" style="margin-top: 20px;">
-    CARRITO DE COMPRAS
-    <img src="assets/img/carrito.jpg" alt="" width="50px" height="50px" style="margin-top: -5px;">
-</h2>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css">
 
-<hr>
-<div class="row">
-    <ul class="list-group" style="width: auto; min-width: 300px; max-width: 400px; margin-left: 140px;">
-        <li class="list-group-item" style="border-right: transparent; border-radius: 0%; height: 45px; left: 100px;">
-            <h6 style="text-align: center;" class="colorGray">
-                <Strong>PRODUCTO</Strong> </h6>
-        </li>
-        <li class="list-group-item" *ngFor="let producto of productos" style=" border-radius: 0%; height: 100px; left: 100px;">
-            <div class="media">
-                <img [src]="producto.img" style="width: auto; height: auto; max-width: 80px; max-height: 80;" [alt]="producto.nombre">
-                <div class="media-body ml-2 mb-n2 colorGray">
-                    <h5 class="mt-0 colorGray"> {{producto.marca}} </h5>
-                    {{producto.nombre}}
-                </div>
-            </div>
-        </li>
+</head>
 
-    </ul>
-    <ul class="list-group" style="border-radius: 0%; width: auto; min-width: 100px; max-width: 150px;">
-        <li class="list-group-item" style="height: 45px; left: 100px; border-right: transparent;">
-            <h6 style="text-align: center;" class="colorGray">
-                <Strong>PRECIO</Strong> </h6>
-        </li>
-        <li class="list-group-item colorGray" *ngFor="let producto of productos" style="border-radius: 0%; border-left: none; height: 100px; justify-items: center; left: 100px;">
-            <p style="margin-top: 22px;"> {{ producto.precio | currency: 'Q' }} </p>
-        </li>
+<body>
+    <h2 align="center" class="colorGray" style="margin-top: 20px;">
+        CARRITO DE COMPRAS
+        <img src="assets/img/carrito.jpg" alt="" width="50px" height="50px" style="margin-top: -5px;">
+    </h2>
 
-    </ul>
-    <ul class="list-group" style="border-radius: 0%; width: auto; min-width: 200px; max-width: 250px;">
+    <hr>
 
-        <li class="list-group-item" style="height: 45px; left: 100px;">
-            <h6 style="text-align: center;" class="colorGray"> <strong>CANTIDAD</strong> </h6>
-        </li>
-        <li class="list-group-item colorGray" *ngFor="let producto of productos; let i = index" style="border-radius: 0%; border-left: none; height: 100px; text-align: center; left: 100px;">
-            <div class="btn-group" role="group">
-                <button id="btns {{i}}" type="button" class="btn btn-secondary" style="margin-top: 18px" onclick="this.blur();">+</button>
-                <input id="cantidad {{i}}" type="text" style="text-align: center; width: 40px; margin-top: 18px;" value="1" disabled>
-                <button id="btnr {{i}}" type="button" class="btn btn-secondary" style="margin-top: 18px" onclick="this.blur();">-</button>
-                <button id="btne {{i}}" type="button" class="btn btn-secondary" style="margin-top: 18px; margin-left: 2px;" onclick="this.blur(); ">
-                    <i class="fa fa-trash"></i>
-                </button>
-            </div>
-        </li>
-
-    </ul>
-    <ul class="list-group" style="border-radius: 0%; width: auto; min-width: 100px; max-width: 150px;">
-        <li class="list-group-item" style="height: 45px; left: 100px; border-left: transparent;">
-            <h6 style="text-align: center;" class="colorGray"> <strong>SUB-TOTAL</strong> </h6>
-        </li>
-        <li class="list-group-item colorGray" *ngFor="let producto of productos" style="border-radius: 0%; border-left: none; height: 100px; text-align: center; left: 100px;">
-            <p style="margin-top: 22px;"> {{ subtotal | currency: 'Q' }} </p>
-        </li>
-
-    </ul>
-</div>
-<div class="row">
-    <ul class="list-group" style="margin-top: 30px; min-width: 150px; max-width: 200px; width: auto; margin-left: 650px;">
-        <div>
-            <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent;"> <strong>| Detalle de pago</strong></li>
-            <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent;">
-                Sub-total de compra
-                <hr style="margin-bottom: -10px; margin-top: 0px;">
-            </li>
-            <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent;">
-                Envío y entrega
-                <hr style="margin-bottom: -10px; margin-top: 0px;">
-            </li>
-            <li class="list-group-item colorBlue" style="border-right: transparent;">
-                <strong>Total de Pedido</strong>
-                <hr style="margin-bottom: -10px; margin-top: 0px;">
-            </li>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button class="dropdown-item" type="button">Action</button>
+            <button class="dropdown-item" type="button">Another action</button>
+            <button class="dropdown-item" type="button">Something else here</button>
         </div>
-    </ul>
-    <ul class="list-group" style="margin-top: 30px; min-width: 150px; max-width: 200px; width: auto;">
-        <div>
-            <li class="list-group-item" style="color: transparent; border-bottom: transparent; border-left: transparent;">
-                <Strong>|</Strong>
-            </li>
-            <li class="list-group-item colorGray" style="border-bottom: transparent; border-left: transparent; text-align: right;">
-                {{ subtotal | currency: 'Q' }}
-                <hr style="margin-bottom: -10px; margin-top: 0px;">
-            </li>
-            <li class="list-group-item colorGray" style="border-bottom: transparent; border-left: transparent; text-align: right;">
-                {{ subtotal | currency: 'Q' }}
-                <hr style="margin-bottom: -10px; margin-top: 0px;">
-            </li>
-            <li class="list-group-item colorBlue" style="border-left: transparent; text-align: right;">
-                <Strong>{{ subtotal | currency: 'Q' }}</Strong>
-                <hr style="margin-bottom: -10px; margin-top: 0px;">
-            </li>
+    </div>
 
-        </div>
-    </ul>
-</div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">IMAGEN</th>
+                    <th scope="col">NOMBRE</th>
+                    <th scope="col">PRECIO</th>
+                    <th scope="col">CANTIDAD</th>
+                    <th scope="col">SUB-TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let producto of productos; let i = index;">
+                    <td>
+                        <div class="media">
+                            <img class="img-r imagenes" [src]="producto.img" [alt]="producto.nombre">
+                        </div>
+                    </td>
+                    <td class="colorGray">
+                        <h5 class="mt-0 colorGray"> {{producto.marca}} </h5>
+                        {{producto.nombre}}
+                    </td>
+                    <td class="colorGray">
+                        {{ producto.precio | currency: 'Q' }}
+                    </td>
+                    <td class="colorGray">
+                        <div class="btn-group" role="group">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                1
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="">Action</a>
+                                    <a class="dropdown-item" href="">Another action</a>
+                                    <a class="dropdown-item" href="">Something else here</a>
+                                </div>
+                            </div>
+                            <button id="btne {{i}}" type="button" class="btn btn-secondary" style="margin-left: 2px;" onclick="this.blur(); "><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </td>
+                    <td class="colorGray">
+                        {{ subtotal | currency: 'Q' }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="row padd2">
+        <ul class="list-group" style="width: 190px;">
+            <div>
+                <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent; border-radius: 0%;"> <strong>| Detalle de pago</strong></li>
+                <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent; border-radius: 0%;">
+                    Sub-total de compra
+                    <hr style="margin-bottom: -10px; margin-top: 0px;">
+                </li>
+                <li class="list-group-item colorGray" style="border-bottom: transparent; border-right: transparent; border-radius: 0%;">
+                    Envío y entrega
+                    <hr style="margin-bottom: -10px; margin-top: 0px;">
+                </li>
+                <li class="list-group-item colorBlue" style="border-right: transparent; border-radius: 0%;">
+                    <strong>Total de Pedido</strong>
+                    <hr style="margin-bottom: -10px; margin-top: 0px;">
+                </li>
+            </div>
+        </ul>
+        <ul class="list-group" style="width: 150px;">
+            <div>
+                <li class="list-group-item" style="color: transparent; border-bottom: transparent; border-left: transparent; border-radius: 0%;">
+                    <Strong>|</Strong>
+                </li>
+                <li class="list-group-item colorGray" style="border-bottom: transparent; border-left: transparent; text-align: right; border-radius: 0%;">
+                    {{ subtotal | currency: 'Q' }}
+                    <hr style="margin-bottom: -10px; margin-top: 0px;">
+                </li>
+                <li class="list-group-item colorGray" style="border-bottom: transparent; border-left: transparent; text-align: right; border-radius: 0%;">
+                    {{ subtotal | currency: 'Q' }}
+                    <hr style="margin-bottom: -10px; margin-top: 0px;">
+                </li>
+                <li class="list-group-item colorBlue" style="border-left: transparent; text-align: right; border-radius: 0%;">
+                    <Strong>{{ subtotal | currency: 'Q' }}</Strong>
+                    <hr style="margin-bottom: -10px; margin-top: 0px;">
+                </li>
+            </div>
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+
+</html>
