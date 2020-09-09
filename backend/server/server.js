@@ -7,6 +7,9 @@ const cors = require('cors')
 
 const app = express()
 
+// Use cors
+app.use(cors())
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
  
@@ -16,8 +19,6 @@ app.use(bodyParser.json())
 // configuración global de rutas
 app.use(require('./routes/index'))
 
-// Use cors
-app.use(cors())
 
 // Conexión a la base de datos
 mongoose.connect(process.env.URLDB, {
