@@ -1,0 +1,25 @@
+.centrar {
+    width: 83%;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+}
+
+
+/*Ingreso de productos*/
+
+.fijarTarjetas {
+    width: 100%;
+    height: 8vw;
+    object-fit: cover;
+}
+
+.fijarInventario {
+    width: 60%;
+    height: 10vw;
+}
+
+.fijarMarco {
+    width: 100%;
+}
