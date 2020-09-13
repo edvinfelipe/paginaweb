@@ -17,7 +17,6 @@ export class CarritocompraComponent implements OnInit {
   constructor( private _productosService:ProductosService) { }
 
   ngOnInit(): void {
-    
     this.productos = this._productosService.getProductos();
   }
 
