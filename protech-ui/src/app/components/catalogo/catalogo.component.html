@@ -2,9 +2,8 @@
     <div class="contenedor_filtros">
         <aside class="filtros">
             <p *ngFor="let m of arregloMarcas">
-                <input name="marca" value="{{m.nombre}}" type="radio">
+                <input #termino name="marca" value="{{m.nombre}}" (click)="obtenerRadio()" type="radio">
                 <span> {{m.nombre}} </span>
-
             </p>
         </aside>
     </div>
@@ -16,5 +15,16 @@
             <app-tarjetas-productos [producto]="producto" [index]="i" *ngFor="let producto of arregloProductos; let i = index"></app-tarjetas-productos>
 
         </div>
+
+        <div class="paginacion">
+            <ul *ngFor="let numeroPagina of arregloPaginas;" (click)="paginacion(numeroPagina)">
+                <li class="conte" value="{{numeroPagina}}">
+                    {{numeroPagina}}
+                </li>
+            </ul>
+
+
+        </div>
+
     </div>
 </body>

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 //Rutas
-import { APP_ROUTING } from './routes';
+import { APP_ROUTING } from './app.routes';
 //Servicios
 import { MarcasService } from './services/marcas.service';
 import { ProductosService } from './services/productos.service';
