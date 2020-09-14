@@ -24,8 +24,6 @@ import { PanelprincipalComponent } from './components/panelprincipal/panelprinci
 import { CheckoutComponent } from './components/checkout/checkout.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { NoimagePipe } from './pipes/noimage.pipe';
-
 
 
 @NgModule({
@@ -42,8 +40,7 @@ import { NoimagePipe } from './pipes/noimage.pipe';
     IngresoproductosComponent,
     CarritocompraComponent,
     PanelprincipalComponent,
-    CheckoutComponent,
-    NoimagePipe
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
