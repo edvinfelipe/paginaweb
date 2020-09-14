@@ -9,57 +9,47 @@ import { MarcasService } from '../../services/marcas.service';
   styleUrls: ['./catalogo.component.css']
 })
 export class CatalogoComponent implements OnInit {
-  
   arregloProductos: any[] = [];
   arregloMarcas: any[] = [];
   arregloPaginas: any = [];
   numPaginas: number;
- 
-  constructor(private _catalogoService:CatalagoService, private _marcasService:MarcasService) {
+  constructor(private _catalogoService: CatalagoService, private _marcasService: MarcasService) {
     this._marcasService.getMarcas()
       .subscribe( (dataMarcas: any) => {
-        console.log(dataMarcas);
-        this.arregloMarcas = dataMarcas
+        this.arregloMarcas = dataMarcas;
       });
     this._catalogoService.getProductos()
       .subscribe( (dataProductos: any) => {
-        console.log(dataProductos);
-        this.arregloProductos = dataProductos
-      }); 
-      this.obtenerPaginas();   
+        this.arregloProductos = dataProductos.productos;
+      });
+    this.obtenerPaginas();
     }
 
   ngOnInit(): void {
 
   }
 
-  obtenerRadio(termino: String){
+  obtenerRadio(termino: String): void{
     console.log(termino);
-    this._catalogoService.getFilter(`marca/${ termino }`);
+    /* this._catalogoService.getFilter(`marca/${ termino }`); */
   }
 
-  paginacion(termino: number){
-    console.log(termino);
+  paginacion(termino: number): void{
     this._catalogoService.getProductos(termino)
       .subscribe( (dataProductos: any) => {
-        console.log(dataProductos);
-        this.arregloProductos = dataProductos
+        this.arregloProductos = dataProductos.productos;
       });
   }
-  
-  obtenerPaginas(){
-    this._catalogoService.getPaginacion()
+
+  obtenerPaginas(): void{
+    this._catalogoService.getProductos()
     .subscribe( (dataPaginacion: any) => {
-      console.log(dataPaginacion);
-      this.numPaginas = dataPaginacion;
-      this.numPaginas = Math.ceil( this.numPaginas/10);
-      console.log(this.numPaginas);
-      for(let i = 1; i <=this.numPaginas;i++){
-        console.log(i);
+      this.numPaginas = dataPaginacion.count;
+      this.numPaginas = Math.ceil( this.numPaginas / 10);
+      for (let i = 1; i <= this.numPaginas; i++){
         this.arregloPaginas.push(i);
       }
-      console.log(this.arregloPaginas);
-    }); 
+    });
   }
 
 }
