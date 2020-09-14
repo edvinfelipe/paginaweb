@@ -46,8 +46,7 @@
 
 .productos {
     padding-left: 200px;
-    padding-right: 150px;
-    border-bottom: 4px solid grey;
+    /* padding-right: 120px; */
     border-color: grey;
     width: 100%;
 }
@@ -59,16 +58,30 @@
     margin: auto;
 }
 
-.contenedor_footer {
-    z-index: 3000;
+.paginacion {
+    padding-left: 260px;
+}
+
+.paginacion ul {
+    display: inline-block;
+    list-style: none;
+    text-align: center;
+    padding: 10px 20px;
+    margin: 15px;
+    color: #fff;
+    background-color: #1A2A40;
+}
+
+.paginacion ul:hover {
+    cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {
     .contenedor_filtros,
     .contenedor_productos,
-    .contenedor_footer,
     .productos,
-    .filtros {
+    .filtros,
+    .paginacion {
         display: block;
         position: static;
         padding: 5px;

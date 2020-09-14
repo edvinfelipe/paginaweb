@@ -4,11 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 //Rutas
-import { APP_ROUTING } from './routes';
+import { APP_ROUTING } from './app.routes';
 //Servicios
-
-//Componentes
+import { MarcasService } from './services/marcas.service';
 import { ProductosService } from './services/productos.service';
+//Componentes
 import { AppComponent } from './app.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
@@ -24,6 +24,8 @@ import { PanelprincipalComponent } from './components/panelprincipal/panelprinci
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ConfiguracionesComponent } from './components/configuraciones/configuraciones.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -31,13 +33,10 @@ import { ConfiguracionesComponent } from './components/configuraciones/configura
     CatalogoComponent,
     TarjetasProductosComponent,
     FooterComponent,
-
-    AppComponent,
     AboutusComponent,
     NavbarComponent,
     ContactpageComponent,
     HowbuyComponent,
-    AppComponent,
     DetalleproductoComponent,
     IngresoproductosComponent,
     CarritocompraComponent,
@@ -47,12 +46,14 @@ import { ConfiguracionesComponent } from './components/configuraciones/configura
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     APP_ROUTING,
     AppRoutingModule,
   ],
   providers: [
-    ProductosService
+    ProductosService,
+    MarcasService
   ],
   bootstrap: [AppComponent]
 })
