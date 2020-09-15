@@ -8,7 +8,7 @@ import { MarcasService } from '../../services/marcas.service';
 })
 export class ConfiguracionesComponent implements OnInit {
 
-//  marcas:Marcas[] = [];
+  // marcas:Marcas[] = [];
 
   constructor( private _marcasService:MarcasService ) { }
 
