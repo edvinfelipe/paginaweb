@@ -59,7 +59,7 @@
 }
 
 .paginacion {
-    padding-left: 260px;
+    margin: 20px;
 }
 
 .btn_Filtros {
@@ -72,17 +72,25 @@
 }
 
 .paginacion ul {
-    display: inline-block;
     list-style: none;
     text-align: center;
+}
+
+.paginacion ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.paginacion ul li a {
+    display: block;
     padding: 10px 20px;
-    margin: 15px;
     color: #fff;
     background-color: #1A2A40;
 }
 
-.paginacion ul:hover {
+.paginacion ul li a:hover {
     cursor: pointer;
+    background-color: #263e61;
 }
 
 @media screen and (max-width: 600px) {

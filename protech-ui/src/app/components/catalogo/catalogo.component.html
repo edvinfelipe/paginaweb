@@ -34,9 +34,9 @@
         </div>
 
         <div class="paginacion">
-            <ul *ngFor="let numeroPagina of arregloPaginas;" (click)="aplicarFiltros(numeroPagina)">
-                <li value="{{numeroPagina}}">
-                    {{numeroPagina}}
+            <ul>
+                <li *ngFor="let numeroPagina of arregloPaginas;" (click)="aplicarFiltros(numeroPagina)">
+                    <a>{{numeroPagina}}</a>
                 </li>
             </ul>
 
