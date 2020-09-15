@@ -24,7 +24,6 @@ import { PaginainicioComponent } from './components/paginainicio/paginainicio.co
 import { PanelprincipalComponent } from './components/panelprincipal/panelprincipal.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ConfiguracionesComponent } from './components/configuraciones/configuraciones.component';
-import { MarcasService } from './services/marcas.service';
 
 import { HttpClientModule } from '@angular/common/http';
 
