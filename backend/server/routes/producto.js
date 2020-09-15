@@ -48,6 +48,43 @@ app.get('/api/producto',( req, res )=>{
 })
 
 //==============================
+// Obtener un sólo producto
+//==============================
+app.get('/api/producto/:id',( req, res )=>{
+
+    const id = req.params.id
+
+    Producto.findOne({ _id:id, descontinuado: false }  )
+        .populate('categoria','nombre')
+        .populate('marca','nombre')
+        .populate('imagenes')
+        .exec((err, productoDB) => {
+
+            if(err){
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            if( !productoDB ){
+                return res.status(404).json({
+                    status: false,
+                    err: {
+                        message: 'No existe la categoria'
+                    }
+                })
+            }
+    
+            res.json({
+                status: true,
+                producto: productoDB
+            })
+
+        })
+})
+
+//==============================
 // Lista de productos por marca 
 //==============================
 app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
