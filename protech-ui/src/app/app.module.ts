@@ -23,6 +23,7 @@ import { CarritocompraComponent } from './components/carritocompra/carritocompra
 import { PanelprincipalComponent } from './components/panelprincipal/panelprincipal.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ConfiguracionesComponent } from './components/configuraciones/configuraciones.component';
+import { MarcasService } from './services/marcas.service';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { ConfiguracionesComponent } from './components/configuraciones/configura
     AppRoutingModule,
   ],
   providers: [
-    ProductosService
+    ProductosService,
+    MarcasService
   ],
   bootstrap: [AppComponent]
 })

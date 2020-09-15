@@ -26,7 +26,7 @@ export class MarcasService {
         console.log("Service ready");
     }
 
-    getProductos():Marcas[]{
+    getMarcas():Marcas[]{
         return this.marcas;
     }
 }
