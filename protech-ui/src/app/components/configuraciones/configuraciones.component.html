@@ -51,12 +51,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let marca of marcas; let i = index;">
+                                <tr *ngFor="let categoria of categorias; let i = index;">
                                     <td class="colorGray">
                                         {{i + 1}}
                                     </td>
                                     <td class="colorGray tab-left">
-                                        <input class="in colorGray" type="text" id="cat {{i}}" placeholder="{{marca.nombre}}" pattern="[a-zA-ZñÑ.'-]{1,25}" style="max-width: 250px; border: transparent;" title="Solo se permiten letras o los caracteres .-' ">
+                                        <input class="in colorGray" type="text" id="cat {{i}}" placeholder="{{categoria.nombre}}" pattern="[a-zA-ZñÑ.'-]{1,25}" style="max-width: 250px; border: transparent;" title="Solo se permiten letras o los caracteres .-' ">
                                     </td>
                                     <td class="colorGray tab-left">
                                         <button id="btncw {{i}}" type="button" class="btn botw" onclick="this.blur();" data-toggle="modal" data-target="#updCategoria"><i class="fas fa-pen"></i></button>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MarcasService, Marcas } from '../../services/marcas.service';
+import { MarcasService } from '../../services/marcas.service';
 //import * as $ from 'jquery';
 declare var $ : any;
 
@@ -11,13 +11,22 @@ declare var $ : any;
 
 export class ConfiguracionesComponent implements OnInit {
 
-  // marcas:Marcas[] = [];
+  marcas: any[] = [];
+  categorias: any[] = [];
 
-  constructor( private _marcasService:MarcasService ) { }
+  constructor( private _marcasService:MarcasService ) { 
+    this._marcasService.getMarcas()
+      .subscribe( (dataMarcas: any) => {
+        this.marcas = dataMarcas;
+      });
+    this._marcasService.getCategorias()
+      .subscribe( (dataCategorias: any) => {
+        this.categorias = dataCategorias;
+      });
+  }
+
 
   ngOnInit(): void {
-    this.marcas = this._marcasService.getMarcas();
-
     //Desplegar ingreso categoría
     $('#btnCategoria').click(function(){
       let cat = $('#categoriatxt').val();
