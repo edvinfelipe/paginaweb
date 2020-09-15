@@ -1,9 +1,12 @@
 /* import { RouterModule, Routes } from '@angular/router';
 import { CarritocompraComponent } from './components/carritocompra/carritocompra.component';
+import { ConfiguracionesComponent } from './components/configuraciones/configuraciones.component';
 
 const APP_ROUTES: Routes = [
     { path: 'carritocompra', component: CarritocompraComponent },
-    { path: '**', pathMatch: 'full', redirectTo: 'carritocompra' }
+    { path: 'configuraciones', component: ConfiguracionesComponent },
+    { path: '**', pathMatch: 'full', redirectTo: 'carritocompra' },
+    { path: '**', pathMatch: 'full', redirectTo: 'configuraciones' }
 
 ];
 
