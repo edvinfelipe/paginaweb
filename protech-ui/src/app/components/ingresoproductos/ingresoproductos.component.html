@@ -1,95 +1,220 @@
 <div class="centrar">
+    <div class="row">
+        <div class="col-3">
+            <img src="assets/img/inventory.png" alt="" class="fijarInventario">
+            <label class="col-1" style="font-size:3.0vw">
+                <strong>Inventario</strong></label>
+        </div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-7">
+            <img src="assets/img/Componente 20 – 1@2x.png" alt="" class="fijarMarco">
+        </div>
+    </div>
+
+    <nav>
+        <div style="margin-top: 15px;" class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a style="font-size:1.2vw" class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ingresar producto</a>
+            <a style="font-size:1.2vw" class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Visualizar producto</a>
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div style="margin-top: 35px;">
+                <form class="was-validated">
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <input style="font-size:0.9vw" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required>
+                            <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                            <div class="row form-group">
+                                <div class="col-6">
+                                    <select style="font-size:0.9vw" class="custom-select" required>
+                                        <option value=""> Marca</option>
+                                        <option *ngFor="let marca of marcas;">{{ marca }}</option>
+                                    </select>
+                                    <div style="font-size:0.6vw" class="invalid-feedback">Seleccione una marca</div>
+                                </div>
+                                <div class="col-6">
+                                    <select style="font-size:0.9vw" class="custom-select" required>
+                                        <option value="">Categoría</option>
+                                        <option *ngFor="let categoria of categorias;">{{ categoria }}</option>                                    
+                                    </select>
+                                    <div style="font-size:0.6vw" class="invalid-feedback">Seleccione una categoría</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input style="font-size:0.9vw" type="number" step="0.01" min="0" class="form-control" id="PrecioVenta" placeholder="Precio de venta (Q.)" required>
+                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales)</div>
+                            </div>
+                            <div class="form-group">
+                                <input style="font-size:0.9vw" type="number" min="0" class="form-control" id="Existencia" placeholder="Existencia" required>
+                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use enteros solamente)</div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" required>
+                                        <label style="font-size:0.9vw" class="custom-control-label" for="customControlValidation1">Disponible</label>
+                                        <div style="font-size:0.6vw" class="invalid-feedback">Seleccione la opción disponible o descontinuado</div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="form-check">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+                                            <label style="font-size:0.9vw" class="custom-control-label" for="customControlValidation2">Descontinuado</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <div class="form-group form-check">
+                                        <input style="font-size:0.9vw" type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label style="font-size:0.9vw" class="form-check-label" for="exampleCheck1">En descuento</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <input style="font-size:0.9vw" type="text" class="form-control" placeholder="% descuento">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+
+                        </div>
+                        <div class="col-4">
+                            <div class="card-group">
+                                <div class="card">
+                                    <img [src]="urls[0]" class="fijarTarjetas" alt="">
+                                </div>
+                                <div class="card">
+                                    <img [src]="urls[1]" class="fijarTarjetas" alt="">
+                                </div>
+                                <div class="card">
+                                    <img [src]="urls[2]" class="fijarTarjetas" alt="">
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px;" class="form-group">
+                                <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event)">
+                                <div style="font-size:0.6vw" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-5">
+                            <textarea style="font-size:0.9vw" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción" required></textarea>
+                            <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                        </div>
+                    </div>
+                    <button style="font-size:0.9vw" id="submit" type="submit" class="btn btn-primary">Ingresar producto</button>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Nav-Profile</div>
+    </div>
+</div>
+
+<!--<div class="centrar">
+    <div>
+        <img src="assets/img/comocomprar.png" alt="" class="fijarMarco">
+    </div>
+
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
-            <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+            <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ingresar producto</a>
+            <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Visualizar producto</a>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div style="margin-top: 35px;" class="row">
                 <div class="form-group col-4">
-                    <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto">
-                    <br>
-                    <div class="row form-group">
-                        <div class="btn-group col-6">
-                            <button id="selected" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Marca</button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Marca 1</a>
-                                <a class="dropdown-item" href="#">Marca 2</a>
-                                <a class="dropdown-item" href="#">Marca 3</a>
+                    <form id="form1" class="was-validated">
+
+                        <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required>
+                        <div class="invalid-feedback">Campo incompleto</div>
+                        <br>
+                        <div class="row form-group">
+                            <div class="btn-group col-6">
+                                <select class="custom-select" required>
+                                    <option value=""> Marca</option>
+                                    <option *ngFor="let marca of marcas;">{{ marca }}</option>
+                                    <div class="invalid-feedback">Seleccione una marca</div>
+                                  </select>
+                            </div>
+                            <div class="btn-group col-6">
+                                <select class="custom-select" required>
+                                    <option value="">Categoría</option>
+                                    <option *ngFor="let categoria of categorias;">{{ categoria }}</option>
+                                    <div class="invalid-feedback">Seleccione una categoría</div>
+                                  </select>
                             </div>
                         </div>
-                        <div class="btn-group col-6">
-                            <button id="selected2" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Categoría</button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Categoría 1</a>
-                                <a class="dropdown-item" href="#">Categoría 2</a>
-                                <a class="dropdown-item" href="#">Categoría 3</a>
+                        <div class="form-group">
+                            <input type="number" step="0.01" min="0" class="form-control" id="PrecioVenta" placeholder="Precio de venta (Q.)" required>
+                            <div class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales)</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" min="0" class="form-control" id="Existencia" placeholder="Existencia" required>
+                            <div class="invalid-feedback">Campo incompleto o mal llenado (use enteros solamente)</div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" required>
+                                    <label class="custom-control-label" for="customControlValidation1">Disponible</label>
+                                    <div class="invalid-feedback">Seleccione la opción disponible o descontinuado</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-6">
+                                <div class="form-check">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+                                        <label class="custom-control-label" for="customControlValidation2">Descontinuado</label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="PrecioVenta" placeholder="Precio de venta">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="Existencia" placeholder="Existencia">
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Disponible</label>
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-6">
+                                <input type="text" class="form-control" placeholder="% descuento">
                             </div>
                         </div>
-                        <div class="form-group col-6">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Descontinuado</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-6">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">En oferta</label>
-                            </div>
-                        </div>
-                        <div class="form-group col-6">
-                            <input type="text" class="form-control" placeholder="% descuento">
-                        </div>
-                    </div>
+                    </form>
+
 
                 </div>
 
                 <div class="col-3">
 
                 </div>
+                <form>
+
+                </form>
                 <div class="col-4">
-                    <div class="card-group">
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="">
-                            <div class="card-body">
+                    <form>
+                        <div class="card-group">
+                            <div class="card">
+                                <img [src]="urls[0]" class="fijarTarjetas" alt="">
+                            </div>
+                            <div class="card">
+                                <img [src]="urls[1]" class="fijarTarjetas" alt="">
+                            </div>
+                            <div class="card">
+                                <img [src]="urls[2]" class="fijarTarjetas" alt="">
                             </div>
                         </div>
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="">
-                            <div class="card-body">
-                            </div>
+                        <div class="form-group">
+                            <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event)">
                         </div>
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="">
-                            <div class="card-body">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlFile1">Example file input</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
+                    </form>
                 </div>
             </div>
 
@@ -100,12 +225,15 @@
 
             <div class="row">
                 <div class="form-group col-5">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción"></textarea>
+                    <form class="was-validated">
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción" required></textarea>
+                        <div class="invalid-feedback">Campo incompleto</div>
+                    </form>
+
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button id="submit" type="submit" class="btn btn-primary" onclick="submitForms()">Sign in</button>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Nav-Profile</div>
-        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Nav-Contact</div>
     </div>
-</div>
+</div>-->
