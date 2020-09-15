@@ -62,6 +62,15 @@
     padding-left: 260px;
 }
 
+.btn_Filtros {
+    color: #fff;
+    background-color: #1A2A40;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
 .paginacion ul {
     display: inline-block;
     list-style: none;
