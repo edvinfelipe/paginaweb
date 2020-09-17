@@ -4,7 +4,7 @@ body {
 }
 
 .colorGray {
-    color: #929292
+    color: #707070
 }
 
 .colorBlue {
@@ -12,6 +12,8 @@ body {
 }
 
 .padd1 {
+    display: inline-block;
+    float: right;
     padding-left: 390px;
     padding-right: 100px;
 }
@@ -59,6 +61,23 @@ body {
     height: auto;
     max-width: 80px;
     max-height: 80px;
+}
+
+.recorte1 {
+    clip-path: inset(0 50% 0 0);
+}
+
+.recorte2 {
+    clip-path: inset(0 0 0 50%);
+    margin-left: -145px;
+}
+
+.imgCompra {
+    left: 140px;
+    display: inline-block;
+    position: absolute;
+    float: left;
+    width: 120px;
 }
 
 
@@ -117,6 +136,38 @@ body {
 
 /*Select Styles End*/
 
+.botonA {
+    background-color: #1A2A40;
+    color: #ffffff;
+}
+
+.botonA:hover {
+    background-color: #263c58;
+    color: #ffffff;
+}
+
+
+/* Botón eliminar */
+
+.boton {
+    background-color: #ffffff;
+    border: 1px solid #707070;
+}
+
+.boton:hover {
+    background-color: #d9534f;
+    border: 1px solid #d9534f;
+    color: #ffffff;
+}
+
+.fa-trash-alt {
+    color: #707070;
+}
+
+.boton:hover .fa-trash-alt {
+    color: #ffffff;
+}
+
 @media screen and (max-width: 1000px) {
     .container-dinero,
     .container-titulos,
@@ -132,6 +183,7 @@ body {
     }
     .padd1 {
         max-width: 1000px;
+        float: none;
         padding-left: 5px;
         padding-right: 5px;
     }
@@ -139,6 +191,9 @@ body {
         max-width: 400px;
         padding-left: 5px;
         padding-right: 5px;
+    }
+    .imgCompra {
+        display: none;
     }
 }
 
@@ -156,12 +211,17 @@ body {
         min-width: 200px;
     }
     .padd1 {
+        float: none;
         max-width: 1000px;
-        padding-left: 100px;
+        padding-left: 240px;
     }
     .padd2 {
         min-width: 400px;
         max-width: 600px;
-        padding-left: 100px;
+        padding-left: 240px;
+    }
+    .imgCompra {
+        display: inline-block;
+        left: 50px;
     }
 }

@@ -8,12 +8,20 @@
 
 
 <body>
-    <h2 align="center" class="colorGray" style="margin-top: 20px;">
-        CARRITO DE COMPRAS
-        <img src="assets/img/carrito.jpg" alt="" width="50px" height="50px" style="margin-top: -5px;">
+    <h2 align="center" class="colorGray">
+        <div style="width: 130px; display: inline-block;">
+            <img class="recorte1" src="assets/img/Componente 20 – 1@2x.png" height="60px">
+        </div>
+        Carrito de Compras
+        <img src="assets/img/carrito.jpg" width="50px" height="50px" style="margin-top: -5px;">
+        <div style="width: 130px; display: inline-block;">
+            <img class="recorte2" src="assets/img/Componente 20 – 1@2x.png" height="60px">
+        </div>
     </h2>
-
     <hr>
+
+
+    <img src="assets/img/comprar.png" alt="compra" class="imgCompra">
 
     <div class="table-responsive padd1">
         <table class="table" style="border: 1px solid #dbd9d9;">
@@ -44,7 +52,7 @@
                         <select id="cantidad {{i}}" class="select-css">
                             <option *ngFor="let num of numeros" value="{{num}}">{{num}}</option>
                         </select>
-                        <button id="btne {{i}}" type="button" class="btn btn-secondary" onclick="this.blur();"><i class="fas fa-trash-alt"></i></button>
+                        <button id="btne {{i}}" type="button" class="btn boton" onclick="this.blur();" data-toggle="modal" data-target="#deleteProducto"><i class="fas fa-trash-alt"></i></button>
                     </td>
                     <td class="colorGray">
                         {{ subtotal | currency: 'Q' }}
@@ -58,7 +66,7 @@
         <table class="table" style="border: 1px solid #dbd9d9;">
             <thead class="" style="color: #929292; border-bottom-style: hidden;">
                 <tr>
-                    <th scope="col">| Detalle de pago</th>
+                    <th scope="col">| DETALLE DE PAGO</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -89,6 +97,23 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="modal fade" id="deleteProducto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteP">¿Desea eliminar este producto?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn botonA" data-dismiss="modal">Continuar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
