@@ -17,12 +17,18 @@ import { CatalogoComponent } from './components/catalogo/catalogo.component';
 /* import { TarjetasProductosComponent } from './components/tarjetas-productos/tarjetas-productos.component' */
 import { DetalleproductoComponent } from './components/detalleproducto/detalleproducto.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
+import { PaginainicioComponent } from "./components/paginainicio/paginainicio.component";
+import { HowbuyComponent } from "./components/howbuy/howbuy.component";
+import { ContactpageComponent } from "./components/contactpage/contactpage.component";
 
 const app_routes: Routes = [
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'detalle/:id', component: DetalleproductoComponent },
-  { path: 'home', component: AboutusComponent},
-  { path: '**', pathMatch: 'full', redirectTo: 'home' } 
+  { path: 'home', component: PaginainicioComponent},
+  { path: 'nosotros', component: AboutusComponent},
+  { path: 'comprar', component: HowbuyComponent},
+  { path: 'contacto', component: ContactpageComponent},
+  { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
 export const APP_ROUTING = RouterModule.forRoot(app_routes);
