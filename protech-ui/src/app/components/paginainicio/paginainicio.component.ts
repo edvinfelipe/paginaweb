@@ -7,12 +7,15 @@ import { CatalagoService} from '../../services/catalago.service';
 })
 export class PaginainicioComponent implements OnInit {
 
-  // productos:Producto[]=[];
+  arregloproductos:any[]=[];
 
   constructor(private _productos:CatalagoService) { }
 
   ngOnInit(): void {
-    // this.productos = this._productos.getProductos();
+     this._productos.getProductos()
+     .subscribe( (dataProductos: any) => {
+       this.arregloproductos = dataProductos.productos;
+     });
   }
 
 }
