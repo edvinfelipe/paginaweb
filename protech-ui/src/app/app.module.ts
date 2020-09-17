@@ -50,9 +50,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    APP_ROUTING,
-    AppRoutingModule,
+    APP_ROUTING
   ],
   providers: [
     ProductosService,
