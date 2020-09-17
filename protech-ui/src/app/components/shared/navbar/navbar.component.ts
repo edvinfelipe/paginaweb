@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MarcasService } from "../../../services/marcas.service";
 
 @Component({
   selector: 'app-navbar',
@@ -7,19 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-   menu:boolean=false;
+  categorias: any[] = [];
 
-  constructor() { }
+  constructor(private _marcasService:MarcasService) {
+    this._marcasService.getCategorias()
+      .subscribe( (dataCategorias: any) => {
+        this.categorias = dataCategorias;
+      });
+   }
 
   ngOnInit(): void {
   }
 
-  mostrarBoton(){
-
-    if(this.menu){
-      this.menu = false;
-    }else{
-      this.menu= true;
-    }
-  }
 }

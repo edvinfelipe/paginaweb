@@ -12,7 +12,7 @@
   <div class="header_main-bottom">
     <div class="header_main-container">
       <div class="header_main_logo">
-        <a href="#" class="logo">
+        <a [routerLink]="['/home']" class="logo">
           <img src="assets/img/image.png" alt="">
         </a>
       </div>
@@ -58,19 +58,19 @@
               Productos
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <a *ngFor="let categoria of categorias;" class="dropdown-item"  href="#">{{categoria.nombre}}</a>
+              <!-- <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a> -->
             </div>
           </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Nosotros <span class="sr-only">(current)</span></a>
+            <a class="nav-link" [routerLink]="['/nosotros']">Nosotros <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">¿Cómo comprar?</a>
+            <a class="nav-link" [routerLink]="['/comprar']">¿Cómo comprar?</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contactenos</a>
+            <a class="nav-link" [routerLink]="['/contacto']">Contactenos</a>
           </li>
         </ul>
       </div>
