@@ -15,11 +15,10 @@ export class TarjetasProductosComponent implements OnInit {
   }
   
   /**
-   * Función que agregará la ruta completa a la imagen recibida por el json de producto
+   * Función que obtendrá la url del producto.
    */
   obtenerImagen(){
-    let bytes = this.producto.imagenes[0].imagen;
-    let source2 = `https://api-protech.herokuapp.com/api/imagen/${bytes}`;
-    return source2;
+    let bytes = this.producto.imagenes[0].url;
+    return bytes;
   }
 }
