@@ -1,0 +1,39 @@
+.card{
+    margin-top: 60px;
+    border-color: #000000;
+    margin-bottom: 40px;
+}
+.list-group{
+    max-height: 630px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+.alert{
+    margin-top: 30px;
+    background-color: #1a2a40;
+    color: white;
+
+}
+.col-3{
+    border: 1px solid;
+    text-align: center;
+    border-color: #1a2a40;
+}
+.col-9{
+    border-right: 1px solid;
+    
+    text-align: center;
+    border-color: white;
+}
+.col-4{
+    margin-top: 30px;
+    border: 1px solid;
+    text-align: left;
+    border-color:#1a2a40 ;
+
+}
+

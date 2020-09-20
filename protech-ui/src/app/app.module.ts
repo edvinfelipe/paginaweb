@@ -26,6 +26,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ConfiguracionesComponent } from './components/configuraciones/configuraciones.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { HistorialComprasComponent } from './components/historial-compras/historial-compras.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { HttpClientModule } from '@angular/common/http';
     PanelprincipalComponent,
     PanelprincipalComponent,
     CheckoutComponent,
-    ConfiguracionesComponent
+    ConfiguracionesComponent,
+    HistorialComprasComponent
   ],
   imports: [
     BrowserModule,
