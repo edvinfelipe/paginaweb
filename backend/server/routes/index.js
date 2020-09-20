@@ -8,7 +8,14 @@ app.use(require('./marca'))
 app.use(require('./usuario'))
 app.use(require('./login'))
 app.use(require('./producto'))
-app.use(require('./upload'))
+
+if( process.env.CLOUD_NAME ){
+    app.use(require('./uploadcloud'))
+}else{
+
+    app.use(require('./upload'))
+}
+
 app.use(require('./imagenes'))
 
 

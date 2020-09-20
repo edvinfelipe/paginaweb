@@ -20,6 +20,17 @@ process.env.SEED = process.env.SEED || 'llave-secreta-desarrollo'
 process.env.CADUCIDAD_TOKEN = '48h'
 
 //==========================================
+//  Dominio del servidor
+//==========================================
+process.env.DOMINIO = process.env.DOMINIO || 'http://localhost:3000' 
+//==========================================
+//  Cloud de imagenes
+//==========================================
+process.env.CLOUD_NAME = process.env.CLOUD_NAME || ''
+process.env.API_KEY = process.env.API_KEY || ''
+process.env.API_SECRET = process.env.API_SECRET || ''
+
+//==========================================
 //  Base de datos
 //==========================================
 let urlDB

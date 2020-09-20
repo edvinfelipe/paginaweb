@@ -9,8 +9,19 @@ const Producto = require('../models/producto')
 
 const verificarToken = require('../middleware/autenticacion')
 
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({
+    cloud_name:  process.env.CLOUD_NAME, 
+    api_key:  process.env.API_KEY, 
+    api_secret: process.env.API_SECRET 
+})
+
+
 // Con este middleware, todos los archivos que se suban caen en el req.files
-app.use(fileUpload())
+app.use(fileUpload({
+    useTempFiles: true
+}))
 
 
 app.post('/api/upload/:id', verificarToken ,(req, res)=>{
@@ -62,28 +73,22 @@ app.post('/api/upload/:id', verificarToken ,(req, res)=>{
                 })
             }
     
-            insertarImagen(res, archivo, idProducto, extension)
-        })
-
+            uploadImage(res, archivo, idProducto)
+    })
+   
 })
 
-function insertarImagen(res, archivo, idPorducto, extension ){
+// ===========================================
+//  Subida de imagen a cloud
+// ===========================================
+function uploadImage(res, archivo, idPorducto){
 
-    // Cambiar el nombre del archivo
-    let nombreArchivo = `${idPorducto}-${ new Date().getMilliseconds() }.${ extension }`
-
-    archivo.mv(`backend/uploads/productos/${ nombreArchivo }`, (err)=>{
-
-        if( err ){
-            return res.status(500).json({
-                status: false,
-                err
-            })
-        }
+    cloudinary.uploader.upload(archivo.tempFilePath)
+    .then(result =>{
 
         const imagen = new Imagen({
-            imagen: nombreArchivo,
-            url: `${process.env.DOMINIO}/api/imagen/${nombreArchivo}`,
+            imagen: result.public_id,
+            url: result.url,
             producto: idPorducto
         })
 
@@ -98,10 +103,16 @@ function insertarImagen(res, archivo, idPorducto, extension ){
 
             return res.status(201).json({
                 status: true,
-                producto: imagenDB
+                imagen: imagenDB
             })
         })
 
+    })
+    .catch( err => {
+        return res.status(400).json({
+            status: false,
+            err
+        })
     })
 
 }

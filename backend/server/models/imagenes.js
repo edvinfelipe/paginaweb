@@ -7,6 +7,9 @@ const imagenSchema = new Schema({
     imagen:{
         type: String,
     },
+    url:{
+        type: String
+    },
     producto:{
         type: Schema.Types.ObjectId,
         ref: 'Producto'
