@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CatalagoService } from '../../services/catalago.service';
 import { fromEventPattern } from 'rxjs';
 import { MarcasService } from '../../services/marcas.service';
+import { CategoriasService } from '../../services/categorias.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -11,14 +12,23 @@ import { MarcasService } from '../../services/marcas.service';
 export class CatalogoComponent implements OnInit {
   arregloProductos: any[] = [];
   arregloMarcas: any[] = [];
+  arregloCategorias: any[] = [];
   arregloPaginas: any = [];
   numPaginas: number;
-  constructor(private _catalogoService: CatalagoService, private _marcasService: MarcasService) {
+  marca: string;
+  categoria: string;
+  constructor(private _categoriasService: CategoriasService ,private _catalogoService: CatalagoService, private _marcasService: MarcasService) {
     this._marcasService.getMarcas()
       .subscribe( (dataMarcas: any) => {
         this.arregloMarcas = dataMarcas;
       });
-    this._catalogoService.getProductos()
+
+    this._categoriasService.getCategorias()
+      .subscribe( (dataCategorias: any) => {
+        this.arregloCategorias = dataCategorias;
+      });
+
+    this._catalogoService.getProductos2()
       .subscribe( (dataProductos: any) => {
         this.arregloProductos = dataProductos.productos;
       });
@@ -28,21 +38,24 @@ export class CatalogoComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
-  obtenerRadio(termino: String): void{
-    console.log(termino);
-    /* this._catalogoService.getFilter(`marca/${ termino }`); */
+  setMarca(marca: string): void{
+    this.marca = marca;
+  }
+  setCategoria(categoria: string): void{
+    this.categoria = categoria;
   }
 
-  paginacion(termino: number): void{
-    this._catalogoService.getProductos(termino)
-      .subscribe( (dataProductos: any) => {
-        this.arregloProductos = dataProductos.productos;
-      });
+  aplicarFiltros(termino = 1): void{
+    this._catalogoService.getProductos2(this.categoria, this.marca, termino)
+    .subscribe( (dataProductosFiltrados: any) => {
+      this.arregloProductos = dataProductosFiltrados.productos;
+    });
+    this.obtenerPaginas();
   }
 
   obtenerPaginas(): void{
-    this._catalogoService.getProductos()
+    this.arregloPaginas = [];
+    this._catalogoService.getProductos2(this.categoria,this.marca)
     .subscribe( (dataPaginacion: any) => {
       this.numPaginas = dataPaginacion.count;
       this.numPaginas = Math.ceil( this.numPaginas / 10);
@@ -51,5 +64,6 @@ export class CatalogoComponent implements OnInit {
       }
     });
   }
+
 
 }
