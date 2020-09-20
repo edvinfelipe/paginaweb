@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MarcasService } from '../../services/marcas.service';
+import { CategoriasService } from "../../services/categorias.service";
 //import * as $ from 'jquery';
 declare var $ : any;
 
@@ -14,12 +15,12 @@ export class ConfiguracionesComponent implements OnInit {
   marcas: any[] = [];
   categorias: any[] = [];
 
-  constructor( private _marcasService:MarcasService ) { 
+  constructor( private _marcasService:MarcasService, private _categoriasService:CategoriasService ) {
     this._marcasService.getMarcas()
       .subscribe( (dataMarcas: any) => {
         this.marcas = dataMarcas;
       });
-    this._marcasService.getCategorias()
+    this._categoriasService.getCategorias()
       .subscribe( (dataCategorias: any) => {
         this.categorias = dataCategorias;
       });

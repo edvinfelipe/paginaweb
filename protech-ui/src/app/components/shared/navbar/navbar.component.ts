@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MarcasService } from "../../../services/marcas.service";
+import { CategoriasService } from "../../../services/categorias.service";
 
 @Component({
   selector: 'app-navbar',
@@ -10,8 +10,8 @@ export class NavbarComponent implements OnInit {
 
   categorias: any[] = [];
 
-  constructor(private _marcasService:MarcasService) {
-    this._marcasService.getCategorias()
+  constructor(private _cateogiriasService:CategoriasService) {
+    this._cateogiriasService.getCategorias()
       .subscribe( (dataCategorias: any) => {
         this.categorias = dataCategorias;
       });
