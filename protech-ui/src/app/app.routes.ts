@@ -20,12 +20,10 @@ import { AboutusComponent } from './components/aboutus/aboutus.component';
 import { PaginainicioComponent } from "./components/paginainicio/paginainicio.component";
 import { HowbuyComponent } from "./components/howbuy/howbuy.component";
 import { ContactpageComponent } from "./components/contactpage/contactpage.component";
-import { CarritocompraComponent} from "./components/carritocompra/carritocompra.component";
 
 const app_routes: Routes = [
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'detalle/:id', component: DetalleproductoComponent },
-  { path: 'carritocompra/:id/:cantidad', component: CarritocompraComponent },
   { path: 'home', component: PaginainicioComponent},
   { path: 'nosotros', component: AboutusComponent},
   { path: 'comprar', component: HowbuyComponent},

@@ -28,7 +28,7 @@
             <div class="input-group col-sm-4">
 
                 <button style="font-size:2vw;" type="button" (click)="manipularContador(0)" class="btn btn-dark btn-sm">-</button>
-                <input style="font-size:2vw;" [(ngModel)]="numero" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
+                <input style="font-size:2vw;" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
                 <button style="font-size:2vw;" type="button " (click)="manipularContador(1)" class="btn btn-dark btn-sm">+</button>
             </div>
             <br>
@@ -61,7 +61,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button [routerLink]="['/carritocompra', producto.id, numero]" routerLinkActive="router-link-active" (click)="mostrarCantidad()" type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
             </div>
         </div>
     </div>

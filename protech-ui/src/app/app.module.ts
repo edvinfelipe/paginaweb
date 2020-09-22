@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -53,7 +52,6 @@ import { HistorialComprasComponent } from './components/historial-compras/histor
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,
     APP_ROUTING
   ],
   providers: [
