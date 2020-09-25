@@ -8,6 +8,7 @@ const _ = require('underscore')
 const Producto  = require('../models/producto')
 
 const verificarToken = require('../middleware/autenticacion')
+const { max } = require('underscore')
 
 //==============================
 // Lista de todos los productos 
@@ -47,9 +48,88 @@ app.get('/api/producto',( req, res )=>{
         })
 })
 
+// =======================================
+//  Lista de producto por rango de precios
+// =======================================
+app.get('/api/producto/precio/',( req, res )=>{
+
+    let desde = Number( req.query.page || 1 )
+        desde = 10*(desde - 1)
+    
+    const min = req.query.min || 0 
+    const max = req.query.max || 0 
+
+    Producto.find({ descontinuado: false, precio: { $gte: min, $lte: max } }  )
+        .skip(desde)
+        .limit(10)
+        .populate('categoria','nombre')
+        .populate('marca','nombre')
+        .populate('imagenes')
+        .exec((err, productos) => {
+
+            if(err){
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            Producto.countDocuments( { 
+                descontinuado: false, 
+                precio: { $gte: min, $lte: max } }, (err, conteo)=>{
+
+                res.json({
+                    status: true,
+                    count: conteo,
+                    productos,
+    
+                })
+            })
+
+        })
+  
+})
+
 //==============================
-// Lista de productos por marca 
+// Obtener un sólo producto
 //==============================
+app.get('/api/producto/:id',( req, res )=>{
+
+    const id = req.params.id
+
+    Producto.findOne({ _id:id, descontinuado: false }  )
+        .populate('categoria','nombre')
+        .populate('marca','nombre')
+        .populate('imagenes')
+        .exec((err, productoDB) => {
+
+            if(err){
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            if( !productoDB ){
+                return res.status(404).json({
+                    status: false,
+                    err: {
+                        message: 'No existe la categoria'
+                    }
+                })
+            }
+    
+            res.json({
+                status: true,
+                producto: productoDB
+            })
+
+        })
+})
+
+//=========================================
+// Lista de productos por marca y categoria
+//=========================================
 app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
 
     let desde = Number( req.query.page || 1 )
@@ -62,6 +142,9 @@ app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
     Producto.find({ descontinuado: false, categoria, marca }  )
         .skip(desde)
         .limit(10)
+        .populate('categoria','nombre')
+        .populate('marca','nombre')
+        .populate('imagenes')
         .exec((err, productos) => {
 
             if(err){
@@ -71,7 +154,7 @@ app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
                 })
             }
 
-            Producto.countDocuments( { descontinuado: false }, (err, conteo)=>{
+            Producto.countDocuments( { descontinuado: false, categoria, marca }, (err, conteo)=>{
 
                 res.json({
                     status: true,
@@ -83,6 +166,8 @@ app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
 
         })
 })
+
+
 
 // ===========================
 //  Crear un nuevo producto
