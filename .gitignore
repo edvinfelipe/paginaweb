@@ -2,4 +2,5 @@
 # dependencies de nodejs
 protech-ui/node_modules
 backend/node_modules
+node_modules/
 npm-debug.log*
