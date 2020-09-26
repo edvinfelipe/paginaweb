@@ -11,7 +11,7 @@ const verificarToken = require('../middleware/autenticacion')
 //=====================
 // Lista de categorias
 // ====================
-app.get('/api/categoria', (req, res)=>{
+app.get('/api/categoria',(req, res)=>{
 
     Categoria.find({eliminado: false}, 'nombre' )
         .sort('nombre')

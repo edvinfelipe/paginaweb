@@ -9,7 +9,7 @@ app.use(require('./usuario'))
 app.use(require('./login'))
 app.use(require('./producto'))
 
-if( process.env.CLOUD_NAME ){
+if( process.env.NODE_ENV !== 'dev' ){
     app.use(require('./uploadcloud'))
 }else{
 
