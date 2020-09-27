@@ -24,5 +24,5 @@ const facturaSchema = new Schema({
     }
 })
 
-categoriaSchema.plugin( uniqueValidator, { message: '{PATH} debe ser único'})
-module.exports = mongoose.model('Factura', categoriaSchema )
+facturaSchema.plugin( uniqueValidator, { message: '{PATH} debe ser único'})
+module.exports = mongoose.model('Factura', facturaSchema )

@@ -24,5 +24,5 @@ const detalleSchema = new Schema({
     
 })
 
-categoriaSchema.plugin( uniqueValidator, { message: '{PATH} debe ser único'})
-module.exports = mongoose.model('Detalle', categoriaSchema )
+detalleSchema.plugin( uniqueValidator, { message: '{PATH} debe ser único'})
+module.exports = mongoose.model('Detalle', detalleSchema )

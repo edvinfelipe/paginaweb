@@ -167,8 +167,6 @@ app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
         })
 })
 
-
-
 // ===========================
 //  Crear un nuevo producto
 // ===========================
@@ -300,7 +298,5 @@ app.delete('/api/producto/:id', verificarToken, (req, res) => {
     });
 
 });
-
-
 
 module.exports = app

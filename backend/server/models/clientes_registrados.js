@@ -31,8 +31,12 @@ const clientesSchema = new Schema({
     password:{
         type: String,
         require: [true, "Password necesario"]
+    },
+    eliminado: {
+        type: Boolean,
+        default: false
     }
 })
 
-categoriaSchema.plugin( uniqueValidator, { message: '{PATH} debe ser único'})
-module.exports = mongoose.model('Clientes', categoriaSchema )
+clientesSchema.plugin( uniqueValidator, { message: '{PATH} debe ser único'})
+module.exports = mongoose.model('Clientes', clientesSchema )
