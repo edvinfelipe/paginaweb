@@ -12,11 +12,16 @@ const detalleSchema = new Schema({
         type: Number,
         require: [true, "cantidad es necesario"]
     },
-    descpricion:{
+    descripcion:{
         type: String,
         require: [true, "Descripcion necesaria"]
     },
     factura_id:{
+        type: Schema.Types.ObjectId,
+        ref: 'Factura',
+        require: [true, "Id Requerido"]
+    },
+    producto_id:{
         type: Schema.Types.ObjectId,
         ref: 'Factura',
         require: [true, "Id Requerido"]

@@ -23,8 +23,7 @@ app.post('/api/factura' , (req, res) => {
         total: body.total,
         fecha_venta: body.fecha_venta,
         cliente_factura: body.cliente_factura,
-        producto_id: body.producto_id
-
+       
     })
 
     factura.save( (err, FacturaDB )=>{

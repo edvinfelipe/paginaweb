@@ -16,11 +16,6 @@ const facturaSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Clientes',
         require: [true, "Id Requerido"]
-    },
-    producto_id:{
-        type: Schema.Types.ObjectId,
-        ref: 'Producto',
-        require: [true, "Id Requerido"]
     }
 })
 

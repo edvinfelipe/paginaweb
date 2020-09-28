@@ -7,6 +7,7 @@ const _ = require('underscore')
 const bcrypt = require('bcrypt')
 
 const Cliente = require('../models/clientes_registrados')
+const clientes_registrados = require('../models/clientes_registrados')
 
 //const verificarToken = require('../middleware/autenticacion')
 
@@ -51,9 +52,8 @@ app.post('/api/cliente' , (req, res) => {
 // ====================
 app.get('/api/cliente', (req, res)=>{
 
-    Cliente.find()
-
-        .exec((err, cliente)=>{
+    clientes_registrados.find( { eliminado:false })
+        .exec((err, clientes)=>{
 
             if( err ){ 
                 return res.status(500).json({
@@ -64,10 +64,11 @@ app.get('/api/cliente', (req, res)=>{
 
             res.json({
                 status: true,
-                cliente
+                clientes
             })
         })
-    })
+        
+})
 
 
 //======================
@@ -133,5 +134,46 @@ app.get('/api/cliente/:id', (req, res)=>{
         })
     })
     
+    app.delete('/api/cliente/:id', (req, res) => {
+
+        const id = req.params.id
+    
+        const cambiaEstado = {
+            eliminado: true
+        }
+    
+        clientes_registrados.findByIdAndUpdate(
+            id, 
+            cambiaEstado,
+            { new: true }, 
+            (err, clienteBorrado )=>{
+               
+                if( err ){
+                    return res.status(500).json({
+                        status: false,
+                        err
+                    })
+                }
+    
+                if( !clienteBorrado ){
+                    return res.status(404).json({
+                        status: false,
+                        err: {
+                            message: 'No existe el cliente'
+                        }
+                    })
+                }
+        
+                res.json({
+                    status: true,
+                    cliente: clienteBorrado
+                })
+        })
+    })
+    
+    
+
+
+
 
 module.exports = app

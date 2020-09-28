@@ -14,17 +14,18 @@ const detalle_facturas = require('../models/detalle_factura')
 // Crea una FACTURA
 // ====================
 
-app.post('/api/detalle_factura/' , (req, res) => {
+app.post('/api/detalle_factura' , (req, res) => {
 
     let body = req.body
-    const idFactura = req.params.factura_id
+
 
     const detalle = new detalle_facturas({
 
         subtotal: body.subtotal,
         cantidad: body.cantidad,
         descripcion: body.descripcion,
-        factura_id: body.factura_id
+        factura_id: body.factura_id,
+        producto_id: body.producto_id
 
     })
 
