@@ -39,7 +39,7 @@ app.get('/api/usuario', verificarToken, (req, res)=>{
 // =====================
 app.get('/api/usuario/:id', verificarToken , (req, res)=>{
 
-    const id = req.params.id
+    const id = req.params.idz
 
     Usuario.findOne( { _id: id, eliminado: false}, (err, usuarioDB)=>{
 

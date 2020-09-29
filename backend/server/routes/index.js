@@ -8,6 +8,9 @@ app.use(require('./marca'))
 app.use(require('./usuario'))
 app.use(require('./login'))
 app.use(require('./producto'))
+app.use(require('./clientes_registrados'))
+app.use(require('./factura'))
+app.use(require('./detalle_factura'))
 
 if( process.env.NODE_ENV !== 'dev' ){
     app.use(require('./uploadcloud'))
