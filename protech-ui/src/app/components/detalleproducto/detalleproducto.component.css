@@ -12,14 +12,19 @@
     margin-right: auto;
 }
 
+.imagenes {
+    height: 100%;
+    width: 100%;
+}
+
 .fijarTarjetaGrande {
     width: 100%;
     height: 20vw;
-    object-fit: cover;
+    object-fit: fill;
 }
 
 .fijarTarjetaPequena {
     width: 100%;
     height: 10vw;
-    object-fit: cover;
+    object-fit: fill;
 }
