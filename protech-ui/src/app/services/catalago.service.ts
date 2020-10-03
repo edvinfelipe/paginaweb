@@ -50,10 +50,12 @@ export class CatalagoService {
   }
   
   getProductos2(idCategoria = '', idMarca = '', noPagina = 1){
-    if (idCategoria == '' || idMarca == '') {
-      return this.getQuery(`?page=${ noPagina }`)
+    if (idCategoria != '' && idMarca == '') {
+      return this.getQuery( "categoria/"+ idCategoria + `/?page=${ noPagina }`);
     } else if (idCategoria != '' && idMarca != '') {
       return this.getQuery( "marca/"+ idCategoria + '/' + idMarca + `/?page=${ noPagina }`);
+    } else if (idCategoria == '' || idMarca == ''){
+      return this.getQuery(`?page=${ noPagina }`)
     }
   }
 }
