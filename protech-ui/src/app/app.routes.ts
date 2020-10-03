@@ -23,7 +23,7 @@ import { ContactpageComponent } from "./components/contactpage/contactpage.compo
 import { CarritocompraComponent} from "./components/carritocompra/carritocompra.component";
 
 const app_routes: Routes = [
-  { path: 'catalogo', component: CatalogoComponent },
+  { path: 'catalogo/:id', component: CatalogoComponent },
   { path: 'detalle/:id', component: DetalleproductoComponent },
   { path: 'carritocompra/:id/:cantidad', component: CarritocompraComponent },
   { path: 'home', component: PaginainicioComponent},
