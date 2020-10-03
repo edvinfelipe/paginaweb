@@ -167,6 +167,46 @@ app.get('/api/producto/marca/:categoria/:marca',( req, res )=>{
         })
 })
 
+//=========================================
+// Lista de productos por categoria
+//=========================================
+app.get('/api/producto/categoria/:categoria',( req, res )=>{
+
+    let desde = Number( req.query.page || 1 )
+        desde = 10*(desde - 1)
+    
+    const categoria = req.params.categoria 
+    console.log(categoria)
+
+    Producto.find({ descontinuado: false, categoria }  )
+        .skip(desde)
+        .limit(10)
+        .populate('categoria','nombre')
+        .populate('marca','nombre')
+        .populate('imagenes')
+        .exec((err, productos) => {
+
+            if(err){
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            Producto.countDocuments( { descontinuado: false, categoria }, (err, conteo)=>{
+
+                res.json({
+                    status: true,
+                    count: conteo,
+                    productos,
+    
+                })
+            })
+
+        })
+
+})
+
 // ===========================
 //  Crear un nuevo producto
 // ===========================
