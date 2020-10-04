@@ -11,20 +11,22 @@ declare var $: any;
 export class IngresoproductosComponent implements OnInit {
   marcas: string[] = ['Marca 1', 'Marca 2', 'Marca 3'];
   categorias: string[] = ['Categoría 1', 'Categoría 2', 'Categoría 3'];
+  urls = new Array<string>();
+  especificacion: string;
   constructor() {
   }
 
   ngOnInit(): void {
     $("#image").on("change", function() {
       if ($("#image")[0].files.length > 3) {
-          alert("Elija únicamente un máximo de 3 archivos por favor");
-      } else {
-          $("#submit").submit();
-      }
-  });
+          alert("Usted ha ingresado más de 3 imágenes, así que se ingresarán al servidor las primeras 3 imágenes ingresadas únicamente.");
+      }});
   }
 
-  urls = new Array<string>();
+  obtenerEspecificacion(){
+    console.log('Especificación ingresada: ')
+  }
+  
 
   detectFiles(event) {
     this.urls = [];
