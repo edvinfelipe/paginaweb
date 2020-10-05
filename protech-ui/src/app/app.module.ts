@@ -28,6 +28,8 @@ import { ConfiguracionesComponent } from './components/configuraciones/configura
 
 import { HttpClientModule } from '@angular/common/http';
 import { HistorialComprasComponent } from './components/historial-compras/historial-compras.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -48,13 +50,15 @@ import { HistorialComprasComponent } from './components/historial-compras/histor
     PanelprincipalComponent,
     CheckoutComponent,
     ConfiguracionesComponent,
-    HistorialComprasComponent
+    HistorialComprasComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    APP_ROUTING
+    APP_ROUTING,
+    NgbModule
   ],
   providers: [
     ProductosService,

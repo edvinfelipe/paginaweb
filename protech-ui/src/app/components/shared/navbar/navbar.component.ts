@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriasService } from "../../../services/categorias.service";
+import {NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { CategoriasService } from "../../../services/categorias.service";
+import { LoginComponent } from "../../login/login.component";
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -10,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
   categorias: any[] = [];
 
-  constructor(private _cateogiriasService:CategoriasService) {
+  constructor(private _cateogiriasService:CategoriasService,private modalService: NgbModal) {
     this._cateogiriasService.getCategorias()
       .subscribe( (dataCategorias: any) => {
         console.log(dataCategorias);
@@ -21,4 +23,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  open() {
+    // const modalRef = this.modalService.open(ModalComponent);
+    const modalRef = this.modalService.open(LoginComponent);
+
+  }
 }
