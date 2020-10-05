@@ -3,6 +3,8 @@ import {NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { CategoriasService } from "../../../services/categorias.service";
 import { LoginComponent } from "../../login/login.component";
+import { RegistroComponent } from "../../registro/registro.component";
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -23,9 +25,13 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  open() {
+  openInicioSesion() {
     // const modalRef = this.modalService.open(ModalComponent);
     const modalRef = this.modalService.open(LoginComponent);
 
+  }
+
+  openRegistro(){
+    const modalRef = this.modalService.open(RegistroComponent);
   }
 }

@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HistorialComprasComponent } from './components/historial-compras/historial-compras.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { LoginComponent } from './components/login/login.component';
     CheckoutComponent,
     ConfiguracionesComponent,
     HistorialComprasComponent,
-    LoginComponent
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

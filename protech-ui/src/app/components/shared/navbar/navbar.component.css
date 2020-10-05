@@ -31,6 +31,10 @@
   cursor: pointer;
 }
 
+.header_main-list li a:hover {
+  color: #1A2A40;
+  background-color: white;
+}
 
 .header_main-bottom{
   width: 100%;
