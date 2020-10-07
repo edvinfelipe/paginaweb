@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { FormControl } from "@angular/forms";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

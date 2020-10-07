@@ -33,5 +33,6 @@ export class NavbarComponent implements OnInit {
 
   openRegistro(){
     const modalRef = this.modalService.open(RegistroComponent);
+    // this.modalService.open(RegistroComponent, { size: 'lg' });
   }
 }
