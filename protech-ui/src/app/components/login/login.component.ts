@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { FormControl } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Location } from '@angular/common';
+
+import { LoginService } from "../../services/login.service";
+import { Login } from "../../interfaces/login";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,9 +13,44 @@ import { FormControl } from "@angular/forms";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public activeModal: NgbActiveModal) { }
+  formLogin: FormGroup;
+  loginData: Login;
+  response: any = [];
+  constructor(public activeModal: NgbActiveModal, private formBuilder:FormBuilder, private _loginService:LoginService,private location: Location) {
+    this.buildFormLogin();
+   }
 
   ngOnInit(): void {
+  }
+
+  private buildFormLogin() {
+    this.formLogin = this.formBuilder.group({
+      usuario: ['',[Validators.required]],
+      contrasenia: ['',[Validators.required]]
+    });
+  }
+
+  datos(){
+
+    if(this.formLogin.valid ){
+      const valor = this.formLogin.value;
+      this.loginData = {
+        username: this.formLogin.get('usuario').value,
+        password: this.formLogin.get('contrasenia').value
+      };
+      this._loginService.inicioSesion(this.loginData).subscribe((data:any) =>{
+        this.response= data;
+        console.log(data.body['token']);
+        console.log(data);
+        // this._loginService.setToken(data.token);
+        // location.reload();
+      });
+
+    }else{
+      this.formLogin.markAllAsTouched();
+
+    }
+
   }
 
 }
