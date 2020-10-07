@@ -28,8 +28,11 @@ export class LoginService {
   }
 
   getToken(){
-    return localStorage.getItem("accesToken");
+    return sessionStorage.getItem("accesToken");
   }
 
+  logOut(){
+
+  }
 
 }

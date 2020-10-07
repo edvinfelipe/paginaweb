@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
         this.response= data;
         console.log(data.body['token']);
         console.log(data);
-        // this._loginService.setToken(data.token);
-        // location.reload();
+        this._loginService.setToken(data.body['token']);
+        location.reload();
       });
 
     }else{

@@ -1,6 +1,6 @@
 <div class="header_main">
   <div class="header_main-top">
-    <ul class="header_main-list">
+    <ul *ngIf="!isLogged" class="header_main-list">
       <li>
         <a (click)="openInicioSesion()">Inicia Sesión</a>
       </li>
@@ -8,6 +8,16 @@
         <a (click)="openRegistro()">Registrarse</a>
       </li>
     </ul>
+    <div *ngIf="isLogged" class="sesion-icon">
+      <div class="dropdown">
+        <i class="fas fa-user fa-lg dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="header_main-bottom">
     <div class="header_main-container">
