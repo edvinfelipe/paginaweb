@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Location } from '@angular/common';
 
 import { CategoriasService } from "../../../services/categorias.service";
 import { LoginComponent } from "../../login/login.component";
@@ -46,5 +47,10 @@ export class NavbarComponent implements OnInit {
       this.isLogged=true;
       console.log(this.isLogged);
     }
+  }
+
+  onLogOut(){
+    this._loginService.logOut();
+    location.reload();
   }
 }

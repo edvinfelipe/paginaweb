@@ -32,7 +32,7 @@ export class LoginService {
   }
 
   logOut(){
-
+    sessionStorage.removeItem("accesToken");
   }
 
 }
