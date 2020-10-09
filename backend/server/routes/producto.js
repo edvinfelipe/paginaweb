@@ -7,8 +7,7 @@ const _ = require('underscore')
 
 const Producto  = require('../models/producto')
 
-const verificarToken = require('../middleware/autenticacion')
-const { max } = require('underscore')
+const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 
 //==============================
 // Lista de todos los productos 
@@ -206,10 +205,49 @@ app.get('/api/producto/categoria/:categoria',( req, res )=>{
 
 })
 
+//=========================================
+// Lista de productos por marca
+//=========================================
+app.get('/api/producto/marca/:marca', ( req, res )=>{
+
+    let desde = Number( req.query.page || 1 )
+        desde = 10*(desde - 1)
+    
+    const marca = req.params.marca 
+
+    Producto.find({ descontinuado: false, marca }  )
+        .skip(desde)
+        .limit(10)
+        .populate('categoria','nombre')
+        .populate('marca','nombre')
+        .populate('imagenes')
+        .exec((err, productos) => {
+
+            if(err){
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            Producto.countDocuments( { descontinuado: false, marca }, (err, conteo)=>{
+
+                res.json({
+                    status: true,
+                    count: conteo,
+                    productos,
+    
+                })
+            })
+
+        })
+
+})
+
 // ===========================
 //  Crear un nuevo producto
 // ===========================
-app.post('/api/producto', verificarToken, (req, res) => {
+app.post('/api/producto', [ verificarToken, verificarRole ], (req, res) => {
      
 
     let body = req.body;
@@ -250,7 +288,7 @@ app.post('/api/producto', verificarToken, (req, res) => {
 // ===========================
 //  Actualizar un producto
 // ===========================
-app.put('/api/producto/:id', verificarToken, (req, res) => { 
+app.put('/api/producto/:id', [ verificarToken, verificarRole ], (req, res) => { 
 
     let body = _.pick(req.body,
     [   'nombre',
@@ -301,7 +339,7 @@ app.put('/api/producto/:id', verificarToken, (req, res) => {
 // ===========================
 //  Eliminar un producto
 // ===========================
-app.delete('/api/producto/:id', verificarToken, (req, res) => { 
+app.delete('/api/producto/:id', [ verificarToken, verificarRole ], (req, res) => { 
 
     
     
