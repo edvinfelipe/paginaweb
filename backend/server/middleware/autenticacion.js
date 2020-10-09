@@ -26,4 +26,26 @@ const verificarToken = ( req, res, next ) => {
     })
 }
 
-module.exports = verificarToken
+// =============================
+//  Verificar AdminRole
+// =============================
+const verificarRole = (req,res, next)=>{
+
+    const { role } = req.usuario
+
+    if( role === 'ADMIN_ROLE'){
+        return next()
+    }
+
+    return res.status(401).json({
+        status: false,
+        err: {
+            message: 'No tiene privilegio'
+        }
+    })
+}
+
+module.exports = {
+    verificarToken,
+    verificarRole
+}
