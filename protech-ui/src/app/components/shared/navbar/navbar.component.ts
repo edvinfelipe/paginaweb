@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
   constructor(private _cateogiriasService:CategoriasService,private modalService: NgbModal, private _loginService: LoginService) {
     this._cateogiriasService.getCategorias()
       .subscribe( (dataCategorias: any) => {
-        console.log(dataCategorias);
         this.categorias = dataCategorias;
       });
    }
@@ -29,7 +28,6 @@ export class NavbarComponent implements OnInit {
   }
 
   openInicioSesion() {
-    // const modalRef = this.modalService.open(ModalComponent);
     const modalRef = this.modalService.open(LoginComponent);
 
   }

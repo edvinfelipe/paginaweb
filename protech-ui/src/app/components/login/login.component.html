@@ -20,6 +20,7 @@
         <small *ngIf="formLogin.get('contrasenia').hasError('required')" class="text-danger">Campo requerido</small>
       </div>
     </div>
+    <p *ngIf="isErrorLoged" class="text-danger"> Usuario o contraseña incorrectos</p>
     <small id="emailHelp" class="form-text text-muted"><a href="#" style="color: #1A2A40;">¿Olvido su contraseña?</a></small>
   </form>
 </div>

@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   loginData: Login;
   response: any = [];
+  isErrorLoged:boolean=false;
   constructor(public activeModal: NgbActiveModal, private formBuilder:FormBuilder, private _loginService:LoginService,private location: Location) {
     this.buildFormLogin();
    }
@@ -39,12 +40,19 @@ export class LoginComponent implements OnInit {
         password: this.formLogin.get('contrasenia').value
       };
       this._loginService.inicioSesion(this.loginData).subscribe((data:any) =>{
-        this.response= data;
-        console.log(data.body['token']);
-        console.log(data);
-        this._loginService.setToken(data.body['token']);
-        location.reload();
-      });
+
+        if( parseInt(data.status)==200){
+          this.isErrorLoged=false;
+          console.log(data.body['token']);
+          console.log(data);
+          this._loginService.setToken(data.body['token']);
+          location.reload();
+        }
+      },
+      error =>{
+          this.isErrorLoged=true;
+      }
+      );
 
     }else{
       this.formLogin.markAllAsTouched();
