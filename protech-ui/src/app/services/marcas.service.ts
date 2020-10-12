@@ -7,10 +7,10 @@ import { map } from 'rxjs/operators';
 })
 export class MarcasService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     /*console.log("Constructor, servicio de marcas")*/
   }
-  
+
   getMarcas(){
 
     const headers = new HttpHeaders({

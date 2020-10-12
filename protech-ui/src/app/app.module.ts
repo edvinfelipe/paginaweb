@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -27,6 +28,9 @@ import { ConfiguracionesComponent } from './components/configuraciones/configura
 
 import { HttpClientModule } from '@angular/common/http';
 import { HistorialComprasComponent } from './components/historial-compras/historial-compras.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './components/login/login.component';
+import { RegistroComponent } from './components/registro/registro.component';
 
 
 @NgModule({
@@ -47,12 +51,17 @@ import { HistorialComprasComponent } from './components/historial-compras/histor
     PanelprincipalComponent,
     CheckoutComponent,
     ConfiguracionesComponent,
-    HistorialComprasComponent
+    HistorialComprasComponent,
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    APP_ROUTING
+    FormsModule,
+    ReactiveFormsModule,
+    APP_ROUTING,
+    NgbModule
   ],
   providers: [
     ProductosService,

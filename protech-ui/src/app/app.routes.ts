@@ -21,15 +21,18 @@ import { PaginainicioComponent } from "./components/paginainicio/paginainicio.co
 import { HowbuyComponent } from "./components/howbuy/howbuy.component";
 import { ContactpageComponent } from "./components/contactpage/contactpage.component";
 import { CarritocompraComponent} from "./components/carritocompra/carritocompra.component";
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const app_routes: Routes = [
-  { path: 'catalogo', component: CatalogoComponent },
+  { path: 'catalogo/:id', component: CatalogoComponent },
   { path: 'detalle/:id', component: DetalleproductoComponent },
   { path: 'carritocompra/:id/:cantidad', component: CarritocompraComponent },
   { path: 'home', component: PaginainicioComponent},
   { path: 'nosotros', component: AboutusComponent},
   { path: 'comprar', component: HowbuyComponent},
   { path: 'contacto', component: ContactpageComponent},
+  { path: 'carrito', component: CarritocompraComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
