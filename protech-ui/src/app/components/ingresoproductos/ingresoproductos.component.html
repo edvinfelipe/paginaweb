@@ -22,11 +22,13 @@
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div style="margin-top: 35px;">
-                <form class="was-validated">
+                <form id="Datos" class="was-validated">
                     <div class="form-group row">
                         <div class="col-4">
-                            <input style="font-size:0.9vw" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required>
-                            <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                            <div class="form-group">
+                                <input style="font-size:0.9vw" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required>
+                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                            </div>
                             <div class="row form-group">
                                 <div class="col-6">
                                     <select style="font-size:0.9vw" class="custom-select" required>
@@ -44,11 +46,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input style="font-size:0.9vw" type="number" step="0.01" min="0" class="form-control" id="PrecioVenta" placeholder="Precio de venta (Q.)" required>
+                                <input style="font-size:0.9vw" type="number" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Ingrese sólo números (si usa decimales que sean 2 como máximo)" step="0.01" min="0" class="form-control" id="PrecioVenta" placeholder="Precio de venta (Q.)" required>
                                 <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales)</div>
                             </div>
                             <div class="form-group">
-                                <input style="font-size:0.9vw" type="number" min="0" class="form-control" id="Existencia" placeholder="Existencia" required>
+                                <input style="font-size:0.9vw" type="number" pattern="[0-9]*" min="0" class="form-control" id="Existencia" placeholder="Existencia" required>
                                 <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use enteros solamente)</div>
                             </div>
                             <div class="row">
@@ -71,12 +73,12 @@
                             <div class="row">
                                 <div class="form-group col-6">
                                     <div class="form-group form-check">
-                                        <input style="font-size:0.9vw" type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <input style="font-size:0.9vw" type="checkbox" class="form-check-input" (click)="asignarValor()" id="cbDescuento" #descuento>
                                         <label style="font-size:0.9vw" class="form-check-label" for="exampleCheck1">En descuento</label>
                                     </div>
                                 </div>
                                 <div class="form-group col-6">
-                                    <input style="font-size:0.9vw" type="text" class="form-control" placeholder="% descuento">
+                                    <input *ngIf="booleano" id="inputDescuento" style="font-size:0.9vw" type="text" class="form-control" placeholder="% descuento" #inputDescuento required>
                                 </div>
                             </div>
                         </div>
@@ -99,141 +101,40 @@
                                 <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event)">
                                 <div style="font-size:0.6vw" class="invalid-feedback"></div>
                             </div>
+                            <div class="form-group">
+                                <p>El botón para ingresar el producto se activa una vez que se ha ingresado una especificación ({{ especificaciones.length }} especificaciones)
+                                </p>
+                                <div class="form-group row">
+                                    <div class="col-10">
+
+                                        <input style="font-size:0.9vw" pattern="[0-9a-zA-ZÀ-ÿ\s\u00f1\u00d1:.;!#$%&/()=?¡¿/*+>_-]*" title="Ingrese letras, números y SOLO los caracteres especiales especificados: :.;!#$%&/()=?¡¿/*-+>_ (no ingrese comas, importante)" class="form-control" id="especificacion"
+                                            placeholder="Descripción" #especificacion>
+                                        <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" style="font-size:0.9vw" class="btn btn-outline-primary" (click)="obtenerEspecificacion()">Agregar</button>
+                                    </div>
+                                </div>
+                                <p *ngIf="especificaciones.length > 0">
+                                    Especificación {{indiceEspecificaciones + 1}}: <br> {{ especificaciones[indiceEspecificaciones]}}
+                                </p>
+                                <p *ngIf="especificaciones.length == 0">
+                                    Todavía no hay especificaciones ingresadas
+                                </p>
+                                <div class="btn-group col-12" role="group" aria-label="First group">
+                                    <button type="button" class="btn btn-secondary" (click)="manipularVector(0)">+</button>
+                                    <button type="button" class="btn btn-outline-primary" (click)="eliminarEspecificaciones()">Eliminar</button>
+                                    <button type="button" class="btn btn-secondary" (click)="manipularVector(1)">-</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-5">
-                            <textarea style="font-size:0.9vw" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción" required></textarea>
-                            <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
-                        </div>
-                    </div>
-                    <button style="font-size:0.9vw" id="submit" type="submit" class="btn btn-primary">Ingresar producto</button>
+
+                    <button *ngIf="especificaciones.length > 0" style="font-size:0.9vw" class="btn btn-primary" (click)="validarIngreso()">Ingresar producto</button>
                 </form>
+
             </div>
         </div>
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Nav-Profile</div>
     </div>
 </div>
-
-<!--<div class="centrar">
-    <div>
-        <img src="assets/img/comocomprar.png" alt="" class="fijarMarco">
-    </div>
-
-    <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ingresar producto</a>
-            <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Visualizar producto</a>
-        </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div style="margin-top: 35px;" class="row">
-                <div class="form-group col-4">
-                    <form id="form1" class="was-validated">
-
-                        <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required>
-                        <div class="invalid-feedback">Campo incompleto</div>
-                        <br>
-                        <div class="row form-group">
-                            <div class="btn-group col-6">
-                                <select class="custom-select" required>
-                                    <option value=""> Marca</option>
-                                    <option *ngFor="let marca of marcas;">{{ marca }}</option>
-                                    <div class="invalid-feedback">Seleccione una marca</div>
-                                  </select>
-                            </div>
-                            <div class="btn-group col-6">
-                                <select class="custom-select" required>
-                                    <option value="">Categoría</option>
-                                    <option *ngFor="let categoria of categorias;">{{ categoria }}</option>
-                                    <div class="invalid-feedback">Seleccione una categoría</div>
-                                  </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" step="0.01" min="0" class="form-control" id="PrecioVenta" placeholder="Precio de venta (Q.)" required>
-                            <div class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales)</div>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" min="0" class="form-control" id="Existencia" placeholder="Existencia" required>
-                            <div class="invalid-feedback">Campo incompleto o mal llenado (use enteros solamente)</div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" required>
-                                    <label class="custom-control-label" for="customControlValidation1">Disponible</label>
-                                    <div class="invalid-feedback">Seleccione la opción disponible o descontinuado</div>
-                                </div>
-                            </div>
-                            <div class="form-group col-6">
-                                <div class="form-check">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
-                                        <label class="custom-control-label" for="customControlValidation2">Descontinuado</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                            </div>
-                            <div class="form-group col-6">
-                                <input type="text" class="form-control" placeholder="% descuento">
-                            </div>
-                        </div>
-                    </form>
-
-
-                </div>
-
-                <div class="col-3">
-
-                </div>
-                <form>
-
-                </form>
-                <div class="col-4">
-                    <form>
-                        <div class="card-group">
-                            <div class="card">
-                                <img [src]="urls[0]" class="fijarTarjetas" alt="">
-                            </div>
-                            <div class="card">
-                                <img [src]="urls[1]" class="fijarTarjetas" alt="">
-                            </div>
-                            <div class="card">
-                                <img [src]="urls[2]" class="fijarTarjetas" alt="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event)">
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-
-            <div class="row">
-
-            </div>
-
-            <div class="row">
-                <div class="form-group col-5">
-                    <form class="was-validated">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Descripción" required></textarea>
-                        <div class="invalid-feedback">Campo incompleto</div>
-                    </form>
-
-                </div>
-            </div>
-            <button id="submit" type="submit" class="btn btn-primary" onclick="submitForms()">Sign in</button>
-        </div>
-        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Nav-Profile</div>
-    </div>
-</div>-->
