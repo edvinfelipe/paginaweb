@@ -101,21 +101,36 @@
                                 <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event)">
                                 <div style="font-size:0.6vw" class="invalid-feedback"></div>
                             </div>
+                            <div class="form-group">
+                                <p>El botón para ingresar el producto se activa una vez que se ha ingresado una especificación ({{ especificaciones.length }} especificaciones)
+                                </p>
+                                <div class="form-group row">
+                                    <div class="col-10">
+
+                                        <input style="font-size:0.9vw" pattern="[0-9a-zA-ZÀ-ÿ\s\u00f1\u00d1:.;!#$%&/()=?¡¿/*+>_-]*" title="Ingrese letras, números y SOLO los caracteres especiales especificados: :.;!#$%&/()=?¡¿/*-+>_ (no ingrese comas, importante)" class="form-control" id="especificacion"
+                                            placeholder="Descripción" #especificacion>
+                                        <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="button" style="font-size:0.9vw" class="btn btn-outline-primary" (click)="obtenerEspecificacion(); verificar()">Agregar</button>
+                                    </div>
+                                </div>
+                                <p *ngIf="especificaciones.length > 0">
+                                    Especificación {{indiceEspecificaciones + 1}}: <br> {{ especificaciones[indiceEspecificaciones]}}
+                                </p>
+                                <p *ngIf="especificaciones.length == 0">
+                                    Todavía no hay especificaciones ingresadas
+                                </p>
+                                <div class="btn-group col-12" role="group" aria-label="First group">
+                                    <button type="button" class="btn btn-secondary" (click)="manipularVector(0)">+</button>
+                                    <button type="button" class="btn btn-outline-primary" (click)="eliminarEspecificaciones()">Eliminar</button>
+                                    <button type="button" class="btn btn-secondary" (click)="manipularVector(1)">-</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <input style="font-size:0.9vw" pattern="[0-9a-zA-ZÀ-ÿ\s\u00f1\u00d1:.;!#$%&/()=?¡¿/*+>_-]*" title="Ingrese letras, números y SOLO los caracteres especiales especificados: :.;!#$%&/()=?¡¿/*-+>_ (no ingrese comas, importante)" class="form-control" id="especificacion"
-                                    placeholder="Descripción" #especificacion>
-                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
-                            </div>
-                            <div class="col-1">
-                                <button type="button" style="font-size:0.9vw" class="btn btn-outline-primary" (click)="obtenerEspecificacion(); verificar()">Agregar</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button style="font-size:0.9vw" class="btn btn-primary" (click)="validarIngreso()">Ingresar producto</button>
+
+                    <button *ngIf="especificaciones.length > 0" style="font-size:0.9vw" class="btn btn-primary" (click)="validarIngreso()">Ingresar producto</button>
                 </form>
 
             </div>

@@ -16,6 +16,7 @@ export class IngresoproductosComponent implements OnInit {
   sEspecificaciones: string = '';
   especificaciones = new Array<string>();
   booleano = false;
+  indiceEspecificaciones: number = 0;
   constructor() {
   }
 
@@ -82,6 +83,25 @@ export class IngresoproductosComponent implements OnInit {
     }
   }
 
+  manipularVector(accion: number)
+  {
+    if (accion === 0)
+    {
+      if (this.indiceEspecificaciones < (this.especificaciones.length-1))
+      {
+        this.indiceEspecificaciones = this.indiceEspecificaciones + 1;
+      }
+      
+    }
+    else
+    {
+      if (this.indiceEspecificaciones > 0)
+      {
+        this.indiceEspecificaciones = this.indiceEspecificaciones - 1;
+      }
+    }
+  }
+
   asignarValor(){
     this.booleano = (<HTMLInputElement>document.getElementById('cbDescuento')).checked;
   }
@@ -102,11 +122,12 @@ export class IngresoproductosComponent implements OnInit {
     
   }
 
-  eliminarEspecificaciones(especificacion)
+  eliminarEspecificaciones()
   {
-    var i = this.especificaciones.indexOf(especificacion);
-    if (i != -1){
-      this.especificaciones.splice(i, 1);
+    this.especificaciones.splice(this.indiceEspecificaciones, 1);
+    if (this.indiceEspecificaciones > 0)
+    {
+      this.indiceEspecificaciones = this.indiceEspecificaciones - 1;
     }
   }
 
@@ -117,30 +138,18 @@ export class IngresoproductosComponent implements OnInit {
       for (let file of files) {
         let reader = new FileReader();
         reader.onload = (e: any) => {
-          this.urls.push(e.target.result);
+          console.log(this.urls.push(e.target.result));
         }
         reader.readAsDataURL(file);
       }
     }
   }
 
-  imgPorDefecto(urls: string[])
+  mostrarImagenes()
   {
-    if (urls.length === 0)
-    {
-      urls[0] = "assets/img/Interrogación.png";
-      urls[1] = "assets/img/Interrogación.png";
-      urls[2] = "assets/img/Interrogación.png";
-    }
-    else if (urls.length === 1)
-    {
-      urls[1] = "assets/img/Interrogación.png";
-      urls[2] = "assets/img/Interrogación.png";
-    }
-    else if (urls.length === 2){
-      urls[2] = "assets/img/Interrogación.png";
-    }
-
+    console.log(this.urls[0]);
+    console.log(this.urls[1]);
+    console.log(this.urls[2]);
   }
 
 }
