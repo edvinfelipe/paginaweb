@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -58,10 +57,7 @@ import { RegistroComponent } from './components/registro/registro.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    APP_ROUTING,
-    NgbModule
+    APP_ROUTING
   ],
   providers: [
     ProductosService,
