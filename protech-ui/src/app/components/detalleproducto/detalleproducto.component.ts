@@ -40,7 +40,7 @@ export class DetalleproductoComponent implements OnInit {
 
   setCantidad()
   {
-    this.numero = (<HTMLInputElement>document.getElementById('cantidad')).value;
+    this.numero = (+(<HTMLInputElement>document.getElementById('cantidad')).value);
   }
 
   obtenerImagenPrincipal()
