@@ -10,7 +10,7 @@ import { CatalagoService } from '../../services/catalago.service';
 })
 
 export class DetalleproductoComponent implements OnInit {
-  numero = 1;
+  numero: number = 1;
   ruta = 0;
   sEspecificacion: string;
   especificaciones: string[] = [];
@@ -36,6 +36,11 @@ export class DetalleproductoComponent implements OnInit {
   mostrarCantidad()
   {
     console.log(this.numero);
+  }
+
+  setCantidad()
+  {
+    this.numero = (<HTMLInputElement>document.getElementById('cantidad')).value;
   }
 
   obtenerImagenPrincipal()

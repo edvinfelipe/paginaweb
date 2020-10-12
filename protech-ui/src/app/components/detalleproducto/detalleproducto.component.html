@@ -33,11 +33,11 @@
             <div class="input-group col-sm-4">
 
                 <button style="font-size:2vw;" type="button" (click)="manipularContador(0)" class="btn btn-dark btn-sm">-</button>
-                <input style="font-size:2vw;" [(ngModel)]="numero" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
+                <input id="cantidad" style="font-size:2vw;" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
                 <button style="font-size:2vw;" type="button " (click)="manipularContador(1)" class="btn btn-dark btn-sm">+</button>
             </div>
             <br>
-            <button style="font-size:3vw;" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal">
+            <button style="font-size:3vw;" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()">
                 &nbsp;&nbsp;Comprar&nbsp;&nbsp;</button>
         </div>
     </div>

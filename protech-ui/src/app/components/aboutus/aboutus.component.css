@@ -1,4 +1,4 @@
-.landing {
+/* .landing {
   position: relative;
   width: 100%;
   height: 65vh;
@@ -53,9 +53,41 @@
   font-style: 2rem;
   font-weight: 700;
   letter-spacing: .3rem;
+} */
+
+/* Baner */
+.img-container {
+  background-image: url(src/assets/computers.png);
+  height:60vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
 
+.inner-container{
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  color: white;
+  height: auto;
+}
+
+.inner-container h1{
+  margin-top: 180px;
+  font-size: 7em;
+  letter-spacing: 1rem;
+}
+
+.inner-container h3{
+  margin-top: 30px;
+  letter-spacing: 0.2rem;
+}
+
+
 .img_content {
+  margin-top: 100px;
+  margin-bottom: 50px;
   padding-top: 20px;
   padding-bottom: 30px;
 
@@ -81,6 +113,10 @@
   .landing{
     height: 50vh;
   }
+
+  .inner-container h1{
+    margin-top: 100px;
+  }
 }
 
 @media  screen and (max-width: 590px){
@@ -97,4 +133,12 @@
   .img_content-items img {
     margin-top: 20px;
   }
+}
+
+@media  screen and (max-width: 590px){
+  .inner-container h1{
+    margin-top: 75px;
+    font-size: 3em;
+  }
+
 }
