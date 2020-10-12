@@ -10,21 +10,23 @@ import { CatalagoService } from '../../services/catalago.service';
 })
 
 export class DetalleproductoComponent implements OnInit {
-  numero = 1;
+  numero: number = 1;
   ruta = 0;
-  especificaciones: string[] = ['Especificación 1', 'Especificación 2', 'Especificacion 3', 'Especificacion 4',
-  'Especificacion 5', 'Especificacion 6', 'Especificacion 7'];
-  rutas: string[] = ['assets/img/Samsung.jpg', 'assets/img/Samsung3.jpg'];
+  sEspecificacion: string;
+  especificaciones: string[] = [];
+  rutas: string[] = [];
   id: string;
   producto: any = {};
-  
   constructor(private router: Router, catalogoService: CatalagoService) {
     this.id = this.router.url.split('/')[2];
-
+    
     catalogoService.getProducto(this.id)
       .subscribe( (producto: any) => {
         this.producto = producto.producto;
-        console.log(this.producto.precio);
+        console.log('Precio: ' + this.producto.precio);
+        this.obtenerEspecificaciones();
+        this.obtenerImagenes();
+        this.obtenerImagenPrincipal();
       });
     
   }
@@ -34,6 +36,49 @@ export class DetalleproductoComponent implements OnInit {
   mostrarCantidad()
   {
     console.log(this.numero);
+  }
+
+  setCantidad()
+  {
+    this.numero = (+(<HTMLInputElement>document.getElementById('cantidad')).value);
+  }
+
+  obtenerImagenPrincipal()
+  {
+    return this.rutas[this.ruta];
+  }
+
+  obtenerEspecificaciones(){
+    for (let i = 0; i < this.producto.especificacion.split(',').length; i++)
+    {
+      this.especificaciones[i] = this.producto.especificacion.split(',')[i];
+    }
+  }
+
+  obtenerImagenes(){
+    for (let i = 0; i < 3; i++)
+    {
+      if (this.producto.imagenes.length > i)
+      {
+        this.rutas[i] = this.producto.imagenes[i].url;
+      }
+    }
+    if (this.producto.imagenes.length === 0)
+    {
+      this.rutas[0] = 'assets/img/Interrogación.png';
+      this.rutas[1] = 'assets/img/Interrogación.png';
+      this.rutas[2] = 'assets/img/Interrogación.png';
+    }
+    else if (this.producto.imagenes.length === 1)
+    {
+      this.rutas[1] = 'assets/img/Interrogación.png';
+      this.rutas[2] = 'assets/img/Interrogación.png';
+    }
+    else if (this.producto.imagenes.length === 2)
+    {
+      this.rutas[2] = 'assets/img/Interrogación.png';
+    }
+    
   }
 
   // tslint:disable-next-line: typedef
@@ -56,9 +101,9 @@ export class DetalleproductoComponent implements OnInit {
     this.ruta = ruta;
   }
   // tslint:disable-next-line: typedef
-  retornarRuta()
+  retornarRuta(posicion: number)
   {
-    return this.ruta;
+    return this.rutas[posicion];
   }
   
 }
