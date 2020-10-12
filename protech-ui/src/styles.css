@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto%22");
+* {
+    font-family: 'Roboto', sans-serif;
+    /* color: #707070 GRIS TEXT*/
+    /* color: #1A2A40 BACKGROUND COLOR BLUE*/
+}
+
+btn {
+    color: #ffffff
+}

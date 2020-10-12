@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="card">
+        <img [src]="obtenerImagen()">
+        <h4> {{ producto.nombre }}</h4>
+        <p> {{producto.descripcion}} </p>
+        <button class="boton" [routerLink]="['/detalle', producto.id]" type="button" name="button"> Ver detalles </button>
+    </div>
+</div>

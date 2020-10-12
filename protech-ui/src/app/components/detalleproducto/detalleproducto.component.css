@@ -1,0 +1,25 @@
+.centrar {
+    width: 83%;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+}
+
+.especificaciones {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fijarTarjetaGrande {
+    width: 100%;
+    height: 20vw;
+    object-fit: cover;
+}
+
+.fijarTarjetaPequena {
+    width: 100%;
+    height: 10vw;
+    object-fit: cover;
+}
