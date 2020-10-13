@@ -70,39 +70,36 @@ app.get('/api/categoria/:id', (req, res)=>{
 // ====================
 app.post('/api/categoria',[ verificarToken, verificarRole ] ,async(req, res) => {
 
-    try {
+    const { nombre } = req.body
 
-        const { nombre } = req.body
+    Categoria.findOne({ nombre }, ( err, categoriaDB)=>{
 
-        let categoria = await Categoria.findOne({ nombre });
-
-        if( categoria ){
-            categoria.eliminado = false
-            categoria.save()
-
-            return res.json({
-                status: true,
-                categoria
+        if( err ){
+            return res.status(500).json({
+                status: false,
+                err
             })
         }
 
-        categoria = new Categoria({ nombre })
-        await categoria.save()
+        if( categoriaDB ){
+            categoriaDB.eliminado = false
+            categoriaDB.save() 
 
-        res.json({
-            status: true,
-            categoria
-        })
-        
-    } catch (error) {
+            return res.json({
+                status: true,
+                categoria: categoriaDB
+            }) 
+        }
 
-        return res.status(500).json({
-            status: false,
-            err: {
-                message: 'Ocurrio error en el servidor'
-            }
-        })
-    }
+        const categoria = new Categoria({nombre})
+        categoria.save((err, categoriaNew)=>{
+            return res.json({
+                status: true,
+                marca: categoriaNew
+            })
+        })        
+
+    })
 })
 
 //========================

@@ -68,39 +68,38 @@ app.get('/api/marca/:id', (req, res)=>{
 //=====================
 // Crea una marca
 // ====================
-app.post('/api/marca', [ verificarToken, verificarRole ], async(req, res) => {
-
-    try {
+app.post('/api/marca', [ verificarToken, verificarRole ], (req, res) => {
 
         const { nombre } = req.body
 
-        let marca = await Marca.findOne({ nombre })
+        Marca.findOne({ nombre }, ( err, marcaDB)=>{
 
-        if( marca ){
+            if( err ){
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
 
-            marca.eliminado = false
-            marca.save() 
+            if( marcaDB ){
+                marcaDB.eliminado = false
+                marcaDB.save() 
+    
+                return res.json({
+                    status: true,
+                    marca: marcaDB
+                }) 
+            }
 
-            return res.json({
-                status: true,
-                marca
-            }) 
-        }
+            const marca = new Marca({nombre})
+            marca.save((err, marcaNew)=>{
+                return res.json({
+                    status: true,
+                    marca: marcaNew
+                })
+            })        
 
-        marca = new Marca({ nombre })
-        await marca.save()
-
-        return res.json({
-            status: true,
-            marca
         })
-        
-    } catch (error) {
-        return res.status(500).json({
-            status: false,
-            err
-        })
-    }
 })
 
 //========================
