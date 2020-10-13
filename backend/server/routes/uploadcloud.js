@@ -83,37 +83,37 @@ app.post('/api/upload/:id', verificarToken ,(req, res)=>{
 // ===========================================
 function uploadImage(res, archivo, idPorducto){
 
-    cloudinary.uploader.upload(archivo.tempFilePath)
-    .then(result =>{
+    // cloudinary.uploader.upload(archivo.tempFilePath)
+    // .then(result =>{
 
-        const imagen = new Imagen({
-            imagen: result.public_id,
-            url: result.url,
-            producto: idPorducto
-        })
+    //     const imagen = new Imagen({
+    //         imagen: result.public_id,
+    //         url: result.url,
+    //         producto: idPorducto
+    //     })
 
-        imagen.save((err, imagenDB)=>{
+    //     imagen.save((err, imagenDB)=>{
 
-            if( err ){
-                return res.status(500).json({
-                    status: false,
-                    err
-                })
-            }
+    //         if( err ){
+    //             return res.status(500).json({
+    //                 status: false,
+    //                 err
+    //             })
+    //         }
 
-            return res.status(201).json({
-                status: true,
-                imagen: imagenDB
-            })
-        })
+    //         return res.status(201).json({
+    //             status: true,
+    //             imagen: imagenDB
+    //         })
+    //     })
 
-    })
-    .catch( err => {
-        return res.status(400).json({
-            status: false,
-            err
-        })
-    })
+    // })
+    // .catch( err => {
+    //     return res.status(400).json({
+    //         status: false,
+    //         err
+    //     })
+    // })
 
 }
 

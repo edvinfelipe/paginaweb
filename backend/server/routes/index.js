@@ -19,7 +19,7 @@ app.use(require('./detalle_factura'))
 //     app.use(require('./upload'))
 // }
 
-// app.use(require('./imagenes'))
+app.use(require('./imagenes'))
 
 
 module.exports = app
