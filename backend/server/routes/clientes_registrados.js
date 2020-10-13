@@ -28,7 +28,7 @@ app.post('/api/cliente' , (req, res) => {
         correo:     body.correo,
         nit:        body.nit,
         username:   body.username,
-        role:   body.role,
+        role:       body.role,
         password:   bcrypt.hashSync( body.password, 10 ),
     })
 
