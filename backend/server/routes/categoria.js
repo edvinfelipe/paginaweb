@@ -68,7 +68,7 @@ app.get('/api/categoria/:id', (req, res)=>{
 //=====================
 // Crea una categoria
 // ====================
-app.post('/api/categoria',[ verificarToken, verificarRole ] ,async(req, res) => {
+app.post('/api/categoria',[ verificarToken, verificarRole ] ,(req, res) => {
 
     const { nombre } = req.body
 
