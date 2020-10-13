@@ -13,7 +13,7 @@ app.use(require('./factura'))
 app.use(require('./detalle_factura'))
 
 // if( process.env.NODE_ENV !== 'dev' ){
-    app.use(require('./uploadcloud'))
+    // app.use(require('./uploadcloud'))
 // }else{
 
 //     app.use(require('./upload'))
