@@ -8,7 +8,7 @@ const app = express()
 // app.use(require('./usuario'))
 // app.use(require('./login'))
 app.use(require('./producto'))
-app.use(require('./clientes_registrados'))
+// app.use(require('./clientes_registrados'))
 app.use(require('./factura'))
 app.use(require('./detalle_factura'))
 
