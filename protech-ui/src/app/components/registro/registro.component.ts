@@ -6,6 +6,7 @@ import { map } from "rxjs/operators";
 import { Validaciones } from "./validaciones";
 import { Registro } from "../../interfaces/registro";
 import { RegistroService } from "../../services/registro.service";
+import { MensajeErrorComponent } from "../shared/mensaje-error/mensaje-error.component";
 
 @Component({
   selector: 'app-registro',
@@ -19,7 +20,7 @@ export class RegistroComponent implements OnInit {
   dataUsuario:Registro;
   response:any =[];
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder:FormBuilder, private _registro:RegistroService) {
+  constructor(public activeModal: NgbActiveModal, private formBuilder:FormBuilder, private _registro:RegistroService,private modalService: NgbModal) {
     this.buildFormCredenciales();
     this.buildFormDatos();
   }
@@ -74,6 +75,10 @@ export class RegistroComponent implements OnInit {
       this._registro.registrarUsuario(this.dataUsuario).subscribe(data =>{
         this.response= data;
         console.log(this.response);
+      },
+      error=>{
+        this.activeModal.close();
+        this.modalService.open(MensajeErrorComponent);
       });
       // console.log(valor);
     }else{
@@ -82,5 +87,4 @@ export class RegistroComponent implements OnInit {
     }
 
   }
-
 }
