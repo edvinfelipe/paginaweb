@@ -8,12 +8,6 @@
   margin-bottom: 20px;
 }
 
-.button,.container-formulario form input{
-  /* display: block; */
-  margin-top: 20px;
-  /* margin-left: 100px;
-  margin-right: 100px; */
-}
 
 .button{
   margin-bottom: 20px;
@@ -22,18 +16,22 @@
   color: white;
   background-color:  #1A2A40;
 }
-
+/*
 .container-formulario form textarea{
   margin-top: 20px;
-  /* margin-left: 100px;
-  margin-right: 100px; */
-}
+  margin-left: 100px;
+  margin-right: 100px;
+} */
 
-.container-formulario form {
+/* .container-formulario form {
   display: flex;
   flex-direction: column;
-}
+} */
 
 .input {
   height: 35px;
+}
+
+button{
+  width: 100%;
 }
