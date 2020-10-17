@@ -17,7 +17,22 @@ export class IngresoproductosComponent implements OnInit {
   especificaciones = new Array<string>();
   booleano = false;
   indiceEspecificaciones: number = 0;
+  //campos[0] = producto
+  //campos[1] = marca
+  //campos[2] = categoría
+  //campos[3] = precio de venta
+  //campos[4] = existencia
+  //campos[5] = % descuento
+  campos: string[] = ['', '', '', '', '', ''];
+  //banderaradio = 1 (disponible)
+  //banderaradio = 2 (descontinuado)
+  banderaradio = 0;
+
   constructor() {
+  }
+
+  manipularBRadio(valor){
+    this.banderaradio = valor;
   }
 
   ngOnInit(): void {
@@ -25,6 +40,63 @@ export class IngresoproductosComponent implements OnInit {
       if ($("#image")[0].files.length > 3) {
           alert("Usted ha ingresado más de 3 imágenes, así que se ingresarán al servidor las primeras 3 imágenes ingresadas únicamente.");
       }});
+  }
+
+  bandera()
+  {
+    //Validar que todos los campos (sin incluir los checkbox ni radios) no estén vacíos
+    for (let i = 0; i < this.campos.length-1; i++)
+    {
+      if (this.campos[i] != null)
+      {
+        if (this.campos[i].length === 0)
+        {
+          return false;
+        }
+      }
+      else{
+        return false;
+      }
+    }
+    //Validar que al menos un radio-button esté seleccionado
+    if (this.banderaradio === 0)
+    {
+      return false;
+    }
+    //Validar que, si el checkbox de descuento está seleccionado, que su campo de texto no esté vacío
+    if (this.booleano === true)
+    {
+      if (this.campos[5].length === 0 || this.campos[5] === null)
+      {
+        return false;
+      }
+    }
+    //Verificar que los campos de precio y existencia cumplan con los regex especificados
+    var regexexistencia = /^\d*$/;
+    var regexprecio = /^\d+(?:\.\d{1,2})?$/ ;
+    var regexdescuento = /^\d{1,2}$/;
+    var existencia = regexexistencia.exec((<HTMLInputElement>document.getElementById("existencia")).value);
+    var precio = regexprecio.exec((<HTMLInputElement>document.getElementById("precioVenta")).value);
+    
+    if (!existencia || !precio)
+    {
+      return false;
+    }
+    if (this.booleano === true)
+    {
+      var descuento = regexdescuento.exec((<HTMLInputElement>document.getElementById("inputDescuento")).value);
+      if (!descuento)
+      {
+        return false;
+      }
+    }
+    //Si todos los casos anteriores se dieron, entonces retornar true
+    return true;
+  }
+
+  refrescarPagina()
+  {
+    location.reload();
   }
 
   obtenerEspecificacion(){
