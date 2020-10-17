@@ -43,9 +43,10 @@ export class LoginComponent implements OnInit {
 
         if( parseInt(data.status)==200){
           this.isErrorLoged=false;
-          console.log(data.body['token']);
-          console.log(data);
+          // console.log(data.body['token']);
+          // console.log(data);
           this._loginService.setToken(data.body['token']);
+          this._loginService.setUser(data.body['usuario']);
           location.reload();
         }
       },
