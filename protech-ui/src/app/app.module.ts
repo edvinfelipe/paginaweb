@@ -31,6 +31,7 @@ import { HistorialComprasComponent } from './components/historial-compras/histor
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
+import { MensajeErrorComponent } from './components/shared/mensaje-error/mensaje-error.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { RegistroComponent } from './components/registro/registro.component';
     ConfiguracionesComponent,
     HistorialComprasComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    MensajeErrorComponent
   ],
   imports: [
     BrowserModule,
