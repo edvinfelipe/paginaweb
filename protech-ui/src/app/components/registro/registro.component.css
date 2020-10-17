@@ -3,6 +3,11 @@
   color: white;
 }
 
+.btn-btnsave:hover{
+  /* background-color:  #1A2A40; */
+  color: white;
+}
+
 .validaciones {
   margin-top: 10px;
 }

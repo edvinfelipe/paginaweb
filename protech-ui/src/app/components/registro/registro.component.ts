@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
 import { map } from "rxjs/operators";
 
 import { Validaciones } from "./validaciones";
@@ -20,7 +21,7 @@ export class RegistroComponent implements OnInit {
   dataUsuario:Registro;
   response:any =[];
 
-  constructor(public activeModal: NgbActiveModal, private formBuilder:FormBuilder, private _registro:RegistroService,private modalService: NgbModal) {
+  constructor(public activeModal: NgbActiveModal, private formBuilder:FormBuilder, private _registro:RegistroService,private modalService: NgbModal,private toastr: ToastrService) {
     this.buildFormCredenciales();
     this.buildFormDatos();
   }
@@ -53,16 +54,11 @@ export class RegistroComponent implements OnInit {
       nit: ['',[Validators.required]]
     });
   }
-  // registrar(event:Event){
-  //   event.preventDefault();
-  //   const valor = this.formCredenciales.value;
-  //   console.log(valor);
-  // }
 
-  datos(){
+  validarDatos():boolean{
 
     if(this.formCredenciales.valid && this.formDatos.valid){
-      const valor = this.formCredenciales.value;
+
       this.dataUsuario = {
         nombre:this.formDatos.get('nombre').value,
         direccion:this.formDatos.get('direccion').value,
@@ -72,19 +68,38 @@ export class RegistroComponent implements OnInit {
         username:this.formCredenciales.get('usuario').value,
         password:this.formCredenciales.get('contrasenia').value
       };
+      // this._registro.registrarUsuario(this.dataUsuario).subscribe(data =>{
+      //   this.response= data;
+      //   console.log(this.response);
+      // },
+      // error=>{
+      //   this.activeModal.close();
+      //   this.modalService.open(MensajeErrorComponent);
+      // });
+      // console.log(valor);
+      return true;
+    }else{
+      this.formDatos.markAllAsTouched();
+      this.formCredenciales.markAllAsTouched();
+      return false;
+    }
+
+  }
+
+  registrarUsuario() {
+    if (this.validarDatos()){
       this._registro.registrarUsuario(this.dataUsuario).subscribe(data =>{
         this.response= data;
         console.log(this.response);
+        this.activeModal.close();
+        this.toastr.success("Registro Exitoso","Pro-tech");
       },
       error=>{
         this.activeModal.close();
         this.modalService.open(MensajeErrorComponent);
       });
-      // console.log(valor);
-    }else{
-      this.formDatos.markAllAsTouched();
-      this.formCredenciales.markAllAsTouched();
-    }
 
+    // Login
+    }
   }
 }
