@@ -34,6 +34,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { MensajeErrorComponent } from './components/shared/mensaje-error/mensaje-error.component';
+import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/recuperarcontrasenia.module';
+
 
 
 @NgModule({
@@ -66,8 +68,10 @@ import { MensajeErrorComponent } from './components/shared/mensaje-error/mensaje
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    RecuperarcontraseniaModule,
     APP_ROUTING,
-    NgbModule
+    NgbModule,
+
 
   ],
   providers: [
