@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { BnNgIdleService } from 'bn-ng-idle';
 import { AppRoutingModule } from './app-routing.module';
 
 //Rutas
@@ -76,7 +76,8 @@ import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/re
   ],
   providers: [
     ProductosService,
-    MarcasService
+    MarcasService,
+    BnNgIdleService
   ],
   bootstrap: [AppComponent]
 })

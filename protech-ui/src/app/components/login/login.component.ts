@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
-
 import { LoginService } from "../../services/login.service";
 import { Login } from "../../interfaces/login";
 
@@ -65,4 +64,5 @@ export class LoginComponent implements OnInit {
       );
     }
   }
+
 }
