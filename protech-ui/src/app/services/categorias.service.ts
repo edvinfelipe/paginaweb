@@ -6,8 +6,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CategoriasService {
-  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjAyNjMxNzA0LCJleHAiOjE2MDI4MDQ1MDR9.YtG46ZNL2von4-gLP7q_vgtIw3dDAHz6f_Vme8wMEUU';
-
+  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NjkwMjU0NjQ5ZjIyZDhmNmJmYTk0Iiwibm9tYnJlIjoiYXNkIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjMiLCJjb3JyZW8iOiJhc2RmIiwibml0IjoiMSIsInVzZXJuYW1lIjoiY3Jpc3RpYW4iLCJfX3YiOjB9LCJpYXQiOjE2MDI5ODE3ODUsImV4cCI6MTYwMzE1NDU4NX0.UG-XjfV9XWtjELQYYaEpBfMktGWh_Bn_d0XRrIhW2R8';
   constructor( private http: HttpClient) { }
   getCategorias(){
     const headers = new HttpHeaders({

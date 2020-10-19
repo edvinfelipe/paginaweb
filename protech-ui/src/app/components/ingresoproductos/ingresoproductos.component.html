@@ -26,32 +26,36 @@
                     <div class="form-group row">
                         <div class="col-4">
                             <div class="form-group">
-                                <input style="font-size:0.9vw" [(ngModel)]="campos[0]" name="producto" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required #producto>
+                                <input style="font-size:0.9vw" [(ngModel)]="campos[0]" maxlength="45" name="producto" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required #producto>
+                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                            </div>
+                            <div class="form-group">
+                                <input style="font-size:0.9vw" [(ngModel)]="campos[1]" maxlength="80" name="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción" required #descripcion>
                                 <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-6">
-                                    <select [(ngModel)]="campos[1]" name="marca" id="marca" style="font-size:0.9vw" class="custom-select" required #marca>
+                                    <select [(ngModel)]="campos[2]" name="marca" id="marca" style="font-size:0.9vw" class="custom-select" required #marca>
                                         <option value=""> Marca</option>
-                                        <option *ngFor="let marca of marcas;">{{ marca }}</option>
+                                        <option *ngFor="let marca of marcas;">{{ marca.nombre }}</option>
                                     </select>
                                     <div style="font-size:0.6vw" class="invalid-feedback">Seleccione una marca</div>
                                 </div>
                                 <div class="col-6">
-                                    <select [(ngModel)]="campos[2]" name="categoria" id="categoria" style="font-size:0.9vw" class="custom-select" required #categoria>
+                                    <select [(ngModel)]="campos[3]" name="categoria" id="categoria" style="font-size:0.9vw" class="custom-select" required #categoria>
                                         <option value="">Categoría</option>
-                                        <option *ngFor="let categoria of categorias;">{{ categoria }}</option>                                    
+                                        <option *ngFor="let categoria of categorias;">{{ categoria.nombre }}</option>                                    
                                     </select>
                                     <div style="font-size:0.6vw" class="invalid-feedback">Seleccione una categoría</div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input [(ngModel)]="campos[3]" name="precio" style="font-size:0.9vw" type="text" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Ingrese sólo números (si usa decimales que sean 2 como máximo)" step="0.01" min="0" class="form-control" id="precioVenta" placeholder="Precio de venta (Q.)"
+                                <input [(ngModel)]="campos[4]" name="precio" style="font-size:0.9vw" type="text" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Ingrese sólo números (si usa decimales que sean 2 como máximo)" step="0.01" min="0" class="form-control" id="precioVenta" placeholder="Precio de venta (Q.)"
                                     required #precio>
                                 <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales o enteros)</div>
                             </div>
                             <div class="form-group">
-                                <input [(ngModel)]="campos[4]" name="existencia" style="font-size:0.9vw" name="existencia" type="text" pattern="[0-9]*" min="0" class="form-control" id="existencia" placeholder="Existencia" required #existencia>
+                                <input [(ngModel)]="campos[5]" name="existencia" style="font-size:0.9vw" name="existencia" type="text" pattern="[0-9]*" min="0" class="form-control" id="existencia" placeholder="Existencia" required #existencia>
                                 <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use enteros solamente)</div>
                             </div>
                             <div class="row">
@@ -77,11 +81,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-6">
-                                    <input [(ngModel)]="campos[5]" name="inputDescuento" pattern="[0-9]{1,2}" *ngIf="booleano" id="inputDescuento" style="font-size:0.9vw" type="text" class="form-control" placeholder="% descuento" #inputDescuento required>
+                                    <input [(ngModel)]="campos[6]" name="inputDescuento" pattern="[0-9]{1,2}" *ngIf="booleano" id="inputDescuento" style="font-size:0.9vw" type="text" class="form-control" placeholder="% descuento" #inputDescuento required>
                                     <div style="font-size:0.6vw" class="invalid-feedback">Ingrese un número de uno o dos dígitos</div>
                                 </div>
                             </div>
-                            <button *ngIf="especificaciones.length > 0 && bandera()" data-toggle="modal" data-target="#myModal" style="font-size:0.9vw" class="btn btn-primary" (click)="validarIngreso()">Ingresar producto</button>
+                            <button *ngIf="especificaciones.length > 0 && bandera()" style="font-size:0.9vw" class="btn btn-primary" (click)="ingresarProducto()">Ingresar producto</button>
                         </div>
                         <div class="col-3">
 
@@ -99,7 +103,7 @@
                                 </div>
                             </div>
                             <div style="margin-top: 15px;" class="form-group">
-                                <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event)">
+                                <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event); asignarImagenes($event)">
                                 <div style="font-size:0.6vw" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group">
@@ -140,12 +144,12 @@
     </div>
 </div>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Se ha ingresado el producto con éxito</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" (click)="refrescarPagina()" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
             </div>
@@ -155,3 +159,7 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

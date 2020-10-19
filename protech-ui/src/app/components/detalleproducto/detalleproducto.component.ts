@@ -23,7 +23,6 @@ export class DetalleproductoComponent implements OnInit {
     catalogoService.getProducto(this.id)
       .subscribe( (producto: any) => {
         this.producto = producto.producto;
-        console.log('Precio: ' + this.producto.precio);
         this.obtenerEspecificaciones();
         this.obtenerImagenes();
         this.obtenerImagenPrincipal();
