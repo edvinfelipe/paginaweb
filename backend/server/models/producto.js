@@ -13,27 +13,32 @@ const opts = {
 const productoSchema = Schema({
     nombre: {
         type: String,
-        required: [ true, 'El nombre es necesario']
+        required: [true, 'El nombre es necesario']
     },
     precio: {
         type: Number,
-        required: [ true, 'El precio es necesario']
+        required: [true, 'El precio es necesario']
     },
-    descripcion:{
+    descripcion: {
         type: String,
-        default:''
+        default: ''
     },
     existencia: {
         type: Number,
-        required: [ true, 'La existencia es necesario']
+        required: [true, 'La existencia es necesario']
+    },
+    reservado: {
+        type: Number,
+        default: 0,
+        required: false
     },
     especificacion: {
         type: String,
-        required: [ true, 'Las especificaciones son necesarias']
+        required: [true, 'Las especificaciones son necesarias']
     },
     disponible: {
         type: Boolean,
-        required: [ true, 'Disponible es necesario']
+        required: [true, 'Disponible es necesario']
     },
     garantia: {
         type: String,
@@ -48,7 +53,7 @@ const productoSchema = Schema({
         type: Boolean,
         default: false
     },
-    porcenjateOferta:{
+    porcenjateOferta: {
         type: Number,
         default: 0
     },
@@ -69,14 +74,14 @@ const productoSchema = Schema({
 }, opts)
 
 
-productoSchema.virtual('imagenes',{
+productoSchema.virtual('imagenes', {
     ref: 'Imagen',
-    localField:'_id',
-    foreignField:'producto',
+    localField: '_id',
+    foreignField: 'producto',
     justOne: false
 })
 
-productoSchema.methods.toJSON = function(){
+productoSchema.methods.toJSON = function() {
 
     // Obteniendo el objeto o usuario
     let producto = this;
@@ -90,4 +95,4 @@ productoSchema.methods.toJSON = function(){
     return productoObject
 }
 
-module.exports = mongoose.model('Producto', productoSchema )
+module.exports = mongoose.model('Producto', productoSchema)
