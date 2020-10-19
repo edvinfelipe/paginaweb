@@ -3,7 +3,7 @@
 
         <aside class="filtros">
 
-            <h4> Filtrar por:</h4>
+            <h4> <b>Filtrar por:</b> </h4>
             <p>Marca:</p>
             <select class="fullWidth" #marca (change)='setMarca(marca.value)'>
                 <option></option>
@@ -25,13 +25,9 @@
         </aside>
     </div>
 
-    <div class="contenedor_productos ">
+    <div class="contenedor_productos">
 
-        <div class="productos">
-
-            <app-tarjetas-productos [producto]="producto" [index]="i" *ngFor="let producto of arregloProductos; let i = index"></app-tarjetas-productos>
-
-        </div>
+        <app-tarjetas-productos style="padding-right: 15px;" [producto]="producto" [index]="i" *ngFor="let producto of arregloProductos; let i = index"></app-tarjetas-productos>
 
         <div class="paginacion">
             <ul>

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppRoutingModule } from './app-routing.module';
 
 //Rutas
@@ -28,6 +29,7 @@ import { ConfiguracionesComponent } from './components/configuraciones/configura
 
 import { HttpClientModule } from '@angular/common/http';
 import { HistorialComprasComponent } from './components/historial-compras/historial-compras.component';
+
 
 
 @NgModule({
