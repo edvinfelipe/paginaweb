@@ -44,7 +44,7 @@ app.post('/password/email', async(req, res)=>{
             html: `<h2>Contraseña</h2>
                    <p>Bienvenido, para restablecer su contraseña debe ingresar al
                    siguiente link</p>
-                   <h5>${process.env.DOMINIOEMAIL}?token=${token}</h5>`
+                   <h5>${process.env.DOMINIOEMAIL}${token}</h5>`
         }
 
         transporter.sendMail(mailOptions, function(err, info){

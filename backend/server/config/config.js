@@ -20,7 +20,7 @@ process.env.SEED = process.env.SEED || 'llave-secreta-desarrollo'
 process.env.SEEDEMAIL = process.env.SEEDEMAIL || 'llave-secreta-desarrollo'
 process.env.EMAIL = process.env.EMAIL || ''
 process.env.PASSWORD = process.env.PASSWORD || ''
-process.env.DOMINIOEMAIL = 'http://localhost:4200/forgotpassword/newpassword'
+process.env.DOMINIOEMAIL = 'http://localhost:4200/forgotpassword/newpassword/'
 
 //==========================================
 //  Vencimiento del token 
