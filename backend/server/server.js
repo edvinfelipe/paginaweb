@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // configuración global de rutas
-app.use(require('./routes/index'))
+app.use('/api',require('./routes/index'))
 
 
 // Conexión a la base de datos

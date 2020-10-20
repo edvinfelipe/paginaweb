@@ -12,7 +12,7 @@ const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 //==============================
 // Lista de todos los productos 
 //==============================
-app.get('/api/producto', (req, res) => {
+app.get('/producto', (req, res) => {
 
     let desde = Number(req.query.page || 1)
     desde = 10 * (desde - 1)
@@ -50,7 +50,7 @@ app.get('/api/producto', (req, res) => {
 // =======================================
 //  Lista de producto por rango de precios
 // =======================================
-app.get('/api/producto/precio/', (req, res) => {
+app.get('/producto/precio/', (req, res) => {
 
     let desde = Number(req.query.page || 1)
     desde = 10 * (desde - 1)
@@ -93,7 +93,7 @@ app.get('/api/producto/precio/', (req, res) => {
 //==============================
 // Obtener un sólo producto
 //==============================
-app.get('/api/producto/:id', (req, res) => {
+app.get('/producto/:id', (req, res) => {
 
     const id = req.params.id
 
@@ -130,7 +130,7 @@ app.get('/api/producto/:id', (req, res) => {
 //=========================================
 // Lista de productos por marca y categoria
 //=========================================
-app.get('/api/producto/marca/:categoria/:marca', (req, res) => {
+app.get('/producto/marca/:categoria/:marca', (req, res) => {
 
     let desde = Number(req.query.page || 1)
     desde = 10 * (desde - 1)
@@ -170,7 +170,7 @@ app.get('/api/producto/marca/:categoria/:marca', (req, res) => {
 //=========================================
 // Lista de productos por categoria
 //=========================================
-app.get('/api/producto/categoria/:categoria', (req, res) => {
+app.get('/producto/categoria/:categoria', (req, res) => {
 
     let desde = Number(req.query.page || 1)
     desde = 10 * (desde - 1)
@@ -209,7 +209,7 @@ app.get('/api/producto/categoria/:categoria', (req, res) => {
 //=========================================
 // Lista de productos por marca
 //=========================================
-app.get('/api/producto/marca/:marca', (req, res) => {
+app.get('/producto/marca/:marca', (req, res) => {
 
     let desde = Number(req.query.page || 1)
     desde = 10 * (desde - 1)
@@ -248,7 +248,7 @@ app.get('/api/producto/marca/:marca', (req, res) => {
 // ===========================
 //  Crear un nuevo producto
 // ===========================
-app.post('/api/producto', [verificarToken, verificarRole], (req, res) => {
+app.post('/producto', [verificarToken, verificarRole], (req, res) => {
 
 
     let body = req.body;
@@ -289,7 +289,7 @@ app.post('/api/producto', [verificarToken, verificarRole], (req, res) => {
 // ===========================
 //  Actualizar un producto
 // ===========================
-app.put('/api/producto/:id', [verificarToken, verificarRole], (req, res) => {
+app.put('/producto/:id', [verificarToken, verificarRole], (req, res) => {
 
     let body = _.pick(req.body, ['nombre',
         'precio',
@@ -339,7 +339,7 @@ app.put('/api/producto/:id', [verificarToken, verificarRole], (req, res) => {
 // ======================================
 //  Actualizar la existencia del producto 
 // ======================================
-app.put('/api/producto/update/:id', async(req, res) => {
+app.put('/producto/update/:id', async(req, res) => {
 
     try {
         const id = req.params.id
@@ -394,7 +394,7 @@ app.put('/api/producto/update/:id', async(req, res) => {
 // ===========================
 //  Eliminar un producto
 // ===========================
-app.delete('/api/producto/:id', [verificarToken, verificarRole], (req, res) => {
+app.delete('/producto/:id', [verificarToken, verificarRole], (req, res) => {
 
 
 
