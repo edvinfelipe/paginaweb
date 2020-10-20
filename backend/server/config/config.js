@@ -15,6 +15,14 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 process.env.SEED = process.env.SEED || 'llave-secreta-desarrollo'
 
 //==========================================
+//  Configuración del envio del email
+//==========================================
+process.env.SEEDEMAIL = process.env.SEEDEMAIL || 'llave-secreta-desarrollo'
+process.env.EMAIL = process.env.EMAIL || ''
+process.env.PASSWORD = process.env.PASSWORD || ''
+process.env.DOMINIOEMAIL = 'http://localhost:4200/forgotpassword/newpassword'
+
+//==========================================
 //  Vencimiento del token 
 //==========================================
 process.env.CADUCIDAD_TOKEN = '48h'

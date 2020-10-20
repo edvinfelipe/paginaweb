@@ -11,7 +11,7 @@ const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 //=====================
 // Lista de categorias
 // ====================
-app.get('/api/categoria',(req, res)=>{
+app.get('/categoria',(req, res)=>{
 
     Categoria.find({eliminado: false}, 'nombre' )
         .sort('nombre')
@@ -35,7 +35,7 @@ app.get('/api/categoria',(req, res)=>{
 //======================
 // Regresa una categoria
 // =====================
-app.get('/api/categoria/:id', (req, res)=>{
+app.get('/categoria/:id', (req, res)=>{
 
     const id = req.params.id
 
@@ -68,7 +68,7 @@ app.get('/api/categoria/:id', (req, res)=>{
 //=====================
 // Crea una categoria
 // ====================
-app.post('/api/categoria',[ verificarToken, verificarRole ] ,(req, res) => {
+app.post('/categoria',[ verificarToken, verificarRole ] ,async(req, res) => {
 
     const { nombre } = req.body
 
@@ -105,7 +105,7 @@ app.post('/api/categoria',[ verificarToken, verificarRole ] ,(req, res) => {
 //========================
 // Modifica una categoria
 // =======================
-app.put('/api/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
+app.put('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
 
     const id = req.params.id
 
@@ -143,7 +143,7 @@ app.put('/api/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
 //========================
 // Elimina una categoria
 // =======================
-app.delete('/api/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
+app.delete('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
 
     const id = req.params.id
 

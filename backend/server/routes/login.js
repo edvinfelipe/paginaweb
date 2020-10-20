@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt')
 //======================
 //  Inicio de Sesión 
 //====================== 
-app.post('/api/login', (req, res) =>{
+app.post('/login', (req, res) =>{
 
     const body = req.body
 

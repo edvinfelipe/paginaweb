@@ -23,7 +23,8 @@ const clientesSchema = new Schema({
     },
     correo:{
         type: String,
-        require: false
+        unique: true,
+        require: [true, "El correo es necesario"]
     },
     nit:{
         type: String,

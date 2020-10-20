@@ -24,7 +24,7 @@ app.use(fileUpload({
 }))
 
 
-app.post('/api/upload/:id', [verificarToken, verificarRole], (req, res) => {
+app.post('/upload/:id', [verificarToken, verificarRole], (req, res) => {
 
     const idProducto = req.params.id
 

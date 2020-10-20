@@ -13,7 +13,7 @@ const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 app.use(fileUpload())
 
 
-app.post('/api/upload/:id', [ verificarToken, verificarRole ] ,(req, res)=>{
+app.post('/upload/:id', [ verificarToken, verificarRole ] ,(req, res)=>{
 
     const idProducto = req.params.id
 
@@ -83,7 +83,7 @@ function insertarImagen(res, archivo, idPorducto, extension ){
 
         const imagen = new Imagen({
             imagen: nombreArchivo,
-            url: `${process.env.DOMINIO}/api/imagen/${nombreArchivo}`,
+            url: `${process.env.DOMINIO}/imagen/${nombreArchivo}`,
             producto: idPorducto
         })
 
