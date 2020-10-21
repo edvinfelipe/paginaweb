@@ -26,61 +26,66 @@
                     <div class="form-group row">
                         <div class="col-4">
                             <div class="form-group">
-                                <input style="font-size:0.9vw" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required>
+                                <input style="font-size:0.9vw" [(ngModel)]="campos[0]" maxlength="45" name="producto" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required #producto>
+                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                            </div>
+                            <div class="form-group">
+                                <input style="font-size:0.9vw" [(ngModel)]="campos[1]" maxlength="80" name="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción" required #descripcion>
                                 <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
                             </div>
                             <div class="row form-group">
                                 <div class="col-6">
-                                    <select style="font-size:0.9vw" class="custom-select" required>
+                                    <select [(ngModel)]="campos[2]" name="marca" id="marca" style="font-size:0.9vw" class="custom-select" required #marca>
                                         <option value=""> Marca</option>
-                                        <option *ngFor="let marca of marcas;">{{ marca }}</option>
+                                        <option *ngFor="let marca of marcas;">{{ marca.nombre }}</option>
                                     </select>
                                     <div style="font-size:0.6vw" class="invalid-feedback">Seleccione una marca</div>
                                 </div>
                                 <div class="col-6">
-                                    <select style="font-size:0.9vw" class="custom-select" required>
+                                    <select [(ngModel)]="campos[3]" name="categoria" id="categoria" style="font-size:0.9vw" class="custom-select" required #categoria>
                                         <option value="">Categoría</option>
-                                        <option *ngFor="let categoria of categorias;">{{ categoria }}</option>                                    
+                                        <option *ngFor="let categoria of categorias;">{{ categoria.nombre }}</option>                                    
                                     </select>
                                     <div style="font-size:0.6vw" class="invalid-feedback">Seleccione una categoría</div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input style="font-size:0.9vw" type="number" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Ingrese sólo números (si usa decimales que sean 2 como máximo)" step="0.01" min="0" class="form-control" id="PrecioVenta" placeholder="Precio de venta (Q.)" required>
-                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales)</div>
+                                <input [(ngModel)]="campos[4]" name="precio" style="font-size:0.9vw" type="text" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Ingrese sólo números (si usa decimales que sean 2 como máximo)" step="0.01" min="0" class="form-control" id="precioVenta" placeholder="Precio de venta (Q.)"
+                                    required #precio>
+                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales o enteros)</div>
                             </div>
                             <div class="form-group">
-                                <input style="font-size:0.9vw" type="number" pattern="[0-9]*" min="0" class="form-control" id="Existencia" placeholder="Existencia" required>
+                                <input [(ngModel)]="campos[5]" name="existencia" style="font-size:0.9vw" name="existencia" type="text" pattern="[0-9]*" min="0" class="form-control" id="existencia" placeholder="Existencia" required #existencia>
                                 <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use enteros solamente)</div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-6">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="customControlValidation1" name="radio-stacked" required>
-                                        <label style="font-size:0.9vw" class="custom-control-label" for="customControlValidation1">Disponible</label>
+                                        <input type="radio" class="custom-control-input" id="disponible" name="radio-stacked" value="disponible" (click)="manipularBRadio(1)" required #disponible>
+                                        <label style="font-size:0.9vw" class="custom-control-label" for="disponible">Disponible</label>
                                         <div style="font-size:0.6vw" class="invalid-feedback">Seleccione la opción disponible o descontinuado</div>
                                     </div>
                                 </div>
                                 <div class="form-group col-6">
-                                    <div class="form-check">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
-                                            <label style="font-size:0.9vw" class="custom-control-label" for="customControlValidation2">Descontinuado</label>
-                                        </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="descontinuado" name="radio-stacked" value="descontinuado" (click)="manipularBRadio(2)" required #descontinuado>
+                                        <label style="font-size:0.9vw" class="custom-control-label" for="descontinuado">Descontinuado</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-6">
                                     <div class="form-group form-check">
-                                        <input style="font-size:0.9vw" type="checkbox" class="form-check-input" (click)="asignarValor()" id="cbDescuento" #descuento>
+                                        <input name="descuento" style="font-size:0.9vw" type="checkbox" class="form-check-input" (click)="asignarValor()" id="cbDescuento" #descuento>
                                         <label style="font-size:0.9vw" class="form-check-label" for="exampleCheck1">En descuento</label>
                                     </div>
                                 </div>
                                 <div class="form-group col-6">
-                                    <input *ngIf="booleano" id="inputDescuento" style="font-size:0.9vw" type="text" class="form-control" placeholder="% descuento" #inputDescuento required>
+                                    <input [(ngModel)]="campos[6]" name="inputDescuento" pattern="[0-9]{1,2}" *ngIf="booleano" id="inputDescuento" style="font-size:0.9vw" type="text" class="form-control" placeholder="% descuento" #inputDescuento required>
+                                    <div style="font-size:0.6vw" class="invalid-feedback">Ingrese un número de uno o dos dígitos</div>
                                 </div>
                             </div>
+                            <button *ngIf="especificaciones.length > 0 && bandera()" style="font-size:0.9vw" class="btn btn-primary" (click)="ingresarProducto()">Ingresar producto</button>
                         </div>
                         <div class="col-3">
 
@@ -98,17 +103,17 @@
                                 </div>
                             </div>
                             <div style="margin-top: 15px;" class="form-group">
-                                <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event)">
+                                <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event); asignarImagenes($event)">
                                 <div style="font-size:0.6vw" class="invalid-feedback"></div>
                             </div>
                             <div class="form-group">
-                                <p>El botón para ingresar el producto se activa una vez que se ha ingresado una especificación ({{ especificaciones.length }} especificaciones)
+                                <p>El botón para ingresar el producto se activa una vez que se ha ingresado una especificación ({{ especificaciones.length }} especificaciones) y ningún campo esté con marco rojo.
                                 </p>
                                 <div class="form-group row">
                                     <div class="col-10">
 
                                         <input style="font-size:0.9vw" pattern="[0-9a-zA-ZÀ-ÿ\s\u00f1\u00d1:.;!#$%&/()=?¡¿/*+>_-]*" title="Ingrese letras, números y SOLO los caracteres especiales especificados: :.;!#$%&/()=?¡¿/*-+>_ (no ingrese comas, importante)" class="form-control" id="especificacion"
-                                            placeholder="Descripción" #especificacion>
+                                            placeholder="Especificación" #especificacion>
                                         <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
                                     </div>
                                     <div class="col-2">
@@ -130,7 +135,7 @@
                         </div>
                     </div>
 
-                    <button *ngIf="especificaciones.length > 0" style="font-size:0.9vw" class="btn btn-primary" (click)="validarIngreso()">Ingresar producto</button>
+
                 </form>
 
             </div>
@@ -138,3 +143,23 @@
         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Nav-Profile</div>
     </div>
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Se ha ingresado el producto con éxito</h5>
+                <button type="button" class="close" (click)="refrescarPagina()" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="refrescarPagina()" data-dismiss="modal">Continuar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

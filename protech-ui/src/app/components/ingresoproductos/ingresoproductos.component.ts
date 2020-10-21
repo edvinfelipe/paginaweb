@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ImagenesproductoService } from '../../services/imagenesproducto.service';
+import { MarcasService } from '../../services/marcas.service';
+import { CategoriasService } from '../../services/categorias.service';
+import { ProductoService } from '../../services/producto.service';
 //componentes de form
 declare var $: any;
 
@@ -10,14 +14,45 @@ declare var $: any;
   styleUrls: ['./ingresoproductos.component.css']
 })
 export class IngresoproductosComponent implements OnInit {
-  marcas: string[] = ['Marca 1', 'Marca 2', 'Marca 3'];
-  categorias: string[] = ['Categoría 1', 'Categoría 2', 'Categoría 3'];
+  //marcas: any[] = ['Marca 1', 'Marca 2', 'Marca 3'];
+  //categorias: any[] = ['Categoría 1', 'Categoría 2', 'Categoría 3'];
+  marcas: any[];
+  categorias: any[];
   urls = new Array<string>();
+  imagenes = new Array<any>();
   sEspecificaciones: string = '';
   especificaciones = new Array<string>();
+  //false = no hay descuento
+  //true = hay descuento
   booleano = false;
   indiceEspecificaciones: number = 0;
-  constructor() {
+  //campos[0] = producto
+  //campos[1] = descripcion
+  //campos[2] = marca
+  //campos[3] = categoría
+  //campos[4] = precio de venta
+  //campos[5] = existencia
+  //campos[6] = % descuento
+  campos: string[] = ['', '', '', '', '', '', ''];
+  //banderaradio = 1 (disponible)
+  //banderaradio = 2 (descontinuado)
+  banderaradio = 0;
+
+  constructor(private imagenesService: ImagenesproductoService, private marcasService:MarcasService, 
+    private categoriasService:CategoriasService, private productoService: ProductoService) {
+    this.marcasService.getMarcas()
+      .subscribe( (dataMarcas: any) => {
+        this.marcas = dataMarcas;
+      });
+    this.categoriasService.getCategorias()
+      .subscribe( (dataCategorias: any) => {
+        this.categorias = dataCategorias;
+      });
+      $('#myModal').modal({backdrop: 'static', keyboard: false})
+  }
+
+  manipularBRadio(valor){
+    this.banderaradio = valor;
   }
 
   ngOnInit(): void {
@@ -25,6 +60,74 @@ export class IngresoproductosComponent implements OnInit {
       if ($("#image")[0].files.length > 3) {
           alert("Usted ha ingresado más de 3 imágenes, así que se ingresarán al servidor las primeras 3 imágenes ingresadas únicamente.");
       }});
+    this.validarImagenes();
+  }
+
+  validarImagenes(){
+    for (let i = 0; i < 3; i++)
+    {
+      if (this.urls[i] === null || this.urls[i] !== 'assets/img/Interrogación.png')
+      {
+        this.urls[i] = 'assets/img/Interrogación.png';
+      }
+    }
+  }
+
+  bandera()
+  {
+    //Validar que todos los campos (sin incluir los checkbox ni radios) no estén vacíos
+    for (let i = 0; i < this.campos.length-1; i++)
+    {
+      if (this.campos[i] != null)
+      {
+        if (this.campos[i].length === 0)
+        {
+          return false;
+        }
+      }
+      else{
+        return false;
+      }
+    }
+    //Validar que al menos un radio-button esté seleccionado
+    if (this.banderaradio === 0)
+    {
+      return false;
+    }
+    //Validar que, si el checkbox de descuento está seleccionado, que su campo de texto no esté vacío
+    if (this.booleano === true)
+    {
+      if (this.campos[5].length === 0 || this.campos[5] === null)
+      {
+        return false;
+      }
+    }
+    //Verificar que los campos de precio y existencia cumplan con los regex especificados
+    var regexexistencia = /^\d*$/;
+    var regexprecio = /^\d+(?:\.\d{1,2})?$/ ;
+    var regexdescuento = /^\d{1,2}$/;
+    var existencia = regexexistencia.exec((<HTMLInputElement>document.getElementById("existencia")).value);
+    var precio = regexprecio.exec((<HTMLInputElement>document.getElementById("precioVenta")).value);
+    
+    if (!existencia || !precio)
+    {
+      return false;
+    }
+    if (this.booleano === true)
+    {
+      var descuento = regexdescuento.exec((<HTMLInputElement>document.getElementById("inputDescuento")).value);
+      if (!descuento)
+      {
+        return false;
+      }
+    }
+    //Si todos los casos anteriores se dieron, entonces retornar true
+    return true;
+  }
+
+  refrescarPagina()
+  {
+    location.reload();
   }
 
   obtenerEspecificacion(){
@@ -54,6 +157,15 @@ export class IngresoproductosComponent implements OnInit {
     {
       alert("Especificación mal ingresada");
     }
+  }
+
+  ingresarImagen()
+  {
+    for (let i = 0; i < 3; i++)
+    {
+      
+    }
+    //this.imagenesService.postImagen().subscribe();
   }
 
   validarLongitud()
@@ -106,17 +218,6 @@ export class IngresoproductosComponent implements OnInit {
     this.booleano = (<HTMLInputElement>document.getElementById('cbDescuento')).checked;
   }
 
-  validarIngreso()
-  {
-    if ((<HTMLInputElement>document.getElementById('cbDescuento')).checked)
-    {
-      if (!(<HTMLInputElement>document.getElementById('inputDescuento')).checked)
-      {
-        console.log('No se puede ingresar');
-      }
-    }
-  }
-
   eliminarEspecificaciones()
   {
     this.especificaciones.splice(this.indiceEspecificaciones, 1);
@@ -126,25 +227,87 @@ export class IngresoproductosComponent implements OnInit {
     }
   }
 
-  detectFiles(event) {
+  /*detectFiles(event) {
     this.urls = [];
     let files = event.target.files;
+    console.log(files);
     if (files) {
       for (let file of files) {
         let reader = new FileReader();
         reader.onload = (e: any) => {
-          console.log(this.urls.push(e.target.result));
+          this.urls.push(e.target.result);
+          
+          console.log(this.urls.length);
         }
         reader.readAsDataURL(file);
       }
     }
+  }*/
+
+  detectFiles(event)
+  {
+    let files = event.target.files;
+    let posicion = 0;
+    console.log(files);
+    if (files) {
+      
+      for (let file of files) {
+          let reader = new FileReader();
+          reader.onload = (e: any) => {
+            if (posicion < 3)
+            {
+              this.urls[posicion] = e.target.result;
+              posicion = posicion + 1;
+            }
+          }
+          reader.readAsDataURL(file);
+      }
+    }
+    this.validarImagenes();
   }
 
-  mostrarImagenes()
+  asignarImagenes(event){
+    let aux = 0;
+    while (aux < event.target.files.length)
+    {
+      this.imagenes[aux] = event.target.files[aux];
+      aux = aux + 1;
+    }
+  }
+
+  ingresarImagenes(id: any)
   {
-    console.log(this.urls[0]);
-    console.log(this.urls[1]);
-    console.log(this.urls[2]);
+    for (let i = 0; i < 3; i++)
+    {
+      if (this.urls[i] === null || this.urls[i] !== 'assets/img/Interrogación.png'){
+        this.imagenesService.postImagen(this.imagenes[i], id).subscribe(
+          (res) => console.log(res),
+          (err) => console.log(err),
+          );
+      }
+    }
+    $('#myModal').modal('show');
+  }
+
+  mostrarIndice()
+  {
+    console.log((<HTMLSelectElement>document.getElementById('marca')).selectedIndex);
+  }
+
+  ingresarProducto()
+  {
+    let id;
+    let mid = this.marcas[(<HTMLSelectElement>document.getElementById('marca')).selectedIndex-1]._id;
+    let cid = this.categorias[(<HTMLSelectElement>document.getElementById('categoria')).selectedIndex-1]._id;
+    this.productoService.postProducto(this.campos, this.banderaradio, this.booleano, this.sEspecificaciones, mid, cid).subscribe(
+      (producto: any) => {
+        id = producto.producto._id;
+        this.ingresarImagenes(id);
+        console.log(producto);
+      },
+      (err) => console.log(err),
+    );
+    
   }
 
 }
