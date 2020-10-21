@@ -1,5 +1,51 @@
-.btn-btnsave{
-    background-color:  #1A2A40;
-    color: white;
-  }
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.table, th, td {
+  margin-top: 0px;
+  border: 1px solid black;
+  padding: 10px;
+}
+.home{
+  display: flex;
+  flex-wrap: wrap;
   
+}
+.in-flex{
+  flex: 1;
+  margin-left: 150px;
+  padding: 25px;
+  min-width: 300px;
+ 
+}
+.in-flex:first-child{
+  flex:2;
+  margin-left: 150px;
+  margin-bottom: 0px
+}
+.in-flex div{
+  padding:6px;
+}
+
+.btn-dark{
+  background-color: #1A2A40;
+  background-image: address;
+}
+
+.ButonLapiz{
+  background: url("../assets/lapiz.jpg");
+  background-size: 100% 100%;
+  border: none;
+  cursor: pointer;
+  width: 45px;
+  height: 40px;
+}
+.ButonBasurero{
+  background: url("../assets/basurero.jpg");
+  background-size: 100% 100%;
+  border: none;
+  cursor: pointer;
+  width: 45px;
+  height: 40px;
+}
