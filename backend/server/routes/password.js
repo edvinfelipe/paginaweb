@@ -55,9 +55,7 @@ app.post('/password/email', async(req, res)=>{
                     err
                 })
             }
-    
-            console.log(info)
-    
+
             return res.json({
                 status: true,
                 message: info.response
