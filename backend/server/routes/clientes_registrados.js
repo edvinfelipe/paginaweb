@@ -6,11 +6,7 @@ const app = express()
 const _ = require('underscore')
 const bcrypt = require('bcrypt')
 
-const Cliente = require('../models/clientes_registrados')
 const clientes_registrados = require('../models/clientes_registrados')
-
-//const verificarToken = require('../middleware/autenticacion')
-
 
 //=====================
 // Crea una Cliente
@@ -59,7 +55,7 @@ app.get('/cliente', (req, res)=>{
             if( err ){ 
                 return res.status(500).json({
                     status: false,
-                    err
+                    err     
                 })
             }
 
@@ -79,7 +75,7 @@ app.get('/cliente/:id', (req, res)=>{
 
     const id = req.params.id
 
-    Cliente.find({_id:id})
+    clientes_registrados.find({_id:id})
 
         .exec((err, cliente)=>{
 
@@ -106,7 +102,7 @@ app.get('/cliente/:id', (req, res)=>{
     
         const body = _.pick(req.body,'nombre','direccion','telefono','correo','nit','username','password')
     
-        Cliente.findByIdAndUpdate(
+        clientes_registrados.findByIdAndUpdate(
             id, 
             body,
             { new: true }, 
