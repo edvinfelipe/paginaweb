@@ -12,7 +12,7 @@ const clientes_registrados = require('../models/clientes_registrados')
 // Crea una Cliente
 // ====================
 
-app.post('/api/cliente' , (req, res) => {
+app.post('/cliente' , (req, res) => {
 
     let body = req.body
 
@@ -24,7 +24,8 @@ app.post('/api/cliente' , (req, res) => {
         correo:     body.correo,
         nit:        body.nit,
         username:   body.username,
-        password:   body.password,
+        role:   body.role,
+        password:   bcrypt.hashSync( body.password, 10 ),
     })
 
     cliente.save( (err, clienteDB )=>{
@@ -46,7 +47,7 @@ app.post('/api/cliente' , (req, res) => {
 //=====================
 // Lista de Clientes
 // ====================
-app.get('/api/cliente', (req, res)=>{
+app.get('/cliente', (req, res)=>{
 
     clientes_registrados.find( { eliminado:false })
         .exec((err, clientes)=>{
@@ -70,7 +71,7 @@ app.get('/api/cliente', (req, res)=>{
 //======================
 // Regresa un cliente
 // =====================
-app.get('/api/cliente/:id', (req, res)=>{
+app.get('/cliente/:id', (req, res)=>{
 
     const id = req.params.id
 
@@ -95,7 +96,7 @@ app.get('/api/cliente/:id', (req, res)=>{
 //=====================
 // Modifica un cliente
 // ====================    
-    app.put('/api/cliente/:id', (req, res) => {
+    app.put('/cliente/:id', (req, res) => {
 
         const id = req.params.id
     
@@ -130,7 +131,7 @@ app.get('/api/cliente/:id', (req, res)=>{
         })
     })
     
-    app.delete('/api/cliente/:id', (req, res) => {
+    app.delete('/cliente/:id', (req, res) => {
 
         const id = req.params.id
     

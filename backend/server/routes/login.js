@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-const Usuario = require('../models/usuario')
+const Cliente = require('../models/clientes_registrados')
 
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -9,11 +9,11 @@ const bcrypt = require('bcrypt')
 //======================
 //  Inicio de Sesión 
 //====================== 
-app.post('/api/login', (req, res) =>{
+app.post('/login', (req, res) =>{
 
     const body = req.body
 
-    Usuario.findOne({ username: body.username, eliminado: false }, ( err, usuario ) => {
+    Cliente.findOne({ username: body.username, eliminado: false }, ( err, usuario ) => {
 
         if( err ){
             return res.status(500).json({

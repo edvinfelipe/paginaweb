@@ -4,6 +4,7 @@
     "description": "Api para un e-commerce",
     "main": "index.js",
     "scripts": {
+        "dev": "nodemon backend/server/server.js",
         "start": "node backend/server/server.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -27,6 +28,10 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.9.28",
         "mongoose-unique-validator": "^2.0.3",
+        "nodemailer": "^6.4.14",
         "underscore": "^1.10.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.4"
     }
 }

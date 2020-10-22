@@ -5,15 +5,16 @@ const app = express()
 // Endpoints de la API
 app.use(require('./categoria'))
 app.use(require('./marca'))
-app.use(require('./usuario'))
+// app.use(require('./usuario'))
 app.use(require('./login'))
 app.use(require('./producto'))
 app.use(require('./clientes_registrados'))
 app.use(require('./factura'))
 app.use(require('./detalle_factura'))
 app.use(require('./carrito'))
+app.use(require('./password'))
 
-if( process.env.CLOUD_NAME ){
+if( process.env.NODE_ENV !== 'dev' ){
     app.use(require('./uploadcloud'))
 }else{
 

@@ -7,13 +7,13 @@ const app = express()
 const Imagen = require('../models/imagenes')
 const Producto = require('../models/producto')
 
-const verificarToken = require('../middleware/autenticacion')
+const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 
 // Con este middleware, todos los archivos que se suban caen en el req.files
 app.use(fileUpload())
 
 
-app.post('/api/upload/:id', verificarToken ,(req, res)=>{
+app.post('/upload/:id', [ verificarToken, verificarRole ] ,(req, res)=>{
 
     const idProducto = req.params.id
 
@@ -83,7 +83,7 @@ function insertarImagen(res, archivo, idPorducto, extension ){
 
         const imagen = new Imagen({
             imagen: nombreArchivo,
-            url: `${process.env.DOMINIO}/api/imagen/${nombreArchivo}`,
+            url: `${process.env.DOMINIO}/imagen/${nombreArchivo}`,
             producto: idPorducto
         })
 

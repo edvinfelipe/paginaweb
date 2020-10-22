@@ -14,7 +14,7 @@ const detalle_facturas = require('../models/detalle_factura')
 // Crea una FACTURA
 // ====================
 
-app.post('/api/detalle_factura' , (req, res) => {
+app.post('/detalle_factura' , (req, res) => {
 
     let body = req.body
 
@@ -50,7 +50,7 @@ app.post('/api/detalle_factura' , (req, res) => {
 // Lista de todos las detalles
 //==============================
 
-app.get('/api/detalle_factura', (req, res)=>{
+app.get('/detalle_factura', (req, res)=>{
 
     detalle_facturas.find()
 
@@ -74,7 +74,7 @@ app.get('/api/detalle_factura', (req, res)=>{
 // Lista de todos los detalles por facturas
 //==============================
 
-app.get('/api/detalle_factura/:factura_id', (req, res)=>{
+app.get('/detalle_factura/:factura_id', (req, res)=>{
 
     const idFactura = req.params.factura_id
 

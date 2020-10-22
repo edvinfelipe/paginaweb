@@ -7,14 +7,14 @@ const app = express()
 const Imagen = require('../models/imagenes')
 const Producto = require('../models/producto')
 
-const verificarToken = require('../middleware/autenticacion')
+const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 
 const cloudinary = require('cloudinary').v2
 
 cloudinary.config({
-    cloud_name:  process.env.CLOUD_NAME, 
-    api_key:  process.env.API_KEY, 
-    api_secret: process.env.API_SECRET 
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
 })
 
 
@@ -24,14 +24,14 @@ app.use(fileUpload({
 }))
 
 
-app.post('/api/upload/:id', verificarToken ,(req, res)=>{
+app.post('/upload/:id', [verificarToken, verificarRole], (req, res) => {
 
     const idProducto = req.params.id
 
-    if( !req.files ){
+    if (!req.files) {
         return res.status(400).json({
             status: false,
-            err:{
+            err: {
                 message: 'No se ha seleccionado ningún archivo'
             }
         })
@@ -39,81 +39,81 @@ app.post('/api/upload/:id', verificarToken ,(req, res)=>{
 
     let archivo = req.files.imagen
     const nombreCortado = archivo.name.split('.')
-    const extension = nombreCortado[ nombreCortado.length - 1 ]
-    
-    // Extensiones permitidas
-    const extencionesValidas = ['png','jpg','gif','jpeg']
+    const extension = nombreCortado[nombreCortado.length - 1]
 
-    if( extencionesValidas.indexOf(extension) < 0){
+    // Extensiones permitidas
+    const extencionesValidas = ['png', 'jpg', 'gif', 'jpeg']
+
+    if (extencionesValidas.indexOf(extension) < 0) {
 
         return res.status(400).json({
-            status:false,
-            err:{
-                message: 'Las extensiones permitidas '+extencionesValidas.join(','),
+            status: false,
+            err: {
+                message: 'Las extensiones permitidas ' + extencionesValidas.join(','),
                 ext: extension
             }
         })
     }
 
-    Producto.findById(idProducto,( err, productoDB )=>{
+    Producto.findById(idProducto, (err, productoDB) => {
 
-            if( err ){ 
-                return res.status(500).json({
-                    status: false,
-                    err
-                })
-            }
-    
-            if( !productoDB ){
-                return res.status(404).json({
-                    status: false,
-                    err: {
-                        message: 'No existe el producto'
-                    }
-                })
-            }
-    
-            uploadImage(res, archivo, idProducto)
+        if (err) {
+            return res.status(500).json({
+                status: false,
+                err
+            })
+        }
+
+        if (!productoDB) {
+            return res.status(404).json({
+                status: false,
+                err: {
+                    message: 'No existe el producto'
+                }
+            })
+        }
+
+        uploadImage(res, archivo, idProducto)
     })
-   
+
 })
 
 // ===========================================
 //  Subida de imagen a cloud
 // ===========================================
-function uploadImage(res, archivo, idPorducto){
+function uploadImage(res, archivo, idPorducto) {
 
     cloudinary.uploader.upload(archivo.tempFilePath)
-    .then(result =>{
+        .then(result => {
 
-        const imagen = new Imagen({
-            imagen: result.public_id,
-            url: result.url,
-            producto: idPorducto
-        })
+            const imagen = new Imagen({
+                imagen: result.public_id,
+                url: result.url,
+                producto: idPorducto
+            })
 
-        imagen.save((err, imagenDB)=>{
+            imagen.save((err, imagenDB) => {
 
-            if( err ){
-                return res.status(500).json({
-                    status: false,
-                    err
+                if (err) {
+                    return res.status(500).json({
+                        status: false,
+                        err
+                    })
+                }
+
+                return res.status(201).json({
+                    status: true,
+                    imagen: imagenDB
                 })
-            }
+            })
 
-            return res.status(201).json({
-                status: true,
-                imagen: imagenDB
+        })
+        .catch(err => {
+            return res.status(400).json({
+                status: false,
+                err
             })
         })
-
-    })
-    .catch( err => {
-        return res.status(400).json({
-            status: false,
-            err
-        })
-    })
 
 }
 
