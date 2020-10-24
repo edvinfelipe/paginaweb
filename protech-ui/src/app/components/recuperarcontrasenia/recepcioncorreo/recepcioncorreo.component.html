@@ -9,6 +9,7 @@
         <small *ngIf="formCorreo.get('correo').hasError('email')" class="text-danger">Ingrese un correo valido</small>
       </div>
     </div>
-    <button class="btn btn-btnsave" (click)="validarCorreo()">Enviar</button>
+    <small *ngIf="!correoValido" class="txt-danger">El correo no esta asociado a una cuenta</small>
+    <button class="btn btn-btnsave" (click)="enviarCorreo()">Enviar</button>
   </form>
 </div>

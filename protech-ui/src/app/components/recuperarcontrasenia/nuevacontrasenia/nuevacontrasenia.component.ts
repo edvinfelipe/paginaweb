@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 
 import { Validaciones } from "../../registro/validaciones";
+import { RecuperarconrtraseniaService } from "../../../services/recuperarconrtrasenia.service";
 
 @Component({
   selector: 'app-nuevacontrasenia',
@@ -11,8 +13,8 @@ import { Validaciones } from "../../registro/validaciones";
 export class NuevacontraseniaComponent implements OnInit {
 
   formPassword: FormGroup;
-
-  constructor(private formBuilder:FormBuilder) {
+  nuevacontrasenia: any = {}
+  constructor(private formBuilder:FormBuilder,private _recuperarContraseniaService:RecuperarconrtraseniaService,private _activatedRoute: ActivatedRoute) {
     this.buildFormPassword();
   }
 
@@ -34,12 +36,29 @@ export class NuevacontraseniaComponent implements OnInit {
     });
   }
 
-  validarFormContrasenia(){
+  validarFormContrasenia() : boolean{
     if(this.formPassword.valid){
-      console.log("Valido");
+      this.nuevacontrasenia ={
+        password:this.formPassword.get("contrasenia").value
+      }
+      return true;
     }else{
       this.formPassword.markAllAsTouched();
+      return false;
     }
   }
+
+  enviarNuevaContrasenia(){
+    if(this.validarFormContrasenia()){
+      this._activatedRoute.params.subscribe(params =>{
+        console.log(params['token']);
+        this._recuperarContraseniaService.recuperarContrasenia(params['token'],this.nuevacontrasenia).subscribe((data: any)=>{
+          console.log(data);
+        })
+      })
+    }
+  }
+
+
 
 }
