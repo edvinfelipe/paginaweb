@@ -22,6 +22,7 @@ import { HowbuyComponent } from "./components/howbuy/howbuy.component";
 import { ContactpageComponent } from "./components/contactpage/contactpage.component";
 import { CarritocompraComponent} from "./components/carritocompra/carritocompra.component";
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { UsuariosComponent} from './components/usuarios/usuarios.component';
 
 const app_routes: Routes = [
   { path: 'catalogo/:id', component: CatalogoComponent },
@@ -33,6 +34,7 @@ const app_routes: Routes = [
   { path: 'contacto', component: ContactpageComponent},
   { path: 'carrito', component: CarritocompraComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'usuarios', component: UsuariosComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
