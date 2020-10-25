@@ -6,20 +6,37 @@
     margin-bottom: 60px;
 }
 
+.negro {
+    color: black;
+}
+
+a.active.nav-link {
+    background-color: #1A2A40!important;
+    color: white;
+}
+
 
 /*Ingreso de productos*/
 
 .fijarTarjetas {
     width: 100%;
-    height: 8vw;
     object-fit: cover;
 }
 
 .fijarInventario {
     width: 60%;
-    height: 10vw;
 }
 
 .fijarMarco {
     width: 100%;
+}
+
+@media (max-width: 760px) {
+    .responsive-tarjetas {
+        width: 33%;
+        margin-bottom: 30px;
+    }
+    .especificacion {
+        margin-bottom: 20px;
+    }
 }
