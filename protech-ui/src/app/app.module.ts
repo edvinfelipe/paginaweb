@@ -36,6 +36,7 @@ import { RegistroComponent } from './components/registro/registro.component';
 import { MensajeErrorComponent } from './components/shared/mensaje-error/mensaje-error.component';
 import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/recuperarcontrasenia.module';
 
+import { CheckoutService } from './services/checkout.service';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/re
   providers: [
     ProductosService,
     MarcasService,
-    BnNgIdleService
+    BnNgIdleService,
+    CheckoutService
   ],
   bootstrap: [AppComponent]
 })
