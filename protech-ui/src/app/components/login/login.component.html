@@ -21,10 +21,10 @@
       </div>
     </div>
     <p *ngIf="isErrorLoged" class="text-danger"> Usuario o contraseña incorrectos</p>
-    <small id="emailHelp" class="form-text text-muted"><a href="#" style="color: #1A2A40;">¿Olvido su contraseña?</a></small>
+    <small id="emailHelp" class="form-text text-muted"><a [routerLink]="['/forgotpassword/ingresocorreo']" style="color: #1A2A40;">¿Olvido su contraseña?</a></small>
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">Cancelar</button>
-  <button type="button" class="btn btn-btnsave" (click)='datos()'>Iniciar Sesión</button>
+  <button type="button" class="btn btn-btnsave" (click)='login()'>Iniciar Sesión</button>
 </div>

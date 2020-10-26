@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BnNgIdleService } from 'bn-ng-idle';
 import { AppRoutingModule } from './app-routing.module';
 
 //Rutas
@@ -32,6 +34,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { MensajeErrorComponent } from './components/shared/mensaje-error/mensaje-error.component';
+import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/recuperarcontrasenia.module';
+
 
 
 @NgModule({
@@ -59,15 +63,21 @@ import { MensajeErrorComponent } from './components/shared/mensaje-error/mensaje
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    RecuperarcontraseniaModule,
     APP_ROUTING,
-    NgbModule
+    NgbModule,
+
+
   ],
   providers: [
     ProductosService,
-    MarcasService
+    MarcasService,
+    BnNgIdleService
   ],
   bootstrap: [AppComponent]
 })

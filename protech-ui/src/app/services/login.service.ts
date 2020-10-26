@@ -27,12 +27,22 @@ export class LoginService {
     sessionStorage.setItem("accesToken",token);
   }
 
+  setUser(user){
+    let userString = JSON.stringify(user);
+    sessionStorage.setItem("user",userString);
+  }
+
   getToken(){
     return sessionStorage.getItem("accesToken");
   }
 
+  getUser(){
+    return sessionStorage.getItem("user");
+  }
+
   logOut(){
     sessionStorage.removeItem("accesToken");
+    sessionStorage.removeItem("user");
   }
 
 }
