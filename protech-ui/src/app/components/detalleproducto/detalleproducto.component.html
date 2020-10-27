@@ -3,36 +3,41 @@
     <div class="row">
         <div class="col-4">
             <div class="card">
-                <img src="{{rutas[retornarRuta()]}}" class="fijarTarjetaGrande">
+                <img [src]="obtenerImagenPrincipal()" class="fijarTarjetaGrande imagenes">
             </div>
             <br>
             <div class="row">
-                <div class="col-6">
-                    <div class="card ">
-                        <img (click)="asignarRuta(0)" src="assets/img/Samsung.jpg" class="fijarTarjetaPequena">
+                <div class="col-4">
+                    <div class="card">
+                        <img (click)="asignarRuta(0)" [src]="retornarRuta(0)" class="fijarTarjetaPequena">
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <div class="card">
-                        <img (click)="asignarRuta(1)" src="assets/img/Samsung3.jpg" class="fijarTarjetaPequena">
+                        <img (click)="asignarRuta(1)" [src]="retornarRuta(1)" class="fijarTarjetaPequena">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <img (click)="asignarRuta(2)" [src]="retornarRuta(2)" class="fijarTarjetaPequena">
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-7">
-            <h5 style="font-size:3vw;">Nombre del producto:</h5>
+            <h5 style="font-size:3vw;">Nombre del producto: {{ producto.nombre }}</h5>
             <br>
-            <h5 style="font-size:3vw;">Precio: Q#,###.## </h5>
+            <h5 style="font-size:3vw;">Precio: Q{{ producto.precio }} </h5>
             <br>
             <h6 style="font-size:3vw;">Cantidad: &nbsp;</h6>
             <div class="input-group col-sm-4">
 
                 <button style="font-size:2vw;" type="button" (click)="manipularContador(0)" class="btn btn-dark btn-sm">-</button>
-                <input style="font-size:2vw;" [(ngModel)]="numero" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
-                <button style="font-size:2vw;" type="button " (click)="manipularContador(1)" class="btn btn-dark btn-sm">+</button>
+                <input id="cantidad" [(ngModel)]="numero" style="font-size:2vw;" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
+                <button style="font-size:2vw;" type="button " (click)="manipularContador(1); mostrarCantidad()" class="btn btn-dark btn-sm">+</button>
             </div>
             <br>
-            <button style="font-size:3vw;" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal">
+            <button style="font-size:3vw;" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()">
                 &nbsp;&nbsp;Comprar&nbsp;&nbsp;</button>
         </div>
     </div>

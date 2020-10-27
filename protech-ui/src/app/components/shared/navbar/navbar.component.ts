@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Location } from '@angular/common';
+
 import { CategoriasService } from "../../../services/categorias.service";
+import { LoginComponent } from "../../login/login.component";
+import { RegistroComponent } from "../../registro/registro.component";
+import { LoginService } from "../../../services/login.service";
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +15,40 @@ import { CategoriasService } from "../../../services/categorias.service";
 export class NavbarComponent implements OnInit {
 
   categorias: any[] = [];
-
-  constructor(private _cateogiriasService:CategoriasService) {
+  isLogged:boolean = false;
+  constructor(private _cateogiriasService:CategoriasService,private modalService: NgbModal, private _loginService: LoginService) {
     this._cateogiriasService.getCategorias()
       .subscribe( (dataCategorias: any) => {
-        console.log(dataCategorias);
         this.categorias = dataCategorias;
       });
    }
 
   ngOnInit(): void {
+    this.onCheckUser();
   }
 
+  openInicioSesion() {
+    const modalRef = this.modalService.open(LoginComponent);
+
+  }
+
+  openRegistro(){
+    const modalRef = this.modalService.open(RegistroComponent);
+    // this.modalService.open(RegistroComponent, { size: 'lg' });
+  }
+
+  onCheckUser(){
+    if(this._loginService.getToken() ===null){
+      this.isLogged=false;
+      console.log(this.isLogged);
+    }else{
+      this.isLogged=true;
+      console.log(this.isLogged);
+    }
+  }
+
+  onLogOut(){
+    this._loginService.logOut();
+    location.reload();
+  }
 }

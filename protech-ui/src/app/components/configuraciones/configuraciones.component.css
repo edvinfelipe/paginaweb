@@ -73,7 +73,6 @@ a.active.nav-link {
 .in:focus {
     border-color: rgba(112, 112, 112, .001);
     box-shadow: 0 0 0 0;
-    box-shadow: 0 0 0 0;
     color: rgb(85, 85, 85);
     outline: none;
 }

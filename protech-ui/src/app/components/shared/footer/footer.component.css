@@ -53,17 +53,27 @@ footer {
     display: flex;
 }
 
-.row img,
-.row2 img,
-.row3 img {
-    width: 25px;
-    height: 25px;
-}
-
 .row label {
     margin-top: 2px;
     margin-left: 15px;
     color: #C7C7C7;
+}
+
+.fab,
+.far {
+    font-size: 25px;
+}
+
+.fa-whatsapp {
+    color: #00BB2D;
+}
+
+.fa-facebook-square {
+    color: #3B5998;
+}
+
+.fa-twitter {
+    color: #00ACEE;
 }
 
 .column3 {
