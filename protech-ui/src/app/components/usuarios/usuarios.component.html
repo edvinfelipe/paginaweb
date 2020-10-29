@@ -5,15 +5,15 @@
 <div class="home" >
   <div class="in-flex" >
         <div class="form-group" id="name-group">
-          <input type="text" class="form-control" placeholder="Nombre">
+          <input type="text" class="form-control" placeholder="Codigo" [(ngModel)]="datos1.codigo">
         </div>
         <div class="form-group" id="user-group">
-          <input type="password" class="form-control" placeholder="Usuario">  
+          <input type="password" class="form-control" placeholder="Nombre de usuario" [(ngModel)]="datos1.username">  
         </div>
           <div class="form-group" id="contraseña-group">
-          <input type="password" class="form-control" placeholder="Contraseña">  
+          <input type="password" class="form-control" placeholder="Contraseña"  [(ngModel)]="datos1.password">  
         </div>
-      <button type="submit" class="btn btn-dark btn-lg btn-block" >Crear Usuario</button>
+      <button (click)="Agregar()" type="submit" class="btn btn-dark btn-lg btn-block" >Crear Usuario</button>
   </div>  
   <div class="in-flex">
     <table class="table table-hover">
@@ -38,5 +38,4 @@
   </div>
 </div>
 </section>
-
 
