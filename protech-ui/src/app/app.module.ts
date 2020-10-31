@@ -85,7 +85,7 @@ import { CheckoutService } from './services/checkout.service';
     ProductosService,
     MarcasService,
     BnNgIdleService,
-    CheckoutService
+    CheckoutService,
     CarritoUsuarioService
   ],
   bootstrap: [AppComponent]
