@@ -89,7 +89,10 @@ export class DetalleproductoComponent implements OnInit {
     }
     else if (accion === 1)
     {
-      this.numero = this.numero + 1;
+      if (this.numero < this.producto.existencia)
+      {
+        this.numero = this.numero + 1;
+      }
     }
     // tslint:disable-next-line: no-trailing-whitespace
   }
