@@ -50,7 +50,7 @@ export class CheckoutService {
     let horafactura = this.gethoraformato();
 
     let fechayhorafactura = fecha + 'T'+ horafactura;    
-    let body = {total: total, fecha_venta: fechayhorafactura, cliente_factura:cliente, __v: 0}
+    let body = {total: total, fecha_venta: fechayhorafactura, cliente_factura:cliente}
 
     return this.http.post('https://api-protech.herokuapp.com/api/factura/', body);
   }
@@ -61,7 +61,7 @@ export class CheckoutService {
     let horafactura = this.gethoraformato();
 
     let fechayhorafactura = fecha + 'T'+ horafactura;    
-    let body = {total: total, fecha_venta: fechayhorafactura, __v: 0}
+    let body = {total: total, fecha_venta: fechayhorafactura}
 
     return this.http.post('https://api-protech.herokuapp.com/api/factura/', body);
 
