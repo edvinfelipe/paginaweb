@@ -11,6 +11,8 @@ import { APP_ROUTING } from './app.routes';
 //Servicios
 import { MarcasService } from './services/marcas.service';
 import { ProductosService } from './services/productos.service';
+import { CarritoUsuarioService } from './services/carrito-usuario.service';
+
 //Componentes
 import { AppComponent } from './app.component';
 import { AboutusComponent } from './components/aboutus/aboutus.component';
@@ -77,7 +79,8 @@ import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/re
   providers: [
     ProductosService,
     MarcasService,
-    BnNgIdleService
+    BnNgIdleService,
+    CarritoUsuarioService
   ],
   bootstrap: [AppComponent]
 })

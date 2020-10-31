@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class CatalagoService {
   constructor(private http: HttpClient) {
-    console.log('Constructor catalogo servicios');
+    /* console.log('Constructor catalogo servicios'); */
    }
 
 /**
@@ -22,7 +22,7 @@ export class CatalagoService {
     });
     return this.http.get(url, {headers})
       .pipe( map (data => {
-        console.log (url);
+        //console.log (url);
         return data;
       }));
   }
