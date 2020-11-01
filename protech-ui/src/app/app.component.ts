@@ -15,6 +15,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.sessionTimeOut();
+    this.localStorageTimeOut();
   }
 
   private sessionTimeOut(){
@@ -23,6 +24,16 @@ export class AppComponent {
       this.bnIdle.startWatching(3600).subscribe((isTimedOut: boolean) => {
         if (isTimedOut) {
           this._loginService.logOut();
+          location.reload();
+        }
+      });
+    }
+  }
+  private localStorageTimeOut(): void{
+    if(localStorage.getItem('venta')){
+      this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+        if (isTimedOut) {
+          localStorage.clear();
           location.reload();
         }
       });
