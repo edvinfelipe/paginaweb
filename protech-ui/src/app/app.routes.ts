@@ -33,7 +33,7 @@ const app_routes: Routes = [
   { path: 'nosotros', component: AboutusComponent},
   { path: 'comprar', component: HowbuyComponent},
   { path: 'contacto', component: ContactpageComponent},
-  { path: 'carrito', component: CarritocompraComponent },
+  { path: 'carritocompra', component: CarritocompraComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'configuraciones', component: ConfiguracionesComponent },
   { path: 'historialcompras', component: HistorialComprasComponent},

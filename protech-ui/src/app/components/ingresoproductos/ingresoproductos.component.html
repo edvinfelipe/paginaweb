@@ -15,8 +15,10 @@
 
     <nav>
         <div style="margin-top: 15px;" class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a style="font-size:1.2vw" class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Ingresar producto</a>
-            <a style="font-size:1.2vw" class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Visualizar producto</a>
+            <a class="nav-link active negro" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+                <img src="assets/img/inventory.png" alt="" width="20px" height="20px" style="margin-top: -5px;"> Ingresar producto</a>
+            <a class="nav-link negro" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">
+                <img src="assets/img/list.png" alt="" width="20px" height="20px" style="margin-top: -5px;"> Visualizar producto</a>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
@@ -24,87 +26,93 @@
             <div style="margin-top: 35px;">
                 <form id="Datos" class="was-validated">
                     <div class="form-group row">
-                        <div class="col-4">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <input style="font-size:0.9vw" [(ngModel)]="campos[0]" maxlength="45" name="producto" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required #producto>
-                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                                <input [(ngModel)]="campos[0]" maxlength="45" name="producto" type="text" class="form-control" id="nombreProducto" placeholder="Nombre del producto" required #producto>
+                                <div class="invalid-feedback">Campo incompleto</div>
                             </div>
                             <div class="form-group">
-                                <input style="font-size:0.9vw" [(ngModel)]="campos[1]" maxlength="80" name="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción" required #descripcion>
-                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                                <textarea [(ngModel)]="campos[1]" rows=2 maxlength="80" name="descripcion" type="text" class="form-control" id="descripcion" placeholder="Descripción" required #descripcion></textarea>
+                                <div class="invalid-feedback">Campo incompleto</div>
                             </div>
                             <div class="row form-group">
-                                <div class="col-6">
-                                    <select [(ngModel)]="campos[2]" name="marca" id="marca" style="font-size:0.9vw" class="custom-select" required #marca>
+                                <div class="col-md-6">
+                                    <select [(ngModel)]="campos[2]" name="marca" id="marca" class="custom-select" required #marca>
                                         <option value=""> Marca</option>
                                         <option *ngFor="let marca of marcas;">{{ marca.nombre }}</option>
                                     </select>
-                                    <div style="font-size:0.6vw" class="invalid-feedback">Seleccione una marca</div>
+                                    <div class="invalid-feedback">Seleccione una marca</div>
                                 </div>
-                                <div class="col-6">
-                                    <select [(ngModel)]="campos[3]" name="categoria" id="categoria" style="font-size:0.9vw" class="custom-select" required #categoria>
+                                <div class="col-md-6">
+                                    <select [(ngModel)]="campos[3]" name="categoria" id="categoria" class="custom-select" required #categoria>
                                         <option value="">Categoría</option>
                                         <option *ngFor="let categoria of categorias;">{{ categoria.nombre }}</option>                                    
                                     </select>
-                                    <div style="font-size:0.6vw" class="invalid-feedback">Seleccione una categoría</div>
+                                    <div class="invalid-feedback">Seleccione una categoría</div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input [(ngModel)]="campos[4]" name="precio" style="font-size:0.9vw" type="text" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Ingrese sólo números (si usa decimales que sean 2 como máximo)" step="0.01" min="0" class="form-control" id="precioVenta" placeholder="Precio de venta (Q.)"
+                                <input [(ngModel)]="campos[4]" name="precio" type="text" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Ingrese sólo números (si usa decimales que sean 2 como máximo)" step="0.01" min="0" class="form-control" id="precioVenta" placeholder="Precio de venta (Q.)"
                                     required #precio>
-                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales o enteros)</div>
+                                <div class="invalid-feedback">Campo incompleto o mal llenado (use 2 decimales o enteros)</div>
                             </div>
                             <div class="form-group">
-                                <input [(ngModel)]="campos[5]" name="existencia" style="font-size:0.9vw" name="existencia" type="text" pattern="[0-9]*" min="0" class="form-control" id="existencia" placeholder="Existencia" required #existencia>
-                                <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto o mal llenado (use enteros solamente)</div>
+                                <input [(ngModel)]="campos[5]" name="existencia" name="existencia" type="text" pattern="[0-9]*" min="0" class="form-control" id="existencia" placeholder="Existencia" required #existencia>
+                                <div class="invalid-feedback">Campo incompleto o mal llenado (use enteros solamente)</div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-6">
                                     <div class="custom-control custom-radio">
                                         <input type="radio" class="custom-control-input" id="disponible" name="radio-stacked" value="disponible" (click)="manipularBRadio(1)" required #disponible>
-                                        <label style="font-size:0.9vw" class="custom-control-label" for="disponible">Disponible</label>
-                                        <div style="font-size:0.6vw" class="invalid-feedback">Seleccione la opción disponible o descontinuado</div>
+                                        <label class="custom-control-label" for="disponible">Disponible</label>
+                                        <div class="invalid-feedback">Seleccione la opción disponible o descontinuado</div>
                                     </div>
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-6">
                                     <div class="custom-control custom-radio">
                                         <input type="radio" class="custom-control-input" id="descontinuado" name="radio-stacked" value="descontinuado" (click)="manipularBRadio(2)" required #descontinuado>
-                                        <label style="font-size:0.9vw" class="custom-control-label" for="descontinuado">Descontinuado</label>
+                                        <label class="custom-control-label" for="descontinuado">Descontinuado</label>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-6">
                                     <div class="form-group form-check">
-                                        <input name="descuento" style="font-size:0.9vw" type="checkbox" class="form-check-input" (click)="asignarValor()" id="cbDescuento" #descuento>
-                                        <label style="font-size:0.9vw" class="form-check-label" for="exampleCheck1">En descuento</label>
+                                        <input name="descuento" type="checkbox" class="form-check-input" (click)="asignarValor()" id="cbDescuento" #descuento>
+                                        <label class="form-check-label" for="exampleCheck1">En descuento</label>
                                     </div>
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-md-6">
                                     <input [(ngModel)]="campos[6]" name="inputDescuento" pattern="[0-9]{1,2}" *ngIf="booleano" id="inputDescuento" style="font-size:0.9vw" type="text" class="form-control" placeholder="% descuento" #inputDescuento required>
-                                    <div style="font-size:0.6vw" class="invalid-feedback">Ingrese un número de uno o dos dígitos</div>
+                                    <div class="invalid-feedback">Ingrese un número de uno o dos dígitos</div>
                                 </div>
                             </div>
-                            <button *ngIf="especificaciones.length > 0 && bandera()" style="font-size:0.9vw" class="btn btn-primary" (click)="ingresarProducto()">Ingresar producto</button>
+                            <button *ngIf="especificaciones.length > 0 && bandera()" style="font-size:0.9vw" class="btn btn-secondary" (click)="ingresarProducto()">Ingresar producto</button>
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3">
 
                         </div>
-                        <div class="col-4">
-                            <div class="card-group">
-                                <div class="card">
-                                    <img [src]="urls[0]" class="fijarTarjetas" alt="">
+                        <div class="col-md-4">
+                            <div class="row ">
+                                <div class="col-md-4 responsive-tarjetas">
+                                    <div class="card">
+                                        <img [src]="urls[0]" class="fijarTarjetas" alt="">
+                                    </div>
                                 </div>
-                                <div class="card">
-                                    <img [src]="urls[1]" class="fijarTarjetas" alt="">
+                                <div class="col-md-4 responsive-tarjetas">
+                                    <div class="card">
+                                        <img [src]="urls[1]" class="fijarTarjetas" alt="">
+                                    </div>
                                 </div>
-                                <div class="card">
-                                    <img [src]="urls[2]" class="fijarTarjetas" alt="">
+                                <div class="col-md-4 responsive-tarjetas">
+                                    <div class="card">
+                                        <img [src]="urls[2]" class="fijarTarjetas" alt="">
+                                    </div>
                                 </div>
                             </div>
                             <div style="margin-top: 15px;" class="form-group">
-                                <input style="font-size:0.9vw" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event); asignarImagenes($event)">
-                                <div style="font-size:0.6vw" class="invalid-feedback"></div>
+                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="image" multiple (change)="detectFiles($event); asignarImagenes($event)">
+                                <div class="invalid-feedback"></div>
                             </div>
                             <div class="form-group">
                                 <p>El botón para ingresar el producto se activa una vez que se ha ingresado una especificación ({{ especificaciones.length }} especificaciones) y ningún campo esté con marco rojo.
@@ -112,12 +120,12 @@
                                 <div class="form-group row">
                                     <div class="col-10">
 
-                                        <input style="font-size:0.9vw" pattern="[0-9a-zA-ZÀ-ÿ\s\u00f1\u00d1:.;!#$%&/()=?¡¿/*+>_-]*" title="Ingrese letras, números y SOLO los caracteres especiales especificados: :.;!#$%&/()=?¡¿/*-+>_ (no ingrese comas, importante)" class="form-control" id="especificacion"
+                                        <input pattern="[0-9a-zA-ZÀ-ÿ\s\u00f1\u00d1:.;!#$%&/()=?¡¿/*+>_-]*" title="Ingrese letras, números y SOLO los caracteres especiales especificados: :.;!#$%&/()=?¡¿/*-+>_ (no ingrese comas, importante)" class="form-control especificacion" id="especificacion"
                                             placeholder="Especificación" #especificacion>
-                                        <div style="font-size:0.6vw" class="invalid-feedback">Campo incompleto</div>
+                                        <div class="invalid-feedback">Campo incompleto</div>
                                     </div>
-                                    <div class="col-2">
-                                        <button type="button" style="font-size:0.9vw" class="btn btn-outline-primary" (click)="obtenerEspecificacion()">Agregar</button>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-dark" (click)="obtenerEspecificacion()">Agregar</button>
                                     </div>
                                 </div>
                                 <p *ngIf="especificaciones.length > 0">
@@ -126,9 +134,9 @@
                                 <p *ngIf="especificaciones.length == 0">
                                     Todavía no hay especificaciones ingresadas
                                 </p>
-                                <div class="btn-group col-12" role="group" aria-label="First group">
+                                <div class="btn-group col-md-12" role="group" aria-label="First group">
                                     <button type="button" class="btn btn-secondary" (click)="manipularVector(0)">+</button>
-                                    <button type="button" class="btn btn-outline-primary" (click)="eliminarEspecificaciones()">Eliminar</button>
+                                    <button type="button" class="btn btn-dark" (click)="eliminarEspecificaciones()">Eliminar</button>
                                     <button type="button" class="btn btn-secondary" (click)="manipularVector(1)">-</button>
                                 </div>
                             </div>
