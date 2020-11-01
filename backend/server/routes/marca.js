@@ -11,7 +11,7 @@ const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 //=====================
 // Lista de marcas
 // ====================
-app.get('/api/marca', (req, res)=>{
+app.get('/marca', (req, res)=>{
 
     Marca.find({eliminado: false}, 'nombre' )
         .sort('nombre')
@@ -35,7 +35,7 @@ app.get('/api/marca', (req, res)=>{
 //======================
 // Regresa una marca
 // =====================
-app.get('/api/marca/:id', (req, res)=>{
+app.get('/marca/:id', (req, res)=>{
 
     const id = req.params.id
 
@@ -68,7 +68,7 @@ app.get('/api/marca/:id', (req, res)=>{
 //=====================
 // Crea una marca
 // ====================
-app.post('/api/marca', [ verificarToken, verificarRole ], async(req, res) => {
+app.post('/marca', [ verificarToken, verificarRole ], async(req, res) => {
 
     try {
 
@@ -106,7 +106,7 @@ app.post('/api/marca', [ verificarToken, verificarRole ], async(req, res) => {
 //========================
 // Modifica una marca
 // =======================
-app.put('/api/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
+app.put('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
 
     const id = req.params.id
 
@@ -144,7 +144,7 @@ app.put('/api/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
 //========================
 // Elimina una marca
 // =======================
-app.delete('/api/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
+app.delete('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
 
     const id = req.params.id
 
