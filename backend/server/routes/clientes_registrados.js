@@ -16,7 +16,7 @@ app.post('/cliente' , (req, res) => {
 
     let body = req.body
 
-    const cliente = new Cliente({
+    const cliente = new clientes_registrados({
 
         nombre:     body.nombre,
         direccion:  body.direccion,
