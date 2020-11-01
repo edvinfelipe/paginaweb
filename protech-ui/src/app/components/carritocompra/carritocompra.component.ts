@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CatalagoService } from '../../services/catalago.service';
 import { CarritoUsuarioService } from '../../services/carrito-usuario.service';
 import { ActivatedRoute } from '@angular/router'
-import { ConstantPool } from '@angular/compiler';
-import { map, timestamp } from 'rxjs/operators';
-import { from } from 'rxjs';
-declare var $ : any;
+declare var $: any;
 
+// carlosmenchu3 y 45335787Carlos$ usuario y contraseña para pruebas
 @Component({
   selector: 'app-carritocompra',
   templateUrl: './carritocompra.component.html',
@@ -23,6 +21,10 @@ export class CarritocompraComponent implements OnInit {
   fila = -1;
   total = 0;
   user: any;
+
+  /* TEMPS */
+  listaTemporal: any[] = [];
+  carritoTemporal: any [] = [];
 
 
   constructor( private _productosService: CatalagoService, private router: ActivatedRoute, private _carritoService: CarritoUsuarioService) {
@@ -49,7 +51,6 @@ export class CarritocompraComponent implements OnInit {
           this.objProducto = params;
           this.agregarProductoSession(this.objProducto.id, this.objProducto.cantidad);
           this.objProducto = [];
-          this.cargarCarrito();
         }else{
           this.cargarStorage();
           this.objProducto = params;
@@ -60,22 +61,12 @@ export class CarritocompraComponent implements OnInit {
       }
     });
   }
-  prueba(): void{
-    this.cargarSession();
-    this._carritoService.getCarrito(this.user._id).subscribe((element: any) => {
-      this.carritoUser.push(element.carrito);
-      this._productosService.getProducto(element.producto_id)
-      .subscribe((producto: any) => {
-        this.prod = producto.producto;
-        this.productos.push(this.prod);
-        this.total += producto.producto.precio * element.cantidad;
-      });
-    });
-  }
+
   cargarCarrito(): void{
-    this.productos = [];
-    this.listaVenta = [];
     if (sessionStorage.getItem('user')){
+      this.listaVenta = [];
+      this.productos = [];
+      this.carritoUser = [];
       this._carritoService.getCarrito(this.user._id).subscribe((element: any) => {
         this.carritoUser.push(element);
         this.carritoUser.forEach(el => {
@@ -91,6 +82,7 @@ export class CarritocompraComponent implements OnInit {
         });
       });
     }else{
+      this.productos = [];
       this.listaVenta.forEach( element => {
         this._productosService.getProducto(element.id)
         .subscribe((producto: any) => {
@@ -101,15 +93,33 @@ export class CarritocompraComponent implements OnInit {
       });
     }
   }
+
   agregarProductoSession(productoId: any, cantidad: any): void{
-    this.cargarCarrito();
-    for(let i = 0; i < this.listaVenta.length; i++){
-      if(this.listaVenta[i].producto_id === productoId){
-        this.putSession(cantidad, this.listaVenta[i]._id);
-        i = this.listaVenta.length;
-      }else{
-        this._carritoService.postCarrito(this.user._id, productoId, cantidad);
-      }
+    let find = -1;
+    //this.cargarListaV();
+    this._carritoService.getCarrito(this.user._id).subscribe((element: any) => {
+      this.carritoTemporal.push(element);
+      this.carritoTemporal.forEach(el => {
+        el.forEach(data => {
+          this.listaTemporal.push(data);
+        });
+        for (let i = 0; i < this.listaTemporal.length; i++){
+          if(this.listaTemporal[i].producto_id === productoId){
+            this._carritoService.putCarrito(cantidad, this.listaTemporal[i]._id).subscribe(error => {
+              this.cargarCarrito();
+            });
+            find = 1;
+            i = this.listaTemporal.length;
+          }else{
+            find = 0;
+          }
+        }
+      });
+    });
+    if(find === 0){
+      this._carritoService.postCarrito(this.user._id, productoId, cantidad).subscribe(error => {
+        this.cargarCarrito();
+      });
     }
   }
 
@@ -158,10 +168,13 @@ export class CarritocompraComponent implements OnInit {
 
   /* PARA DE SESIÓN ------------------------------------------------------------------------------ */
   putSession(cantidad: any, id: any): void{
-    this._carritoService.putCarrito(cantidad, id);
+    this._carritoService.putCarrito(cantidad, id).subscribe(error => {
+    });
+
   }
   deleteOneProduct(productoId: any, clienteId: any): void{
-    this._carritoService.deleteProductoCarrito(productoId, clienteId);
+    this._carritoService.deleteProductoCarrito(productoId, clienteId)
+      .subscribe(error => {});
   }
 
   /* Botones más y menos ------------------------------------------------------------------------------ */
@@ -171,7 +184,6 @@ export class CarritocompraComponent implements OnInit {
       currency: 'GTQ',
       minimumFractionDigits: 2
     });
-
     let elementCantidad = document.querySelector(`[name="${elementI}"]`) as HTMLInputElement;
     let cant = parseInt(elementCantidad.value);
     let precio = this.productos[idx].precio;
@@ -185,6 +197,7 @@ export class CarritocompraComponent implements OnInit {
         for(let i = 0; i < this.listaVenta.length; i++){
           if(this.listaVenta[i].producto_id === this.productos[idx]._id){
             this.putSession(cant, this.listaVenta[i]._id);
+            this.listaVenta[i].cantidad = cant;
             i = this.listaVenta.length;
           }
         }
@@ -216,6 +229,7 @@ export class CarritocompraComponent implements OnInit {
         for(let i = 0; i < this.listaVenta.length; i++){
           if(this.listaVenta[i].producto_id === this.productos[idx]._id){
             this.putSession(cant, this.listaVenta[i]._id);
+            this.listaVenta[i].cantidad = cant;
             i = this.listaVenta.length;
           }
         }
@@ -233,11 +247,18 @@ export class CarritocompraComponent implements OnInit {
   }
   
   deleteRow(): void{
-    this.listaVenta.splice(this.fila, 1);
-    this.productos.splice(this.fila, 1);
-    this.guardarStorage(this.listaVenta);
-    this.cargarStorage();
-    this.fila = -1;
+    if(sessionStorage.getItem('user')){
+      this.deleteOneProduct(this.productos[this.fila]._id, this.listaVenta[this.fila].cliente_id);
+      this.listaVenta.splice(this.fila, 1);
+      this.productos.splice(this.fila, 1);
+      this.fila = -1;
+    }else{
+      this.listaVenta.splice(this.fila, 1);
+      this.productos.splice(this.fila, 1);
+      this.guardarStorage(this.listaVenta);
+      this.cargarStorage();
+      this.fila = -1;
+    }
   }
 
   /* TOTAL */
