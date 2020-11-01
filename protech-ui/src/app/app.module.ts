@@ -14,7 +14,9 @@ import { APP_ROUTING } from './app.routes';
 //Servicios
 import { MarcasService } from './services/marcas.service';
 import { ProductosService } from './services/productos.service';
+import { HistorialServiceService } from './services/historial-service.service';
 import { CarritoUsuarioService } from './services/carrito-usuario.service';
+
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -86,6 +88,7 @@ import { CheckoutService } from './services/checkout.service';
     MarcasService,
     BnNgIdleService,
     CheckoutService,
+    HistorialServiceService,
     CarritoUsuarioService
   ],
   bootstrap: [AppComponent]

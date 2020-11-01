@@ -79,8 +79,9 @@ export class CheckoutComponent {
          email:this.emailenvio, direccion:this.direccionenvio, departamento: this.departamentoenvio,
          nota:this.notaenvio, metodoenvio: this.metodo}
       console.log("Nombre"+this.nombreenvio)
-    let detalleenvioJSON = JSON.stringify(detalleenvio); 
-    console.log("Detalle de envio "+ detalleenvioJSON);
+    //let detalleenvioJSON = JSON.parse(detalleenvio); 
+    //console.log("Detalle de envio "+ detalleenvio);
+    console.log(detalleenvio);
   }
 
 
@@ -104,7 +105,7 @@ export class CheckoutComponent {
   }
   // Funcion que obtiene el id del cliente del SessionStorage
   getCliente() {
-    return this.client = sessionStorage.getItem('id');
+    return this.client = sessionStorage.getItem('_id');
   }
 
   constructor(private checkout: CheckoutService, private modalService: NgbModal, private Location: Location) {
