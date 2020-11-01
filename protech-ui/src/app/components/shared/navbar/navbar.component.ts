@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { CategoriasService } from "../../../services/categorias.service";
 import { LoginComponent } from "../../login/login.component";
@@ -16,12 +16,17 @@ export class NavbarComponent implements OnInit {
 
   categorias: any[] = [];
   isLogged:boolean = false;
-  constructor(private _cateogiriasService:CategoriasService,private modalService: NgbModal, private _loginService: LoginService) {
+  constructor(private _cateogiriasService:CategoriasService,private modalService: NgbModal, private _loginService: LoginService,
+              private Router: Router) {
     this._cateogiriasService.getCategorias()
       .subscribe( (dataCategorias: any) => {
         this.categorias = dataCategorias;
       });
    }
+
+  HistorialLocation() {
+    this.Router.navigate(['historialcompras']);
+  }
 
   ngOnInit(): void {
     this.onCheckUser();
