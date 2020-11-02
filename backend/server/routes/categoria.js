@@ -11,13 +11,13 @@ const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 //=====================
 // Lista de categorias
 // ====================
-app.get('/categoria',(req, res)=>{
+app.get('/categoria', (req, res) => {
 
-    Categoria.find({eliminado: false}, 'nombre' )
+    Categoria.find({ eliminado: false }, 'nombre')
         .sort('nombre')
-        .exec((err, categorias)=>{
+        .exec((err, categorias) => {
 
-            if( err ){ 
+            if (err) {
                 return res.status(500).json({
                     status: false,
                     err
@@ -29,26 +29,26 @@ app.get('/categoria',(req, res)=>{
                 categorias
             })
         })
-        
+
 })
 
 //======================
 // Regresa una categoria
 // =====================
-app.get('/categoria/:id', (req, res)=>{
+app.get('/categoria/:id', (req, res) => {
 
     const id = req.params.id
 
-    Categoria.findOne( { _id: id, eliminado: false}, 'nombre', (err, categoriaDB)=>{
+    Categoria.findOne({ _id: id, eliminado: false }, 'nombre', (err, categoriaDB) => {
 
-        if( err ){ 
+        if (err) {
             return res.status(500).json({
                 status: false,
                 err
             })
         }
 
-        if( !categoriaDB ){
+        if (!categoriaDB) {
             return res.status(404).json({
                 status: false,
                 err: {
@@ -62,42 +62,42 @@ app.get('/categoria/:id', (req, res)=>{
             categoria: categoriaDB
         })
     })
-        
+
 })
 
 //=====================
 // Crea una categoria
 // ====================
-app.post('/categoria',[ verificarToken, verificarRole ] ,async(req, res) => {
+app.post('/categoria', [verificarToken, verificarRole], (req, res) => {
 
     const { nombre } = req.body
 
-    Categoria.findOne({ nombre }, ( err, categoriaDB)=>{
+    Categoria.findOne({ nombre }, (err, categoriaDB) => {
 
-        if( err ){
+        if (err) {
             return res.status(500).json({
                 status: false,
                 err
             })
         }
 
-        if( categoriaDB ){
+        if (categoriaDB) {
             categoriaDB.eliminado = false
-            categoriaDB.save() 
+            categoriaDB.save()
 
             return res.json({
                 status: true,
                 categoria: categoriaDB
-            }) 
+            })
         }
 
-        const categoria = new Categoria({nombre})
-        categoria.save((err, categoriaNew)=>{
+        const categoria = new Categoria({ nombre })
+        categoria.save((err, categoriaNew) => {
             return res.json({
                 status: true,
                 marca: categoriaNew
             })
-        })        
+        })
 
     })
 })
@@ -105,26 +105,25 @@ app.post('/categoria',[ verificarToken, verificarRole ] ,async(req, res) => {
 //========================
 // Modifica una categoria
 // =======================
-app.put('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
+app.put('/categoria/:id', [verificarToken, verificarRole], (req, res) => {
 
     const id = req.params.id
 
-    const body = _.pick(req.body,'nombre','eliminado')
+    const body = _.pick(req.body, 'nombre', 'eliminado')
 
     Categoria.findByIdAndUpdate(
-        id, 
-        body,
-        { new: true }, 
-        (err, categoriaDB)=>{
-           
-            if( err ){
+        id,
+        body, { new: true },
+        (err, categoriaDB) => {
+
+            if (err) {
                 return res.status(500).json({
                     status: false,
                     err
                 })
             }
 
-            if( !categoriaDB ){
+            if (!categoriaDB) {
                 return res.status(404).json({
                     status: false,
                     err: {
@@ -132,18 +131,18 @@ app.put('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
                     }
                 })
             }
-    
+
             res.json({
                 status: true,
                 categoria: categoriaDB
             })
-    })
+        })
 })
 
 //========================
 // Elimina una categoria
 // =======================
-app.delete('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
+app.delete('/categoria/:id', [verificarToken, verificarRole], (req, res) => {
 
     const id = req.params.id
 
@@ -152,19 +151,18 @@ app.delete('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
     }
 
     Categoria.findByIdAndUpdate(
-        id, 
-        cambiaEstado,
-        { new: true }, 
-        (err, categoriaBorrado )=>{
-           
-            if( err ){
+        id,
+        cambiaEstado, { new: true },
+        (err, categoriaBorrado) => {
+
+            if (err) {
                 return res.status(500).json({
                     status: false,
                     err
                 })
             }
 
-            if( !categoriaBorrado ){
+            if (!categoriaBorrado) {
                 return res.status(404).json({
                     status: false,
                     err: {
@@ -172,12 +170,12 @@ app.delete('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
                     }
                 })
             }
-    
+
             res.json({
                 status: true,
                 categoria: categoriaBorrado
             })
-    })
+        })
 })
 
 
