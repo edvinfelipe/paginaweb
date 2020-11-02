@@ -9,21 +9,21 @@ const bcrypt = require('bcrypt')
 //======================
 //  Inicio de Sesión 
 //====================== 
-app.post('/login', (req, res) =>{
+app.post('/login', (req, res) => {
 
     const body = req.body
 
-    Cliente.findOne({ username: body.username, eliminado: false }, ( err, usuario ) => {
+    Cliente.findOne({ username: body.username, eliminado: false }, (err, usuario) => {
 
-        if( err ){
+        if (err) {
             return res.status(500).json({
                 status: false,
                 err
             })
         }
 
-            
-        if( !usuario  ){
+
+        if (!usuario) {
             return res.status(400).json({
                 status: false,
                 err: {
@@ -32,7 +32,7 @@ app.post('/login', (req, res) =>{
             })
         }
 
-        if( !bcrypt.compareSync( body.password, usuario.password ) ){
+        if (!bcrypt.compareSync(body.password, usuario.password)) {
 
             return res.status(400).json({
                 status: false,
@@ -45,7 +45,7 @@ app.post('/login', (req, res) =>{
         // Generación del token
         const token = jwt.sign({
             usuario
-        }, process.env.SEED ,{ expiresIn:  process.env.CADUCIDAD_TOKEN })
+        }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN })
 
         res.json({
             status: true,
