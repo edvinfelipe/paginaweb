@@ -15,7 +15,6 @@ const facturaSchema = new Schema({
     cliente_factura: {
         type: Schema.Types.ObjectId,
         ref: 'Clientes',
-        require: [true, "Id Requerido"]
     },
     cliente_envio_id: {
         type: Schema.Types.ObjectId,

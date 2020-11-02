@@ -32,6 +32,10 @@ const envioSchema = new Schema({
         type: String,
         require: false
     },
+    metodo_pago: {
+        type: String,
+        required: true
+    },
     entregado: {
         type: Boolean,
         require: false,
