@@ -1,12 +1,20 @@
 /* ROUTE de Facta */
 
 const express = require('express')
+const { check } = require('express-validator')
+const mongoose = require('mongoose')
+
 const app = express()
 
 const _ = require('underscore')
 const bcrypt = require('bcrypt')
 
 const Factura = require('../models/factura')
+const Detalle = require('../models/detalle_factura')
+const Envio = require('../models/envio')
+const Producto = require('../models/producto')
+
+const { fieldValidator } = require('../middleware/field-validator')
 
 //const verificarToken = require('../middleware/autenticacion')
 
@@ -14,21 +22,85 @@ const Factura = require('../models/factura')
 // Crea una FACTURA
 // ====================
 
-app.post('/factura' , (req, res) => {
+app.post('/factura', [
+        check('det_envio', 'Los datos del envio es necesario').not().isEmpty(),
+        check('factura', 'La factura es necesario').not().isEmpty(),
+        check('det_factura', 'El detalle de factura es necesario').not().isEmpty(),
+        fieldValidator
+    ],
+    async(req, res) => {
 
-    let body = req.body
+        // Inicio de la transacción
+        // const db = mongoose.connection;
+        let session = await mongoose.startSession();
+        session.startTransaction();
 
-    const factura = new Factura({
 
-        total: body.total,
-        fecha_venta: body.fecha_venta,
-        cliente_factura: body.cliente_factura,
-       
+        const { det_envio, factura, det_factura } = req.body;
+
+        try {
+
+            const opts = { session, new: true };
+
+            // Guardado el detalle del usuario de envio
+            const userenvio = new Envio(det_envio)
+            const userenvioDB = await userenvio.save();
+
+
+            // Guardado de la factura
+            factura.cliente_envio_id = userenvioDB._id
+            const facturaDB = await Factura(factura).save()
+
+            // Guardado de detalle de factura
+            det_factura.map(async(detalle) => {
+
+                const producto = await Producto.findById(detalle.producto_id)
+
+                detalle.factura_id = facturaDB._id
+                await Detalle(detalle).save()
+
+                const camposActualizar = {
+                    reservado: 0,
+                    existencia: producto.existencia - detalle.cantidad
+                }
+
+                // Actualiza la existencia del producto    
+                await Producto.findByIdAndUpdate(detalle.producto_id, camposActualizar)
+            })
+
+            await session.commitTransaction();
+            session.endSession();
+
+            res.json({
+                status: true,
+                det_envio: userenvioDB
+
+            })
+
+        } catch (error) {
+
+            await session.abortTransaction()
+            session.endSession()
+            res.status(500).json({
+                status: false,
+                err: 'Ocurrió error en el ingreso, favor de volver a intentar',
+                error
+            })
+        }
+
     })
 
-    factura.save( (err, FacturaDB )=>{
+//==============================
+// Lista de todos las facturas
+//==============================
 
-        if( err ){
+app.get('/factura', (req, res) => {
+
+    Factura.find()
+
+    .exec((err, factura) => {
+
+        if (err) {
             return res.status(500).json({
                 status: false,
                 err
@@ -37,59 +109,35 @@ app.post('/factura' , (req, res) => {
 
         res.json({
             status: true,
-            factura: FacturaDB
+            factura
         })
     })
 })
 
 //==============================
-// Lista de todos las facturas
-//==============================
-
-app.get('/factura', (req, res)=>{
-
-    Factura.find()
-
-        .exec((err, factura)=>{
-
-            if( err ){ 
-                return res.status(500).json({
-                    status: false,
-                    err
-                })
-            }
-
-            res.json({
-                status: true,
-                factura
-            })
-        })
-    })
-
-//==============================
 // Lista de todas las facturas por cliente
 //==============================
 
-app.get('/factura/:cliente_factura', (req, res)=>{
+app.get('/factura/:cliente_factura', (req, res) => {
 
     const idCliente = req.params.cliente_factura
 
-    Factura.find({cliente_factura:idCliente})
+    Factura.find({ cliente_factura: idCliente })
 
-        .exec((err, factura)=>{
+    .exec((err, factura) => {
 
-            if( err ){ 
-                return res.status(500).json({
-                    status: false,
-                    err
-                })
-            }
-
-            res.json({
-                status: true,
-                factura
+        if (err) {
+            return res.status(500).json({
+                status: false,
+                err
             })
+        }
+
+        res.json({
+            status: true,
+            factura
         })
     })
+})
 
 module.exports = app
