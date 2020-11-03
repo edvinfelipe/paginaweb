@@ -16,7 +16,7 @@ const facturaSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Clientes',
     },
-    cliente_envio_id: {
+    cliente_envio: {
         type: Schema.Types.ObjectId,
         ref: 'Envio'
     }
