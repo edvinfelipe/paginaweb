@@ -44,6 +44,10 @@ const envioSchema = new Schema({
     cliente: {
         type: Schema.Types.ObjectId,
         ref: 'Clientes'
+    },
+    factura:{
+        type: Schema.Types.ObjectId,
+        ref: 'Factura'
     }
 })
 

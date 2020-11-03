@@ -48,8 +48,10 @@ app.post('/factura', [
 
 
             // Guardado de la factura
-            factura.cliente_envio_id = userenvioDB._id
+            factura.cliente_envio = userenvioDB._id
             const facturaDB = await Factura(factura).save()
+            userenvioDB.factura = facturaDB._id
+            await userenvioDB.save()
 
             // Guardado de detalle de factura
             det_factura.map(async(detalle) => {
@@ -73,7 +75,8 @@ app.post('/factura', [
 
             res.json({
                 status: true,
-                det_envio: userenvioDB
+                det_envio: userenvioDB,
+                factura: facturaDB
 
             })
 
@@ -98,6 +101,27 @@ app.get('/factura', (req, res) => {
 
     Factura.find()
 
+    .exec((err, factura) => {
+
+        if (err) {
+            return res.status(500).json({
+                status: false,
+                err
+            })
+        }
+
+        res.json({
+            status: true,
+            factura
+        })
+    })
+})
+
+app.get('/factura/detenvio/:id', (req, res) => {
+
+    const id = req.params.id
+    Factura.findById(id)
+    .populate('cliente_envio')
     .exec((err, factura) => {
 
         if (err) {
