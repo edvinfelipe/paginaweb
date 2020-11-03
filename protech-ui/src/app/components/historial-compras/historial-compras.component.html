@@ -1,13 +1,15 @@
 <div class="container-fluid" style="margin-bottom: 60px;">
     <div class="row">
-        <div class="container-fluid" class="col-5">
-            <div class="card">
-                <h3 style="background-color: #1a2a40; color: white; text-align: center; margin: 0%;">Historial del cliente</h3>
-               <ul class="list-group" *ngFor="let item of HistorialCompras" >
-                    <li class="list-group-item" onclick="alert(' Actualiza la tabla')">  historial <br> {{item.compra}} <br> {{item.precio}}</li>
-                                        
-               </ul>
-            </div>
+        <div class="container-fluid" class="col-4" style="margin-left: 60px;">
+          <h3 style="background-color: #1a2a40; color: white; text-align: center; margin-top: 60px;">Historial del cliente</h3> 
+          
+          
+            <button class="factura"  *ngFor="let factura of HistorialCompras" (click)="getBoton(factura.idcompra)">
+              Identificador de compra: {{factura.idcompra}} 
+              <br> Fecha de compra: {{factura.fechacompra}} 
+              <br> Total de compra: {{factura.total}}
+            </button>
+
         </div>
         <div class="container-fluid" class="col-7" style="margin-top: 60px;">
 
@@ -39,7 +41,7 @@
                       <th scope="col">Subtotal</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let DetalleProducto of DetalleCompra">
+                <tbody *ngFor="let DetalleProducto of DetalleProductos">
                     <tr>
                       <th scope="row">1</th>
                       <td>{{DetalleProducto.descripcion}} </td>

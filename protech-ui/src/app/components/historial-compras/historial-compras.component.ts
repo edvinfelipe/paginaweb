@@ -8,7 +8,7 @@ import { HistorialServiceService } from "../../services/historial-service.servic
 export class HistorialComprasComponent implements OnInit {
 
   HistorialCompras: any[] = [];
-  DetalleCompra: any[] = [];
+  DetalleProductos: any[] = [];
   DetalleEnvio: any;
   Cliente: any;
 
@@ -18,7 +18,29 @@ export class HistorialComprasComponent implements OnInit {
   }
 
   GetCompras(){
-    this.HistorialCompras = [{compra:"compra de prueba", precio:"precio de prueba 1234"}];
+    let id_cliente = this.HistorialServicio.GetUsuarioActual();
+    this.HistorialServicio.GetCompras(id_cliente)
+    .subscribe((data:any)=>{ 
+      data.factura.forEach(element => {
+        this.HistorialCompras.push({idcompra:element._id,fechacompra:element.fecha_venta, 
+                                    total:element.total});
+      });
+    })
+
+  }
+  getBoton(id_factura: any){
+    console.log(id_factura);
+    this.DetalleProductos= [];
+    this.HistorialServicio.GetDetalleProductos(id_factura)
+    .subscribe((data:any)=>{
+      console.log(data);
+      data.detalle.forEach(element => {
+        this.DetalleProductos.push({descripcion:element.descripcion,cantidad:element.cantidad,
+                                    descuento:"?",precio:"pendiente",subtotal:"pendiente"});
+      });
+    }
+    );
+    console.log("Aqui deberia estar el detalle");
   }
 
   GetDetalleEnvio(){
@@ -26,17 +48,17 @@ export class HistorialComprasComponent implements OnInit {
   }
 
   GetDetalleCompra(){
-    this.DetalleCompra = [{descripcion:" Producto computadora",cantidad:"3",descuento:"10%",precio:100,subtotal:200},
+    this.DetalleProductos = [{descripcion:" Producto computadora",cantidad:"3",descuento:"10%",precio:100,subtotal:200},
                           {descripcion:" Producto computadora",cantidad:"2",descuento:"no aplica",precio:100,subtotal:"200"}]
   }
 
 
 
-  constructor(HistorialServicio: HistorialServiceService) {
+  constructor(private HistorialServicio: HistorialServiceService) {
     this.GetDatosCliente();
     this.GetCompras();
     this.GetDetalleEnvio();
-    this.GetDetalleCompra();
+    //this.GetDetalleCompra();
   }
   
 

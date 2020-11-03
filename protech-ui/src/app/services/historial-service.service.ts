@@ -27,4 +27,16 @@ export class HistorialServiceService {
     console.log(ua._id);
     return this.UsuarioActual = ua._id;
   }
+
+  GetCompras(id_Cliente: string){
+    return this.HttpClient.get("https://api-protech.herokuapp.com/api/factura/"+id_Cliente);
+  }
+
+  GetDetalleEnvio(){
+    
+  }
+
+  GetDetalleProductos(id_factura:string){
+    return this.HttpClient.get("https://api-protech.herokuapp.com/api/detalle_factura/"+id_factura);
+  }
 }
