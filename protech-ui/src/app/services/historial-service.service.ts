@@ -32,8 +32,8 @@ export class HistorialServiceService {
     return this.HttpClient.get("https://api-protech.herokuapp.com/api/factura/"+id_Cliente);
   }
 
-  GetDetalleEnvio(){
-    
+  GetDetalleEnvio(id_factura){
+    return this.HttpClient.get("https://api-protech.herokuapp.com/api/factura/detenvio/"+id_factura);
   }
 
   GetDetalleProductos(id_factura:string){

@@ -23,9 +23,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th>{{DetalleEnvio.nombre}}</th>
-                        <th>{{DetalleEnvio.Fecha}}</th>
-                        <th>{{DetalleEnvio.total}}</th>
+                        <th>{{InfoFactura.nombre}}</th>
+                        <th>{{InfoFactura.fecha}}</th>
+                        <th>Q.{{InfoFactura.total}}</th>
                     </tr>
                 </tbody>
             </table>
@@ -47,7 +47,7 @@
                       <td>{{DetalleProducto.descripcion}} </td>
                       <td>{{DetalleProducto.cantidad}}</td>
                       <td>{{DetalleProducto.descuento}}</td>
-                      <td>{{DetalleProducto.precio}}</td>
+                      <td>Q.{{DetalleProducto.precio}}</td>
                       <td>Q.{{DetalleProducto.subtotal}}.</td>
                     </tr>  
                 </tbody>
@@ -58,7 +58,7 @@
                     <td></td>
                     <td></td>
                     <th>TOTAL</th>
-                    <td>Q1000</td>
+                    <td>Q.{{total}}.00</td>
                   </tr>
                 </tfoot>
             </table>
@@ -67,12 +67,14 @@
                 <tr>
                   <th> Direccion </th>
                   <th> Anotacion </th>
+                  <th> Metodo De Pago</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Aqui va la Direccion</td>
-                  <td>Aqui va la Anotacion</td>
+                  <td>{{DetalleEnvio.direccion}}</td>
+                  <td>{{DetalleEnvio.anotacion}}</td>
+                  <td>{{DetalleEnvio.metodoenvio}}</td>
                 </tr>
               </tbody>
             </table> 
