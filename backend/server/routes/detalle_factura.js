@@ -79,6 +79,7 @@ app.get('/detalle_factura/:factura_id', (req, res)=>{
     const idFactura = req.params.factura_id
 
     detalle_facturas.find({factura_id:idFactura})
+        .populate('producto_id')
 
         .exec((err, detalle)=>{
 
