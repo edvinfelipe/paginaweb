@@ -4,7 +4,6 @@ import { CarritoUsuarioService } from '../../services/carrito-usuario.service';
 import { ActivatedRoute } from '@angular/router'
 declare var $: any;
 
-// carlosmenchu3 y 45335787Carlos$ usuario y contraseña para pruebas
 @Component({
   selector: 'app-carritocompra',
   templateUrl: './carritocompra.component.html',
@@ -96,7 +95,6 @@ export class CarritocompraComponent implements OnInit {
 
   agregarProductoSession(productoId: any, cantidad: any): void{
     let find = -1;
-    //this.cargarListaV();
     this._carritoService.getCarrito(this.user._id).subscribe((element: any) => {
       this.carritoTemporal.push(element);
       this.carritoTemporal.forEach(el => {
@@ -115,12 +113,12 @@ export class CarritocompraComponent implements OnInit {
           }
         }
       });
+      if (find === 0){
+        this._carritoService.postCarrito(this.user._id, productoId, cantidad).subscribe(error => {
+          this.cargarCarrito();
+        });
+      }
     });
-    if(find === 0){
-      this._carritoService.postCarrito(this.user._id, productoId, cantidad).subscribe(error => {
-        this.cargarCarrito();
-      });
-    }
   }
 
   agregarProductoLocal(prod: any): void{
