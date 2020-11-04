@@ -8,37 +8,81 @@ import { HistorialServiceService } from "../../services/historial-service.servic
 export class HistorialComprasComponent implements OnInit {
 
   HistorialCompras: any[] = [];
-  DetalleCompra: any[] = [];
+  DetalleProductos: any[] = [];
   DetalleEnvio: any;
+  InfoFactura: any;
   Cliente: any;
+  total: any;
 
-  GetDatosCliente(){
+  GetDatosCliente() {
     this.Cliente = JSON.parse(sessionStorage.getItem("user"));
     console.log(this.Cliente);
   }
 
-  GetCompras(){
-    this.HistorialCompras = [{compra:"compra de prueba", precio:"precio de prueba 1234"}];
+  GetCompras() {
+    let id_cliente = this.HistorialServicio.GetUsuarioActual();
+
+    this.HistorialServicio.GetCompras(id_cliente)
+      .subscribe((data: any) => {
+        data.factura.forEach(element => {
+          this.HistorialCompras.push({
+            idcompra: element._id, fechacompra: element.fecha_venta,
+            total: element.total
+          });
+        });
+      })
+
+  }
+  getBoton(id_factura: any) {
+    console.log(id_factura);
+    this.DetalleProductos = [];
+    this.total = 0;
+    this.GetDetalleEnvio(id_factura);
+    this.HistorialServicio.GetDetalleProductos(id_factura)
+      .subscribe((data: any) => {
+        data.detalle.forEach(element => {
+          this.total += ((element.producto_id.precio * element.cantidad) - (element.producto_id.porcenjateOferta * element.producto_id.precio));
+          this.DetalleProductos.push({
+            descripcion: element.descripcion, cantidad: element.cantidad,
+            descuento: element.producto_id.porcenjateOferta, precio: element.producto_id.precio,
+            subtotal: ((element.producto_id.precio * element.cantidad) - (element.producto_id.porcenjateOferta * element.producto_id.precio))
+          });
+        });
+      });
   }
 
-  GetDetalleEnvio(){
-    this.DetalleEnvio = {nombre:"nombre del sujeto", Fecha:" 12/12/12", total:"1,000.00"};
+  GetDetalleEnvio(id_envio) {
+    this.DetalleEnvio = {direccion: "", anotacion: "",metodoenvio: ""};
+    this.InfoFactura ={nombre:"",fecha:"",total:""}
+    this.HistorialServicio.GetDetalleEnvio(id_envio)
+    .subscribe((data: any)=>{
+      console.log("///////////////");
+      console.log(data);
+      this.InfoFactura ={nombre:JSON.parse(sessionStorage.getItem("user")).nombre,fecha:data.factura.fecha_venta,total:data.factura.total}
+      this.DetalleEnvio = { direccion: data.factura.cliente_envio.direccion, anotacion: data.factura.cliente_envio.nota,
+                            metodoenvio: data.factura.cliente_envio.metodo_pago};
+    
+
+    });
+    
   }
 
-  GetDetalleCompra(){
-    this.DetalleCompra = [{descripcion:" Producto computadora",cantidad:"3",descuento:"10%",precio:100,subtotal:200},
-                          {descripcion:" Producto computadora",cantidad:"2",descuento:"no aplica",precio:100,subtotal:"200"}]
+  GetNombreCliente(id_cliente){
+    let NombreCliente = JSON.parse(sessionStorage.getItem("user")).nombre;
+    return NombreCliente.nombre;
   }
 
 
 
-  constructor(HistorialServicio: HistorialServiceService) {
+
+  constructor(private HistorialServicio: HistorialServiceService) {
     this.GetDatosCliente();
     this.GetCompras();
-    this.GetDetalleEnvio();
-    this.GetDetalleCompra();
+    this.GetDetalleEnvio("");
+    //this.GetInfoFactura();
+    //this.GetDetalleCompra();
   }
-  
+
 
   ngOnInit(): void {
   }
