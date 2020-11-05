@@ -96,7 +96,6 @@ export class CarritocompraComponent implements OnInit {
   agregarProductoSession(productoId: any, cantidad: any): void{
     let find = -1;
     this._carritoService.getCarrito(this.user._id).subscribe((element: any) => {
-      console.log(element.length);
       if(element.length === 0){
         this._carritoService.postCarrito(this.user._id, productoId, cantidad).subscribe(error => {
           this.cargarCarrito();
@@ -264,6 +263,7 @@ export class CarritocompraComponent implements OnInit {
       this.cargarStorage();
       this.fila = -1;
     }
+    this.getTotal();
   }
 
   /* TOTAL */
