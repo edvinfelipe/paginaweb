@@ -96,27 +96,34 @@ export class CarritocompraComponent implements OnInit {
   agregarProductoSession(productoId: any, cantidad: any): void{
     let find = -1;
     this._carritoService.getCarrito(this.user._id).subscribe((element: any) => {
-      this.carritoTemporal.push(element);
-      this.carritoTemporal.forEach(el => {
-        el.forEach(data => {
-          this.listaTemporal.push(data);
-        });
-        for (let i = 0; i < this.listaTemporal.length; i++){
-          if(this.listaTemporal[i].producto_id === productoId){
-            this._carritoService.putCarrito(cantidad, this.listaTemporal[i]._id).subscribe(error => {
-              this.cargarCarrito();
-            });
-            find = 1;
-            i = this.listaTemporal.length;
-          }else{
-            find = 0;
-          }
-        }
-      });
-      if (find === 0){
+      console.log(element.length);
+      if(element.length === 0){
         this._carritoService.postCarrito(this.user._id, productoId, cantidad).subscribe(error => {
           this.cargarCarrito();
         });
+      }else{
+        this.carritoTemporal.push(element);
+        this.carritoTemporal.forEach(el => {
+          el.forEach(data => {
+            this.listaTemporal.push(data);
+          });
+          for (let i = 0; i < this.listaTemporal.length; i++){
+            if(this.listaTemporal[i].producto_id === productoId){
+              this._carritoService.putCarrito(cantidad, this.listaTemporal[i]._id).subscribe(error => {
+                this.cargarCarrito();
+              });
+              find = 1;
+              i = this.listaTemporal.length;
+            }else{
+              find = 0;
+            }
+          }
+        });
+        if (find === 0){
+          this._carritoService.postCarrito(this.user._id, productoId, cantidad).subscribe(error => {
+            this.cargarCarrito();
+          });
+        }
       }
     });
   }
