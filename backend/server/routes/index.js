@@ -12,6 +12,7 @@ app.use(require('./clientes_registrados'))
 app.use(require('./factura'))
 app.use(require('./detalle_factura'))
 app.use(require('./carrito'))
+app.use(require('./reporte'))
 
 if( process.env.CLOUD_NAME ){
     app.use(require('./uploadcloud'))

@@ -7,6 +7,7 @@ const _ = require('underscore')
 const bcrypt = require('bcrypt')
 
 const Factura = require('../models/factura')
+const verificarToken = require('../middleware/autenticacion')
 
 //const verificarToken = require('../middleware/autenticacion')
 
@@ -14,7 +15,7 @@ const Factura = require('../models/factura')
 // Crea una FACTURA
 // ====================
 
-app.post('/api/factura' , (req, res) => {
+app.post('/api/factura' , verificarToken , (req, res) => {
 
     let body = req.body
 
@@ -46,7 +47,7 @@ app.post('/api/factura' , (req, res) => {
 // Lista de todos las facturas
 //==============================
 
-app.get('/api/factura', (req, res)=>{
+app.get('/api/factura',verificarToken , (req, res)=>{
 
     Factura.find()
 
@@ -70,7 +71,7 @@ app.get('/api/factura', (req, res)=>{
 // Lista de todas las facturas por cliente
 //==============================
 
-app.get('/api/factura/:cliente_factura', (req, res)=>{
+app.get('/api/factura/:cliente_factura',verificarToken , (req, res)=>{
 
     const idCliente = req.params.cliente_factura
 

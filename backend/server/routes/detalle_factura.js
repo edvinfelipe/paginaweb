@@ -7,14 +7,14 @@ const _ = require('underscore')
 const bcrypt = require('bcrypt')
 
 const detalle_facturas = require('../models/detalle_factura')
-
+const verificarToken = require('../middleware/autenticacion')
 
 
 //=====================
 // Crea una FACTURA
 // ====================
 
-app.post('/api/detalle_factura' , (req, res) => {
+app.post('/api/detalle_factura' , verificarToken ,(req, res) => {
 
     let body = req.body
 
@@ -50,7 +50,7 @@ app.post('/api/detalle_factura' , (req, res) => {
 // Lista de todos las detalles
 //==============================
 
-app.get('/api/detalle_factura', (req, res)=>{
+app.get('/api/detalle_factura',verificarToken , (req, res)=>{
 
     detalle_facturas.find()
 
@@ -74,7 +74,7 @@ app.get('/api/detalle_factura', (req, res)=>{
 // Lista de todos los detalles por facturas
 //==============================
 
-app.get('/api/detalle_factura/:factura_id', (req, res)=>{
+app.get('/api/detalle_factura/:factura_id', verificarToken ,(req, res)=>{
 
     const idFactura = req.params.factura_id
 
