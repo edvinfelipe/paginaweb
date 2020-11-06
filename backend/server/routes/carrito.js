@@ -12,7 +12,7 @@ const Carrito = require('../models/carrito')
 // Crea un nuevo detalle
 // ====================
 
-app.post('/api/carrito', (req, res) => {
+app.post('/carrito', (req, res) => {
 
     let body = req.body
 
@@ -42,7 +42,7 @@ app.post('/api/carrito', (req, res) => {
 // Lista de todos los detalles por cliente
 //==============================
 
-app.get('/api/carrito/:cliente_id', (req, res) => {
+app.get('/carrito/:cliente_id', (req, res) => {
 
     const idCliente = req.params.cliente_id
 
@@ -70,7 +70,7 @@ app.get('/api/carrito/:cliente_id', (req, res) => {
 //==============================
 
 
-app.get('/api/carrito', (req, res) => {
+app.get('/carrito', (req, res) => {
 
     Carrito.find()
 
@@ -94,7 +94,7 @@ app.get('/api/carrito', (req, res) => {
 // Modifica un detalle por id 
 //==============================
 
-app.put('/api/carrito/:id', (req, res) => {
+app.put('/carrito/:id', (req, res) => {
 
     let body = _.pick(req.body,
         [
@@ -142,7 +142,7 @@ app.put('/api/carrito/:id', (req, res) => {
 // Elimina toda la coleccion de un cliente
 //==============================
 
-app.delete('/api/carrito/:cliente_id', (req, res) => {
+app.delete('/carrito/:cliente_id', (req, res) => {
 
     const id = req.params.cliente_id
 
@@ -175,7 +175,7 @@ app.delete('/api/carrito/:cliente_id', (req, res) => {
 // Elimina un detalle por producto y cliente
 //==============================
 
-app.delete('/api/carrito/:producto_id/:cliente_id', (req, res) => {
+app.delete('/carrito/:producto_id/:cliente_id', (req, res) => {
 
     const idProducto = req.params.producto_id
     const idCliente = req.params.cliente_id

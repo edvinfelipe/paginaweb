@@ -23,7 +23,7 @@ const detalleSchema = new Schema({
     },
     producto_id:{
         type: Schema.Types.ObjectId,
-        ref: 'Factura',
+        ref: 'Producto',
         require: [true, "Id Requerido"]
     }
     

@@ -16,7 +16,7 @@ cloudinary.config({
     api_secret: process.env.API_SECRET 
 })
 
-app.get('/api/imagen/:name', (req, res)=>{
+app.get('/imagen/:name', (req, res)=>{
 
     const name = req.params.name
     
@@ -35,7 +35,7 @@ app.get('/api/imagen/:name', (req, res)=>{
 // ====================================
 //  Elimina una imagen
 // ====================================
-app.delete('/api/imagen/:id', (req, res) => {
+app.delete('/imagen/:id', (req, res) => {
 
     const id = req.params.id
 

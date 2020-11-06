@@ -13,7 +13,7 @@ const verificarToken = require('../middleware/autenticacion')
 //=====================
 // Lista de usuarios
 // ====================
-app.get('/api/usuario', verificarToken, (req, res)=>{
+app.get('/usuario', verificarToken, (req, res)=>{
 
     Usuario.find( { eliminado:false } )
         .sort('username')
@@ -37,7 +37,7 @@ app.get('/api/usuario', verificarToken, (req, res)=>{
 //======================
 // Regresa una usuario
 // =====================
-app.get('/api/usuario/:id', verificarToken , (req, res)=>{
+app.get('/usuario/:id', verificarToken , (req, res)=>{
 
     const id = req.params.idz
 
@@ -70,7 +70,7 @@ app.get('/api/usuario/:id', verificarToken , (req, res)=>{
 //=====================
 // Crea una usuario
 // ====================
-app.post('/api/usuario', verificarToken , (req, res) => {
+app.post('/usuario', verificarToken , (req, res) => {
 
     let body = req.body
 
@@ -99,7 +99,7 @@ app.post('/api/usuario', verificarToken , (req, res) => {
 //========================
 // Modifica una usuario
 // =======================
-app.put('/api/usuario/:id', verificarToken, (req, res) => {
+app.put('/usuario/:id', verificarToken, (req, res) => {
 
     const id = req.params.id
 
@@ -137,7 +137,7 @@ app.put('/api/usuario/:id', verificarToken, (req, res) => {
 //========================
 // Elimina una usuario
 // =======================
-app.delete('/api/usuario/:id', verificarToken, (req, res) => {
+app.delete('/usuario/:id', verificarToken, (req, res) => {
 
     const id = req.params.id
 

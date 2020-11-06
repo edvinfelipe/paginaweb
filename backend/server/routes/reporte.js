@@ -7,7 +7,7 @@ const _ = require('underscore')
 const bcrypt = require('bcrypt')
 
 const Reporte = require('../models/factura')
-const verificarToken = require('../middleware/autenticacion')
+const { verificarToken, verificarRole }  = require('../middleware/autenticacion')
 
 
 
@@ -15,7 +15,7 @@ const verificarToken = require('../middleware/autenticacion')
 //==============================
 // Total ventas
 //==============================
-app.get('/api/reporte/total',verificarToken , (req, res) => {
+app.get('/reporte/total',[verificarToken, verificarRole] , (req, res) => {
 
     const datos = req.params
     Reporte.aggregate(
@@ -47,7 +47,7 @@ app.get('/api/reporte/total',verificarToken , (req, res) => {
 // Total ventas por año y mes 
 //==============================
 
-app.get('/api/reporte/ventas', verificarToken ,(req, res) => {
+app.get('/reporte/ventas', [ verificarToken, verificarRole ] ,(req, res) => {
 
     const idCliente = req.params.cliente_factura
     Reporte.aggregate(

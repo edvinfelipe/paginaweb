@@ -14,7 +14,7 @@ const verificarToken = require('../middleware/autenticacion')
 // Crea una FACTURA
 // ====================
 
-app.post('/api/detalle_factura' , verificarToken ,(req, res) => {
+app.post('/detalle_factura' , (req, res) => {
 
     let body = req.body
 
@@ -50,7 +50,7 @@ app.post('/api/detalle_factura' , verificarToken ,(req, res) => {
 // Lista de todos las detalles
 //==============================
 
-app.get('/api/detalle_factura',verificarToken , (req, res)=>{
+app.get('/detalle_factura', (req, res)=>{
 
     detalle_facturas.find()
 
@@ -74,12 +74,12 @@ app.get('/api/detalle_factura',verificarToken , (req, res)=>{
 // Lista de todos los detalles por facturas
 //==============================
 
-app.get('/api/detalle_factura/:factura_id', verificarToken ,(req, res)=>{
+app.get('/detalle_factura/:factura_id', (req, res)=>{
 
     const idFactura = req.params.factura_id
 
     detalle_facturas.find({factura_id:idFactura})
-
+        .populate('producto_id')
         .exec((err, detalle)=>{
 
             if( err ){ 

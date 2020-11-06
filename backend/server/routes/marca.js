@@ -6,12 +6,12 @@ const _ = require('underscore')
 
 const Marca = require('../models/marca')
 
-const verificarToken = require('../middleware/autenticacion')
+const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 
 //=====================
 // Lista de marcas
 // ====================
-app.get('/api/marca', (req, res)=>{
+app.get('/marca', (req, res)=>{
 
     Marca.find({eliminado: false}, 'nombre' )
         .sort('nombre')
@@ -35,7 +35,7 @@ app.get('/api/marca', (req, res)=>{
 //======================
 // Regresa una marca
 // =====================
-app.get('/api/marca/:id', verificarToken, (req, res)=>{
+app.get('/marca/:id', (req, res)=>{
 
     const id = req.params.id
 
@@ -68,34 +68,45 @@ app.get('/api/marca/:id', verificarToken, (req, res)=>{
 //=====================
 // Crea una marca
 // ====================
-app.post('/api/marca', verificarToken, (req, res) => {
+app.post('/marca', [ verificarToken, verificarRole ], async(req, res) => {
 
-    let body = _.pick(req.body,'nombre')
+    try {
 
-    const marca = new Marca({
-        nombre: body.nombre
-    })
+        const { nombre } = req.body
 
-    marca.save( (err, marcaDB )=>{
+        let marca = await Marca.findOne({ nombre })
 
-        if( err ){
-            return res.status(500).json({
-                status: false,
-                err
-            })
+        if( marca ){
+
+            marca.eliminado = false
+            marca.save() 
+
+            return res.json({
+                status: true,
+                marca
+            }) 
         }
 
-        res.json({
+        marca = new Marca({ nombre })
+        await marca.save()
+
+        return res.json({
             status: true,
-            marca: marcaDB
+            marca
         })
-    })
+        
+    } catch (error) {
+        return res.status(500).json({
+            status: false,
+            err
+        })
+    }
 })
 
 //========================
 // Modifica una marca
 // =======================
-app.put('/api/marca/:id', verificarToken, (req, res) => {
+app.put('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
 
     const id = req.params.id
 
@@ -133,7 +144,7 @@ app.put('/api/marca/:id', verificarToken, (req, res) => {
 //========================
 // Elimina una marca
 // =======================
-app.delete('/api/marca/:id', verificarToken, (req, res) => {
+app.delete('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
 
     const id = req.params.id
 

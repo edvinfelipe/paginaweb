@@ -6,12 +6,12 @@ const _ = require('underscore')
 
 const Categoria = require('../models/categoria')
 
-const verificarToken = require('../middleware/autenticacion')
+const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 
 //=====================
 // Lista de categorias
 // ====================
-app.get('/api/categoria', (req, res)=>{
+app.get('/categoria',(req, res)=>{
 
     Categoria.find({eliminado: false}, 'nombre' )
         .sort('nombre')
@@ -35,7 +35,7 @@ app.get('/api/categoria', (req, res)=>{
 //======================
 // Regresa una categoria
 // =====================
-app.get('/api/categoria/:id', verificarToken, (req, res)=>{
+app.get('/categoria/:id', (req, res)=>{
 
     const id = req.params.id
 
@@ -68,34 +68,47 @@ app.get('/api/categoria/:id', verificarToken, (req, res)=>{
 //=====================
 // Crea una categoria
 // ====================
-app.post('/api/categoria', (req, res) => {
+app.post('/categoria',[ verificarToken, verificarRole ] ,async(req, res) => {
 
-    let body = req.body
+    try {
 
-    const categoria = new Categoria({
-        nombre: body.nombre
-    })
+        const { nombre } = req.body
 
-    categoria.save( (err, categoriaDB )=>{
+        let categoria = await Categoria.findOne({ nombre });
 
-        if( err ){
-            return res.status(500).json({
-                status: false,
-                err
+        if( categoria ){
+            categoria.eliminado = false
+            categoria.save()
+
+            return res.json({
+                status: true,
+                categoria
             })
         }
 
+        categoria = new Categoria({ nombre })
+        await categoria.save()
+
         res.json({
             status: true,
-            categoria: categoriaDB
+            categoria
         })
-    })
+        
+    } catch (error) {
+
+        return res.status(500).json({
+            status: false,
+            err: {
+                message: 'Ocurrio error en el servidor'
+            }
+        })
+    }
 })
 
 //========================
 // Modifica una categoria
 // =======================
-app.put('/api/categoria/:id', verificarToken, (req, res) => {
+app.put('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
 
     const id = req.params.id
 
@@ -133,7 +146,7 @@ app.put('/api/categoria/:id', verificarToken, (req, res) => {
 //========================
 // Elimina una categoria
 // =======================
-app.delete('/api/categoria/:id', verificarToken, (req, res) => {
+app.delete('/categoria/:id', [ verificarToken, verificarRole ], (req, res) => {
 
     const id = req.params.id
 
