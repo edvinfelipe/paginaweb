@@ -45,4 +45,13 @@ export class LoginService {
     sessionStorage.removeItem("user");
   }
 
+  isLogged():boolean {
+
+    if(null!=sessionStorage.getItem("accesToken")){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 }
