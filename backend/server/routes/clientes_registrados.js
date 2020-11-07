@@ -48,7 +48,7 @@ app.post('/cliente', (req, res) => {
 //=====================
 // Lista de Clientes
 // ====================
-app.get('/cliente', [verificarToken, verificarRole], async(req, res) => {
+app.get('/cliente',[verificarToken,verificarRole], async(req, res) => {
 
     try {
         const role = req.query.role

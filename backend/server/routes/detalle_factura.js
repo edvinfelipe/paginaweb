@@ -7,7 +7,7 @@ const _ = require('underscore')
 const bcrypt = require('bcrypt')
 
 const detalle_facturas = require('../models/detalle_factura')
-
+const verificarToken = require('../middleware/autenticacion')
 
 
 //=====================
@@ -80,7 +80,6 @@ app.get('/detalle_factura/:factura_id', (req, res)=>{
 
     detalle_facturas.find({factura_id:idFactura})
         .populate('producto_id')
-
         .exec((err, detalle)=>{
 
             if( err ){ 
