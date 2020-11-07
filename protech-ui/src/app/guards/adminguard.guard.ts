@@ -12,10 +12,10 @@ export class AdminguardGuard implements CanActivate {
 
   canActivate(){
     if(!this._authService.isLogged()){
-      this._router.navigate([]);
-      return true;
+      this._router.navigate(['/home']);
+      return false;
     }
-    return false;
+    return true;
   }
 
 
