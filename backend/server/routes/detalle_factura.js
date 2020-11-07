@@ -7,7 +7,7 @@ const _ = require('underscore')
 const bcrypt = require('bcrypt')
 
 const detalle_facturas = require('../models/detalle_factura')
-
+const verificarToken = require('../middleware/autenticacion')
 
 
 //=====================

@@ -13,6 +13,7 @@ app.use(require('./factura'))
 app.use(require('./detalle_factura'))
 app.use(require('./carrito'))
 app.use(require('./password'))
+app.use(require('./reporte'))
 
 if( process.env.NODE_ENV !== 'dev' ){
     app.use(require('./uploadcloud'))
