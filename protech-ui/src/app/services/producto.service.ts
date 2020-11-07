@@ -7,7 +7,7 @@ import { Productos } from "../interfaces/productos";
   providedIn: 'root'
 })
 export class ProductoService {
-  header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjAzMDc1NjkyLCJleHAiOjE2MDMyNDg0OTJ9.CyLK2kyJP2jrkeZTYsf_rwklOQYvLWOkfPqljuLwiN8';
+  header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA0MzQwOTg3LCJleHAiOjE2MDQ1MTM3ODd9.Xxe79sOMxNMt-g9qpVm05WTO8qm9Ewq_AuPMXO782DQ';
   url = 'http://api-protech.herokuapp.com/api/producto/';
   bodyProducto: Productos;
   constructor(private http: HttpClient) { }
@@ -37,7 +37,7 @@ export class ProductoService {
       descripcion: campos[1],
       garantia: 'No dispone',
       ofertado: descuento,
-      porcentajeOferta: parseInt(campos[6]),
+      porcenjateOferta: parseInt(campos[6]),
       nombre: campos[0],
       precio: parseFloat(campos[4]),
       existencia: parseInt(campos[5]),
@@ -53,5 +53,43 @@ export class ProductoService {
     }
     let body = JSON.stringify(this.bodyProducto);
     return this.http.post(this.url, body, {headers});
+  }
+
+  putProducto(id: any, campos: string[], disponible: any, descuento: any, especificacion: any, mid: any, cid: any)
+  {
+    const headers = new HttpHeaders({
+      'Authorization': this.header,
+      'Content-Type':'application/json'
+    });
+    this.bodyProducto = {
+      descripcion: campos[1],
+      garantia: 'No dispone',
+      ofertado: descuento,
+      porcenjateOferta: parseInt(campos[6]),
+      nombre: campos[0],
+      precio: parseFloat(campos[4]),
+      existencia: parseInt(campos[5]),
+      especificacion: especificacion,
+      disponible: true,
+      marca: mid,
+      categoria: cid
+    };
+    console.log(this.bodyProducto.descripcion);
+    if (disponible === 2)
+    {
+      this.bodyProducto.disponible = false;
+    }
+    let body = JSON.stringify(this.bodyProducto);
+    return this.http.put(this.url + id, body, {headers});
+  }
+
+  deleteProducto(id: any)
+  {
+    const headers = new HttpHeaders({
+      'Authorization': this.header,
+      'Content-Type':'application/json'
+    });
+
+    return this.http.delete(this.url + id, {headers});
   }
 }
