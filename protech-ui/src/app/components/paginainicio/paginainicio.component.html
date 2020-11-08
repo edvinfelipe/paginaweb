@@ -44,6 +44,11 @@
         </div>
       </div>
     </div>
-    <app-tarjetas-productos  [producto]="producto" [index]="i" *ngFor="let producto of arregloproductos2; let i = index"></app-tarjetas-productos>
+    <div class="row">
+      <div class="col-sm-4" *ngFor="let producto of arregloproductos2; let i = index">
+        <app-tarjetas-productos  [producto]="producto" [index]="i"></app-tarjetas-productos>
+      </div>
+    </div>
+    <!-- <app-tarjetas-productos  [producto]="producto" [index]="i" *ngFor="let producto of arregloproductos2; let i = index"></app-tarjetas-productos> -->
   </div>
 </div>
