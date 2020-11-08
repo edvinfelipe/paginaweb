@@ -63,6 +63,10 @@
     background-color: #263e61;
 }
 
+.container .row{
+  margin-top: 60px;
+}
+
 @media screen and (max-width: 600px) {
     .contenedor_general {
         display: block;
