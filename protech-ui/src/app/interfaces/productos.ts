@@ -2,7 +2,7 @@ export interface Productos{
    descripcion:string; 
    garantia:string;
    ofertado:boolean;
-   porcentajeOferta:number;
+   porcenjateOferta:number;
    nombre:string;
    precio:number;
    existencia:number;
