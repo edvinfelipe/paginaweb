@@ -8,6 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { AppRoutingModule } from './app-routing.module';
+import { ChartsModule } from 'ng2-charts';
 
 //Rutas
 import { APP_ROUTING } from './app.routes';
@@ -34,6 +35,7 @@ import { PaginainicioComponent } from './components/paginainicio/paginainicio.co
 import { PanelprincipalComponent } from './components/panelprincipal/panelprincipal.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ConfiguracionesComponent } from './components/configuraciones/configuraciones.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { HistorialComprasComponent } from './components/historial-compras/historial-compras.component';
@@ -68,7 +70,8 @@ import { CheckoutService } from './services/checkout.service';
     HistorialComprasComponent,
     LoginComponent,
     RegistroComponent,
-    MensajeErrorComponent
+    MensajeErrorComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,7 @@ import { CheckoutService } from './services/checkout.service';
     RecuperarcontraseniaModule,
     APP_ROUTING,
     NgbModule,
-
+    ChartsModule
 
   ],
   providers: [

@@ -211,9 +211,11 @@ label #sidebar_btn:hover {
     .nav_bar .nav_btn:hover {
         color: #19B3D3;
     }
+    #changeOption {
+        display: none;
+    }
     .mobile_nav_items {
         background: rgb(26, 42, 64);
-        display: none;
     }
     .mobile_nav_items a {
         color: #fff;

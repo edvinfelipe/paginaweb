@@ -18,9 +18,9 @@
     <div class="mobile_nav">
         <div class="nav_bar">
             <img src="" class="mobile_profile_image" alt="">
-            <i class="fa fa-bars nav_btn"></i>
+            <i class="fa fa-bars nav_btn" (click)="switchMenu()"></i>
         </div>
-        <div class="mobile_nav_items">
+        <div id="changeOption" class="mobile_nav_items">
             <a href="#"><i class="fas fa-boxes"></i><span>Inventario</span></a>
             <a href="#"><i class="fas fa-clipboard-list"></i><span>Reportes</span></a>
             <a href="#"><i class="fas fa-users"></i><span>Usuarios</span></a>
@@ -30,10 +30,10 @@
     <!--mobile navigation bar end-->
     <!--sidebar start-->
     <div class="sidebar">
-        <div class="profile_info">
+        <!-- <div class="profile_info">
             <img src="/assets/img/razer.png" class="profile_image" alt="">
             <h4>NombreAdmin</h4>
-        </div>
+        </div> -->
         <a href="#"><i class="fas fa-boxes"></i><span>Inventario</span></a>
         <a href="#"><i class="fas fa-clipboard-list"></i><span>Reportes</span></a>
         <a href="#"><i class="fas fa-users"></i><span>Usuarios</span></a>
@@ -43,7 +43,7 @@
     <!--sidebar end-->
 
     <div class="content">
-        <div class="card">
+        <!--  <div class="card">
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
                 book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
         </div>
@@ -176,7 +176,7 @@
                 sequi ex veniam magni vitae! Eos, qui. Natus ducimus, dolore a repellendus quod quasi aperiam placeat, incidunt odio voluptate aliquid! Sit ipsum voluptatem eius aliquid consequuntur consectetur velit aliquam qui, quidem fugit nulla sed
                 laudantium? Iure aut molestiae ea ad assumenda vel alias voluptate veritatis eum quod accusantium exercitationem voluptas eaque enim minima, blanditiis nisi? Labore aspernatur iure quibusdam aut nulla doloribus distinctio hic, quas quasi
                 rem porro quos ad eaque eius quam neque temporibus maiores ratione numquam aliquam voluptates! Eligendi vero sequi odio! Nesciunt sapiente aliquam nam eius veritatis perspiciatis?</p>
-        </div>
-
+        </div> -->
+        <app-reportes></app-reportes>
     </div>
 </body>
