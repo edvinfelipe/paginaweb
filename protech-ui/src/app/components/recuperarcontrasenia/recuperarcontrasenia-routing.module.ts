@@ -9,7 +9,7 @@ const routes: Routes = [
   {path:'forgotpassword', component: RecuperarcontraseniaComponent,
   children: [
     {path:'ingresocorreo',component:RecepcioncorreoComponent},
-    {path:'newpassword',component:NuevacontraseniaComponent}
+    {path:'newpassword/:token',component:NuevacontraseniaComponent}
   ]}
 ];
 

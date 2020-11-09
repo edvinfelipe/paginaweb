@@ -1,43 +1,42 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <div class="centrar">
     <div class="row">
-        <div class="col-4">
+        <div class="col-md-4">
             <div class="card">
-                <img [src]="obtenerImagenPrincipal()" class="fijarTarjetaGrande imagenes">
+                <img [src]="obtenerImagenPrincipal()" class="fijarTarjetaGrande responsive-tarjetaGrande">
             </div>
             <br>
             <div class="row">
-                <div class="col-4">
+                <div class="col-md-4 responsive-tarjetaPequena">
                     <div class="card">
                         <img (click)="asignarRuta(0)" [src]="retornarRuta(0)" class="fijarTarjetaPequena">
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4 responsive-tarjetaPequena">
                     <div class="card">
                         <img (click)="asignarRuta(1)" [src]="retornarRuta(1)" class="fijarTarjetaPequena">
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4 responsive-tarjetaPequena">
                     <div class="card">
                         <img (click)="asignarRuta(2)" [src]="retornarRuta(2)" class="fijarTarjetaPequena">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-7">
-            <h5 style="font-size:3vw;">Nombre del producto: {{ producto.nombre }}</h5>
+        <div class="col-md-7 offset-md-1">
+            <h4>Nombre del producto: {{ producto.nombre }}</h4>
             <br>
-            <h5 style="font-size:3vw;">Precio: Q{{ producto.precio }} </h5>
+            <h4>Precio: Q{{ producto.precio }} </h4>
             <br>
-            <h6 style="font-size:3vw;">Cantidad: &nbsp;</h6>
-            <div class="input-group col-sm-4">
-
-                <button style="font-size:2vw;" type="button" (click)="manipularContador(0)" class="btn btn-dark btn-sm">-</button>
-                <input id="cantidad" style="font-size:2vw;" type="text" readonly value=" {{ numero }}" class="form-control" aria-describedby="inputGroup-sizing-sm">
-                <button style="font-size:2vw;" type="button " (click)="manipularContador(1)" class="btn btn-dark btn-sm">+</button>
+            <h5>Cantidad: &nbsp;</h5>
+            <div class="input-group">
+                <button class="colorBoton" style="width:30px;" type="button" (click)="manipularContador(0)" class="btn btn-dark btn-sm">-</button>
+                <input class="gris" style="width:70px;" id="cantidad" [(ngModel)]="numero" type="text" readonly value=" {{ numero }}">
+                <button class="colorBoton" style="width:30px;" type="button " (click)="manipularContador(1); mostrarCantidad()" class="btn btn-dark btn-sm">+</button>
             </div>
             <br>
-            <button style="font-size:3vw;" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()">
+            <button class="azul" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()">
                 &nbsp;&nbsp;Comprar&nbsp;&nbsp;</button>
         </div>
     </div>
@@ -47,8 +46,8 @@
 
     <div class="especificaciones">
         <ul class="list-group ">
-            <b style="font-size:2vw;">Especificaciones:</b>
-            <li style="font-size:1.8vw;" class="list-group-item " *ngFor="let especificacion of especificaciones">{{ especificacion }}</li>
+            <b>Especificaciones:</b>
+            <li class="list-group-item " *ngFor="let especificacion of especificaciones">{{ especificacion }}</li>
         </ul>
     </div>
 
@@ -66,7 +65,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button [routerLink]="['/carritocompra', producto.id, numero]" routerLinkActive="router-link-active" (click)="mostrarCantidad()" type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
+                <button [routerLink]="['/carritocompra', producto.id, numero]" routerLinkActive="router-link-active" (click)="mostrarCantidad()" type="button" class="btn btn-danger" data-dismiss="modal">Continuar</button>
             </div>
         </div>
     </div>

@@ -1,24 +1,15 @@
 <div class="container-fluid" style="margin-bottom: 60px;">
     <div class="row">
-        <div class="container-fluid" class="col-5">
-            <div class="card">
-                <h3 style="background-color: #1a2a40; color: white; text-align: center; margin: 0%;">Historial del cliente</h3>
-               <ul class="list-group " >
-                    <li class="list-group-item" onclick="alert(' Actualiza la tabla')">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</li>
-                    <li class="list-group-item" onclick="alert(' Actualiza la tabla')">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</li>
-                    <li class="list-group-item" onclick="alert(' Actualiza la tabla')">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</li>
-                    <button type="button" class="list-group-item list-group-item-action"> historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
-                    <button type="button" class="list-group-item list-group-item-action">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
-                    <button type="button" class="list-group-item list-group-item-action">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
-                    <button type="button" class="list-group-item list-group-item-action"> historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
-                    <button type="button" class="list-group-item list-group-item-action">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
-                    <button type="button" class="list-group-item list-group-item-action">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
-                    <button type="button" class="list-group-item list-group-item-action"> historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
-                    <button type="button" class="list-group-item list-group-item-action">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
-                    <button type="button" class="list-group-item list-group-item-action">  historial <br>Lorem, ipsum dolor sit amet consectetur adipisicing elit. nemo saepe totam sunt esse omnis enim odio qui minima illo vel nam</button>
+        <div class="container-fluid" class="col-4" style="margin-left: 60px;">
+          <h3 style="background-color: #1a2a40; color: white; text-align: center; margin-top: 60px;">Historial del cliente</h3> 
+          
+          
+            <button class="factura"  *ngFor="let factura of HistorialCompras" (click)="getBoton(factura.idcompra)">
+              Identificador de compra: {{factura.idcompra}} 
+              <br> Fecha de compra: {{factura.fechacompra}} 
+              <br> Total de compra: {{factura.total}}
+            </button>
 
-               </ul>
-            </div>
         </div>
         <div class="container-fluid" class="col-7" style="margin-top: 60px;">
 
@@ -32,9 +23,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th>Sujeto 1</th>
-                        <th>99/99/9999</th>
-                        <th>Q99,999.99</th>
+                        <th>{{InfoFactura.nombre}}</th>
+                        <th>{{InfoFactura.fecha}}</th>
+                        <th>Q.{{InfoFactura.total}}</th>
                     </tr>
                 </tbody>
             </table>
@@ -46,76 +37,47 @@
                       <th scope="col">Descripción</th>
                       <th scope="col">Cantidad</th>
                       <th scope="col">Descuento</th>
+                      <th scope="col">Precio</th>
                       <th scope="col">Subtotal</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody *ngFor="let DetalleProducto of DetalleProductos">
                     <tr>
                       <th scope="row">1</th>
-                      <td>Producto </td>
-                      <td>2</td>
-                      <td>No aplica</td>
-                      <td>Q.300.00</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Producto </td>
-                        <td>2</td>
-                        <td>No aplica</td>
-                        <td>Q.300.00</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Producto </td>
-                        <td>2</td>
-                        <td>No aplica</td>
-                        <td>Q.300.00</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td>Producto </td>
-                        <td>2</td>
-                        <td>No aplica</td>
-                        <td>Q.300.00</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td>Producto </td>
-                        <td>2</td>
-                        <td>No aplica</td>
-                        <td>Q.300.00</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">6</th>
-                        <td>Producto </td>
-                        <td>2</td>
-                        <td>No aplica</td>
-                        <td>Q.300.00</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">7</th>
-                        <td>Producto </td>
-                        <td>2</td>
-                        <td>No aplica</td>
-                        <td>Q.300.00</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">8</th>
-                        <td>Producto </td>
-                        <td>2</td>
-                        <td>No aplica</td>
-                        <td>Q.300.00</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">9</th>
-                        <td>Producto </td>
-                        <td>2</td>
-                        <td>No aplica</td>
-                        <td>Q.300.00</td>
-                      </tr>
-                  </tbody>
+                      <td>{{DetalleProducto.descripcion}} </td>
+                      <td>{{DetalleProducto.cantidad}}</td>
+                      <td>{{DetalleProducto.descuento}}</td>
+                      <td>Q.{{DetalleProducto.precio}}</td>
+                      <td>Q.{{DetalleProducto.subtotal}}.</td>
+                    </tr>  
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <th>TOTAL</th>
+                    <td>Q.{{total}}.00</td>
+                  </tr>
+                </tfoot>
             </table>
-
+            <table class="table table-hover">
+              <thead  style="background-color: #1a2a40; color: white;">
+                <tr>
+                  <th> Direccion </th>
+                  <th> Anotacion </th>
+                  <th> Metodo De Pago</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{DetalleEnvio.direccion}}</td>
+                  <td>{{DetalleEnvio.anotacion}}</td>
+                  <td>{{DetalleEnvio.metodoenvio}}</td>
+                </tr>
+              </tbody>
+            </table> 
         </div>
 
     </div>

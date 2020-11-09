@@ -11,13 +11,6 @@ import { CategoriasService } from '../../services/categorias.service';
   styleUrls: ['./catalogo.component.css']
 })
 export class CatalogoComponent implements OnInit {
-  arregloProductos: any[] = [];
-  arregloMarcas: any[] = [];
-  arregloCategorias: any[] = [];
-  arregloPaginas: any = [];
-  numPaginas: number;
-  marca: string;
-  categoria: string;
   constructor(private _categoriasService: CategoriasService ,private _catalogoService: CatalagoService, private _marcasService: MarcasService,private activatedRoute: ActivatedRoute) {
     this._marcasService.getMarcas()
       .subscribe( (dataMarcas: any) => {
@@ -41,6 +34,14 @@ export class CatalogoComponent implements OnInit {
     //   });
     this.obtenerPaginas();
     }
+  arregloProductos: any[] = [];
+  arregloMarcas: any[] = [];
+  arregloCategorias: any[] = [];
+  arregloPaginas: any = [];
+  numPaginas: number;
+  marca = '';
+  categoria = '';
+
 
   ngOnInit(): void {
 
@@ -53,16 +54,17 @@ export class CatalogoComponent implements OnInit {
   }
 
   aplicarFiltros(termino = 1): void{
-    this._catalogoService.getProductos2(this.categoria, this.marca, termino)
+    this._catalogoService.getProductos2(this.categoria, this.marca,-1,-1, termino)
     .subscribe( (dataProductosFiltrados: any) => {
       this.arregloProductos = dataProductosFiltrados.productos;
     });
     this.obtenerPaginas();
   }
 
+
   obtenerPaginas(): void{
     this.arregloPaginas = [];
-    this._catalogoService.getProductos2(this.categoria,this.marca)
+    this._catalogoService.getProductos2(this.categoria, this.marca )
     .subscribe( (dataPaginacion: any) => {
       this.numPaginas = dataPaginacion.count;
       this.numPaginas = Math.ceil( this.numPaginas / 10);

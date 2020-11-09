@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     padding: 0;
 }
@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-    width: 350px;
+    width: 300px;
     max-width: 100vw;
     height: auto;
     display: inline-block;
@@ -71,4 +71,48 @@ body {
     right: 0px;
     background-color: #1A2A40;
     color: #FFFFFF
+} */
+
+.card img{
+  width: 100%;
+  height: 250px;
+}
+
+.card{
+  border: none;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s;
+}
+
+.card:hover{
+
+  box-shadow: 5px 5px 20px  rgba(0,0,0,0.4);
+  transform: translateY(-3%);
+}
+
+/* .card-body P{
+  font-size: 1.2rem;
+} */
+
+.marca-item{
+  font-size: 1rem;
+  padding-left: 15px;
+  padding-top: 20px;
+  padding-bottom: 8px;
+  margin: 0;
+}
+
+.precio-item{
+  font-size: 18px;
+  color: #9A0321;
+}
+
+.btn-color{
+  color: white;
+  background-color: #1A2A40;
+}
+
+.btn-color:hover{
+  color: white;
+  background-color: #9A0321;
 }

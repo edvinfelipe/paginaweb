@@ -1,9 +1,14 @@
+.gris {
+    color: #707070
+}
+
 .centrar {
     width: 83%;
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 60px;
+    display: block;
 }
 
 .especificaciones {
@@ -14,12 +19,17 @@
 
 .fijarTarjetaGrande {
     width: 100%;
-    height: 20vw;
     object-fit: cover;
 }
 
 .fijarTarjetaPequena {
     width: 100%;
-    height: 10vw;
     object-fit: cover;
+}
+
+@media (max-width: 760px) {
+    .responsive-tarjetaPequena {
+        width: 33%;
+        margin-bottom: 30px;
+    }
 }

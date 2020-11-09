@@ -35,7 +35,7 @@
                     <th scope="col">SUB-TOTAL</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody onload="getTotal();">
                 <tr *ngFor="let producto of productos; let i = index;" id="fila{{i}}">
                     <td>
                         <div class="media">
@@ -47,7 +47,7 @@
                         {{producto.nombre}}
                     </td>
                     <td class="colorGray" id="precio{{i}}" style="text-align: right;">
-                        {{ producto.precio | currency: 'Q' }}
+                        {{ producto.precio | currency:'Q ' }}
                     </td>
                     <td class="colorGray cantGroup">
                         <div>
@@ -58,7 +58,7 @@
                         </div>
                     </td>
                     <td class="colorGray subt" id="subT{{i}}" style="text-align: right;">
-                        {{ producto.precio * listaVenta[i].cantidad | currency: 'Q' }}
+                        {{ producto.precio * listaVenta[i].cantidad | currency: 'Q ' }}
                     </td>
                 </tr>
             </tbody>
@@ -78,12 +78,12 @@
                         <strong> TOTAL </strong>
                     </td>
                     <td class="colorBlue subt" style="text-align: right;" id="tabTotal">
-                        {{ 0 | currency: 'Q' }}
+                        {{ total | currency: 'Q ' }}
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" style="border-top: none;">
-                        <button class="btn btnComprar" data-toggle="modal" data-target="#checkout">CONTINUAR COMPRA</button>
+                        <button class="btn btnComprar" data-toggle="modal" data-target="#checkout">CONTINUAR PAGO</button>
                     </td>
                 </tr>
             </tbody>

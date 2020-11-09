@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +15,9 @@ import { APP_ROUTING } from './app.routes';
 //Servicios
 import { MarcasService } from './services/marcas.service';
 import { ProductosService } from './services/productos.service';
+import { HistorialServiceService } from './services/historial-service.service';
+import { CarritoUsuarioService } from './services/carrito-usuario.service';
+
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -38,6 +44,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { MensajeErrorComponent } from './components/shared/mensaje-error/mensaje-error.component';
 import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/recuperarcontrasenia.module';
+
+import { CheckoutService } from './services/checkout.service';
 
 
 
@@ -82,7 +90,10 @@ import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/re
   providers: [
     ProductosService,
     MarcasService,
-    BnNgIdleService
+    BnNgIdleService,
+    CheckoutService,
+    HistorialServiceService,
+    CarritoUsuarioService
   ],
   bootstrap: [AppComponent]
 })

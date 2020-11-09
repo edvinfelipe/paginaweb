@@ -3,7 +3,7 @@
 
         <aside class="filtros">
 
-            <h4> Filtrar por:</h4>
+            <h4> <b>Filtrar por:</b> </h4>
             <p>Marca:</p>
             <select class="fullWidth" #marca (change)='setMarca(marca.value)'>
                 <option></option>
@@ -16,7 +16,7 @@
             <select class="fullWidth" #categoria (change)='setCategoria(categoria.value)'>
                 <option></option>
                 <option *ngFor="let c of arregloCategorias" [value]="c._id">
-                    {{c.nombre}}  
+                    {{c.nombre}}
                 </option>
             </select>
             <p></p>
@@ -25,12 +25,12 @@
         </aside>
     </div>
 
-    <div class="contenedor_productos ">
+    <div class="container">
 
-        <div class="productos">
-
-            <app-tarjetas-productos [producto]="producto" [index]="i" *ngFor="let producto of arregloProductos; let i = index"></app-tarjetas-productos>
-
+        <div class="row">
+          <div class="col-sm-4" *ngFor="let producto of arregloProductos; let i = index">
+            <app-tarjetas-productos [producto]="producto" [index]="i" ></app-tarjetas-productos>
+          </div>
         </div>
 
         <div class="paginacion">

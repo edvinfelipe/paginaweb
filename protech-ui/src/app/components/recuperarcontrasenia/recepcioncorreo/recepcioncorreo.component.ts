@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
+import { RecuperarconrtraseniaService } from "../../../services/recuperarconrtrasenia.service";
+
 @Component({
   selector: 'app-recepcioncorreo',
   templateUrl: './recepcioncorreo.component.html',
@@ -9,7 +11,9 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class RecepcioncorreoComponent implements OnInit {
 
   formCorreo: FormGroup;
-  constructor(private formBuilder:FormBuilder) {
+  correo:any={};
+  correoValido:boolean=true;
+  constructor(private formBuilder:FormBuilder, private _recuperarContraseniaService:RecuperarconrtraseniaService) {
     this.buildFormCorreo();
   }
 
@@ -23,11 +27,32 @@ export class RecepcioncorreoComponent implements OnInit {
     });
   }
 
-  validarCorreo(){
+  validarFormCorreo(): boolean{
     if(this.formCorreo.valid){
-      console.log('Fomrulario valido');
+      this.correo = {
+        correo: this.formCorreo.get('correo').value
+      }
+      return true;
     }else{
       this.formCorreo.markAllAsTouched();
+      return false;
     }
   }
+
+  enviarCorreo(){
+
+    if(this.validarFormCorreo()){
+      this._recuperarContraseniaService.mandarCorreo(this.correo).subscribe((data:any)=>{
+
+        if(data.status){
+          console.log(data.status);
+
+        }
+      },error=>{
+        this.correoValido = false;
+      });
+    }
+  }
+
+
 }
