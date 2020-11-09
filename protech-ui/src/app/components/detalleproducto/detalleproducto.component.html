@@ -36,7 +36,9 @@
                 <button class="colorBoton" style="width:30px;" type="button " (click)="manipularContador(1); mostrarCantidad()" class="btn btn-dark btn-sm">+</button>
             </div>
             <br>
-            <button class="azul" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()">
+            <button *ngIf="numero > 0" class="azul" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()">
+                &nbsp;&nbsp;Comprar&nbsp;&nbsp;</button>
+            <button *ngIf="numero == 0" class="azul" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()" disabled>
                 &nbsp;&nbsp;Comprar&nbsp;&nbsp;</button>
         </div>
     </div>

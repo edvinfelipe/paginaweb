@@ -10,7 +10,7 @@ import { CatalagoService } from '../../services/catalago.service';
 })
 
 export class DetalleproductoComponent implements OnInit {
-  numero: number = 1; //Cantidad del producto a comprar
+  numero: number = 0; //Cantidad del producto a comprar
   ruta = 0; // Posición del vector de rutas
   sEspecificacion: string; // String completo de especificaciones
   especificaciones: string[] = []; // Arreglo de especificaciones descompuesto de sEspecificacion
@@ -84,7 +84,7 @@ export class DetalleproductoComponent implements OnInit {
   // Aumentar/disminuir cantidad, validando que no sobrepase la cantidad de existencias
   manipularContador(accion: number)
   {
-    if (this.numero > 1 && accion === 0)
+    if (this.numero > 0 && accion === 0)
     {
       this.numero = this.numero - 1;
     }

@@ -7,7 +7,7 @@ import { Productos } from "../interfaces/productos";
   providedIn: 'root'
 })
 export class ProductoService {
-  header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA0MzQwOTg3LCJleHAiOjE2MDQ1MTM3ODd9.Xxe79sOMxNMt-g9qpVm05WTO8qm9Ewq_AuPMXO782DQ';
+  header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA0OTU5MDY3LCJleHAiOjE2MDUxMzE4Njd9.07kr6zaTUF1Dhi_kaX3snzhyAqQhEDbMIws3sWFWVeQ';
   url = 'http://api-protech.herokuapp.com/api/producto/';
   bodyProducto: Productos;
   constructor(private http: HttpClient) { }
