@@ -15,10 +15,11 @@ export class CatalagoService {
  * Funcion que ejecutará el query que se le haya sido mandado
  * @param query Consulta que se desee realizar dependiendo de los parametros
  */
+  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Il9pZCI6IjVmNTU0ZDhjODgzNzE1NWYyMTllOTM0YSIsImNvZF9lbXBsZWFkbyI6IkVNXzExIiwidXNlcm5hbWUiOiJhZG1pbiIsIl9fdiI6MH0sImlhdCI6MTU5OTYwMTUxNCwiZXhwIjoxNTk5Nzc0MzE0fQ.BI8FgxCGtpWpM6AE0XrDH-GUhdx5txMfnqfQlkVRf8Y';
   getQuery( query: String){
     const url = `https://api-protech.herokuapp.com/api/producto/${ query }`;
     const headers = new HttpHeaders({
-      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Il9pZCI6IjVmNTU0ZDhjODgzNzE1NWYyMTllOTM0YSIsImNvZF9lbXBsZWFkbyI6IkVNXzExIiwidXNlcm5hbWUiOiJhZG1pbiIsIl9fdiI6MH0sImlhdCI6MTU5OTYwMTUxNCwiZXhwIjoxNTk5Nzc0MzE0fQ.BI8FgxCGtpWpM6AE0XrDH-GUhdx5txMfnqfQlkVRf8Y'
+      'Authorization': this.token
     });
     return this.http.get(url, {headers})
       .pipe( map (data => {
@@ -70,5 +71,14 @@ export class CatalagoService {
     } else if (idCategoria == '' || idMarca == ''){ //  Ningún filtro aplicado
       return this.getQuery(`?page=${ noPagina }`)
     }
+  }
+
+  putExistencias(id: any, cant: any, type: any){
+    const headers = new HttpHeaders({
+      'Authorization': this.token
+    });
+
+    const body = {tipo: type, cantidad: cant};
+    return this.http.put(`https://api-protech.herokuapp.com/api/producto/update/${ id }`, body, {headers});
   }
 }
