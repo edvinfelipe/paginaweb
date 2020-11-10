@@ -1,0 +1,33 @@
+.columna{
+  max-width: 600px;
+}
+
+.boton-pedidios{
+  max-width: 600px;
+  margin-bottom: 50px;
+}
+
+.boton{
+  max-width: 200px;
+}
+
+#contenedor-Principal{
+  margin-top: 35px;
+}
+
+.pedidos{
+  font-size: 3rem;
+  padding-left: 10px;
+}
+
+#contendor-titulos{
+  margin-bottom: 55px;
+}
+
+
+@media screen and (max-width: 780px) {
+
+  .form-row{
+    justify-content: center;
+  }
+}

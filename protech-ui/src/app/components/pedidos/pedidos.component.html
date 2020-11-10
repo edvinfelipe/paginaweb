@@ -1,0 +1,107 @@
+<div class="container" id="contenedor-Principal">
+  <div class="row" id="contendor-titulos">
+    <div class="col-sm-12 d-flex justify-content-center">
+      <i class="fas fa-truck fa-5x" style="color: #1A2A40;"></i>
+      <div class="d-flex justify-content-center align-items-center">
+        <h2 class="pedidos">Pedidos</h2>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 d-flex justify-content-center">
+      <div class="columna">
+        <form method="GET">
+          <div class="form-row">
+            <div class="col-auto">
+              <div class="form-group">
+                <label for="date1">De:</label>
+                <input type="date" class="form-control" placeholder="dd/mm/yyyy" id="date1">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="form-group">
+                <label for="date1">A:</label>
+                <input type="date" class="form-control" placeholder="dd/mm/yyyy" id="date1">
+              </div>
+            </div>
+          </div>
+          <div class="boton-pedidios d-flex justify-content-center ">
+            <button type="button" class="btn btn-primary" id="buscar"> Ver Pedidos </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="historialP">
+    <div class="col-sm-12">
+      <h3 class="text-center">Historial de Pedidos</h3>
+      <div class="table-responsive-sm">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 35px;">
+    <div class="col-sm-12">
+      <h3 class="text-center">Detalles del pedido</h3>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Sub-Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
