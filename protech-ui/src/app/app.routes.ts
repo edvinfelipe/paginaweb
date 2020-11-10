@@ -25,6 +25,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ConfiguracionesComponent } from './components/configuraciones/configuraciones.component';
 import { HistorialComprasComponent } from './components/historial-compras/historial-compras.component';
 import { IngresoproductosComponent } from './components/ingresoproductos/ingresoproductos.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
 /* importa el guardia de ruta */
 import { AuthHistorialGuard } from './guards/auth-historial.guard';
 
@@ -35,6 +36,8 @@ const app_routes: Routes = [
   { path: 'carritocompra/:id/:cantidad', component: CarritocompraComponent },
   { path: 'home', component: PaginainicioComponent},
   { path: 'nosotros', component: AboutusComponent},
+  { path: 'inventario', component: IngresoproductosComponent},
+  { path: 'reportes', component: ReportesComponent},
   { path: 'comprar', component: HowbuyComponent},
   { path: 'contacto', component: ContactpageComponent},
   { path: 'carritocompra', component: CarritocompraComponent },
