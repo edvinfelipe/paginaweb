@@ -355,31 +355,76 @@ app.put('/producto/update/:id', async(req, res) => {
             })
         }
 
-        const { cantidad } = req.body
+        const { tipo, cant } = req.body;
+        let reservado = producto.reservado;
 
-        if (producto.existencia >= cantidad) {
+        if (tipo === 'add') {
+            reservado++;
 
-            if (cantidad > 0) {
-                const cant = cantidad - producto.reservado
-                producto.reservado = producto.reservado + cant
-            } else {
-                producto.reservado = 0
+            if (reservado > producto.existencia) {
+
+                return res.status(400).json({
+                    staus: false,
+                    err: {
+                        message: 'Existencia insuficiente'
+                    }
+                })
             }
 
-            producto.save()
-            return res.status(200).json({
-                staus: true
-            })
+            producto.reservado = reservado
         }
 
-        producto.reservado = 0
-        producto.save()
+        if (tipo === 'dec') {
+            reservado -= 1;
+            producto.reservado = reservado <= 0 ? 0 : reservado
+        }
 
-        return res.status(400).json({
-            staus: false,
-            err: {
-                message: 'Existencia insuficiente'
+        if (tipo === 'reserve') {
+
+            if (!cant) {
+                return res.status(400).json({
+                    staus: false,
+                    err: {
+                        message: 'La cantidad es necesario'
+                    }
+                })
             }
+
+            reservado = reservado + cant;
+
+            if (reservado > producto.existencia) {
+
+                return res.status(400).json({
+                    staus: false,
+                    err: {
+                        message: 'Existencia insuficiente'
+                    }
+                })
+            }
+
+            producto.reservado = reservado
+
+        }
+        if (tipo === 'reset') {
+
+            if (!cant) {
+                return res.status(400).json({
+                    staus: false,
+                    err: {
+                        message: 'La cantidad es necesario'
+                    }
+                })
+            }
+
+            reservado = reservado - cant;
+            producto.reservado = reservado > 0 ? reservado : 0
+
+        }
+
+        await producto.save()
+
+        return res.json({
+            staus: true
         })
 
     } catch (err) {
