@@ -25,18 +25,20 @@
             </div>
         </div>
         <div class="col-md-7 offset-md-1">
-            <h4>Nombre del producto: {{ producto.nombre }}</h4>
+            <h4>{{ producto.nombre }}</h4>
             <br>
-            <h4>Precio: Q{{ producto.precio }} </h4>
+            <h4>Precio: {{ producto.precio | currency:'Q ' }} </h4>
             <br>
             <h5>Cantidad: &nbsp;</h5>
             <div class="input-group">
                 <button class="colorBoton" style="width:30px;" type="button" (click)="manipularContador(0)" class="btn btn-dark btn-sm">-</button>
                 <input class="gris" style="width:70px;" id="cantidad" [(ngModel)]="numero" type="text" readonly value=" {{ numero }}">
-                <button class="colorBoton" style="width:30px;" type="button " (click)="manipularContador(1); mostrarCantidad()" class="btn btn-dark btn-sm">+</button>
+                <button class="colorBoton" style="width:30px;" type="button " (click)="manipularContador(1)" class="btn btn-dark btn-sm">+</button>
             </div>
             <br>
-            <button class="azul" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()">
+            <button *ngIf="numero > 0" class="azul" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()">
+                &nbsp;&nbsp;Comprar&nbsp;&nbsp;</button>
+            <button *ngIf="numero == 0" class="azul" type="button" class="btn btn-dark button-big" data-toggle="modal" data-target="#myModal" (click)="setCantidad()" disabled>
                 &nbsp;&nbsp;Comprar&nbsp;&nbsp;</button>
         </div>
     </div>
@@ -65,7 +67,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button [routerLink]="['/carritocompra', producto.id, numero]" routerLinkActive="router-link-active" (click)="mostrarCantidad()" type="button" class="btn btn-danger" data-dismiss="modal">Continuar</button>
+                <button [routerLink]="['/carritocompra', producto.id, numero]" (click)="confirmarCompra()" routerLinkActive="router-link-active" type="button" class="btn btn-danger" data-dismiss="modal">Continuar</button>
             </div>
         </div>
     </div>

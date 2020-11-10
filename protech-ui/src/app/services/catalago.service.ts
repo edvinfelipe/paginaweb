@@ -15,7 +15,7 @@ export class CatalagoService {
  * Funcion que ejecutará el query que se le haya sido mandado
  * @param query Consulta que se desee realizar dependiendo de los parametros
  */
-  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7Il9pZCI6IjVmNTU0ZDhjODgzNzE1NWYyMTllOTM0YSIsImNvZF9lbXBsZWFkbyI6IkVNXzExIiwidXNlcm5hbWUiOiJhZG1pbiIsIl9fdiI6MH0sImlhdCI6MTU5OTYwMTUxNCwiZXhwIjoxNTk5Nzc0MzE0fQ.BI8FgxCGtpWpM6AE0XrDH-GUhdx5txMfnqfQlkVRf8Y';
+  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA0OTU5MDY3LCJleHAiOjE2MDUxMzE4Njd9.07kr6zaTUF1Dhi_kaX3snzhyAqQhEDbMIws3sWFWVeQ';
   getQuery( query: String){
     const url = `https://api-protech.herokuapp.com/api/producto/${ query }`;
     const headers = new HttpHeaders({
@@ -75,10 +75,9 @@ export class CatalagoService {
 
   putExistencias(id: any, cant: any, type: any){
     const headers = new HttpHeaders({
-      'Authorization': this.token
+      'Authorization': this.token,
     });
-
-    const body = {tipo: type, cantidad: cant};
+    const body = {tipo: type, cant: cant};
     return this.http.put(`https://api-protech.herokuapp.com/api/producto/update/${ id }`, body, {headers});
   }
 }

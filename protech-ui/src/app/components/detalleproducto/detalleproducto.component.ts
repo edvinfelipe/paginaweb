@@ -10,19 +10,21 @@ import { CatalagoService } from '../../services/catalago.service';
 })
 
 export class DetalleproductoComponent implements OnInit {
-  numero: number = 1; //Cantidad del producto a comprar
+  numero: number = 0; //Cantidad del producto a comprar
   ruta = 0; // Posición del vector de rutas
   sEspecificacion: string; // String completo de especificaciones
   especificaciones: string[] = []; // Arreglo de especificaciones descompuesto de sEspecificacion
   rutas: string[] = []; // Rutas del producto recibido desde el catálogo
   id: string; // Id del producto recibido desde el catálogo
   producto: any = {}; // Producto recibido desde el catálogo
-  constructor(private router: Router, catalogoService: CatalagoService) {
+  reservado: number;
+  constructor(private router: Router, private catalogoService: CatalagoService) {
     this.id = this.router.url.split('/')[2]; // Obtener el id del producto desde la URL
     
-    catalogoService.getProducto(this.id)
+    this.catalogoService.getProducto(this.id)
       .subscribe( (producto: any) => {
         this.producto = producto.producto; //Obtener producto
+        this.reservado = producto.reservado;
         this.obtenerEspecificaciones(); //Obtener especificaciones
         this.obtenerImagenes(); // Obtener imágenes
         this.obtenerImagenPrincipal(); //Obtener imagen principal
@@ -30,11 +32,6 @@ export class DetalleproductoComponent implements OnInit {
     
   }
   ngOnInit(): void {
-  }
-  //Mostrar cantidad del producto
-  mostrarCantidad()
-  {
-    console.log(this.numero);
   }
   //Asignar cantidad del producto a la variable número
   setCantidad()
@@ -84,16 +81,25 @@ export class DetalleproductoComponent implements OnInit {
   // Aumentar/disminuir cantidad, validando que no sobrepase la cantidad de existencias
   manipularContador(accion: number)
   {
-    if (this.numero > 1 && accion === 0)
+    if (accion === 0)
     {
-      this.numero = this.numero - 1;
+      this.catalogoService.getProducto(this.id)
+        .subscribe( () => {
+          if (this.numero > 0)
+          {
+            this.numero = this.numero - 1;
+          }              
+      });
     }
     else if (accion === 1)
     {
-      if (this.numero < this.producto.existencia)
-      {
-        this.numero = this.numero + 1;
-      }
+      this.catalogoService.getProducto(this.id)
+        .subscribe( (producto: any) => {
+          if ((this.producto.existencia-producto.producto.reservado-this.numero) > 0)
+          {
+            this.numero = this.numero + 1;
+          }
+        });
     }
     // tslint:disable-next-line: no-trailing-whitespace
   }
@@ -108,6 +114,12 @@ export class DetalleproductoComponent implements OnInit {
   retornarRuta(posicion: number)
   {
     return this.rutas[posicion];
+  }
+
+  confirmarCompra()
+  {
+    this.catalogoService.putExistencias(this.id, this.numero, "reserve").subscribe();
+    console.log("Confirmado");
   }
   
 }
