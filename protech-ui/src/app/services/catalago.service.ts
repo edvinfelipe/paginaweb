@@ -79,6 +79,6 @@ export class CatalagoService {
     });
 
     const body = {tipo: type, cantidad: cant};
-    return this.http.put(`https://api-protech.herokuapp.com/api/producto/update/${ id }`, JSON.stringify(body), {headers});
+    return this.http.put(`https://api-protech.herokuapp.com/api/producto/update/${ id }`, body, {headers});
   }
 }

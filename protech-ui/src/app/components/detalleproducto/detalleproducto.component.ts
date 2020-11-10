@@ -81,27 +81,25 @@ export class DetalleproductoComponent implements OnInit {
   // Aumentar/disminuir cantidad, validando que no sobrepase la cantidad de existencias
   manipularContador(accion: number)
   {
-    if (this.numero > 0 && accion === 0)
+    if (accion === 0)
     {
-      this.catalogoService.putExistencias(this.id, null, "dec")
-        .subscribe();
       this.catalogoService.getProducto(this.id)
-        .subscribe( (producto: any) => {
-          this.reservado = producto.reservado;
-          this.numero = this.numero - 1;
+        .subscribe( () => {
+          if (this.numero > 0)
+          {
+            this.numero = this.numero - 1;
+          }              
       });
     }
     else if (accion === 1)
     {
-      this.catalogoService.putExistencias(this.id, null, "add")
-        .subscribe();
       this.catalogoService.getProducto(this.id)
         .subscribe( (producto: any) => {
-          if (this.numero < (this.producto.existencia-producto.producto.reservado))  
+          if ((this.producto.existencia-producto.producto.reservado-this.numero) > 0)
           {
             this.numero = this.numero + 1;
           }
-      });
+        });
     }
     // tslint:disable-next-line: no-trailing-whitespace
   }
