@@ -1,6 +1,29 @@
-# ProtechUi
+# ⚙️ ProtechUi ⚙️
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
+
+### Estructura base 📦
+
+La estructura incluye un proyecto web de aplicación, con la cual se manejan los componentes, scripts y maquetación HTML.
+La estructura base contiene los siguientes archivos y _directorios_ 
+
+* _src_:
+  * _app_:    
+    * _components_:
+      * Todos los componentes creados para el desarrollo del proyecto 
+      * Todos los archivos CSS de cada uno de los componentes
+  * _assets_:
+    * Contiene todas las imagenes del proyecto
+  * _interfaces_
+  * _services_
+     
+### Comandos para la instalación de la estructura 🔧
+
+_Para poder realizar la instalación se debe hacer uso del siguiente comando en la carpeta raíz:_
+
+```
+npm install
+```
 
 ## Development server
 
