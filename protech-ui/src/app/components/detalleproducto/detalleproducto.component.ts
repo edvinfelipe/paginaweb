@@ -17,12 +17,14 @@ export class DetalleproductoComponent implements OnInit {
   rutas: string[] = []; // Rutas del producto recibido desde el catálogo
   id: string; // Id del producto recibido desde el catálogo
   producto: any = {}; // Producto recibido desde el catálogo
-  constructor(private router: Router, catalogoService: CatalagoService) {
+  reservado: number;
+  constructor(private router: Router, private catalogoService: CatalagoService) {
     this.id = this.router.url.split('/')[2]; // Obtener el id del producto desde la URL
     
-    catalogoService.getProducto(this.id)
+    this.catalogoService.getProducto(this.id)
       .subscribe( (producto: any) => {
         this.producto = producto.producto; //Obtener producto
+        this.reservado = producto.reservado;
         this.obtenerEspecificaciones(); //Obtener especificaciones
         this.obtenerImagenes(); // Obtener imágenes
         this.obtenerImagenPrincipal(); //Obtener imagen principal
@@ -86,14 +88,25 @@ export class DetalleproductoComponent implements OnInit {
   {
     if (this.numero > 0 && accion === 0)
     {
-      this.numero = this.numero - 1;
+      this.catalogoService.putExistencias(this.id, null, "dec")
+        .subscribe();
+      this.catalogoService.getProducto(this.id)
+        .subscribe( (producto: any) => {
+          this.reservado = producto.reservado;
+          this.numero = this.numero - 1;
+      });
     }
     else if (accion === 1)
     {
-      if (this.numero < this.producto.existencia)
-      {
-        this.numero = this.numero + 1;
-      }
+      this.catalogoService.putExistencias(this.id, null, "add")
+        .subscribe();
+      this.catalogoService.getProducto(this.id)
+        .subscribe( (producto: any) => {
+          if (this.numero < (this.producto.existencia-producto.producto.reservado))  
+          {
+            this.numero = this.numero + 1;
+          }
+      });
     }
     // tslint:disable-next-line: no-trailing-whitespace
   }
