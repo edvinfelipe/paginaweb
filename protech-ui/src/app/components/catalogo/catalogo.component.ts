@@ -63,7 +63,7 @@ export class CatalogoComponent implements OnInit {
 
 
   obtenerPaginas(): void{
-    this.arregloPaginas = [];
+    /* this.arregloPaginas = [];
     this._catalogoService.getProductos2(this.categoria, this.marca )
     .subscribe( (dataPaginacion: any) => {
       this.numPaginas = dataPaginacion.count;
@@ -71,7 +71,7 @@ export class CatalogoComponent implements OnInit {
       for (let i = 1; i <= this.numPaginas; i++){
         this.arregloPaginas.push(i);
       }
-    });
+    }); */
   }
 
 
