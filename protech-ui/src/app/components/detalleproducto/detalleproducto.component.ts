@@ -115,5 +115,11 @@ export class DetalleproductoComponent implements OnInit {
   {
     return this.rutas[posicion];
   }
+
+  confirmarCompra()
+  {
+    this.catalogoService.putExistencias(this.id, this.numero, "reserve").subscribe();
+    console.log("Confirmado");
+  }
   
 }

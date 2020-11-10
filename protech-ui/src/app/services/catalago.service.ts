@@ -77,8 +77,7 @@ export class CatalagoService {
     const headers = new HttpHeaders({
       'Authorization': this.token,
     });
-
-    const body = {tipo: type, cantidad: cant};
+    const body = {tipo: type, cant: cant};
     return this.http.put(`https://api-protech.herokuapp.com/api/producto/update/${ id }`, body, {headers});
   }
 }

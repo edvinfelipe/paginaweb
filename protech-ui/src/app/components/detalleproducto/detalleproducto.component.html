@@ -67,7 +67,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button [routerLink]="['/carritocompra', producto.id, numero]" routerLinkActive="router-link-active" type="button" class="btn btn-danger" data-dismiss="modal">Continuar</button>
+                <button [routerLink]="['/carritocompra', producto.id, numero]" (click)="confirmarCompra()" routerLinkActive="router-link-active" type="button" class="btn btn-danger" data-dismiss="modal">Continuar</button>
             </div>
         </div>
     </div>
