@@ -355,13 +355,13 @@ app.put('/producto/update/:id', async(req, res) => {
             })
         }
 
-        const { tipo,cant} = req.body;
+        const { tipo, cant } = req.body;
         let reservado = producto.reservado;
 
-        if( tipo === 'add' ){
+        if (tipo === 'add') {
             reservado++;
 
-            if( reservado > producto.existencia  ){
+            if (reservado > producto.existencia) {
 
                 return res.status(400).json({
                     staus: false,
@@ -374,14 +374,40 @@ app.put('/producto/update/:id', async(req, res) => {
             producto.reservado = reservado
         }
 
-        if( tipo === 'dec' ){
+        if (tipo === 'dec') {
             reservado -= 1;
             producto.reservado = reservado <= 0 ? 0 : reservado
         }
 
-        if( tipo === 'reset' ){
+        if (tipo === 'reserve') {
 
-            if( !cant ){
+            if (!cant) {
+                return res.status(400).json({
+                    staus: false,
+                    err: {
+                        message: 'La cantidad es necesario'
+                    }
+                })
+            }
+
+            reservado = reservado + cant;
+
+            if (reservado > producto.existencia) {
+
+                return res.status(400).json({
+                    staus: false,
+                    err: {
+                        message: 'Existencia insuficiente'
+                    }
+                })
+            }
+
+            producto.reservado = reservado
+
+        }
+        if (tipo === 'reset') {
+
+            if (!cant) {
                 return res.status(400).json({
                     staus: false,
                     err: {
@@ -395,7 +421,7 @@ app.put('/producto/update/:id', async(req, res) => {
 
         }
 
-       await producto.save()
+        await producto.save()
 
         return res.json({
             staus: true
