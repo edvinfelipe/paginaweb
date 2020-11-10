@@ -33,11 +33,6 @@ export class DetalleproductoComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-  //Mostrar cantidad del producto
-  mostrarCantidad()
-  {
-    console.log(this.numero);
-  }
   //Asignar cantidad del producto a la variable número
   setCantidad()
   {
