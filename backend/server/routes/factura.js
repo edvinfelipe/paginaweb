@@ -158,8 +158,13 @@ app.get('/factura/fecha/', (req, res) => {
     const fecha_inicial = req.query.fecha_inicial || new Date
     const fecha_final = req.query.fecha_final || new Date
 
+    let desde = Number(req.query.page || 1)
+    desde = 10 * (desde - 1)
+
     const filter = { fecha_venta: { $gte: fecha_inicial, $lte: fecha_final } }
     Factura.find(filter)
+        .skip(desde)
+        .limit(10)
         .populate('cliente_envio')
         .sort({ fecha_venta: -1 })
         .exec((err, factura) => {
