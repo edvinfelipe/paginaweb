@@ -192,7 +192,7 @@ export class CarritocompraComponent implements OnInit {
     let cant = parseInt(elementCantidad.value);
     let precio = this.productos[idx].precio;
     let subT = 0;
-    if( cant < this.productos[idx].existencia){
+    if( cant < (this.productos[idx].existencia - this.productos[idx].reservado)){
       cant = cant + 1;
       subT = cant * precio;
       elementCantidad.value = cant.toString();
@@ -201,11 +201,13 @@ export class CarritocompraComponent implements OnInit {
         for(let i = 0; i < this.listaVenta.length; i++){
           if(this.listaVenta[i].producto_id === this.productos[idx]._id){
             this.putSession(cant, this.listaVenta[i]._id);
+            this._productosService.putExistencias(this.productos[idx]._id, null, 'add').subscribe();
             this.listaVenta[i].cantidad = cant;
             i = this.listaVenta.length;
           }
         }
       }else{
+        this._productosService.putExistencias(this.listaVenta[idx].id, null, 'add').subscribe();
         this.listaVenta[idx].cantidad = cant;
         this.guardarStorage(this.listaVenta);
       }
@@ -233,11 +235,13 @@ export class CarritocompraComponent implements OnInit {
         for(let i = 0; i < this.listaVenta.length; i++){
           if(this.listaVenta[i].producto_id === this.productos[idx]._id){
             this.putSession(cant, this.listaVenta[i]._id);
+            this._productosService.putExistencias(this.productos[idx]._id, null, 'dec').subscribe();
             this.listaVenta[i].cantidad = cant;
             i = this.listaVenta.length;
           }
         }
       } else {
+        this._productosService.putExistencias(this.listaVenta[idx].id, null, 'dec').subscribe();
         this.listaVenta[idx].cantidad = cant;
         this.guardarStorage(this.listaVenta);
       }
@@ -252,11 +256,13 @@ export class CarritocompraComponent implements OnInit {
   
   deleteRow(): void{
     if(sessionStorage.getItem('user')){
+      this._productosService.putExistencias(this.productos[this.fila]._id, this.listaVenta[this.fila].cantidad, 'reset').subscribe();
       this.deleteOneProduct(this.productos[this.fila]._id, this.listaVenta[this.fila].cliente_id);
       this.listaVenta.splice(this.fila, 1);
       this.productos.splice(this.fila, 1);
       this.fila = -1;
     }else{
+      this._productosService.putExistencias(this.listaVenta[this.fila].id, this.listaVenta[this.fila].cantidad, 'reset').subscribe();
       this.listaVenta.splice(this.fila, 1);
       this.productos.splice(this.fila, 1);
       this.guardarStorage(this.listaVenta);
