@@ -15,6 +15,7 @@ const Envio = require('../models/envio')
 const Producto = require('../models/producto')
 
 const { fieldValidator } = require('../middleware/field-validator')
+const { populate } = require('../models/factura')
 
 //const verificarToken = require('../middleware/autenticacion')
 
@@ -99,43 +100,85 @@ app.post('/factura', [
 
 app.get('/factura', (req, res) => {
 
+    let desde = Number(req.query.page || 1)
+    desde = 10 * (desde - 1)
+
     Factura.find()
+        .skip(desde)
+        .limit(10)
+        .populate('cliente_envio')
+        .sort({ fecha_venta: -1 })
+        .exec((err, factura) => {
 
-    .exec((err, factura) => {
+            if (err) {
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
 
-        if (err) {
-            return res.status(500).json({
-                status: false,
-                err
+            Factura.countDocuments({}, (err, conteo) => {
+                res.json({
+                    status: true,
+                    count: conteo,
+                    factura
+                })
             })
-        }
 
-        res.json({
-            status: true,
-            factura
         })
-    })
 })
 
 app.get('/factura/detenvio/:id', (req, res) => {
 
     const id = req.params.id
     Factura.findById(id)
-    .populate('cliente_envio')
-    .exec((err, factura) => {
+        .populate('cliente_envio')
+        .exec((err, factura) => {
 
-        if (err) {
-            return res.status(500).json({
-                status: false,
-                err
+            if (err) {
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            res.json({
+                status: true,
+                factura
             })
-        }
-
-        res.json({
-            status: true,
-            factura
         })
-    })
+})
+
+//====================================
+// Lista de facturas por rango de fecha 
+//=====================================
+
+app.get('/factura/fecha/', (req, res) => {
+
+    const fecha_inicial = req.query.fecha_inicial || new Date
+    const fecha_final = req.query.fecha_final || new Date
+
+    const filter = { fecha_venta: { $gte: fecha_inicial, $lte: fecha_final } }
+    Factura.find(filter)
+        .populate('cliente_envio')
+        .sort({ fecha_venta: -1 })
+        .exec((err, factura) => {
+
+            if (err) {
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            Factura.countDocuments(filter, (err, conteo) => {
+                res.json({
+                    status: true,
+                    count: conteo,
+                    factura
+                })
+            })
+        })
 })
 
 //==============================

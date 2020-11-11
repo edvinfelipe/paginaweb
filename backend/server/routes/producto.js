@@ -18,7 +18,16 @@ app.get('/producto', (req, res) => {
     desde = 10 * (desde - 1)
 
 
-    Producto.find({ descontinuado: false })
+    const buscar = req.query.buscar
+    let filter = { descontinuado: false }
+
+    if (buscar) {
+        let regexp = RegExp(buscar, 'i');
+        filter = {...filter, nombre: regexp }
+
+    }
+
+    Producto.find(filter)
         .skip(desde)
         .limit(10)
         .populate('categoria', 'nombre')
@@ -33,7 +42,7 @@ app.get('/producto', (req, res) => {
                 })
             }
 
-            Producto.countDocuments({ descontinuado: false }, (err, conteo) => {
+            Producto.countDocuments(filter, (err, conteo) => {
 
 
                 res.json({
