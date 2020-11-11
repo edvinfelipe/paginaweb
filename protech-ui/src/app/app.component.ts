@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BnNgIdleService } from 'bn-ng-idle';
-
-import { LoginService } from "../app/services/login.service";
+import { LoginService } from '../app/services/login.service';
+import { CatalagoService } from './services/catalago.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +11,13 @@ import { LoginService } from "../app/services/login.service";
 export class AppComponent {
   title = 'protech-ui';
 
-  constructor(private bnIdle: BnNgIdleService, private _loginService:LoginService) { }
+  constructor(private bnIdle: BnNgIdleService, private _loginService: LoginService, private _productosService: CatalagoService) { }
 
   ngOnInit(): void {
     this.sessionTimeOut();
     this.localStorageTimeOut();
   }
+  private listaVenta: any[] = []; 
 
   private sessionTimeOut(){
 
@@ -31,8 +32,12 @@ export class AppComponent {
   }
   private localStorageTimeOut(): void{
     if(localStorage.getItem('venta')){
-      this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
+      this.bnIdle.startWatching(/* 7200 */ 10).subscribe((isTimedOut: boolean) => {
         if (isTimedOut) {
+          this.listaVenta = JSON.parse(localStorage.getItem('venta'));
+          this.listaVenta.forEach(element =>{
+            this._productosService.putExistencias(element.id, element.cantidad, 'reset').subscribe(error => alert(error));
+          });
           localStorage.clear();
           location.reload();
         }
