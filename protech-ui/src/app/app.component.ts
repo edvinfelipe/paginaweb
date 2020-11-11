@@ -32,7 +32,7 @@ export class AppComponent {
   }
   private localStorageTimeOut(): void{
     if(localStorage.getItem('venta')){
-      this.bnIdle.startWatching(/* 7200 */ 10).subscribe((isTimedOut: boolean) => {
+      this.bnIdle.startWatching(7200).subscribe((isTimedOut: boolean) => {
         if (isTimedOut) {
           this.listaVenta = JSON.parse(localStorage.getItem('venta'));
           this.listaVenta.forEach(element =>{

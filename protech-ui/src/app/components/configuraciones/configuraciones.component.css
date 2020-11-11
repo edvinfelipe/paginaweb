@@ -86,11 +86,43 @@ a.active.nav-link {
 }
 
 .disp-table {
+    float: right;
+}
+
+.fontTitle {
+    font-size: 3.0vw;
     display: inline-block;
+    vertical-align: middle;
+}
+
+.dimension {
+    max-height: 150px;
+    padding-right: 20px;
+}
+
+.dimension2 {
+    padding-left: 80px;
+    padding-right: 15px;
+}
+
+.block {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.divTitle {
+    float: left;
+}
+
+.divOImg {
     float: right;
 }
 
 @media screen and (max-width: 765px) {
+    .in {
+        max-width: 140px;
+    }
     .disp-form {
         display: block;
     }
@@ -98,5 +130,21 @@ a.active.nav-link {
         display: block;
         float: none;
         padding-top: 20px;
+    }
+    .fontTitle {
+        font-size: 25px;
+        vertical-align: middle;
+    }
+    .dimension2 {
+        max-width: 90px;
+        max-height: 90px;
+        padding-left: 10px;
+    }
+    .dimension {
+        padding-right: 5px;
+    }
+    .divOImg,
+    .divTitle {
+        float: none;
     }
 }
