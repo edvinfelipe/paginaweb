@@ -28,12 +28,12 @@
   <div>
     <h3 class="productos-sugeridos">Productos Sugeridos</h3>
     <div class="row">
-      <div class="col-sm-4 d-flex justify-content-center" *ngFor="let producto of arregloproductos1; let i = index">
+      <div class="col-sm-4" *ngFor="let producto of arregloproductos1; let i = index">
         <app-tarjetas-productos  [producto]="producto" [index]="i"></app-tarjetas-productos>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6 d-flex justify-content-center">
+      <div class="col-sm-6">
         <div class="image-container">
           <img src="assets/img/consolas.png"  class="img-fluid" alt="consola">
         </div>
