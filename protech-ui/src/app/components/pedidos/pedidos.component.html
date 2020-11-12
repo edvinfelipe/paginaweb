@@ -10,95 +10,125 @@
   <div class="row">
     <div class="col-sm-12 d-flex justify-content-center">
       <div class="columna">
-        <form method="GET">
+        <form method="GET" [formGroup]="formDate">
           <div class="form-row">
             <div class="col-auto">
               <div class="form-group">
                 <label for="date1">De:</label>
-                <input type="date" class="form-control" placeholder="dd/mm/yyyy" id="date1">
+                <input type="date" formControlName="startDate" class="form-control" placeholder="dd/mm/yyyy" id="date1">
               </div>
             </div>
             <div class="col-auto">
               <div class="form-group">
                 <label for="date1">A:</label>
-                <input type="date" class="form-control" placeholder="dd/mm/yyyy" id="date1">
+                <input type="date" formControlName="endDate" class="form-control" placeholder="dd/mm/yyyy" id="date1">
               </div>
             </div>
           </div>
           <div class="boton-pedidios d-flex justify-content-center ">
-            <button type="button" class="btn btn-primary" id="buscar"> Ver Pedidos </button>
+            <button type="button" class="btn btn-primary" id="buscar" (click)="getFacturasPorFechas()"> Ver Pedidos </button>
           </div>
         </form>
       </div>
+      <!-- <form class="form-inline">
+        <div class="form-group hidden">
+          <div class="input-group">
+            <input name="datepicker"
+                   class="form-control"
+                   ngbDatepicker
+                   #datepicker="ngbDatepicker"
+                   [autoClose]="'outside'"
+                   (dateSelect)="onDateSelection($event)"
+                   [displayMonths]="2"
+                   [dayTemplate]="t"
+                   outsideDays="hidden"
+                   [startDate]="fromDate!"
+                   tabindex="-1">
+            <ng-template #t let-date let-focused="focused">
+              <span class="custom-day"
+                    [class.focused]="focused"
+                    [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)"
+                    (mouseenter)="hoveredDate = date"
+                    (mouseleave)="hoveredDate = null">
+                {{ date.day }}
+              </span>
+            </ng-template>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <input #dpFromDate
+                   class="form-control" placeholder="yyyy-mm-dd"
+                   name="dpFromDate"
+                   [value]="formatter.format(fromDate)"
+                   (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"><i class="far fa-calendar-alt fa-lg"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group ml-2">
+          <div class="input-group">
+            <input #dpToDate
+                   class="form-control" placeholder="yyyy-mm-dd"
+                   name="dpToDate"
+                   [value]="formatter.format(toDate)"
+                   (input)="toDate = validateInput(toDate, dpToDate.value)">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="datepicker.toggle()" type="button"> <i class="far fa-calendar-alt fa-lg"></i></button>
+            </div>
+          </div>
+        </div>
+      </form> -->
     </div>
   </div>
+  <!-- <div class="row">
+    <div class="col-sm-12 boton-pedidios d-flex justify-content-center">
+      <button type="button" class="btn btn-primary" id="buscar" (click)="getFacturasPorFechas()"> Ver Pedidos </button>
+    </div>
+  </div> -->
   <div class="row" id="historialP">
     <div class="col-sm-12">
       <h3 class="text-center">Historial de Pedidos</h3>
+      <button class="btn">Ver pedidos recientes</button>
       <div class="table-responsive-sm">
-        <table class="table table-hover">
+        <table class="table table-hover table-fixed">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Cliente</th>
               <th scope="col">Fecha</th>
               <th scope="col">Monto</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+            <tr *ngFor="let factura of facturas; let i = index;" (click)="getDetallesFactura(factura._id)">
+              <td>{{factura.cliente_envio.nombre}}</td>
+              <td>{{factura.fecha_venta}}</td>
+              <td>{{factura.total | currency:'Q '}}</td>
             </tr>
           </tbody>
         </table>
+        <ngb-pagination class="d-flex justify-content-center" [collectionSize]="numeroFacturas" [pageSize]="10" [(page)]= "pagina" [directionLinks]="false" (pageChange)="getNexPage($event)"></ngb-pagination>
       </div>
     </div>
   </div>
   <div class="row" style="margin-top: 35px;">
     <div class="col-sm-12">
       <h3 class="text-center">Detalles del pedido</h3>
-      <table class="table table-hover">
+      <table class="table table-hover table-fixed">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Producto</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Sub-Total</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
+          <tr *ngFor="let detalle of detallesFactura; let i = index;">
+            <td>{{detalle.producto_id.nombre}}</td>
+            <td>{{detalle.cantidad}}</td>
+            <td>{{detalle.producto_id.precio | currency:'Q '}}</td>
           </tr>
         </tbody>
       </table>
