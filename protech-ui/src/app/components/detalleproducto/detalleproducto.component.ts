@@ -119,7 +119,5 @@ export class DetalleproductoComponent implements OnInit {
   confirmarCompra()
   {
     this.catalogoService.putExistencias(this.id, this.numero, "reserve").subscribe();
-    console.log("Confirmado");
   }
-  
 }

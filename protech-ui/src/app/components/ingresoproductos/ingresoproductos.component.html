@@ -95,7 +95,6 @@
                                     <div class="invalid-feedback">Ingrese un número de uno o dos dígitos</div>
                                 </div>
                             </div>
-                            <button *ngIf="especificaciones.length > 0 && bandera()" class="btn btn-secondary" (click)="ingresarProducto()">Ingresar producto</button>
                         </div>
                         <div class="col-md-3">
 
@@ -150,6 +149,7 @@
                             </div>
                         </div>
                     </div>
+                    <button *ngIf="especificaciones.length > 0 && bandera()" class="btn btn-secondary" (click)="ingresarProducto()">Ingresar producto</button>
                 </form>
             </div>
         </div>
@@ -165,27 +165,23 @@
                         <div class="invalid-feedback">Seleccione una categoría</div>
                     </div>
                 </form>
-                <table class="table">
+                <table class="table centrarTabla">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Marca</th>
-                            <th scope="col">Categoría</th>
                             <th scope="col">Existencia</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let producto of arregloProductos; let i = index;">
-                            <th scope="row"> {{i+1}}</th>
                             <td>{{producto.nombre}}</td>
                             <td>{{producto.marca.nombre}}</td>
-                            <td>{{producto.categoria.nombre}}</td>
                             <td>{{producto.existencia}}</td>
                             <td>
-                                <button id="btnmw {{i}}" type="button" class="btn botw" onclick="this.blur();" (click)="modificarValores(1); asignarValores(i)"><i class="fas fa-pen"></i></button>
-                                <button id="btnmt {{i}}" type="button" class="btn bott" onclick="this.blur();" (click)="posicionEliminar(i)" style="margin-left: 1px;" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
+                                <button id="btnmw {{i}}" type="button" class="btn botw" onclick="this.blur();" (click)="modificarValores(1); asignarValores(i)"><i class="fas fa-pen responsive"></i></button>
+                                <button id="btnmt {{i}}" type="button" class="btn bott" onclick="this.blur();" (click)="posicionEliminar(i)" style="margin-left: 1px;" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt responsive"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -273,7 +269,6 @@
                                     <div class="invalid-feedback">Ingrese un número de uno o dos dígitos</div>
                                 </div>
                             </div>
-                            <button *ngIf="mespecificaciones.length > 0 && mbandera()" class="btn btn-secondary" (click)="modificarProducto()">Modificar producto</button>
                         </div>
                         <div class="col-md-3">
 
@@ -327,6 +322,7 @@
                             </div>
                         </div>
                     </div>
+                    <button *ngIf="mespecificaciones.length > 0 && mbandera()" class="btn btn-secondary" (click)="modificarProducto()">Modificar producto</button>
                 </form>
             </div>
         </div>
