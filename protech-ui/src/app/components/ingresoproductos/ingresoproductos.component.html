@@ -277,22 +277,28 @@
                             <div class="row ">
                                 <div class="col-md-4 responsive-tarjetas">
                                     <div class="card">
-                                        <img [src]="murls[0]" class="fijarTarjetas" alt="">
+                                        <img *ngIf="mclick[0] == 0" [src]="murls[0]" (click)="controlarSeleccionado(0)" class="fijarTarjetas" alt="">
+                                        <img *ngIf="mclick[0] == 1" [src]="murls[0]" class="fijarTarjetas seleccionado" alt="">
+                                        <button *ngIf="mclick[0] == 1" type="button" (click)="meliminarImagen(0)" class="btn btn-danger">Eliminar</button>
                                     </div>
                                 </div>
                                 <div class="col-md-4 responsive-tarjetas">
                                     <div class="card">
-                                        <img [src]="murls[1]" class="fijarTarjetas" alt="">
+                                        <img *ngIf="mclick[1] == 0" [src]="murls[1]" (click)="controlarSeleccionado(1)" class="fijarTarjetas" alt="">
+                                        <img *ngIf="mclick[1] == 1" [src]="murls[1]" class="fijarTarjetas seleccionado" alt="">
+                                        <button *ngIf="mclick[1] == 1" type="button" (click)="meliminarImagen(1)" class="btn btn-danger">Eliminar</button>
                                     </div>
                                 </div>
                                 <div class="col-md-4 responsive-tarjetas">
                                     <div class="card">
-                                        <img [src]="murls[2]" class="fijarTarjetas" alt="">
+                                        <img *ngIf="mclick[2] == 0" [src]="murls[2]" (click)="controlarSeleccionado(2)" class="fijarTarjetas" alt="">
+                                        <img *ngIf="mclick[2] == 1" [src]="murls[2]" class="fijarTarjetas seleccionado" alt="">
+                                        <button *ngIf="mclick[2] == 1" type="button" (click)="meliminarImagen(2)" class="btn btn-danger">Eliminar</button>
                                     </div>
                                 </div>
                             </div>
                             <div style="margin-top: 15px;" class="form-group">
-                                <input type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="mimage" multiple (change)="mdetectFiles($event); masignarImagenes($event)">
+                                <input *ngIf="mposicion >= 0" type="file" accept=".png, .jpg, .jpeg" class="form-control-file" id="mimage" (change)="mdetectFiles($event); masignarImagenes($event)">
                                 <div class="invalid-feedback"></div>
                             </div>
                             <div class="form-group">

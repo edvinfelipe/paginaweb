@@ -4,6 +4,7 @@ import { MarcasService } from '../../services/marcas.service';
 import { CategoriasService } from '../../services/categorias.service';
 import { ProductoService } from '../../services/producto.service';
 import { CatalagoService } from '../../services/catalago.service';
+import { ReadVarExpr } from '@angular/compiler';
 //componentes de form
 declare var $: any;
 
@@ -21,7 +22,8 @@ export class IngresoproductosComponent implements OnInit {
   categorias: any[]; //Arreglo para retener categorías
   //Arreglos de imágenes para ingreso y modificación
   urls = new Array<string>(); //Arreglo para retener las imágenes que se van a ingresar
-  murls = new Array<string>(); //Arreglo para retener las imágenes que se van a ingresar
+  murls = ['', '', '']; //Arreglo para retener las imágenes que se van a ingresar
+  mclick = [0, 0, 0];
   //Arreglos de imágenes auxiliares para ingreso y modificación
   imagenes = new Array<any>(); //Arreglo auxiliar que retiene las imágenes a ingresar
   mimagenes = new Array<any>(); //Arreglo auxiliar que retiene las imágenes a ingresar
@@ -57,10 +59,11 @@ export class IngresoproductosComponent implements OnInit {
   arregloPaginas: any = [];//Controlar cuántas páginas tiene el get
   numPaginas: number;//Controlar el conteo de productos que me regresa una página
   arregloProductos: any[] = []; //Obtener los productos dependiendo de la página solicitada
-  modificar = 0;
+  modificar = 0;//Controlar si se está en el pánel de modificación o no
   posicion = 0;
   mlongitudImagenes = 0;
   posEliminar = 0;
+  mposicion = -1;
 
   constructor(private imagenesService: ImagenesproductoService, private marcasService:MarcasService, 
     private categoriasService:CategoriasService, private productoService: ProductoService, private catalogoService:
@@ -75,6 +78,22 @@ export class IngresoproductosComponent implements OnInit {
         this.categorias = dataCategorias;
       });
     $('#myModal').modal({backdrop: 'static', keyboard: false})
+  }
+  //Controlar la imagen que se va a eliminar
+  controlarSeleccionado(posicion: number)
+  {
+    for (let i = 0; i < 3; i++)
+    {
+      if (i !== posicion)
+      {
+        this.mclick[i] = 0;
+      }
+      else
+      {
+        this.mclick[i] = 1;
+        this.mposicion = i;
+      }
+    }
   }
 
   manipularBRadio(valor){//Asignar valor a la bandera dependiendo del rb seleccionado (ingreso)
@@ -102,7 +121,7 @@ export class IngresoproductosComponent implements OnInit {
   mvalidarImagenes(){
     for (let i = 0; i < 3; i++)
     {
-      if (this.murls[i] === null || this.murls[i] !== 'assets/img/Interrogación.png')
+      if (this.murls[i] === '' || this.murls[i] === null)
       {
         this.murls[i] = 'assets/img/Interrogación.png';
       }
@@ -416,7 +435,6 @@ export class IngresoproductosComponent implements OnInit {
   //Asignar las imágenes que se van a ingresar al array urls, para luego mostrar dichas imágenes (ingreso)
   detectFiles(event)
   {
-    
     let files = event.target.files;
     let posicion = 0;
     if (event.target.files.length > 3)
@@ -424,7 +442,6 @@ export class IngresoproductosComponent implements OnInit {
       alert("Usted ha ingresado más de 3 imágenes, así que se ingresarán al servidor las primeras 3 imágenes ingresadas únicamente.");
     }
     if (files) {
-      
       for (let file of files) {
           let reader = new FileReader();
           reader.onload = (e: any) => {
@@ -442,28 +459,27 @@ export class IngresoproductosComponent implements OnInit {
   //Asignar las imágenes que se van a ingresar al array urls, para luego mostrar dichas imágenes (modificación)
   mdetectFiles(event)
   {
-    //(<HTMLInputElement>document.getElementById('mimage')).value = '';
     let files = event.target.files;
-    let posicion = 0;
-    this.mlongitudImagenes = event.target.files.length;
-    if (event.target.files.length > 3)
-    {
-      alert("Usted ha ingresado más de 3 imágenes, así que se ingresarán al servidor las primeras 3 imágenes ingresadas únicamente.");
+    if (event.target.files.length > 0) {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.murls[this.mposicion] = e.target.result;
+        }
+        if (files[0] !== '')
+        {
+          reader.readAsDataURL(files[0]);
+        }
     }
-    if (files) {
-      for (let file of files) {
-          let reader = new FileReader();
-          reader.onload = (e: any) => {
-            if (posicion < 3)
-            {
-              this.murls[posicion] = e.target.result;
-              posicion = posicion + 1;
-            }
-          }
-          reader.readAsDataURL(file);
-      }
+    else
+    {
+      this.murls[this.mposicion] = '';
     }
     this.mvalidarImagenes();
+  }
+
+  meliminarImagen(posicion){
+    this.murls[posicion] = 'assets/img/Interrogación.png';
+    this.mimagenes[posicion] = 'Eliminar';
   }
 
   //Asignar imágenes con el vector auxiliar (ingreso)
@@ -477,11 +493,10 @@ export class IngresoproductosComponent implements OnInit {
   }
   //Asignar imágenes con el vector auxiliar (modificación)
   masignarImagenes(event){
-    let aux = 0;
-    while (aux < event.target.files.length)
+    this.mimagenes[this.mposicion] = event.target.files[0];
+    if (event.target.files[0] === undefined)
     {
-      this.mimagenes[aux] = event.target.files[aux];
-      aux = aux + 1;
+      this.mimagenes[this.mposicion] = 'Eliminar';
     }
   }
   //Ingresar imágenes a producto ingresado
@@ -501,25 +516,25 @@ export class IngresoproductosComponent implements OnInit {
 
   modificarImagenes(id: any)
   {
-    if (this.mlongitudImagenes > 0)
+    //Eliminar todas las imágenes
+    for (let i = 0; i < this.arregloProductos[this.posicion].imagenes.length; i++)
     {
-      //Eliminar todas las imágenes
-      for (let i = 0; i < this.arregloProductos[this.posicion].imagenes.length; i++)
+      if (this.mimagenes[i] === 'Eliminar')
       {
         this.imagenesService.deleteImagen(this.arregloProductos[this.posicion].imagenes[i]._id).subscribe(
           (res) => console.log(res),
           (err) => console.log(err),
           );
       }
-      //Ingreso de nuevas imágenes
-      for (let i = 0; i < 3; i++)
-      {
-        if (this.murls[i] === null || this.murls[i] !== 'assets/img/Interrogación.png'){
-        this.imagenesService.postImagen(this.mimagenes[i], id).subscribe(
-          (res) => console.log(res),
-          (err) => console.log(err),
-          );
-        }
+    }
+    //Ingreso de nuevas imágenes
+    for (let i = 0; i < 3; i++)
+    {
+      if ((this.murls[i] === null || this.murls[i] !== 'assets/img/Interrogación.png') && (this.mimagenes[i] !== 'Vino del servidor')){
+      this.imagenesService.postImagen(this.mimagenes[i], id).subscribe(
+        (res) => console.log(res),
+        (err) => console.log(err),
+        );
       }
     }
     $('#myModal').modal('show');
@@ -540,7 +555,8 @@ export class IngresoproductosComponent implements OnInit {
       (err) => console.log(err),
     );
   }
-
+  
+  //Modificar producto con sus respectivos campos
   modificarProducto()
   {
     let id = this.arregloProductos[this.posicion]._id;
@@ -554,7 +570,7 @@ export class IngresoproductosComponent implements OnInit {
       (err) => console.log(err),
     );
   }
-
+  //Eliminar un producto
   eliminarProducto()
   {
     let id = this.arregloProductos[this.posEliminar]._id;
@@ -563,7 +579,7 @@ export class IngresoproductosComponent implements OnInit {
       (err) => console.log(err)
     );
   }
-
+  //Posición en la que se eliminará un producto
   posicionEliminar(eliminar: any)
   {
     this.posEliminar = eliminar;
@@ -612,6 +628,15 @@ export class IngresoproductosComponent implements OnInit {
   modificarValores(numero: number)
   {
     this.modificar = numero;
+    if (numero === 0)
+    {
+      for (let i = 0; i < 3; i++)
+      {
+        this.mimagenes[i] = '';
+        this.murls[i] = '';
+      }
+      this.mvalidarImagenes();
+    }
   }
   //Asignar campos a componentes al momento de confirmar la modificación
   asignarValores(posicion: number){
@@ -644,7 +669,7 @@ export class IngresoproductosComponent implements OnInit {
     for (let i = 0; i < this.arregloProductos[posicion].imagenes.length; i++)
     {
       this.murls[i] = this.arregloProductos[posicion].imagenes[i].url;
+      this.mimagenes[i] = "Vino del servidor";
     }
-    
   }
 }
