@@ -3,6 +3,7 @@
 const express = require('express')
 const { check } = require('express-validator')
 const mongoose = require('mongoose')
+const moment = require('moment')
 
 const app = express()
 
@@ -156,7 +157,7 @@ app.get('/factura/detenvio/:id', (req, res) => {
 app.get('/factura/fecha/', (req, res) => {
 
     const fecha_inicial = req.query.fecha_inicial || new Date
-    const fecha_final = req.query.fecha_final || new Date
+    const fecha_final = moment(req.query.fecha_final, 'YYYY-MM-DD').add(1, 'day') || new Date
 
     let desde = Number(req.query.page || 1)
     desde = 10 * (desde - 1)
