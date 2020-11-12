@@ -74,7 +74,6 @@ export class ProductoService {
       marca: mid,
       categoria: cid
     };
-    console.log(this.bodyProducto.descripcion);
     if (disponible === 2)
     {
       this.bodyProducto.disponible = false;
