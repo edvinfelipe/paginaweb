@@ -1,0 +1,118 @@
+<div class="container" id="contenedor-Principal">
+  <div class="row" id="contendor-titulos">
+    <!-- <div class="col-sm-12 d-flex justify-content-center">
+      <i class="fas fa-truck fa-5x" style="color: #1A2A40;"></i>
+      <div class="d-flex justify-content-center align-items-center">
+        <h2 class="pedidos">Pedidos</h2>
+      </div>
+    </div> -->
+    <div class="col-md-4 col-sm-12 d-flex align-items-center center">
+      <i class="fas fa-truck fa-5x" style="color: #1A2A40;"></i>
+      <h2 class="font-title">Pedidos</h2>
+    </div>
+    <div class="col-md-8 display">
+      <img src="assets/img/componente.png" class="responsive" alt="imagen">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 d-flex justify-content-center">
+      <form action="">
+        <div class="form-row">
+          <div class="col-auto">
+            <div class="form-group">
+              <!-- <label for="exampleFormControlSelect1">Example select</label> -->
+              <select name="select" class="form-control" [(ngModel)]="tipoDeVista" >
+                <option [ngValue]="null" disabled>Seleccione una opcion</option>
+                <option *ngFor="let opcion of opciones" [ngValue]="opcion">{{opcion}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-auto flex-boton">
+            <button type="button" class="btn btn-primary" id="buscar" (click)="tipoVista()"> Ver Pedidos </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row" id="form-fechas" *ngIf="mostrarCalendario()">
+    <div class="col-sm-12 d-flex justify-content-center">
+      <div class="columna">
+        <form method="GET" [formGroup]="formDate">
+          <div class="form-row formulario-fechas">
+            <div class="col-auto">
+              <div class="form-group">
+                <input type="date" formControlName="startDate" class="form-control" placeholder="Fecha Inicio" id="date1">
+              </div>
+            </div>
+            <div class="col-auto">
+              <div class="form-group">
+                <input type="date" formControlName="endDate" class="form-control" placeholder="Fecha Fin" id="date2">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="historialP">
+    <div class="col-sm-12">
+      <h3 class="text-center">Historial de Pedidos</h3>
+      <div class="table-responsive-sm">
+        <table class="table table-hover table-bordered table-fixed">
+          <thead>
+            <tr>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Monto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let factura of facturas; let i = index;" (click)="getDetallesFactura(factura._id); obtenerDatosCliente(factura.cliente_envio.nombre,factura.fecha_venta,factura.total)">
+              <td>{{factura.cliente_envio.nombre}}</td>
+              <td>{{factura.fecha_venta | date:'mediumDate'}}</td>
+              <td>{{factura.total | currency:'Q '}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <ngb-pagination class="d-flex justify-content-center" [collectionSize]="numeroFacturas" [pageSize]="10" [(page)]= "pagina" [directionLinks]="false" (pageChange)="getNexPage($event)"></ngb-pagination>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 35px;" id="detalles-pedido">
+    <div class="col-sm-12">
+      <h3 class="text-center">Detalles del pedido</h3>
+      <div class="tabla-cliente" *ngIf="detallesFactura!=[]">
+        <table class="table table-bordered">
+          <thead class="thead-dark">
+            <tr>
+                <th scope="col">Cliente</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <td>{{nombreCliente}}</td>
+            <td>{{fechaFactura | date:'mediumDate'}}</td>
+            <td>{{totalFactura | currency:'Q '}}</td>
+          </tbody>
+        </table>
+      </div>
+      <table class="table table-hover table-bordered table-fixed">
+        <thead>
+          <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Sub-Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let detalle of detallesFactura; let i = index;">
+            <td>{{detalle.producto_id.nombre}}</td>
+            <td>{{detalle.cantidad}}</td>
+            <td>{{detalle.producto_id.precio | currency:'Q '}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
