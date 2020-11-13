@@ -32,7 +32,18 @@
             </div>
             <div class="header_main-search">
                 <form action="">
-                    <input type="search" placeholder="Buscar" class="input">
+                    <input type="search" placeholder="Buscar" [formControl]="emailCtrl" class="input form-control">
+                    <!-- <ul *ngIf="buscando">
+                      <li *ngFor="let producto of productos">{{producto.nombre}}</li>
+                    </ul> -->
+                    <ul class="filtro-busqueda">
+                      <li>Holadssdsdsdsdsdsdsdsdsdsdsdddddddddddddddddddddddddddddddd</li>
+                      <li>Hola</li>
+                      <li>Hola</li>
+                      <li>Hola</li>
+                      <li>Hola</li>
+                      <li>Hola</li>
+                    </ul>
                 </form>
                 <i class="fas fa-search logo-buscar"></i>
             </div>
