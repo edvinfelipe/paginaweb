@@ -36,7 +36,7 @@ export class NavbarComponent implements OnInit {
       }else{
         this.buscando=false;
       }
-    })
+    });
   }
 
   getCategorias(){
@@ -49,6 +49,11 @@ export class NavbarComponent implements OnInit {
 
   HistorialLocation() {
     this.Router.navigate(['historialcompras']);
+  }
+
+  detalleProducto(idProducto){
+    this.buscando=false;
+    this.Router.navigate(['detalle',idProducto]);
   }
 
   getProductos(producto){
