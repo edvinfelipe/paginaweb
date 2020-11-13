@@ -20,6 +20,12 @@ export class PedidosComponent implements OnInit {
   formDate: FormGroup;
   fechainicio;
   fechaFin;
+  opciones:any = ["Mas recientes","Rango de fechas"];
+  mostrarFechas:boolean;
+  tipoDeVista=null;
+  nombreCliente;
+  totalFactura;
+  fechaFactura;
   constructor(private _pedidoService:PedidosService,private formBuilder:FormBuilder, private toastr: ToastrService) {
     this.buildFormDate();
   }
@@ -34,8 +40,8 @@ export class PedidosComponent implements OnInit {
     });
   }
 
-  getFacturas() {
-    this._pedidoService.getFacturas().subscribe((data:any)=>{
+  getFacturas(noPagina=1) {
+    this._pedidoService.getFacturas(noPagina).subscribe((data:any)=>{
       console.log(data);
       this.facturas= data['factura'];
       this.numeroFacturas = data.count;
@@ -61,11 +67,40 @@ export class PedidosComponent implements OnInit {
 
   getNexPage(pagina){
     console.log(pagina);
-    if(this.validateDate()){
-      this.getFacturasPorFechas(pagina);
+    if(this.mostrarCalendario()){
+      if(this.validateDate()){
+        this.getFacturasPorFechas(pagina);
+      }
     }else{
-      this.getFacturas();
+      this.getFacturas(pagina);
     }
+  }
+
+  tipoVista(){
+
+    if(this.mostrarCalendario()){
+      this.getFacturasPorFechas();
+    }else if(this.mostrarCalendario()==false){
+      this.getFacturas();
+    }else{
+      this.toastr.error("Seleccione una opcion","Adventencia");
+    }
+  }
+
+  mostrarCalendario() {
+
+    if(this.tipoDeVista=="Mas recientes"){
+     return false;
+    } else if (this.tipoDeVista=="Rango de fechas"){
+      return true;
+    }
+
+  }
+
+  obtenerDatosCliente(nombre,fecha,total) {
+    this.nombreCliente=nombre;
+    this.fechaFactura = fecha;
+    this.totalFactura = total;
   }
 
   private validateDate():boolean {

@@ -10,8 +10,8 @@ export class PedidosService {
 
   constructor(private _httpClient:HttpClient) {}
 
-  getFacturas() {
-    return this._httpClient.get(`${this.URL}factura/`);
+  getFacturas(noPagina=1) {
+    return this._httpClient.get(`${this.URL}factura/?&page=${noPagina}`);
   }
 
   getDetallesFactura(idFactura:string) {
