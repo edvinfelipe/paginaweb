@@ -2,11 +2,12 @@
 
 const express = require('express')
 const app = express()
-
+const { check } = require('express-validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 const Cliente = require('../models/clientes_registrados')
+const { fieldValidator } = require('../middleware/field-validator')
 
 // email
 const nodemailer = require('nodemailer')
@@ -106,6 +107,53 @@ app.put('/password/reset', ( req, res)=>{
             err
         })
     }
+})
+
+// Enviar email al correo de protech
+app.post('/contacto/email',
+    [
+        check('correo','El correo es necesario').isEmail(),
+        check('comentario', 'El comentario es necesario').not().isEmpty(),
+        check('nombre', 'El nombre es necesario').not().isEmpty(),
+        fieldValidator
+    ],
+    async(req, res)=>{
+
+    try {
+        const { correo, comentario, nombre, telefono } = req.body
+
+        let mailOptions = {
+            from: 'Mensaje de Cliente',
+            to: process.env.EMAIL,
+            subject:'Mensaje del cliente',
+            html: `<h3>nombre: ${nombre}</h3>
+                   <h5>correo: ${correo}</h5>
+                   <h5>telefono: ${telefono || ''}</h5>
+                   <h5>comentario: ${comentario}</h5>`
+        }
+
+        transporter.sendMail(mailOptions, function(err, info){
+
+            if( err ){
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            return res.json({
+                status: true,
+                message: info.response
+            })
+        })
+
+    } catch (err) {
+        return res.status(500).json({
+            status: false,
+            err
+        })
+    }
+    
 })
 
 module.exports = app
