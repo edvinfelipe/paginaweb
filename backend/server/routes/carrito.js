@@ -146,17 +146,19 @@ app.delete('/carrito/:cliente_id', (req, res) => {
 
     const id = req.params.cliente_id
 
-    Carrito.deleteMany({cliente_id:id}, 
-        (err, carrito )=>{
-           
-            if( err ){
+    Carrito.deleteMany({
+            cliente_id: id
+        },
+        (err, carrito) => {
+
+            if (err) {
                 return res.status(500).json({
                     status: false,
                     err
                 })
             }
 
-            if( !carrito ){
+            if (!carrito) {
                 return res.status(404).json({
                     status: false,
                     err: {
@@ -164,12 +166,12 @@ app.delete('/carrito/:cliente_id', (req, res) => {
                     }
                 })
             }
-    
+
             res.json({
                 status: true,
                 carrito: carrito
             })
-    })
+        })
 })
 //==============================
 // Elimina un detalle por producto y cliente
@@ -180,16 +182,19 @@ app.delete('/carrito/:producto_id/:cliente_id', (req, res) => {
     const idProducto = req.params.producto_id
     const idCliente = req.params.cliente_id
 
-    Carrito.deleteOne({producto_id:idProducto,cliente_id:idCliente}, 
-        (err, carrito )=>{
-            if( err ){
+    Carrito.deleteOne({
+            producto_id: idProducto,
+            cliente_id: idCliente
+        },
+        (err, carrito) => {
+            if (err) {
                 return res.status(500).json({
                     status: false,
                     err
                 })
             }
 
-            if( !carrito ){
+            if (!carrito) {
                 return res.status(404).json({
                     status: false,
                     err: {
@@ -197,12 +202,41 @@ app.delete('/carrito/:producto_id/:cliente_id', (req, res) => {
                     }
                 })
             }
-    
+
             res.json({
                 status: true,
                 carrito: carrito
             })
-    })
+        })
 })
+
+//==============================
+// Devuelve el total de detalles en un carrito
+//==============================
+
+
+app.get('/carrito/conteo/:cliente_id', (req, res) => {
+    const idCliente = req.params.cliente_id
+    Carrito.find({
+            cliente_id: idCliente
+        }, {
+            cantidad: 1
+        }).count()
+        .exec((err, carrito) => {
+
+            if (err) {
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            res.json({
+                status: true,
+                carrito
+            })
+        })
+})
+
 
 module.exports = app
