@@ -32,16 +32,6 @@ export class DetalleproductoComponent implements OnInit {
         this.obtenerImagenPrincipal(); //Obtener imagen principal
       });
     })
-
-    // this.catalogoService.getProducto(this.id)
-    //   .subscribe( (producto: any) => {
-    //     this.producto = producto.producto; //Obtener producto
-    //     this.reservado = producto.reservado;
-    //     this.obtenerEspecificaciones(); //Obtener especificaciones
-    //     this.obtenerImagenes(); // Obtener imágenes
-    //     this.obtenerImagenPrincipal(); //Obtener imagen principal
-    //   });
-
   }
   ngOnInit(): void {
   }
