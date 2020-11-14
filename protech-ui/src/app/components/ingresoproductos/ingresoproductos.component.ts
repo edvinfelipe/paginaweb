@@ -325,7 +325,6 @@ export class IngresoproductosComponent implements OnInit {
       if (i === this.especificaciones.length - 1)
       {
         this.sEspecificaciones = this.sEspecificaciones + this.especificaciones[i];
-        console.log(this.sEspecificaciones);
       }
       else
       {
@@ -342,7 +341,6 @@ export class IngresoproductosComponent implements OnInit {
       if (i === this.mespecificaciones.length - 1)
       {
         this.msEspecificaciones = this.msEspecificaciones + this.mespecificaciones[i];
-        console.log(this.msEspecificaciones);
       }
       else
       {
@@ -506,8 +504,6 @@ export class IngresoproductosComponent implements OnInit {
     {
       if (this.urls[i] === null || this.urls[i] !== 'assets/img/Interrogación.png'){
         this.imagenesService.postImagen(this.imagenes[i], id).subscribe(
-          (res) => console.log(res),
-          (err) => console.log(err),
           );
       }
     }
@@ -522,8 +518,6 @@ export class IngresoproductosComponent implements OnInit {
       if (this.mimagenes[i] === 'Eliminar')
       {
         this.imagenesService.deleteImagen(this.arregloProductos[this.posicion].imagenes[i]._id).subscribe(
-          (res) => console.log(res),
-          (err) => console.log(err),
           );
       }
     }
@@ -532,8 +526,6 @@ export class IngresoproductosComponent implements OnInit {
     {
       if ((this.murls[i] === null || this.murls[i] !== 'assets/img/Interrogación.png') && (this.mimagenes[i] !== 'Vino del servidor')){
       this.imagenesService.postImagen(this.mimagenes[i], id).subscribe(
-        (res) => console.log(res),
-        (err) => console.log(err),
         );
       }
     }
@@ -550,9 +542,7 @@ export class IngresoproductosComponent implements OnInit {
       (producto: any) => {
         id = producto.producto._id;
         this.ingresarImagenes(id);
-        console.log(producto);
       },
-      (err) => console.log(err),
     );
   }
   
@@ -565,9 +555,7 @@ export class IngresoproductosComponent implements OnInit {
     this.productoService.putProducto(id, this.mcampos, this.mbanderaradio, this.mbooleano, this.msEspecificaciones, mid, cid).subscribe(
       (producto: any) => {
         this.modificarImagenes(id);
-        console.log(producto);
       },
-      (err) => console.log(err),
     );
   }
   //Eliminar un producto
@@ -575,8 +563,6 @@ export class IngresoproductosComponent implements OnInit {
   {
     let id = this.arregloProductos[this.posEliminar]._id;
     this.productoService.deleteProducto(id).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
     );
   }
   //Posición en la que se eliminará un producto
