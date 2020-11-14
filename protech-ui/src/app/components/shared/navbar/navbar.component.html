@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <div class="header_main-bottom">
+    <!-- <div class="header_main-bottom">
         <div class="header_main-container">
             <div class="header_main_logo">
                 <a [routerLink]="['/home']" class="logo">
@@ -32,7 +32,18 @@
             </div>
             <div class="header_main-search">
                 <form action="">
-                    <input type="search" placeholder="Buscar" class="input">
+                    <input type="search" placeholder="Buscar" [formControl]="emailCtrl" class="input form-control">
+                    <ul *ngIf="buscando">
+                      <li *ngFor="let producto of productos">{{producto.nombre}}</li>
+                    </ul>
+                    <ul class="filtro-busqueda">
+                      <li>Holadssdsdsdsdsdsdsdsdsdsdsdddddddddddddddddddddddddddddddd</li>
+                      <li>Hola</li>
+                      <li>Hola</li>
+                      <li>Hola</li>
+                      <li>Hola</li>
+                      <li>Hola</li>
+                    </ul>
                 </form>
                 <i class="fas fa-search logo-buscar"></i>
             </div>
@@ -43,6 +54,37 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <div class="container-fluid">
+      <div class="row" id="container-search">
+        <div class="col-sm-3 d-flex logo-flex">
+          <a [routerLink]="['/home']" class="logo">
+            <img src="assets/img/image.png" alt="">
+          </a>
+        </div>
+        <div class="col-sm-6 d-flex align-items-center">
+          <div class="input-main">
+            <input type="text" class="form-control"[formControl]="emailCtrl" placeholder="Buscar">
+            <ul *ngIf="buscando" class="filtro-busqueda">
+              <li *ngFor="let producto of productos" (click)="detalleProducto(producto.id)">
+                <div class="result-serarch d-flex">
+                  <a href="" class="media-image"><img [src]="producto.imagenes[0].url" alt="imagen"></a>
+                  <div class="item-busqueda">
+                    <p>{{producto.nombre}}</p>
+                    <p class="precio-busqueda">{{producto.precio | currency:'Q '}}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-3 d-flex carrito-flex">
+          <div class="header_carrito">
+            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <h5>0</h5>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg  navbar-custom ">

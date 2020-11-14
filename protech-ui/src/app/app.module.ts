@@ -46,6 +46,7 @@ import { MensajeErrorComponent } from './components/shared/mensaje-error/mensaje
 import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/recuperarcontrasenia.module';
 
 import { CheckoutService } from './services/checkout.service';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
 
 
 
@@ -71,7 +72,8 @@ import { CheckoutService } from './services/checkout.service';
     LoginComponent,
     RegistroComponent,
     MensajeErrorComponent,
-    ReportesComponent
+    ReportesComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,

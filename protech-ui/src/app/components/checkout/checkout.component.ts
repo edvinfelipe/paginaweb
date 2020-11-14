@@ -4,6 +4,7 @@ import { CheckoutService } from "../../services/checkout.service";
 import { JsonPipe, Location } from "@angular/common";
 import { CarritoUsuarioService } from "../../services/carrito-usuario.service";
 import {Router} from '@angular/router';
+import { elementAt } from 'rxjs/operators';
 
 @Component({
   selector: 'app-checkout',
@@ -14,14 +15,16 @@ export class CheckoutComponent {
 
 
   detalleproductos: any[] = []; //aqui se almacenan los productos con nuevas propiedades, cantidad y subtotal
+  detallesEnvio: any;
   t: number = 0; //este es el total a pagar
   client: any; //Aqui se almacena el id de la key del sessionStorage
   metodo: any = '';//el ngmodule lo enlaza con el tipo de envio en la vista
   //aca estan las variables para los detalles del envio
-  nombreenvio: string; telefonoenvio: number; nitenvio: number; emailenvio: string; direccionenvio: string;
-  departamentoenvio: string; notaenvio: string;
+  nombreenvio: string; telefonoenvio: string; nitenvio: string; emailenvio: string; direccionenvio: string = "";
+  departamentoenvio: string = "Guatemala"; notaenvio: string; metodopago: string = "Pago Contra Entrega"
   //Arreglo de detalle_envio, factura y detalle_factura
   facturacion: any[] = [];
+  isdisabled: boolean = true;
 
 
   @ViewChild("myModalConf", { static: false }) myModalConf: TemplateRef<any>;
@@ -110,6 +113,7 @@ export class CheckoutComponent {
         console.log("Gracias por su compra");
         if(JSON.parse(sessionStorage.getItem("user")) ==null){
           localStorage.clear();
+          this.ResetReserva();
           console.log("carrito limpio");
         }
         if(JSON.parse(sessionStorage.getItem("user")) !=null){
@@ -117,6 +121,7 @@ export class CheckoutComponent {
           this.CarritoConUsuarioService.deleteAllCarrito(id).subscribe(data => {
             console.log("carrito limpio");
           });
+          this.ResetReserva();
         }
         
       }
@@ -125,16 +130,101 @@ export class CheckoutComponent {
       console.log(error);
     });
   }
+  validacioncampos(){
+    
+    let nombreregex =/^[a-zA-Z]+\ +[a-zA-Z]+\ *[a-zA-Z]*\ *[a-zA-Z]*\ *$/gi 
+    let telefonoregex = /^\d{8}$/g
+    let nitregex =/^[0-9]{6,8}\-*[0-9]{1,3}$|cf|CF|C\/F|c\/f|C\/f|c\/F|Cf|cF/gi
+    let emailregex = /^[a-zA-Z0-9.!&*_-]+\ {0}@{1}\ {0}[a-zA-Z]+\ {0}\.+[a-zA-Z]{2,8}$/gi
+    let direccionregex = /^.{5,100}/gi
+    let notaregex = /^[a-zA-Z0-9.!&*_-]+ *.{0,200}/gi
+    
+    let n = false
+    let t = false
+    let nit = false
+    let em = false 
+    let d = false
+    let not = true
+    
+    if (nombreregex.test(this.nombreenvio) == true) {
+      document.getElementById("vnombre").innerText ="Nombre valido";
+      document.getElementById("vnombre").style.color = "green";
+      n = true;
+    }else{
+      document.getElementById("vnombre").innerText ="El campo debe contener al menos un nombre y un apellido";
+      document.getElementById("vnombre").style.color = "red";
+
+    }
+
+    if (telefonoregex.test(this.telefonoenvio) == true) {
+      console.log("El telefono esta bien escrito")
+      document.getElementById("vtelefono").innerText ="Teléfono valido";
+      document.getElementById("vtelefono").style.color = "green";
+      t = true
+    }else{
+      document.getElementById("vtelefono").innerText ="El campo debe contener 8 digitos";
+      document.getElementById("vtelefono").style.color = "red";
+    }
+
+    if (nitregex.test(this.nitenvio) == true) {
+      document.getElementById("vnit").innerText ="Nit valido";
+      document.getElementById("vnit").style.color = "green";
+      nit = true
+    }else{
+      document.getElementById("vnit").innerText ="No puede dejar vacío el campo, escriba su nit o cf";
+      document.getElementById("vnit").style.color = "red";
+    }
+
+    if (emailregex.test(this.emailenvio) == true) {
+      document.getElementById("vemail").innerText ="Email valido";
+      document.getElementById("vemail").style.color = "green";
+      em = true
+    }else{
+      document.getElementById("vemail").innerText ="El email es invalido";
+      document.getElementById("vemail").style.color = "red";
+    }
+
+    if (direccionregex.test(this.direccionenvio) == true) {
+      document.getElementById("vdireccion").innerText ="Dirección valida";
+      document.getElementById("vdireccion").style.color = "green";
+      d = true
+    }else{
+      document.getElementById("vdireccion").innerText ="Escriba una dirección valida";
+      document.getElementById("vdireccion").style.color = "red";
+    }
+
+    if (notaregex.test(this.notaenvio) == true) {
+      console.log("la nota esta bien escrita");
+      not = true
+    }else{
+      console.log("la nota esta mal escrita");
+    }
+    
+    if (n ==true && t==true && nit==true && em==true && d==true &&not==true) {
+        console.log("los campos estan bien escritos");
+        this.SetDetalleEnvio(this.nombreenvio,this.direccionenvio,this.emailenvio,this.nitenvio,
+                             this.telefonoenvio,this.notaenvio);
+        this.isdisabled = false;
+        document.getElementById("botonConfirmacion").style.backgroundColor = "#095fbc";
+    } else {
+        this.isdisabled = true;
+        document.getElementById("botonConfirmacion").style.backgroundColor = "#1a2a40";
+    }
+
+  }
+
   /* Genera el detalle del envio, con nombre, telefono, nit, memail, direccion, departamento
       y alguna nota si fuera necesario.*/
-  GetDetalleEnvio() {
+  SetDetalleEnvio(nombre,direccion,email,nit,telefono,nota) {
+
     let detalleenvio = {
-      nombre: this.nombreenvio, direccion: this.direccionenvio, email: this.emailenvio,
-      nit: this.nitenvio, departamento: this.departamentoenvio, telefono: this.telefonoenvio,
-      nota: this.notaenvio, metodo_pago: "Pago Contra Entrega"
+      nombre: nombre , direccion: direccion, email: email,
+      nit: nit, departamento: this.departamentoenvio, telefono: telefono,
+      nota: nota, metodo_pago: "Pago Contra Entrega"
     }
-    return detalleenvio;
+    return this.detallesEnvio = detalleenvio;
   }
+
   /*Estas funciones estructuran el formato de tipo DATE de mongodb */
   getfechaformato() {
     let date = new Date(); let anio, mes, dia;
@@ -200,8 +290,9 @@ export class CheckoutComponent {
   //Esta funcion crea un json, de otros objetos de tipo json. y contiene la informacion necesaria
   //para el post a la api.
   DetalleGeneral() {
+    console.log(this.detallesEnvio);
     let DetalleGeneral = {
-      det_envio: this.GetDetalleEnvio(), factura: this.GetDetalleFactura(),
+      det_envio: this.detallesEnvio, factura: this.GetDetalleFactura(),
       det_factura: this.GetDetalleProductoFactura()
     };
     return DetalleGeneral;
@@ -217,8 +308,12 @@ export class CheckoutComponent {
       .subscribe((data: any) => console.log(data));
 
   }
-  // Funcion que obtiene el id del cliente del SessionStorage
-
+  // resetea el valor de la reserva.
+  ResetReserva(){
+    this.detalleproductos.forEach(element => {
+      this.checkout.ResetReserva(element.id,element.cantidad);
+    });
+  }
   constructor(private checkout: CheckoutService, private modalService: NgbModal, private Location: Location,
               private CarritoConUsuarioService: CarritoUsuarioService,private router:Router) {
     //inicializa la funcion para obtener los id's asociados al carrito de compras, para poder buscar el detalle

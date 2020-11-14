@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { Router ,ActivatedRoute} from '@angular/router';
 import { CatalagoService } from '../../services/catalago.service';
 
 @Component({
@@ -18,10 +18,12 @@ export class DetalleproductoComponent implements OnInit {
   id: string; // Id del producto recibido desde el catálogo
   producto: any = {}; // Producto recibido desde el catálogo
   reservado: number;
-  constructor(private router: Router, private catalogoService: CatalagoService) {
-    this.id = this.router.url.split('/')[2]; // Obtener el id del producto desde la URL
-    
-    this.catalogoService.getProducto(this.id)
+  constructor(private router: Router, private catalogoService: CatalagoService, private activatedRoute: ActivatedRoute) {
+    // this.id = this.router.url.split('/')[2]; // Obtener el id del producto desde la URL
+
+    this.activatedRoute.params.subscribe(params =>{
+      this.id = params['id']
+      this.catalogoService.getProducto(this.id)
       .subscribe( (producto: any) => {
         this.producto = producto.producto; //Obtener producto
         this.reservado = producto.reservado;
@@ -29,7 +31,17 @@ export class DetalleproductoComponent implements OnInit {
         this.obtenerImagenes(); // Obtener imágenes
         this.obtenerImagenPrincipal(); //Obtener imagen principal
       });
-    
+    })
+
+    // this.catalogoService.getProducto(this.id)
+    //   .subscribe( (producto: any) => {
+    //     this.producto = producto.producto; //Obtener producto
+    //     this.reservado = producto.reservado;
+    //     this.obtenerEspecificaciones(); //Obtener especificaciones
+    //     this.obtenerImagenes(); // Obtener imágenes
+    //     this.obtenerImagenPrincipal(); //Obtener imagen principal
+    //   });
+
   }
   ngOnInit(): void {
   }
@@ -74,7 +86,7 @@ export class DetalleproductoComponent implements OnInit {
     {
       this.rutas[2] = 'assets/img/Interrogación.png';
     }
-    
+
   }
 
   // tslint:disable-next-line: typedef
@@ -88,7 +100,7 @@ export class DetalleproductoComponent implements OnInit {
           if (this.numero > 0)
           {
             this.numero = this.numero - 1;
-          }              
+          }
       });
     }
     else if (accion === 1)
