@@ -7,7 +7,7 @@ import { Productos } from "../interfaces/productos";
   providedIn: 'root'
 })
 export class ProductoService {
-  header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA0OTU5MDY3LCJleHAiOjE2MDUxMzE4Njd9.07kr6zaTUF1Dhi_kaX3snzhyAqQhEDbMIws3sWFWVeQ';
+  header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA1MjE1NjA0LCJleHAiOjE2MDUzODg0MDR9.czRa0yd6qAgK7S8A5LppW841oZ0AFYth0LKK1V5NGgc';
   url = 'http://api-protech.herokuapp.com/api/producto/';
   bodyProducto: Productos;
   constructor(private http: HttpClient) { }
@@ -74,7 +74,6 @@ export class ProductoService {
       marca: mid,
       categoria: cid
     };
-    console.log(this.bodyProducto.descripcion);
     if (disponible === 2)
     {
       this.bodyProducto.disponible = false;
