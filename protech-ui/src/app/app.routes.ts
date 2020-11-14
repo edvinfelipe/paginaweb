@@ -27,6 +27,7 @@ import { HistorialComprasComponent } from './components/historial-compras/histor
 import { IngresoproductosComponent } from './components/ingresoproductos/ingresoproductos.component';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { PedidosComponent } from "./components/pedidos/pedidos.component";
+import { PanelprincipalComponent } from "./components/panelprincipal/panelprincipal.component";
 /* importa el guardia de ruta */
 import { AuthHistorialGuard } from './guards/auth-historial.guard';
 
@@ -47,6 +48,7 @@ const app_routes: Routes = [
   { path: 'historialcompras', component: HistorialComprasComponent, canActivate: [AuthHistorialGuard] },
   { path: 'ingresoproductos', component: IngresoproductosComponent},
   { path: 'listapedidos', component: PedidosComponent},
+  { path: 'panelprincipal', component: PanelprincipalComponent},
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
