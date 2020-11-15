@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
 
 import { RecuperarconrtraseniaService } from "../../../services/recuperarconrtrasenia.service";
 
@@ -13,7 +14,7 @@ export class RecepcioncorreoComponent implements OnInit {
   formCorreo: FormGroup;
   correo:any={};
   correoValido:boolean=true;
-  constructor(private formBuilder:FormBuilder, private _recuperarContraseniaService:RecuperarconrtraseniaService) {
+  constructor(private formBuilder:FormBuilder, private _recuperarContraseniaService:RecuperarconrtraseniaService, private _toastr: ToastrService) {
     this.buildFormCorreo();
   }
 
@@ -45,8 +46,7 @@ export class RecepcioncorreoComponent implements OnInit {
       this._recuperarContraseniaService.mandarCorreo(this.correo).subscribe((data:any)=>{
 
         if(data.status){
-          console.log(data.status);
-
+          this._toastr.success('Correo enviado','Pro-Tech');
         }
       },error=>{
         this.correoValido = false;

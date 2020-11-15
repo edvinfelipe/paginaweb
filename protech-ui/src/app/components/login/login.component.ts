@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
 
 import { LoginService } from "../../services/login.service";
 import { Login } from "../../interfaces/login";
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   loginData: Login;
   response: any = [];
   isErrorLoged:boolean=false;
-  constructor(public activeModal: NgbActiveModal, private formBuilder:FormBuilder, private _loginService:LoginService) {
+  constructor(public activeModal: NgbActiveModal, private formBuilder:FormBuilder, private _loginService:LoginService, private _router:Router) {
     this.buildFormLogin();
    }
 
@@ -55,6 +56,9 @@ export class LoginComponent implements OnInit {
           this.isErrorLoged=false;
           this._loginService.setToken(data.body['token']);
           this._loginService.setUser(data.body['usuario']);
+          if(data.body['usuario'].role==='ADMIN_ROLE'){
+            this._loginService.setAdmin(data.body['usuario'].role);
+          }
           location.reload();
         }
       },
@@ -63,6 +67,11 @@ export class LoginComponent implements OnInit {
       }
       );
     }
+  }
+
+  recuperarContrasenia() {
+    this._router.navigate(['forgotpassword/ingresocorreo']);
+    this.activeModal.close();
   }
 
 }

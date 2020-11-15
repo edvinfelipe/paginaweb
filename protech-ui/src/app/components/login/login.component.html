@@ -21,7 +21,7 @@
       </div>
     </div>
     <p *ngIf="isErrorLoged" class="text-danger"> Usuario o contraseña incorrectos</p>
-    <small id="emailHelp" class="form-text text-muted"><a [routerLink]="['/forgotpassword/ingresocorreo']" style="color: #1A2A40;">¿Olvido su contraseña?</a></small>
+    <small id="emailHelp" class="form-text text-muted"><a (click)="recuperarContrasenia()" style="color: #1A2A40;">¿Olvido su contraseña?</a></small>
   </form>
 </div>
 <div class="modal-footer">

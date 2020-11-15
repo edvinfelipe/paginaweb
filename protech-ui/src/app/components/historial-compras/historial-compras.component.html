@@ -1,31 +1,31 @@
-<div class="container-fluid" style="margin-bottom: 60px;">
-    <div class="row">
-        <div class="container-fluid" class="col-4" style="margin-left: 60px;">
-          <h3 style="background-color: #1a2a40; color: white; text-align: center; margin-top: 60px;">Historial del cliente</h3> 
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<div class="container">
+        <div class="container-fluid">
+          <h3 class="titulo" >Historial del cliente</h3> 
           
-          
+          <div class="contenedor-facturas">
             <button class="factura"  *ngFor="let factura of HistorialCompras" (click)="getBoton(factura.idcompra)">
-              Identificador de compra: {{factura.idcompra}} 
-              <br> Fecha de compra: {{factura.fechacompra}} 
-              <br> Total de compra: {{factura.total}}
+              <label  for="idecompra"> Identificador de compra: {{factura.idcompra}} </label>
+          <br><label  for="fechacompra"> Fecha de compra: {{factura.fechacompra | date}} </label>
+          <br><label  for="totalcompra"> Total de compra: {{factura.total | currency: 'Q'}}</label>
             </button>
-
+          </div>
         </div>
-        <div class="container-fluid" class="col-7" style="margin-top: 60px;">
+        <div class="container-fluid-2">
 
             <table class="table table-hover">
                 <thead style="background-color: #1a2a40; color: white;">
                     <tr>
-                        <th>Nombre</th>
-                        <th>Fecha</th>
-                        <th>TOTAL</th>
+                        <td data-titulo="Nombre: ">Nombre</td>
+                        <td data-titulo="Fecha: ">Fecha</td>
+                        <td data-titulo="TOTAL: ">TOTAL</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th>{{InfoFactura.nombre}}</th>
-                        <th>{{InfoFactura.fecha}}</th>
-                        <th>Q.{{InfoFactura.total}}</th>
+                        <td data-titulo="Nombre: ">{{InfoFactura.nombre}}</td>
+                        <td data-titulo="Fecha: ">{{InfoFactura.fecha | date}}</td>
+                        <td data-titulo="TOTAL: ">{{InfoFactura.total| currency: 'Q'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -33,52 +33,52 @@
             <table class="table table-hover">
                 <thead style="background-color: #1a2a40; color: white;">
                     <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Descripción</th>
-                      <th scope="col">Cantidad</th>
-                      <th scope="col">Descuento</th>
-                      <th scope="col">Precio</th>
-                      <th scope="col">Subtotal</th>
+                      <th class="tit" scope="col"> </th>
+                      <td data-titulo="Descripción: " scope="col">Descripción</td>
+                      <th data-titulo="Cantidad: " scope="col">Cantidad</th>
+                      <th data-titulo="Descuento: " scope="col">Descuento</th>
+                      <th data-titulo="Precio: " scope="col">Precio</th>
+                      <th data-titulo="Subtotal: " scope="col">Subtotal</th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let DetalleProducto of DetalleProductos">
                     <tr>
-                      <th scope="row">1</th>
-                      <td>{{DetalleProducto.descripcion}} </td>
-                      <td>{{DetalleProducto.cantidad}}</td>
-                      <td>{{DetalleProducto.descuento}}</td>
-                      <td>Q.{{DetalleProducto.precio}}</td>
-                      <td>Q.{{DetalleProducto.subtotal}}.</td>
+                      <td class="tit"> </td>
+                      <td data-titulo="Descripción: ">{{DetalleProducto.descripcion}} </td>
+                      <td data-titulo="Cantidad ">{{DetalleProducto.cantidad}}</td>
+                      <td data-titulo="Descuento: ">{{DetalleProducto.descuento}}</td>
+                      <td data-titulo="Precio: ">{{DetalleProducto.precio| currency: 'Q'}}</td>
+                      <td data-titulo="Subtotal: ">{{DetalleProducto.subtotal| currency: 'Q'}}</td>
                     </tr>  
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <th>TOTAL</th>
-                    <td>Q.{{total}}.00</td>
+                    <th class="espacio"></th>
+                    <th class="espacio"></th>
+                    <th class="espacio"></th>
+                    <th class="espacio"></th>
+                    <th data-titulo="TOTAL: ">TOTAL</th>
+                    <td data-titulo="TOTAL: ">{{total | currency: 'Q'}}</td>
                   </tr>
                 </tfoot>
             </table>
             <table class="table table-hover">
               <thead  style="background-color: #1a2a40; color: white;">
                 <tr>
-                  <th> Direccion </th>
-                  <th> Anotacion </th>
-                  <th> Metodo De Pago</th>
+                  <th data-titulo="Dirección: "> Dirección </th>
+                  <th data-titulo="Anotación: "> Anotación </th>
+                  <th data-titulo="Metodo De Pago: "> Metodo De Pago</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>{{DetalleEnvio.direccion}}</td>
-                  <td>{{DetalleEnvio.anotacion}}</td>
-                  <td>{{DetalleEnvio.metodoenvio}}</td>
+                  <td data-titulo="Dirección: ">{{DetalleEnvio.direccion}}</td>
+                  <td data-titulo="Anotación: ">{{DetalleEnvio.anotacion}}</td>
+                  <td data-titulo="Metodo De Pago: ">{{DetalleEnvio.metodoenvio}}</td>
                 </tr>
               </tbody>
             </table> 
         </div>
 
-    </div>
+    
 </div>

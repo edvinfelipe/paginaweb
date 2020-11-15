@@ -24,6 +24,7 @@ export class CheckoutComponent {
   departamentoenvio: string = "Guatemala"; notaenvio: string; metodopago: string = "Pago Contra Entrega"
   //Arreglo de detalle_envio, factura y detalle_factura
   facturacion: any[] = [];
+  numerofactura: any;
   isdisabled: boolean = true;
 
 
@@ -53,7 +54,7 @@ export class CheckoutComponent {
   GetStorageConCliente(id_usuario: any) {
     this.CarritoConUsuarioService.getCarrito(id_usuario)
       .subscribe((data: any) => {
-        console.log(data);
+        //console.log(data);
         data.forEach(element => {
           let x = 0;
           //console.log(element.producto_id);
@@ -94,11 +95,11 @@ export class CheckoutComponent {
     this.modalService.open(this.myModalConf).result.then(r => {
 
       if (r === "Si") {
-        console.log("Compra confirmada");
+        //console.log("Compra confirmada");
         this.ConfirmacionCompra();
         this.mostrarModalCerrar();
       } else {
-        console.log("Compra denegada");
+        //console.log("Compra denegada");
       }
     }, error => {
       console.log(error);
@@ -114,12 +115,12 @@ export class CheckoutComponent {
         if(JSON.parse(sessionStorage.getItem("user")) ==null){
           localStorage.clear();
           this.ResetReserva();
-          console.log("carrito limpio");
+          //console.log("carrito limpio");
         }
         if(JSON.parse(sessionStorage.getItem("user")) !=null){
           let id = JSON.parse(sessionStorage.getItem("user"))._id;
           this.CarritoConUsuarioService.deleteAllCarrito(id).subscribe(data => {
-            console.log("carrito limpio");
+            //console.log("carrito limpio");
           });
           this.ResetReserva();
         }
@@ -157,7 +158,6 @@ export class CheckoutComponent {
     }
 
     if (telefonoregex.test(this.telefonoenvio) == true) {
-      console.log("El telefono esta bien escrito")
       document.getElementById("vtelefono").innerText ="Teléfono valido";
       document.getElementById("vtelefono").style.color = "green";
       t = true
@@ -194,14 +194,13 @@ export class CheckoutComponent {
     }
 
     if (notaregex.test(this.notaenvio) == true) {
-      console.log("la nota esta bien escrita");
+      //console.log("la nota esta bien escrita");
       not = true
     }else{
-      console.log("la nota esta mal escrita");
+      //console.log("la nota esta mal escrita");
     }
     
     if (n ==true && t==true && nit==true && em==true && d==true &&not==true) {
-        console.log("los campos estan bien escritos");
         this.SetDetalleEnvio(this.nombreenvio,this.direccionenvio,this.emailenvio,this.nitenvio,
                              this.telefonoenvio,this.notaenvio);
         this.isdisabled = false;
@@ -235,7 +234,6 @@ export class CheckoutComponent {
     if (dia < 10) { d = '0' + dia; } else { d = dia; }
 
     let fecha = anio + '-' + m + '-' + d;
-    console.log(fecha)
     return fecha;
   }
 
@@ -260,7 +258,6 @@ export class CheckoutComponent {
   //Obtiene el identificador del cliente.
   GetClient() {
     let id_cliente;
-    console.log("funcion de get cliente");
     if (sessionStorage.length != 0) {
       id_cliente = JSON.parse(sessionStorage.getItem('user'));
       return id_cliente._id;
@@ -290,7 +287,6 @@ export class CheckoutComponent {
   //Esta funcion crea un json, de otros objetos de tipo json. y contiene la informacion necesaria
   //para el post a la api.
   DetalleGeneral() {
-    console.log(this.detallesEnvio);
     let DetalleGeneral = {
       det_envio: this.detallesEnvio, factura: this.GetDetalleFactura(),
       det_factura: this.GetDetalleProductoFactura()
@@ -305,7 +301,9 @@ export class CheckoutComponent {
   ConfirmacionCompra() {
     //console.log("Confirmando compra y creando factura");
     this.checkout.PostFactura(this.DetalleGeneral())
-      .subscribe((data: any) => console.log(data));
+      .subscribe((data: any) => {
+                this.numerofactura = data.det_envio.factura;
+              });
 
   }
   // resetea el valor de la reserva.
@@ -329,7 +327,6 @@ export class CheckoutComponent {
       let id_usuario = usuario._id;
       this.GetStorageConCliente(id_usuario);
     }
-    console.log("usuario");
   }
 
   ngOnInit(): void {

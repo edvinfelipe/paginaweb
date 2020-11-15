@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
 
 import { Validaciones } from "../registro/validaciones";
+import { Correo } from "../../interfaces/correo";
+import { EnviarcorreoService } from "../../services/enviarcorreo.service";
 
 @Component({
   selector: 'app-contactpage',
@@ -11,7 +14,8 @@ import { Validaciones } from "../registro/validaciones";
 export class ContactpageComponent implements OnInit {
 
   formContacto: FormGroup;
-  constructor(private formBuilder:FormBuilder) {
+  correo:Correo;
+  constructor(private formBuilder:FormBuilder, private _enviarCorreoService:EnviarcorreoService,private _toastr: ToastrService) {
     this.buildFormContacto();
   }
 
@@ -28,11 +32,27 @@ export class ContactpageComponent implements OnInit {
   }
 
   enviarCorreo(){
+    console.log("Entro");
     if(this.formContacto.valid){
-      console.log('correo valido');
+      console.log("Valido");
+      this.cuerpoCorreo();
+      this._enviarCorreoService.enviarCorreo(this.correo).subscribe((data:any)=>{
+        if(data.status==true){
+          this.formContacto.reset();
+          this._toastr.success("Mensaje Enviado","Pro-Tech");
+        }
+      });
     }else{
       this.formContacto.markAllAsTouched();
     }
   }
 
+  private cuerpoCorreo() {
+    this.correo = {
+      correo: this.formContacto.get('correo').value,
+      nombre: this.formContacto.get('nombre').value,
+      telefono: this.formContacto.get('telefono').value,
+      comentario: this.formContacto.get('mensaje').value
+    };
+  }
 }

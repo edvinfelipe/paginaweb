@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   emailCtrl = new FormControl('',[]);
   productos:any[] = [];
   buscando:boolean=false;
+  usuario;
   constructor(private _cateogiriasService:CategoriasService,private _filtroBusqueda:FiltrobusquedaService,private modalService: NgbModal, private _loginService: LoginService,
               private Router: Router) {
 
@@ -78,10 +79,9 @@ export class NavbarComponent implements OnInit {
   onCheckUser(){
     if(this._loginService.getToken() ===null){
       this.isLogged=false;
-      console.log(this.isLogged);
     }else{
       this.isLogged=true;
-      console.log(this.isLogged);
+      this.usuario = JSON.parse(this._loginService.getUser());
     }
   }
 

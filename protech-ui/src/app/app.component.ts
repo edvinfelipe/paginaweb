@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { LoginService } from '../app/services/login.service';
 import { CatalagoService } from './services/catalago.service';
+import { Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,21 @@ import { CatalagoService } from './services/catalago.service';
 export class AppComponent {
   title = 'protech-ui';
 
-  constructor(private bnIdle: BnNgIdleService, private _loginService: LoginService, private _productosService: CatalagoService) { }
+  isAdmin:boolean=false;
+  constructor(private bnIdle: BnNgIdleService, private _loginService: LoginService, private _productosService: CatalagoService, private router:Router) { }
 
   ngOnInit(): void {
     this.sessionTimeOut();
     this.localStorageTimeOut();
+    if(sessionStorage.getItem('admin') ==='ADMIN_ROLE') {
+      this.isAdmin=true;
+      this.router.navigate(['panelprincipal']);
+    } else {
+      this.isAdmin=false;
+    }
+
   }
-  private listaVenta: any[] = []; 
+  private listaVenta: any[] = [];
 
   private sessionTimeOut(){
 
