@@ -88,7 +88,7 @@ function uploadImage(res, archivo, idPorducto) {
 
             const imagen = new Imagen({
                 imagen: result.public_id,
-                url: result.url,
+                url: result.url.substring(5,result.url.length),
                 producto: idPorducto
             })
 

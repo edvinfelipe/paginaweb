@@ -11,13 +11,13 @@ const { verificarToken, verificarRole } = require('../middleware/autenticacion')
 //=====================
 // Lista de marcas
 // ====================
-app.get('/marca', (req, res)=>{
+app.get('/marca', (req, res) => {
 
-    Marca.find({eliminado: false}, 'nombre' )
+    Marca.find({ eliminado: false }, 'nombre')
         .sort('nombre')
-        .exec((err, marcas)=>{
+        .exec((err, marcas) => {
 
-            if( err ){ 
+            if (err) {
                 return res.status(500).json({
                     status: false,
                     err
@@ -29,26 +29,26 @@ app.get('/marca', (req, res)=>{
                 marcas
             })
         })
-        
+
 })
 
 //======================
 // Regresa una marca
 // =====================
-app.get('/marca/:id', (req, res)=>{
+app.get('/marca/:id', (req, res) => {
 
     const id = req.params.id
 
-    Marca.findOne( { _id: id, eliminado: false}, 'nombre', (err, marcaDB)=>{
+    Marca.findOne({ _id: id, eliminado: false }, 'nombre', (err, marcaDB) => {
 
-        if( err ){ 
+        if (err) {
             return res.status(500).json({
                 status: false,
                 err
             })
         }
 
-        if( !marcaDB ){
+        if (!marcaDB) {
             return res.status(404).json({
                 status: false,
                 err: {
@@ -62,70 +62,68 @@ app.get('/marca/:id', (req, res)=>{
             marca: marcaDB
         })
     })
-        
+
 })
 
 //=====================
 // Crea una marca
 // ====================
-app.post('/marca', [ verificarToken, verificarRole ], async(req, res) => {
+app.post('/marca', [verificarToken, verificarRole], (req, res) => {
 
-    try {
+    const { nombre } = req.body
 
-        const { nombre } = req.body
+    Marca.findOne({ nombre }, (err, marcaDB) => {
 
-        let marca = await Marca.findOne({ nombre })
+        if (err) {
+            return res.status(500).json({
+                status: false,
+                err
+            })
+        }
 
-        if( marca ){
-
-            marca.eliminado = false
-            marca.save() 
+        if (marcaDB) {
+            marcaDB.eliminado = false
+            marcaDB.save()
 
             return res.json({
                 status: true,
-                marca
-            }) 
+                marca: marcaDB
+            })
         }
 
-        marca = new Marca({ nombre })
-        await marca.save()
+        const marca = new Marca({ nombre })
+        marca.save((err, marcaNew) => {
+            return res.json({
+                status: true,
+                marca: marcaNew
+            })
+        })
 
-        return res.json({
-            status: true,
-            marca
-        })
-        
-    } catch (error) {
-        return res.status(500).json({
-            status: false,
-            err
-        })
-    }
+    })
 })
 
 //========================
 // Modifica una marca
 // =======================
-app.put('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
+app.put('/marca/:id', [verificarToken, verificarRole], (req, res) => {
 
     const id = req.params.id
 
-    const body = _.pick(req.body,'nombre','eliminado')
+    const body = _.pick(req.body, 'nombre', 'eliminado')
 
     Marca.findByIdAndUpdate(
-        id, 
-        body,
-        { new: true }, 
-        (err, marcaDB)=>{
-           
-            if( err ){
+        id,
+        body, { new: true },
+        (err, marcaDB) => {
+
+            if (err) {
                 return res.status(500).json({
                     status: false,
                     err
                 })
             }
 
-            if( !marcaDB ){
+            if (!marcaDB) {
                 return res.status(404).json({
                     status: false,
                     err: {
@@ -133,18 +131,18 @@ app.put('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
                     }
                 })
             }
-    
+
             res.json({
                 status: true,
                 marca: marcaDB
             })
-    })
+        })
 })
 
 //========================
 // Elimina una marca
 // =======================
-app.delete('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
+app.delete('/marca/:id', [verificarToken, verificarRole], (req, res) => {
 
     const id = req.params.id
 
@@ -153,19 +151,18 @@ app.delete('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
     }
 
     Marca.findByIdAndUpdate(
-        id, 
-        cambiaEstado,
-        { new: true }, 
-        (err, marcaBorrado )=>{
-           
-            if( err ){
+        id,
+        cambiaEstado, { new: true },
+        (err, marcaBorrado) => {
+
+            if (err) {
                 return res.status(500).json({
                     status: false,
                     err
                 })
             }
 
-            if( !marcaBorrado ){
+            if (!marcaBorrado) {
                 return res.status(404).json({
                     status: false,
                     err: {
@@ -173,12 +170,12 @@ app.delete('/marca/:id', [ verificarToken, verificarRole ], (req, res) => {
                     }
                 })
             }
-    
+
             res.json({
                 status: true,
                 marca: marcaBorrado
             })
-    })
+        })
 })
 
 

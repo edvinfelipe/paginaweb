@@ -55,6 +55,9 @@ export class LoginComponent implements OnInit {
           this.isErrorLoged=false;
           this._loginService.setToken(data.body['token']);
           this._loginService.setUser(data.body['usuario']);
+          if(data.body['usuario'].role==='ADMIN_ROLE'){
+            this._loginService.setAdmin(data.body['usuario'].role);
+          }
           location.reload();
         }
       },
