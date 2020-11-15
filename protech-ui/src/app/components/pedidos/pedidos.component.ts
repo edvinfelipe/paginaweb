@@ -103,6 +103,9 @@ export class PedidosComponent implements OnInit {
     this.totalFactura = total;
   }
 
+  cambioPedido(){
+    console.log("cambio");
+  }
   private validateDate():boolean {
 
     if(this.formDate.valid){
