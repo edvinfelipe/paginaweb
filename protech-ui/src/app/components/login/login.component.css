@@ -2,3 +2,7 @@
   background-color:  #1A2A40;
   color: white;
 }
+
+#emailHelp a:hover {
+  cursor: pointer;
+}
