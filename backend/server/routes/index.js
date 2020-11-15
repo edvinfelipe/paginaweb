@@ -14,6 +14,7 @@ app.use(require('./detalle_factura'))
 app.use(require('./carrito'))
 app.use(require('./emails'))
 app.use(require('./reporte'))
+app.use(require('./detalleenvio'))
 
 if( process.env.NODE_ENV !== 'dev' ){
     app.use(require('./uploadcloud'))
