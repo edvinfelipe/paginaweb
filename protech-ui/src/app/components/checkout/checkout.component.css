@@ -24,6 +24,23 @@
     border-collapse: collapse;
 }
 
+.contenedor-detalles{
+    width: 100%;
+    display: flex;
+    margin: 1%;
+    padding: 2% 6%;
+}
+.contenedordetalles{
+    width: 40%;
+    padding: 2%;
+    margin: 0% 5%;
+}
+.camposenvio{
+    width: 60%;
+    
+}
+
+
 
 @media (max-width:63em){
     .table-sm tr{
@@ -41,15 +58,68 @@
     .table-sm td[data-titulo]{
         display: flex;
         font-weight: bold;
-        font-size: x-small;
+        font-size: 3vw;
+        border: 1px black solid;
+        background-color: rgb(26, 42,64);
+        color: white;
     }
     .table-sm td[data-titulo]::before{
         content: attr(data-titulo);
         width: 50px;
-        margin-right: 10px;
+        margin-right: 20%;
     }
-    .col-7{
+    .contenedor-detalles{
+        display: inline-block;
+    }
+    .camposenvio{
         width: 100%;
+    }
+
+    .contenedordetalles{
+        width: 100%;
+        padding: 15% 5% ;
+        margin: 5% 0%;
+    }
+
+
+}
+
+@media (max-width:35em){
+    .table-sm tr{
+        display: flex;
+        flex-direction: column;
+        padding: 1em;
+        
+    }
+    .table-sm{
+        width: 100%;
+    }
+    .table-sm thead{
+        display: none;
+    }
+    .table-sm td[data-titulo]{
+        display: flex;
+        font-weight: bold;
+        font-size: 3vw;
+        border: 1px black solid;
+        background-color: rgb(26, 42,64);
+        color: white;
+    }
+    .table-sm td[data-titulo]::before{
+        content: attr(data-titulo);
+        width: 50px;
+        margin-right: 10%;
+    }
+    .contenedor-detalles{
+        display: inline-block;
+    }
+    .camposenvio{
+        width: 100%;
+    }
+
+    .contenedordetalles{
+        width: 100%;
+        padding: 15% 5% ;
     }
 
 }

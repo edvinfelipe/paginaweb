@@ -1,8 +1,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<div class="container">
-    <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
 
-        <div class="col-7">
+    <div class="contenedor-detalles">
+
+        <div class="camposenvio">
             <h3>Detalles de envio</h3><br>
             <label class="campo" for="InputNombre">Nombre</label>
             <input [(ngModel)]="nombreenvio" type="text" class="form-control" id="InputNombre"
@@ -60,7 +60,7 @@
 
         </div>
 
-        <div class="col-5" style="background-color:rgb(26, 42,64);">
+        <div class="contenedordetalles" style="background-color:rgb(26, 42,64);">
             <div class="blanco">
                 <h3 style="align-content: center;">Orden</h3>
                 <table class="table table-sm" style="background-color: azure;">
@@ -76,8 +76,8 @@
                         <tr *ngFor="let producto of detalleproductos">
                             <td data-titulo="Descripcion: " >{{producto.nombre}}</td>
                             <td data-titulo="Cantidad: " >{{producto.cantidad}}</td>
-                            <td data-titulo="Precio: " >Q.{{producto.precio}}.00</td>
-                            <td data-titulo="Subtotal: " >Q.{{producto.subtotal}}.00</td>
+                            <td data-titulo="Precio: " >{{producto.precio| currency: "Q" }}</td>
+                            <td data-titulo="Subtotal: " >{{producto.subtotal| currency: "Q"  }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -85,7 +85,7 @@
                             <th scoop="col">Total</th>
                             <td> </td>
                             <td> </td>
-                            <td>Q.{{t}}.00</td>
+                            <td>{{t | currency: "Q" }}</td>
                         </tr>
                     </tfoot>
 
@@ -109,68 +109,48 @@
             </div>
         </div>
     </div>
+    
 
-    <ng-template #myModalConf let-modal>
+<ng-template #myModalConf let-modal>
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Confirmación</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                    (click)="modal.close('Cerrado desde la ventana')">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¿Esta seguro de realizar la compra?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                    (click)="modal.close('No')">No</button>
-                <button type="button" class="btn btn-primary" (click)="modal.close('Si')">Si</button>
-            </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Confirmación</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                (click)="modal.close('Cerrado desde la ventana')">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-    </ng-template>
-
-    <ng-template #myModalCierre let-modal>
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">COMPRA EXITOSA</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                    (click)="modal.close('Cerrado desde la ventana')">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¡LA COMPRA SE REALIZO CON EXITO!
-                !GRACIAS POR PREFERIRNOS!
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" (click)="homelocation()"
-                    (click)="modal.close('gracias')">¡GRACIAS!</button>
-            </div>
+        <div class="modal-body">
+            ¿Esta seguro de realizar la compra?
         </div>
-    </ng-template>
-</div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                (click)="modal.close('No')">No</button>
+            <button type="button" class="btn btn-primary" (click)="modal.close('Si')">Si</button>
+        </div>
+    </div>
+</ng-template>
 
+<ng-template #myModalCierre let-modal>
 
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">COMPRA EXITOSA</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                (click)="modal.close('Cerrado desde la ventana')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            ¡LA COMPRA SE REALIZO CON EXITO! <br>
+            !GRACIAS POR PREFERIRNOS! <br>
+
+            Su numero de factura es: {{numerofactura}}
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="homelocation()"
+                (click)="modal.close('gracias')">¡GRACIAS!</button>
+        </div>
+    </div>
+</ng-template>

@@ -16,7 +16,7 @@ export class HistorialComprasComponent implements OnInit {
   //Obtiene el cliente que esta logeado, y lo obtiene del sessionstorage
   GetDatosCliente() {
     this.Cliente = JSON.parse(sessionStorage.getItem("user"));
-    console.log(this.Cliente);
+    //console.log(this.Cliente);
   }
   /* Funcion que obtiene todas las compras realizadas por un cliente
      hace uso del servicio historialservicio y de su metodo get compras
@@ -41,7 +41,7 @@ export class HistorialComprasComponent implements OnInit {
     es decir muestra todos los elementos necesarios para el detalle
     de la compra */
   getBoton(id_factura: any) {
-    console.log(id_factura);
+    //console.log(id_factura);
     this.DetalleProductos = [];
     this.total = 0;
     this.GetDetalleEnvio(id_factura);
@@ -63,8 +63,8 @@ export class HistorialComprasComponent implements OnInit {
     this.InfoFactura ={nombre:"",fecha:"",total:""}
     this.HistorialServicio.GetDetalleEnvio(id_envio)
     .subscribe((data: any)=>{
-      console.log("///////////////");
-      console.log(data);
+      //console.log("///////////////");
+      //console.log(data);
       this.InfoFactura ={nombre:JSON.parse(sessionStorage.getItem("user")).nombre,fecha:data.factura.fecha_venta,total:data.factura.total}
       this.DetalleEnvio = { direccion: data.factura.cliente_envio.direccion, anotacion: data.factura.cliente_envio.nota,
                             metodoenvio: data.factura.cliente_envio.metodo_pago};
