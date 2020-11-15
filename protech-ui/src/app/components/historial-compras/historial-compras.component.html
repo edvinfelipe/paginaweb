@@ -6,8 +6,8 @@
           <div class="contenedor-facturas">
             <button class="factura"  *ngFor="let factura of HistorialCompras" (click)="getBoton(factura.idcompra)">
               <label  for="idecompra"> Identificador de compra: {{factura.idcompra}} </label>
-          <br><label  for="fechacompra"> Fecha de compra: {{factura.fechacompra}} </label>
-          <br><label  for="totalcompra"> Total de compra: {{factura.total}}</label>
+          <br><label  for="fechacompra"> Fecha de compra: {{factura.fechacompra | date}} </label>
+          <br><label  for="totalcompra"> Total de compra: {{factura.total | currency: 'Q'}}</label>
             </button>
           </div>
         </div>
@@ -24,8 +24,8 @@
                 <tbody>
                     <tr>
                         <td data-titulo="Nombre: ">{{InfoFactura.nombre}}</td>
-                        <td data-titulo="Fecha: ">{{InfoFactura.fecha}}</td>
-                        <td data-titulo="TOTAL: ">Q.{{InfoFactura.total}}</td>
+                        <td data-titulo="Fecha: ">{{InfoFactura.fecha | date}}</td>
+                        <td data-titulo="TOTAL: ">{{InfoFactura.total| currency: 'Q'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -47,8 +47,8 @@
                       <td data-titulo="Descripción: ">{{DetalleProducto.descripcion}} </td>
                       <td data-titulo="Cantidad ">{{DetalleProducto.cantidad}}</td>
                       <td data-titulo="Descuento: ">{{DetalleProducto.descuento}}</td>
-                      <td data-titulo="Precio: ">Q.{{DetalleProducto.precio}}</td>
-                      <td data-titulo="Subtotal: ">Q.{{DetalleProducto.subtotal}}.</td>
+                      <td data-titulo="Precio: ">{{DetalleProducto.precio| currency: 'Q'}}</td>
+                      <td data-titulo="Subtotal: ">{{DetalleProducto.subtotal| currency: 'Q'}}</td>
                     </tr>  
                 </tbody>
                 <tfoot>
@@ -58,7 +58,7 @@
                     <th class="espacio"></th>
                     <th class="espacio"></th>
                     <th data-titulo="TOTAL: ">TOTAL</th>
-                    <td data-titulo="TOTAL: ">Q.{{total}}.00</td>
+                    <td data-titulo="TOTAL: ">{{total | currency: 'Q'}}</td>
                   </tr>
                 </tfoot>
             </table>
