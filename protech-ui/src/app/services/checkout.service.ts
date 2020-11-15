@@ -12,7 +12,7 @@ export class CheckoutService {
 
   ResetReserva(id,cantidad){
     let body={ tipo:"reset",cant:cantidad};
-    console.log(body);
+    //console.log(body);
     return this.http.put('https://api-protech.herokuapp.com/api/producto/update/'+id, body);
   }
 
@@ -22,7 +22,7 @@ export class CheckoutService {
   }
 
   PostFactura(factura: any){
-    console.log(factura);
+    //console.log(factura);
     return this.http.post('https://api-protech.herokuapp.com/api/factura/', factura);
   }
 }
