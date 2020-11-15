@@ -29,9 +29,12 @@
       </div>
       <div class="form-group">
         <label for="comentario">Comentario</label>
-        <textarea name="" id="comentario" class="form-control" cols="30" rows="10" placeholder="Comentarios"></textarea>
+        <textarea name="" id="comentario" class="form-control" formControlName="mensaje" cols="30" rows="10" placeholder="Comentarios"></textarea>
+        <div *ngIf="formContacto.get('mensaje').touched && formContacto.get('mensaje').errors ">
+          <small *ngIf="formContacto.get('mensaje').hasError('required')" class="text-danger">Campo Requerido</small>
+        </div>
       </div>
-      <button class="button" (click)="enviarCorreo()">Enviar mensaje </button>
     </form>
+    <button class="button" (click)="enviarCorreo()">Enviar mensaje </button>
   </div>
 </div>
