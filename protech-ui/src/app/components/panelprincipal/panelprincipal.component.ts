@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from "../../services/login.service";
 /* import * as $ from 'jquery'; */
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PanelprincipalComponent implements OnInit {
   change = 0;
-  constructor() {
+  constructor( private _loginService :LoginService) {
 
   }
 
@@ -23,5 +24,10 @@ export class PanelprincipalComponent implements OnInit {
       this.change = 0;
     }
 
+  }
+
+  onLogOut(){
+    this._loginService.logOut();
+    location.reload();
   }
 }

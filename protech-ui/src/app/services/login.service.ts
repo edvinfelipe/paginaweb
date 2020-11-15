@@ -32,6 +32,14 @@ export class LoginService {
     sessionStorage.setItem("user",userString);
   }
 
+  setAdmin(admin) {
+    sessionStorage.setItem("admin",admin);
+  }
+
+  getAdmin() {
+    return sessionStorage.getItem("admin");
+  }
+
   getToken(){
     return sessionStorage.getItem("accesToken");
   }
@@ -41,8 +49,7 @@ export class LoginService {
   }
 
   logOut(){
-    sessionStorage.removeItem("accesToken");
-    sessionStorage.removeItem("user");
+    sessionStorage.clear();
   }
 
   isLogged():boolean {
