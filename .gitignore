@@ -3,3 +3,7 @@
 protech-ui/node_modules
 /node_modules
 npm-debug.log*
+
+protech-ui/package-lock.json
+
+protech-ui/package.json
