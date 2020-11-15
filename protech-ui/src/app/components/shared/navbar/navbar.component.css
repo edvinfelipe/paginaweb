@@ -23,7 +23,12 @@
 .sesion-icon {
     padding: 10px;
     float: right;
+    display: flex;
     margin-right: 20px;
+}
+
+.username {
+  padding-right: 5px;
 }
 
 .dropdown-menu-right a:hover {
@@ -171,7 +176,6 @@
 }
 
 .nav-item:hover {
-    /* background-color: #ee4400; */
     background-color: rgb(33, 52, 77);
 }
 

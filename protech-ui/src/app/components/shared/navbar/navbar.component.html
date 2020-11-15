@@ -7,13 +7,16 @@
     <div class="header_main-top">
         <ul *ngIf="!isLogged" class="header_main-list">
             <li>
-                <a (click)="openInicioSesion()">Inicia Sesión</a>
+                <a (click)="openInicioSesion()">Iniciar Sesión</a>
             </li>
             <li>
                 <a (click)="openRegistro()">Registrarse</a>
             </li>
         </ul>
         <div *ngIf="isLogged" class="sesion-icon">
+            <div class="username">
+              <span>{{usuario['nombre']}}</span>
+            </div>
             <div class="dropdown">
                 <i class="fas fa-user fa-lg dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="dropdownMenuLink">
@@ -23,43 +26,11 @@
             </div>
         </div>
     </div>
-    <!-- <div class="header_main-bottom">
-        <div class="header_main-container">
-            <div class="header_main_logo">
-                <a [routerLink]="['/home']" class="logo">
-                    <img src="assets/img/image.png" alt="">
-                </a>
-            </div>
-            <div class="header_main-search">
-                <form action="">
-                    <input type="search" placeholder="Buscar" [formControl]="emailCtrl" class="input form-control">
-                    <ul *ngIf="buscando">
-                      <li *ngFor="let producto of productos">{{producto.nombre}}</li>
-                    </ul>
-                    <ul class="filtro-busqueda">
-                      <li>Holadssdsdsdsdsdsdsdsdsdsdsdddddddddddddddddddddddddddddddd</li>
-                      <li>Hola</li>
-                      <li>Hola</li>
-                      <li>Hola</li>
-                      <li>Hola</li>
-                      <li>Hola</li>
-                    </ul>
-                </form>
-                <i class="fas fa-search logo-buscar"></i>
-            </div>
-            <div class="header_carrito_main">
-                <div class="header_carrito">
-                    <a href="#"><i class="fas fa-shopping-cart"></i></a>
-                    <h5>0</h5>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="container-fluid">
       <div class="row" id="container-search">
         <div class="col-sm-3 d-flex logo-flex">
           <a [routerLink]="['/home']" class="logo">
-            <img src="assets/img/image.png" alt="">
+            <img src="assets/img/image.png" alt="protech">
           </a>
         </div>
         <div class="col-sm-6 d-flex align-items-center">
@@ -80,7 +51,7 @@
         </div>
         <div class="col-sm-3 d-flex carrito-flex">
           <div class="header_carrito">
-            <a href="#"><i class="fas fa-shopping-cart"></i></a>
+            <a [routerLink]="['/carritocompra']"><i class="fas fa-shopping-cart"></i></a>
             <h5>0</h5>
           </div>
         </div>
@@ -88,7 +59,6 @@
     </div>
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg  navbar-custom ">
-            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
             <button class="navbar-toggler  custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -105,8 +75,6 @@
                 </a>
                                 <div class="dropdown-divider"></div>
                             </div>
-                            <!-- <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a> -->
                         </div>
                     </li>
                     <li class="nav-item active">
