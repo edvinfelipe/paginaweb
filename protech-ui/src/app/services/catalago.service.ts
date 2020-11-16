@@ -15,7 +15,7 @@ export class CatalagoService {
  * Funcion que ejecutará el query que se le haya sido mandado
  * @param query Consulta que se desee realizar dependiendo de los parametros
  */
-  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA0OTU5MDY3LCJleHAiOjE2MDUxMzE4Njd9.07kr6zaTUF1Dhi_kaX3snzhyAqQhEDbMIws3sWFWVeQ';
+  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA1MjIyODM2LCJleHAiOjE2MDUzOTU2MzZ9.VqZfRZ1aaZkwTJoxF4VUBrysNmcWH5y9rw-A3JE8MV4';
   getQuery( query: String){
     const url = `https://api-protech.herokuapp.com/api/producto/${ query }`;
     const headers = new HttpHeaders({
