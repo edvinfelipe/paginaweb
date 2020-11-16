@@ -6,14 +6,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CategoriasService {
-  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NjkwMjU0NjQ5ZjIyZDhmNmJmYTk0Iiwibm9tYnJlIjoiYXNkIiwiZGlyZWNjaW9uIjoiYXNkIiwidGVsZWZvbm8iOiIxMjMiLCJjb3JyZW8iOiJhc2RmIiwibml0IjoiMSIsInVzZXJuYW1lIjoiY3Jpc3RpYW4iLCJfX3YiOjB9LCJpYXQiOjE2MDI5ODE3ODUsImV4cCI6MTYwMzE1NDU4NX0.UG-XjfV9XWtjELQYYaEpBfMktGWh_Bn_d0XRrIhW2R8';
+  token = sessionStorage.getItem('accesToken');
   constructor( private http: HttpClient) { }
   getCategorias(){
-    const headers = new HttpHeaders({
-      'Authorization': this.token
-    });
-
-    return this.http.get('https://api-protech.herokuapp.com/api/categoria/', {headers})
+    return this.http.get('https://api-protech.herokuapp.com/api/categoria/')
       .pipe( map( data => data['categorias']));
 
   }

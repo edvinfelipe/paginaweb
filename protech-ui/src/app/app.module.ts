@@ -14,7 +14,6 @@ import { ChartsModule } from 'ng2-charts';
 import { APP_ROUTING } from './app.routes';
 //Servicios
 import { MarcasService } from './services/marcas.service';
-import { ProductosService } from './services/productos.service';
 import { HistorialServiceService } from './services/historial-service.service';
 import { CarritoUsuarioService } from './services/carrito-usuario.service';
 
@@ -91,7 +90,6 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
   ],
   providers: [
-    ProductosService,
     MarcasService,
     BnNgIdleService,
     CheckoutService,
