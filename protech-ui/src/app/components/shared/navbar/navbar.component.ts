@@ -59,8 +59,9 @@ export class NavbarComponent implements OnInit {
   iniciarCarrito() {
     if(sessionStorage.getItem('user')){
       let usuario = JSON.parse(sessionStorage.getItem('user'));
-      this.carritoService.getItemCountItems(usuario.id).subscribe((data:any)=>{
-        const carrito = new IniciarAction(data.carrito);
+      this.carritoService.getItemCountItems(usuario._id).subscribe((data:any)=>{
+        let cantidad = data['carrito'];
+        const carrito = new IniciarAction(cantidad);
         this.store.dispatch(carrito);
       });
     } else {
