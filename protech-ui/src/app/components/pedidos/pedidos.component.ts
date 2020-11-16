@@ -125,4 +125,10 @@ export class PedidosComponent implements OnInit {
       return false;
     }
   }
+
+  modificarEstado(id) {
+    console.log(this.facturas[id].cliente_envio.entregado);
+    this.facturas[id].cliente_envio.entregado=true;
+    console.log(this.facturas[id].cliente_envio.entregado);
+  }
 }

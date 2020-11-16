@@ -86,7 +86,7 @@
                   </label>
                 </div> -->
                 <div>
-                  <button [ngClass]="factura.cliente_envio.entregado ? ' fas fa-check btn btn-success': ' fas fa-times btn btn-danger'" >{{factura.cliente_envio.entregado ? 'Competado':'Pendiente'}}</button>
+                  <button (click)="modificarEstado(i)" [ngClass]="factura.cliente_envio.entregado ? ' fas fa-check btn btn-success': ' fas fa-times btn btn-danger'" >{{factura.cliente_envio.entregado ? ' Competado':'Pendiente'}}</button>
                 </div>
               </td>
             </tr>
