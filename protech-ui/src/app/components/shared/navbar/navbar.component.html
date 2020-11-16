@@ -15,47 +15,47 @@
         </ul>
         <div *ngIf="isLogged" class="sesion-icon">
             <div class="username">
-              <span>{{usuario['nombre']}}</span>
+                <span>{{usuario['nombre']}}</span>
             </div>
             <div class="dropdown">
                 <i class="fas fa-user fa-lg dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" (click)="HistorialLocation()">Historial de compras</a>
-                    <a class="dropdown-item" (click)="onLogOut()">Cerrar sesion</a>
+                    <a class="dropdown-item" (click)="onLogOut()">Cerrar sesión</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
-      <div class="row" id="container-search">
-        <div class="col-sm-3 d-flex logo-flex">
-          <a [routerLink]="['/home']" class="logo">
-            <img src="assets/img/image.png" alt="protech">
-          </a>
-        </div>
-        <div class="col-sm-6 d-flex align-items-center">
-          <div class="input-main">
-            <input type="text" class="form-control"[formControl]="emailCtrl" placeholder="Buscar">
-            <ul *ngIf="buscando" class="filtro-busqueda">
-              <li *ngFor="let producto of productos" (click)="detalleProducto(producto.id)">
-                <div class="result-serarch d-flex">
-                  <a href="" class="media-image"><img [src]="producto.imagenes[0].url" alt="imagen"></a>
-                  <div class="item-busqueda">
-                    <p>{{producto.nombre}}</p>
-                    <p class="precio-busqueda">{{producto.precio | currency:'Q '}}</p>
-                  </div>
+        <div class="row" id="container-search">
+            <div class="col-sm-3 d-flex logo-flex">
+                <a [routerLink]="['/home']" class="logo">
+                    <img src="assets/img/image.png" alt="protech">
+                </a>
+            </div>
+            <div class="col-sm-6 d-flex align-items-center">
+                <div class="input-main">
+                    <input type="text" class="form-control" [formControl]="emailCtrl" placeholder="Buscar">
+                    <ul *ngIf="buscando" class="filtro-busqueda">
+                        <li *ngFor="let producto of productos" (click)="detalleProducto(producto.id)">
+                            <div class="result-serarch d-flex">
+                                <a href="" class="media-image"><img [src]="producto.imagenes[0].url" alt="imagen"></a>
+                                <div class="item-busqueda">
+                                    <p>{{producto.nombre}}</p>
+                                    <p class="precio-busqueda">{{producto.precio | currency:'Q '}}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-              </li>
-            </ul>
-          </div>
+            </div>
+            <div class="col-sm-3 d-flex carrito-flex">
+                <div class="header_carrito">
+                    <a [routerLink]="['/carritocompra']"><i class="fas fa-shopping-cart"></i></a>
+                    <h5>0</h5>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-3 d-flex carrito-flex">
-          <div class="header_carrito">
-            <a [routerLink]="['/carritocompra']"><i class="fas fa-shopping-cart"></i></a>
-            <h5>0</h5>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="main_menu">
         <nav class="navbar navbar-expand-lg  navbar-custom ">
@@ -84,7 +84,7 @@
                         <a class="nav-link" [routerLink]="['/comprar']">¿Cómo comprar?</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/contacto']">Contactenos</a>
+                        <a class="nav-link" [routerLink]="['/contacto']">Contáctenos</a>
                     </li>
                 </ul>
             </div>
