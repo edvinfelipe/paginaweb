@@ -14,9 +14,12 @@ import { ChartsModule } from 'ng2-charts';
 import { APP_ROUTING } from './app.routes';
 //Servicios
 import { MarcasService } from './services/marcas.service';
-import { ProductosService } from './services/productos.service';
 import { HistorialServiceService } from './services/historial-service.service';
 import { CarritoUsuarioService } from './services/carrito-usuario.service';
+
+//ngrx
+import { StoreModule } from "@ngrx/store";
+import { carritoReducer } from "./redux/carrito.reducer";
 
 
 //Componentes
@@ -81,6 +84,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    StoreModule.forRoot({contador:carritoReducer}),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
@@ -91,7 +95,6 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 
   ],
   providers: [
-    ProductosService,
     MarcasService,
     BnNgIdleService,
     CheckoutService,

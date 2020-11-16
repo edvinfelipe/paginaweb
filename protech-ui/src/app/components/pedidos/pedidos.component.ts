@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 
 import { PedidosService } from "../../services/pedidos.service";
+import { EstadoPedido } from "../../interfaces/pedido";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class PedidosComponent implements OnInit {
   nombreCliente;
   totalFactura;
   fechaFactura;
+  estadoPedido:EstadoPedido;
   constructor(private _pedidoService:PedidosService,private formBuilder:FormBuilder, private toastr: ToastrService) {
     this.buildFormDate();
   }
@@ -103,6 +105,11 @@ export class PedidosComponent implements OnInit {
     this.totalFactura = total;
   }
 
+  cambiarEstado(id){
+    this._pedidoService.putEstadoEntrega(this.estadoPedido,id).subscribe((data:any)=>{
+
+    });
+  }
   private validateDate():boolean {
 
     if(this.formDate.valid){

@@ -31,6 +31,7 @@ import { PanelprincipalComponent } from "./components/panelprincipal/panelprinci
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 /* importa el guardia de ruta */
 import { AuthHistorialGuard } from './guards/auth-historial.guard';
+import { AuthAdminGuard } from './guards/auth-admin.guard';
 
 
 
@@ -46,12 +47,12 @@ const app_routes: Routes = [
   { path: 'contacto', component: ContactpageComponent},
   { path: 'carritocompra', component: CarritocompraComponent },
   { path: 'checkout', component: CheckoutComponent },
-  { path: 'configuraciones', component: ConfiguracionesComponent },
+  { path: 'configuraciones', component: ConfiguracionesComponent, canActivate: [AuthAdminGuard] },
   { path: 'historialcompras', component: HistorialComprasComponent, canActivate: [AuthHistorialGuard] },
-  { path: 'ingresoproductos', component: IngresoproductosComponent},
+  { path: 'ingresoproductos', component: IngresoproductosComponent, canActivate: [AuthHistorialGuard] },
   { path: 'listapedidos', component: PedidosComponent},
   { path: 'panelprincipal', component: PanelprincipalComponent},
-  { path: 'usuarios', component: UsuariosComponent },
+  { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthAdminGuard] },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 
