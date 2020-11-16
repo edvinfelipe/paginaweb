@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 
 import { PedidosService } from "../../services/pedidos.service";
+import { EstadoPedido } from "../../interfaces/pedido";
 
 
 @Component({
@@ -26,6 +27,7 @@ export class PedidosComponent implements OnInit {
   nombreCliente;
   totalFactura;
   fechaFactura;
+  estadoPedido:EstadoPedido;
   constructor(private _pedidoService:PedidosService,private formBuilder:FormBuilder, private toastr: ToastrService) {
     this.buildFormDate();
   }
@@ -103,8 +105,10 @@ export class PedidosComponent implements OnInit {
     this.totalFactura = total;
   }
 
-  cambioPedido(){
-    console.log("cambio");
+  cambiarEstado(id){
+    this._pedidoService.putEstadoEntrega(this.estadoPedido,id).subscribe((data:any)=>{
+
+    });
   }
   private validateDate():boolean {
 
@@ -124,11 +128,5 @@ export class PedidosComponent implements OnInit {
       this.toastr.error("Debe seleccionar un rango de fechas","Advertencia");
       return false;
     }
-  }
-
-  modificarEstado(id) {
-    console.log(this.facturas[id].cliente_envio.entregado);
-    this.facturas[id].cliente_envio.entregado=true;
-    console.log(this.facturas[id].cliente_envio.entregado);
   }
 }
