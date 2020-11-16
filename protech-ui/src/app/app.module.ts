@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartsModule } from 'ng2-charts';
+import { StoreModule } from "@ngrx/store";
+import { carritoReducer } from "./redux/carrito.reducer";
 
 //Rutas
 import { APP_ROUTING } from './app.routes';
@@ -81,6 +83,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    StoreModule.forRoot({contador:carritoReducer}),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

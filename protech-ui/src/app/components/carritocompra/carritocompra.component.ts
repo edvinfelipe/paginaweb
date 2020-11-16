@@ -4,13 +4,17 @@ import { CarritoUsuarioService } from '../../services/carrito-usuario.service';
 import { ActivatedRoute } from '@angular/router'
 declare var $: any;
 
+import { DecrementarAction } from "../../redux/carrito.actions";
+import { Store } from "@ngrx/store";
+import { CarritoStore } from "../../redux/carrito.reducers";
+
 @Component({
   selector: 'app-carritocompra',
   templateUrl: './carritocompra.component.html',
   styleUrls: ['./carritocompra.component.css']
 })
 export class CarritocompraComponent implements OnInit {
-  
+
   listaVenta: any[] = [];
   productos: any[] = [];
   carritoUser: any[] = [];
@@ -26,13 +30,13 @@ export class CarritocompraComponent implements OnInit {
   carritoTemporal: any [] = [];
 
 
-  constructor( private _productosService: CatalagoService, private router: ActivatedRoute, private _carritoService: CarritoUsuarioService) {
+  constructor( private _productosService: CatalagoService, private router: ActivatedRoute, private _carritoService: CarritoUsuarioService, private store:Store<CarritoStore>) {
       this.verificarParams();
    }
 
   ngOnInit(): void {
   }
-  
+
   /* PARA CARGAR AL CARRITO ------------------------------------------------------------------------------ */
   verificarParams(): void{
     this.router.params.subscribe( params => {
@@ -214,7 +218,7 @@ export class CarritocompraComponent implements OnInit {
       this.getTotal();
     }
   }
-  
+
   dec(elementI, elementS, idx): void {
     const formatter = new Intl.NumberFormat('es-GT', {
       style: 'currency',
@@ -253,8 +257,10 @@ export class CarritocompraComponent implements OnInit {
   getRow(idx): void{
     this.fila = idx;
   }
-  
+
   deleteRow(): void{
+    const decrementar = new DecrementarAction();
+    this.store.dispatch(decrementar);
     if(sessionStorage.getItem('user')){
       this._productosService.putExistencias(this.productos[this.fila]._id, this.listaVenta[this.fila].cantidad, 'reset').subscribe();
       this.deleteOneProduct(this.productos[this.fila]._id, this.listaVenta[this.fila].cliente_id);
@@ -298,7 +304,7 @@ export class CarritocompraComponent implements OnInit {
     this.listaVenta.forEach(element => {
         if (element.id === productoId){
           cant = element.cantidad;
-        } 
+        }
     });
     return cant;
   }
