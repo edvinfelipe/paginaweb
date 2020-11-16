@@ -289,7 +289,7 @@ export class CarritocompraComponent implements OnInit {
       precio = this.productos[i].precio;
       total = total + (cantidad * precio);
     }
-    document.getElementById("tabTotal").innerHTML = formatter.format(total);
+    this.total = total;
     return total;
   }
   /* Cargar la cantidad */

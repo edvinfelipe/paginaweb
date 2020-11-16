@@ -277,7 +277,7 @@ export class CheckoutComponent {
     let p = [];
     this.detalleproductos.forEach(element => {
       p.push({
-        sub_total: element.subtotal, cantidad: element.cantidad, descripcion: element.descripcion,
+        subtotal: element.subtotal, cantidad: element.cantidad, descripcion: element.descripcion,
         producto_id: element.id
       })
     });
