@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class RegistroService {
 
-  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA1MjUyMTI4LCJleHAiOjE2MDU0MjQ5Mjh9.xVW-gce1gqQvqdlYscu-yUuof995eRk9Z4PeS7_0hAM';
+  token = sessionStorage.getItem('accesToken');
   URL:string = "https://api-protech.herokuapp.com/api/cliente/";
 
   constructor(private http:HttpClient) { }

@@ -49,7 +49,7 @@ const app_routes: Routes = [
   { path: 'checkout', component: CheckoutComponent },
   { path: 'configuraciones', component: ConfiguracionesComponent, canActivate: [AuthAdminGuard] },
   { path: 'historialcompras', component: HistorialComprasComponent, canActivate: [AuthHistorialGuard] },
-  { path: 'ingresoproductos', component: IngresoproductosComponent},
+  { path: 'ingresoproductos', component: IngresoproductosComponent, canActivate: [AuthHistorialGuard] },
   { path: 'listapedidos', component: PedidosComponent},
   { path: 'panelprincipal', component: PanelprincipalComponent},
   { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthAdminGuard] },

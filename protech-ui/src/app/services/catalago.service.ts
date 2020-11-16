@@ -8,22 +8,16 @@ import { map } from 'rxjs/operators';
 })
 export class CatalagoService {
   constructor(private http: HttpClient) {
-    /* console.log('Constructor catalogo servicios'); */
    }
 
 /**
  * Funcion que ejecutará el query que se le haya sido mandado
  * @param query Consulta que se desee realizar dependiendo de los parametros
  */
-  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA1MjIyODM2LCJleHAiOjE2MDUzOTU2MzZ9.VqZfRZ1aaZkwTJoxF4VUBrysNmcWH5y9rw-A3JE8MV4';
   getQuery( query: String){
     const url = `https://api-protech.herokuapp.com/api/producto/${ query }`;
-    const headers = new HttpHeaders({
-      'Authorization': this.token
-    });
-    return this.http.get(url, {headers})
+    return this.http.get(url)
       .pipe( map (data => {
-        //console.log (url);
         return data;
       }));
   }
@@ -74,11 +68,7 @@ export class CatalagoService {
   }
 
   putExistencias(id: any, cant: any, type: any){
-    const headers = new HttpHeaders({
-      'Authorization': this.token,
-    });
-
     const body = {tipo: type, cantidad: cant};
-    return this.http.put(`https://api-protech.herokuapp.com/api/producto/update/${ id }`, body, {headers});
+    return this.http.put(`https://api-protech.herokuapp.com/api/producto/update/${ id }`, body);
   }
 }

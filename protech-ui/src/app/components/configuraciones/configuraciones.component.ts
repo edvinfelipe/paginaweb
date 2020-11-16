@@ -102,7 +102,6 @@ export class ConfiguracionesComponent implements OnInit {
         this.categorias = dataCategorias;
       });
       $("#categoriatxt").val('');
-      
       }, 
       error => {
         console.log(error as any);
@@ -112,12 +111,10 @@ export class ConfiguracionesComponent implements OnInit {
 
   updCategoria(): void{
     const newName = document.querySelector(`[id=cat${this.idCat}]`) as HTMLInputElement;
-    console.log("New Name: " + newName.value)
     for (let i=0; i < this.categorias.length; i++){
       if (this.categorias[i]._id === this.idCategoria){
         this.categorias[i].nombre = newName.value;
         this._categoriasService.putCategorias(newName.value, this.idCategoria).subscribe(error => {
-            console.log(error as any);
           }
         );
         i = this.categorias.length;
@@ -161,7 +158,6 @@ export class ConfiguracionesComponent implements OnInit {
       if (this.marcas[i]._id === this.idMarca){
         this.marcas[i].nombre = newName.value;
         this._marcasService.putMarca(newName.value, this.idMarca).subscribe(error => {
-            console.log(error as any);
           }
         );
         i = this.marcas.length;

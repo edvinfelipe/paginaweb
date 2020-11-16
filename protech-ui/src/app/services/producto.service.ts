@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { Producto } from './productos.service';
 import { Productos } from "../interfaces/productos";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
-  header = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTl9ST0xFIiwiZWxpbWluYWRvIjpmYWxzZSwiX2lkIjoiNWY4NTA2MmFlNjgxZWYwMDE3MTQ1N2Y0Iiwibm9tYnJlIjoiYWRtaW4iLCJkaXJlY2Npb24iOiJhZG1pbiIsInRlbGVmb25vIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiX192IjowfSwiaWF0IjoxNjA1MjE1NjA0LCJleHAiOjE2MDUzODg0MDR9.czRa0yd6qAgK7S8A5LppW841oZ0AFYth0LKK1V5NGgc';
+  header = sessionStorage.getItem('accesToken');
   url = 'http://api-protech.herokuapp.com/api/producto/';
   bodyProducto: Productos;
   constructor(private http: HttpClient) { }
