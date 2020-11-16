@@ -73,21 +73,21 @@
               <td>{{factura.fecha_venta | date:'mediumDate'}}</td>
               <td>{{factura.total | currency:'Q '}}</td>
               <td>
-                <!-- <div class="form-check">
-                  <input class="form-check-input" type="radio" name="exampleRadios" (click)="cambioPedido()" id="exampleRadios2" value="option2">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios" [checked]="factura.cliente_envio.entregado"  (click)="cambiarEstado(factura.cliente_envio.entregado)" id="exampleRadios2" value="option2">
                   <label class="form-check-label" for="exampleRadios2">
                     Completado
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="exampleRadios" (click)="cambioPedido()" id="exampleRadios2" value="option2">
+                  <input class="form-check-input" type="radio" name="exampleRadios" [checked]="factura.cliente_envio.entregado" (click)="cambiarEstado(factura.cliente_envio.entregado)" id="exampleRadios2" value="option2">
                   <label class="form-check-label" for="exampleRadios2">
                     Pendiente
                   </label>
-                </div> -->
-                <div>
-                  <button (click)="modificarEstado(i)" [ngClass]="factura.cliente_envio.entregado ? ' fas fa-check btn btn-success': ' fas fa-times btn btn-danger'" >{{factura.cliente_envio.entregado ? ' Competado':'Pendiente'}}</button>
                 </div>
+                <!-- <div>
+                  <button (click)="modificarEstado(i)" [ngClass]="factura.cliente_envio.entregado ? ' fas fa-check btn btn-success': ' fas fa-times btn btn-danger'" >{{factura.cliente_envio.entregado ? ' Competado':'Pendiente'}}</button>
+                </div> -->
               </td>
             </tr>
           </tbody>
