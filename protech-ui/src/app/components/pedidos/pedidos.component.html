@@ -54,29 +54,47 @@
             </div>
         </div>
     </div>
-    <div class="row" id="historialP">
-        <div class="col-sm-12">
-            <h3 class="text-center">Historial de Pedidos</h3>
-            <div class="table-responsive-sm">
-                <table class="table table-hover table-bordered table-fixed">
-                    <thead>
-                        <tr>
-                            <th scope="col">Cliente</th>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Monto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let factura of facturas; let i = index;" (click)="getDetallesFactura(factura._id); obtenerDatosCliente(factura.cliente_envio.nombre,factura.fecha_venta,factura.total)">
-                            <td>{{factura.cliente_envio.nombre}}</td>
-                            <td>{{factura.fecha_venta | date:'mediumDate'}}</td>
-                            <td>{{factura.total | currency:'Q '}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <ngb-pagination class="d-flex justify-content-center" [collectionSize]="numeroFacturas" [pageSize]="10" [(page)]="pagina" [directionLinks]="false" (pageChange)="getNexPage($event)"></ngb-pagination>
-            </div>
-        </div>
+  </div>
+  <div class="row" id="historialP">
+    <div class="col-sm-12">
+      <h3 class="text-center">Historial de Pedidos</h3>
+      <div class="table-responsive-sm">
+        <table class="table table-hover table-bordered table-fixed">
+          <thead>
+            <tr>
+              <th scope="col">Cliente</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Monto</th>
+              <th scope="col">Estado pedido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let factura of facturas; let i = index;" (click)="getDetallesFactura(factura._id); obtenerDatosCliente(factura.cliente_envio.nombre,factura.fecha_venta,factura.total)">
+              <td>{{factura.cliente_envio.nombre}}</td>
+              <td>{{factura.fecha_venta | date:'mediumDate'}}</td>
+              <td>{{factura.total | currency:'Q '}}</td>
+              <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios" [checked]="factura.cliente_envio.entregado"  (click)="cambiarEstado(factura.cliente_envio.entregado)" id="exampleRadios2" value="option2">
+                  <label class="form-check-label" for="exampleRadios2">
+                    Completado
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="exampleRadios" [checked]="factura.cliente_envio.entregado" (click)="cambiarEstado(factura.cliente_envio.entregado)" id="exampleRadios2" value="option2">
+                  <label class="form-check-label" for="exampleRadios2">
+                    Pendiente
+                  </label>
+                </div>
+                <!-- <div>
+                  <button (click)="modificarEstado(i)" [ngClass]="factura.cliente_envio.entregado ? ' fas fa-check btn btn-success': ' fas fa-times btn btn-danger'" >{{factura.cliente_envio.entregado ? ' Competado':'Pendiente'}}</button>
+                </div> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ngb-pagination class="d-flex justify-content-center" [collectionSize]="numeroFacturas" [pageSize]="10" [(page)]= "pagina" [directionLinks]="false" (pageChange)="getNexPage($event)"></ngb-pagination>
+      </div>
     </div>
     <div class="row" style="margin-top: 35px;" id="detalles-pedido">
         <div class="col-sm-12">

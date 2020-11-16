@@ -17,6 +17,10 @@ import { MarcasService } from './services/marcas.service';
 import { HistorialServiceService } from './services/historial-service.service';
 import { CarritoUsuarioService } from './services/carrito-usuario.service';
 
+//ngrx
+import { StoreModule } from "@ngrx/store";
+import { carritoReducer } from "./redux/carrito.reducer";
+
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -80,6 +84,7 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    StoreModule.forRoot({contador:carritoReducer}),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

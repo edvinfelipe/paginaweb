@@ -51,7 +51,7 @@ export class CatalagoService {
   getRangosPrecios(minimo, maximo, noPagina){
     return this.getQuery( "precio/?min="+`${minimo}&max=${maximo}&page=${ noPagina }`);
   }
-  
+
   getProductos2(idCategoria = '', idMarca = '', minimo = -1, maximo = -1, noPagina = 1){
     if (idCategoria != '' && idMarca == '' && minimo == -1 && maximo == -1) {  //Búsqueda por categoría
       return this.getQuery( "categoria/"+ idCategoria + `/?page=${ noPagina }`);
@@ -68,7 +68,8 @@ export class CatalagoService {
   }
 
   putExistencias(id: any, cant: any, type: any){
-    const body = {tipo: type, cantidad: cant};
+
+    const body = {tipo: type, cant: cant};
     return this.http.put(`https://api-protech.herokuapp.com/api/producto/update/${ id }`, body);
   }
 }
