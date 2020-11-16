@@ -151,6 +151,29 @@ app.get('/factura/detenvio/:id', (req, res) => {
 })
 
 //====================================
+// Lista de todas las facturas 
+//====================================
+app.get('/factura/todos/', (req, res) => {
+
+    Factura.find()
+        .exec((err, facturas) => {
+
+            if (err) {
+                return res.status(500).json({
+                    status: false,
+                    err
+                })
+            }
+
+            res.json({
+                status: true,
+                facturas
+            })
+        })
+})
+
+
+//====================================
 // Lista de facturas por rango de fecha 
 //=====================================
 
