@@ -12,7 +12,7 @@
                 </option>
             </select>
             <p></p>
-            <p>Categoria:</p>
+            <p>Categoría:</p>
             <select class="fullWidth" #categoria (change)='setCategoria(categoria.value)'>
                 <option></option>
                 <option *ngFor="let c of arregloCategorias" [value]="c._id">
