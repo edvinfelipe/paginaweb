@@ -10,10 +10,17 @@ export class AuthAdminGuard implements CanActivate {
 
   }
   canActivate(){
+    let user;
     if(sessionStorage.getItem('user')){
-      return true;
+      user = sessionStorage.getItem('user');
+      if(user.role === 'ADMIN_ROLE'){
+        return true;
+      }else{
+        this.router.navigate(['home']);
+        return false;
+      }
     } else{
-      this.router.navigate(['home'])
+      this.router.navigate(['home']);
       return false;
     }
   }
