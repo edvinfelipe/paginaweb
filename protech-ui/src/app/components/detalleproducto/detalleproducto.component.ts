@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router ,ActivatedRoute} from '@angular/router';
 import { CatalagoService } from '../../services/catalago.service';
+import { IncrementarAction } from "../../redux/carrito.actions";
+import { CarritoStore } from "../../redux/carrito.reducers";
+import { Store } from "@ngrx/store"
 
 @Component({
   selector: 'app-detalleproducto',
@@ -18,7 +21,8 @@ export class DetalleproductoComponent implements OnInit {
   id: string; // Id del producto recibido desde el catálogo
   producto: any = {}; // Producto recibido desde el catálogo
   reservado: number;
-  constructor(private router: Router, private catalogoService: CatalagoService, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private catalogoService: CatalagoService, private activatedRoute: ActivatedRoute,
+    private store:Store<CarritoStore>) {
     // this.id = this.router.url.split('/')[2]; // Obtener el id del producto desde la URL
 
     this.activatedRoute.params.subscribe(params =>{
@@ -120,6 +124,9 @@ export class DetalleproductoComponent implements OnInit {
 
   confirmarCompra()
   {
+    const incrementrar = new IncrementarAction();
+    this.store.dispatch(incrementrar);
     this.catalogoService.putExistencias(this.id, this.numero, "reserve").subscribe();
+
   }
 }

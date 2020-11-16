@@ -5,6 +5,11 @@ import { JsonPipe, Location } from "@angular/common";
 import { CarritoUsuarioService } from "../../services/carrito-usuario.service";
 import {Router} from '@angular/router';
 import { elementAt } from 'rxjs/operators';
+import { Store } from "@ngrx/store";
+
+import { CarritoStore } from "../../redux/carrito.reducers";
+import { ResetAction } from "../../redux/carrito.actions";
+
 
 @Component({
   selector: 'app-checkout',
@@ -106,10 +111,15 @@ export class CheckoutComponent {
     });
   }
 
+  eliminarCarrito() {
+    const reset = new ResetAction();
+    this.store.dispatch(reset);
+  }
+
   mostrarModalCerrar(){
     this.modalService.open(this.myModalCierre).result.then(r =>{
-      
-      
+
+
       if (r==="gracias"){
         console.log("Gracias por su compra");
         if(JSON.parse(sessionStorage.getItem("user")) ==null){
@@ -124,7 +134,7 @@ export class CheckoutComponent {
           });
           this.ResetReserva();
         }
-        
+
       }
     },
     error =>{
@@ -132,21 +142,21 @@ export class CheckoutComponent {
     });
   }
   validacioncampos(){
-    
-    let nombreregex =/^[a-zA-Z]+\ +[a-zA-Z]+\ *[a-zA-Z]*\ *[a-zA-Z]*\ *$/gi 
+
+    let nombreregex =/^[a-zA-Z]+\ +[a-zA-Z]+\ *[a-zA-Z]*\ *[a-zA-Z]*\ *$/gi
     let telefonoregex = /^\d{8}$/g
     let nitregex =/^[0-9]{6,8}\-*[0-9]{1,3}$|cf|CF|C\/F|c\/f|C\/f|c\/F|Cf|cF/gi
     let emailregex = /^[a-zA-Z0-9.!&*_-]+\ {0}@{1}\ {0}[a-zA-Z]+\ {0}\.+[a-zA-Z]{2,8}$/gi
     let direccionregex = /^.{5,100}/gi
     let notaregex = /^[a-zA-Z0-9.!&*_-]+ *.{0,200}/gi
-    
+
     let n = false
     let t = false
     let nit = false
-    let em = false 
+    let em = false
     let d = false
     let not = true
-    
+
     if (nombreregex.test(this.nombreenvio) == true) {
       document.getElementById("vnombre").innerText ="Nombre valido";
       document.getElementById("vnombre").style.color = "green";
@@ -199,7 +209,7 @@ export class CheckoutComponent {
     }else{
       //console.log("la nota esta mal escrita");
     }
-    
+
     if (n ==true && t==true && nit==true && em==true && d==true &&not==true) {
         this.SetDetalleEnvio(this.nombreenvio,this.direccionenvio,this.emailenvio,this.nitenvio,
                              this.telefonoenvio,this.notaenvio);
@@ -295,7 +305,7 @@ export class CheckoutComponent {
   }
 
   /* Esta funcion crea la facturacion y la confirmacion de compra
-    hace uso de dos funciones una cuando no existe el usuario 
+    hace uso de dos funciones una cuando no existe el usuario
     y otra funcion cuando existe el usuario para poder asociarla al cliente
     esto para el historial  */
   ConfirmacionCompra() {
@@ -313,11 +323,11 @@ export class CheckoutComponent {
     });
   }
   constructor(private checkout: CheckoutService, private modalService: NgbModal, private Location: Location,
-              private CarritoConUsuarioService: CarritoUsuarioService,private router:Router) {
+              private CarritoConUsuarioService: CarritoUsuarioService,private router:Router, private store:Store<CarritoStore>) {
     //inicializa la funcion para obtener los id's asociados al carrito de compras, para poder buscar el detalle
     //de los productos
     let usuario = JSON.parse(sessionStorage.getItem("user"));
-    
+
     //si existe el usuario toma el carrito de compras previamente almacenado, sino toma el localStorage
 
     if(usuario == null){

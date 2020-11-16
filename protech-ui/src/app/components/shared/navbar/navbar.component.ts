@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { debounceTime } from "rxjs/operators";
+import { Store } from "@ngrx/store"
+
 
 import { CategoriasService } from "../../../services/categorias.service";
 import { LoginComponent } from "../../login/login.component";
@@ -9,6 +11,10 @@ import { RegistroComponent } from "../../registro/registro.component";
 import { LoginService } from "../../../services/login.service";
 import { FiltrobusquedaService } from "../../../services/filtrobusqueda.service";
 import { FormControl } from '@angular/forms';
+import { from } from 'rxjs';
+import { CarritoStore } from "../../../redux/carrito.reducers"
+import { IniciarAction } from "../../../redux/carrito.actions";
+import { CarritoUsuarioService } from "../../../services/carrito-usuario.service";
 
 @Component({
   selector: 'app-navbar',
@@ -23,11 +29,13 @@ export class NavbarComponent implements OnInit {
   productos:any[] = [];
   buscando:boolean=false;
   usuario;
+  contador;
   constructor(private _cateogiriasService:CategoriasService,private _filtroBusqueda:FiltrobusquedaService,private modalService: NgbModal, private _loginService: LoginService,
-              private Router: Router) {
+              private Router: Router, private store:Store<CarritoStore>, private carritoService: CarritoUsuarioService) {
 
     this.getCategorias();
-
+    this.iniciarCarrito();
+    this.suscribitCarrito();
     this.emailCtrl.valueChanges
     .pipe(debounceTime(350))
     .subscribe(value=>{
@@ -45,6 +53,32 @@ export class NavbarComponent implements OnInit {
     this._cateogiriasService.getCategorias()
     .subscribe( (dataCategorias: any) => {
       this.categorias = dataCategorias;
+    });
+  }
+
+  iniciarCarrito() {
+    if(sessionStorage.getItem('user')){
+      let usuario = JSON.parse(sessionStorage.getItem('user'));
+      this.carritoService.getItemCountItems(usuario.id).subscribe((data:any)=>{
+        const carrito = new IniciarAction(data.carrito);
+        this.store.dispatch(carrito);
+      });
+    } else {
+      let cantidad;
+
+      if(localStorage.getItem('venta')){
+        cantidad = JSON.parse(localStorage.getItem('venta')).length;
+      }else {
+        cantidad=0;
+      }
+      const carrito = new IniciarAction(cantidad);
+        this.store.dispatch(carrito);
+    }
+  }
+
+  suscribitCarrito() {
+    this.store.select('contador').subscribe(state =>{
+      this.contador = state;
     });
   }
 

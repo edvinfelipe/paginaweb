@@ -7,7 +7,7 @@
             <label class="campo" for="InputNombre">Nombre</label>
             <input [(ngModel)]="nombreenvio" type="text" class="form-control" id="InputNombre"
                 placeholder="Ingrese su nombre" (keyup)="validacioncampos()" required>     <h6 class="validacion" id="vnombre"> </h6><br>
-                   
+
 
             <label class="campo" for="InputTelefono">Telefono</label>
             <input [(ngModel)]="telefonoenvio" type="number" class="form-control" id="InputTelefono"
@@ -109,7 +109,7 @@
             </div>
         </div>
     </div>
-    
+
 
 <ng-template #myModalConf let-modal>
 
@@ -127,7 +127,7 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal"
                 (click)="modal.close('No')">No</button>
-            <button type="button" class="btn btn-primary" (click)="modal.close('Si')">Si</button>
+            <button type="button" class="btn btn-primary" (click)="modal.close('Si'); eliminarCarrito();">Si</button>
         </div>
     </div>
 </ng-template>
