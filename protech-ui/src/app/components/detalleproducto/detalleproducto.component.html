@@ -28,6 +28,7 @@
             <h3>{{ producto.nombre }}</h3>
             <br>
             <h3>Precio: {{ producto.precio | currency:'Q ' }} </h3>
+            <h5 *ngIf="producto.porcenjateOferta > 0">En descuento ({{ producto.porcenjateOferta }}%)</h5>
             <br>
             <h4>Cantidad: &nbsp;</h4>
             <div class="input-group">
