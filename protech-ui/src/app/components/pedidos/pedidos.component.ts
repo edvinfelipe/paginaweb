@@ -121,9 +121,9 @@ export class PedidosComponent implements OnInit {
 
     this._pedidoService.putEstadoEntrega(this.estadoPedido,idPedido).subscribe((data)=>{
       if(data['status']){
-        this.toastr.success("Pedido completado","Prothech");
+        this.toastr.success("Venta completado","Prothech");
       } else {
-        this.toastr.success("Pedido pendiente de completar","Prothech");
+        this.toastr.success("Venta pendiente de completar","Prothech");
       }
     });
   }
