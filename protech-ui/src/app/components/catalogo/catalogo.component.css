@@ -11,6 +11,10 @@
     width: 100%;
 }
 
+.margen-card {
+  margin-top: 18px;
+}
+
 .contenedor_filtros {
     top: 25px;
     min-width: 250px;
