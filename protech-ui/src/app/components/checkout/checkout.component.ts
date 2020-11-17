@@ -48,7 +48,8 @@ export class CheckoutComponent {
           Object.defineProperty(data.producto, 'cantidad', { value: 1, writable: true });
           Object.defineProperty(data.producto, 'subtotal', { value: 1, writable: true });
           data.producto.cantidad = parseInt(element.cantidad);
-          x = (data.producto.precio * data.producto.cantidad) - (data.producto.precio * data.producto.porcenjateOferta);
+          console.log(data.producto.porcenjateOferta);
+          x = (data.producto.precio * data.producto.cantidad) - (data.producto.precio * (data.producto.porcenjateOferta/100));
           data.producto.subtotal = x;
           this.detalleproductos.push(data.producto);
           this.t += x;
@@ -69,7 +70,8 @@ export class CheckoutComponent {
               Object.defineProperty(data.producto, 'cantidad', { value: 1, writable: true });
               Object.defineProperty(data.producto, 'subtotal', { value: 1, writable: true });
               data.producto.cantidad = parseInt(element.cantidad);
-              x = (data.producto.precio * data.producto.cantidad) - (data.producto.precio * data.producto.porcenjateOferta);
+              console.log(data.producto.porcenjateOferta);
+              x = (data.producto.precio * data.producto.cantidad) - (data.producto.precio * (data.producto.porcenjateOferta/100));
               data.producto.subtotal = x;
               this.detalleproductos.push(data.producto);
               this.t += x;
