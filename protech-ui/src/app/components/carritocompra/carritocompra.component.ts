@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalagoService } from '../../services/catalago.service';
 import { CarritoUsuarioService } from '../../services/carrito-usuario.service';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { Store } from "@ngrx/store";
 
 import { CarritoStore } from "../../redux/carrito.reducers";
 import { DecrementarAction } from "../../redux/carrito.actions";
+
 
 declare var $: any;
 
@@ -32,7 +33,7 @@ export class CarritocompraComponent implements OnInit {
 
 
   constructor( private _productosService: CatalagoService, private router: ActivatedRoute, private _carritoService: CarritoUsuarioService
-    ,private store:Store<CarritoStore>) {
+    ,private store:Store<CarritoStore>, private routeR:Router) {
       this.verificarParams();
    }
 
@@ -278,6 +279,7 @@ export class CarritocompraComponent implements OnInit {
       this.fila = -1;
     }
     this.getTotal();
+    this.routeR.navigate(['carritocompra']);
   }
 
   /* TOTAL */
