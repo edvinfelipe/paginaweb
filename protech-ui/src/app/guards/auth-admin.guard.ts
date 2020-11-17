@@ -6,23 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthAdminGuard implements CanActivate {
-  constructor(private router: Router){  
+  constructor(private router: Router){
 
   }
   canActivate(){
-    let user;
-    if(sessionStorage.getItem('user')){
-      user = sessionStorage.getItem('user');
-      if(user.role === 'ADMIN_ROLE'){
-        return true;
-      }else{
-        this.router.navigate(['home']);
-        return false;
-      }
+    if(sessionStorage.getItem('admin')){
+      return true;
     } else{
       this.router.navigate(['home']);
       return false;
     }
   }
-  
+
 }

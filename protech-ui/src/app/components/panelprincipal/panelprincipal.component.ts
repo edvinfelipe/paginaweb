@@ -9,8 +9,11 @@ import { LoginService } from "../../services/login.service";
 })
 export class PanelprincipalComponent implements OnInit {
   change = 0;
+  usuario;
+  nombreusuario;
   constructor( private _loginService :LoginService) {
-
+    this.usuario=JSON.parse(this._loginService.getUser());
+    this.nombreusuario = this.usuario.nombre;
   }
 
   ngOnInit(): void {
