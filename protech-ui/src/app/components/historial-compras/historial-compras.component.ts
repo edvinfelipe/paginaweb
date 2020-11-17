@@ -48,11 +48,11 @@ export class HistorialComprasComponent implements OnInit {
     this.HistorialServicio.GetDetalleProductos(id_factura)
       .subscribe((data: any) => {
         data.detalle.forEach(element => {
-          this.total += ((element.producto_id.precio * element.cantidad) - (element.producto_id.porcenjateOferta * element.producto_id.precio));
+          this.total += ((element.producto_id.precio * element.cantidad) - ((element.producto_id.porcenjateOferta/100) * element.producto_id.precio));
           this.DetalleProductos.push({
             descripcion: element.descripcion, cantidad: element.cantidad,
             descuento: element.producto_id.porcenjateOferta, precio: element.producto_id.precio,
-            subtotal: ((element.producto_id.precio * element.cantidad) - (element.producto_id.porcenjateOferta * element.producto_id.precio))
+            subtotal: ((element.producto_id.precio * element.cantidad) - ((element.producto_id.porcenjateOferta/100) * element.producto_id.precio))
           });
         });
       });

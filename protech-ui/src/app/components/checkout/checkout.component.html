@@ -3,25 +3,25 @@
     <div class="contenedor-detalles">
 
         <div class="camposenvio">
-            <h3>Detalles de envio</h3><br>
+            <h3>Detalles de envío</h3><br>
             <label class="campo" for="InputNombre">Nombre</label>
             <input [(ngModel)]="nombreenvio" type="text" class="form-control" id="InputNombre"
                 placeholder="Ingrese su nombre" (keyup)="validacioncampos()" required>     <h6 class="validacion" id="vnombre"> </h6><br>
 
 
-            <label class="campo" for="InputTelefono">Telefono</label>
-            <input [(ngModel)]="telefonoenvio" type="number" class="form-control" id="InputTelefono"
+            <label class="campo" for="InputTelefono">Teléfono</label>
+            <input [(ngModel)]="telefonoenvio" type="tel" class="form-control" id="InputTelefono"
                 placeholder="Ingrese su Telefono/Celular" (keyup)="validacioncampos()" required>     <h6 class="validacion" id="vtelefono"> </h6><br>
 
             <label class="campo" for="InputNit">Nit</label>
             <input [(ngModel)]="nitenvio" type="text" class="form-control" id="InputNit"
                 placeholder="Ingrese su Nit, si no cuenta con uno coloque C/F" (keyup)="validacioncampos()" required>     <h6 class="validacion" id="vnit"> </h6><br>
 
-            <label class="campo" for="InputEmail">Correo electronico</label>
+            <label class="campo" for="InputEmail">Correo electrónico</label>
             <input [(ngModel)]="emailenvio" type="email" class="form-control" id="InputEmail"
                 placeholder="Ingrese su correo electronico" (keyup)="validacioncampos()" required>     <h6 class="validacion" id="vemail"> </h6><br>
 
-            <label class="campo" for="InputDireccion">Direccion</label>
+            <label class="campo" for="InputDireccion">Dirección</label>
             <input [(ngModel)]="direccionenvio" type="text" class="form-control" id="InputDireccion"
                 placeholder="Ingrese su direccion" (keyup)="validacioncampos()" value="" required>     <h6 class="validacion" id="vdireccion"> </h6><br>
 
@@ -92,7 +92,7 @@
                 </table>
             </div>
             <div style="margin-top: 50px;" class="blanco">
-                <h3>Metodo de pago</h3>
+                <h3>Método de pago</h3>
 
                 <select style="margin-top: 30px;" class="form-control" name="MetodoPago" id="InputMetodoPago"
                     [(ngModel)]="metodopago">
@@ -143,10 +143,10 @@
             </button>
         </div>
         <div class="modal-body">
-            ¡LA COMPRA SE REALIZO CON EXITO! <br>
+            ¡LA COMPRA SE REALIZÓ CON ÉXITO! <br>
             !GRACIAS POR PREFERIRNOS! <br>
 
-            Su numero de factura es: {{numerofactura}}
+            Su número de factura es: {{numerofactura}}
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primary" (click)="homelocation()"
