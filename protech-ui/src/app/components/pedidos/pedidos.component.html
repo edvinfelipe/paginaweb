@@ -2,7 +2,7 @@
   <div class="row" id="contendor-titulos">
     <div class="col-md-4 col-sm-12 d-flex align-items-center center">
       <i class="fas fa-truck fa-5x" style="color: #1A2A40;"></i>
-      <h2 class="font-title">Pedidos</h2>
+      <h2 class="font-title">Ventas</h2>
     </div>
     <div class="col-md-8 display">
       <img src="assets/img/componente.png" class="responsive" alt="imagen">
@@ -21,7 +21,7 @@
             </div>
           </div>
             <div class="col-auto flex-boton">
-              <button type="button" class="btn btn-primary" id="buscar" (click)="tipoVista()"> Ver Pedidos </button>
+              <button type="button" class="btn btn-primary" id="buscar" (click)="tipoVista()"> Ver Ventas </button>
             </div>
         </div>
       </form>
@@ -79,7 +79,7 @@
   </div>
   <div class="row" style="margin-top: 35px;" id="detalles-pedido">
     <div class="col-sm-12">
-      <h3 class="text-center">Detalles del pedido</h3>
+      <h3 class="text-center">Detalles de venta</h3>
       <div class="tabla-cliente" *ngIf="detallesFactura!=[]">
         <table class="table table-bordered">
           <thead class="thead-dark">
