@@ -160,7 +160,7 @@ export class CheckoutComponent {
     let not = true
 
     if (nombreregex.test(this.nombreenvio) == true) {
-      document.getElementById("vnombre").innerText ="Nombre valido";
+      document.getElementById("vnombre").innerText ="Nombre válido";
       document.getElementById("vnombre").style.color = "green";
       n = true;
     }else{
@@ -170,16 +170,16 @@ export class CheckoutComponent {
     }
 
     if (telefonoregex.test(this.telefonoenvio) == true) {
-      document.getElementById("vtelefono").innerText ="Teléfono valido";
+      document.getElementById("vtelefono").innerText ="Teléfono v";
       document.getElementById("vtelefono").style.color = "green";
       t = true
     }else{
-      document.getElementById("vtelefono").innerText ="El campo debe contener 8 digitos";
+      document.getElementById("vtelefono").innerText ="El campo debe contener 8 dígitos";
       document.getElementById("vtelefono").style.color = "red";
     }
 
     if (nitregex.test(this.nitenvio) == true) {
-      document.getElementById("vnit").innerText ="Nit valido";
+      document.getElementById("vnit").innerText ="Nit válido";
       document.getElementById("vnit").style.color = "green";
       nit = true
     }else{
@@ -188,16 +188,16 @@ export class CheckoutComponent {
     }
 
     if (emailregex.test(this.emailenvio) == true) {
-      document.getElementById("vemail").innerText ="Email valido";
+      document.getElementById("vemail").innerText ="Email válido";
       document.getElementById("vemail").style.color = "green";
       em = true
     }else{
-      document.getElementById("vemail").innerText ="El email es invalido";
+      document.getElementById("vemail").innerText ="El email es inválido";
       document.getElementById("vemail").style.color = "red";
     }
 
     if (direccionregex.test(this.direccionenvio) == true) {
-      document.getElementById("vdireccion").innerText ="Dirección valida";
+      document.getElementById("vdireccion").innerText ="Dirección válido";
       document.getElementById("vdireccion").style.color = "green";
       d = true
     }else{
