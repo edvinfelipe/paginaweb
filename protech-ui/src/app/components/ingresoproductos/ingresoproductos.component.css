@@ -118,6 +118,9 @@ a.active.nav-link {
     table td:nth-child(1) {
         width: 170px;
     }
+    .letra {
+        font-size: 12px;
+    }
 }
 
 @media (min-width: 761px) {

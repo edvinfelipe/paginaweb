@@ -7,7 +7,7 @@ import { Productos } from "../interfaces/productos";
 })
 export class ProductoService {
   header = sessionStorage.getItem('accesToken');
-  url = 'http://api-protech.herokuapp.com/api/producto/';
+  url = 'https://api-protech.herokuapp.com/api/producto/';
   bodyProducto: Productos;
   constructor(private http: HttpClient) { }
   //campos: any

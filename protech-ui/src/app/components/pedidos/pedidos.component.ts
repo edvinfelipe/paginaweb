@@ -105,9 +105,26 @@ export class PedidosComponent implements OnInit {
     this.totalFactura = total;
   }
 
-  cambiarEstado(id){
-    this._pedidoService.putEstadoEntrega(this.estadoPedido,id).subscribe((data:any)=>{
+  cambiarEstado(estado,index,idPedido){
 
+    if(estado){
+      this.facturas[index].cliente_envio.entregado=false;
+      this.estadoPedido = {
+        entregado: false
+      }
+    } else {
+      this.facturas[index].cliente_envio.entregado=true;
+      this.estadoPedido = {
+        entregado: true
+      }
+    }
+
+    this._pedidoService.putEstadoEntrega(this.estadoPedido,idPedido).subscribe((data)=>{
+      if(data['status']){
+        this.toastr.success("Pedido completado","Prothech");
+      } else {
+        this.toastr.success("Pedido pendiente de completar","Prothech");
+      }
     });
   }
   private validateDate():boolean {

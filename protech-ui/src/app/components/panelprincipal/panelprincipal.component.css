@@ -14,6 +14,18 @@ header {
     height: 70px;
 }
 
+.right_area a {
+  margin-top: -25px;
+  float: right;
+  color: white;
+}
+
+.right_area span {
+  margin-top: -45px;
+  float: right;
+  color: white;
+}
+
 .left_area h3 {
     color: white;
     margin: 0;
