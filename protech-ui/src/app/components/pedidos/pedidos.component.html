@@ -67,7 +67,7 @@
               <td>{{factura.total | currency:'Q '}}</td>
               <td>
                 <div>
-                  <button (click)="cambiarEstado(factura.cliente_envio.entregado,i,factura.cliente_envio._id)" [ngClass]="factura.cliente_envio.entregado ? ' fas fa-check btn btn-success': ' fas fa-times btn btn-danger'" >{{factura.cliente_envio.entregado ? ' Competado':' Pendiente'}}</button>
+                  <button (click)="cambiarEstado(factura.cliente_envio.entregado,i,factura.cliente_envio._id)" [ngClass]="factura.cliente_envio.entregado ? ' btn btn-success': '  btn btn-danger'" >{{factura.cliente_envio.entregado ? ' Competado':' Pendiente'}}</button>
                 </div>
               </td>
             </tr>
@@ -108,7 +108,7 @@
           <tr *ngFor="let detalle of detallesFactura; let i = index;">
             <td>{{detalle.producto_id.nombre}}</td>
             <td>{{detalle.cantidad}}</td>
-            <td>{{detalle.producto_id.precio | currency:'Q '}}</td>
+            <td>{{detalle.subtotal | currency:'Q '}}</td>
           </tr>
         </tbody>
       </table>

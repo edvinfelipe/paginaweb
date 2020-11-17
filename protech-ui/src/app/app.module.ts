@@ -50,6 +50,7 @@ import { RecuperarcontraseniaModule } from './components/recuperarcontrasenia/re
 import { CheckoutService } from './services/checkout.service';
 import { PedidosComponent } from './components/pedidos/pedidos.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -99,7 +100,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     BnNgIdleService,
     CheckoutService,
     HistorialServiceService,
-    CarritoUsuarioService
+    CarritoUsuarioService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
