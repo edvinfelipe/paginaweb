@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 import { Validaciones } from "../../registro/validaciones";
 import { RecuperarconrtraseniaService } from "../../../services/recuperarconrtrasenia.service";
@@ -14,7 +15,8 @@ export class NuevacontraseniaComponent implements OnInit {
 
   formPassword: FormGroup;
   nuevacontrasenia: any = {}
-  constructor(private formBuilder:FormBuilder,private _recuperarContraseniaService:RecuperarconrtraseniaService,private _activatedRoute: ActivatedRoute) {
+  constructor(private formBuilder:FormBuilder,private _recuperarContraseniaService:RecuperarconrtraseniaService,private _activatedRoute: ActivatedRoute,
+    private toast:ToastrService, private router: Router) {
     this.buildFormPassword();
   }
 
@@ -53,7 +55,8 @@ export class NuevacontraseniaComponent implements OnInit {
       this._activatedRoute.params.subscribe(params =>{
         console.log(params['token']);
         this._recuperarContraseniaService.recuperarContrasenia(params['token'],this.nuevacontrasenia).subscribe((data: any)=>{
-          console.log(data);
+          this.toast.success('Nueva contraseña confirmada','Protech');
+          this.router.navigate(['home']);
         })
       })
     }
